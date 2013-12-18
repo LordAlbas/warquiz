@@ -12,36 +12,39 @@ import javax.swing.JPanel;
 
 public class Accueil extends JPanel {
 	
-	private Image[] img;
-
+	private Image[] img_fond = new Image[20];
+	private Image[] img_element = new Image[20];
 	
 	/**
 	 * Constructeur
 	 */
 	public Accueil() {
-		LoadImage("header");
-		LoadImage("accueil_fond");
+		initImage();		// initialisation des images
 		
-		
-		//JPanel centre = new JPanel();
-		//centre.setSize(864, 746);		// /!\ la barre du haut prend env. 22px de haut
-		//JButton btn = new JButton("Yoo!");
-		//this.add(btn);
 	}
 	
 	/**
-	 * Charge un fichier image dans la variable img
-	 * @param _imageFile
+	 * Initialise la banque d'images a partir des fichier .png
 	 */
-	public void LoadImage(String _imageFile) {
+	public void initImage() {
 		try {
-			img = ImageIO.read(new File("images/"+_imageFile+".png"));	// Lecture du fichier .png
+			/*
+			 * Ici on fera une boucle FOR si possible pour charger tout les img_fond
+			 */
+			img_fond[0] = ImageIO.read(new File("images/accueil_fond.png"));	// Lecture du fichier .png
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		try {
+			/*
+			 * Pareil ici pour tout les calques d'elements (tabs, connexion, etc.)
+			 */
+			img_element[0] = ImageIO.read(new File("images/header.png"));	// Lecture du fichier .png
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
-	
-
 	
 	/**
 	 * Paint
@@ -51,14 +54,11 @@ public class Accueil extends JPanel {
 			setBackground(new Color(250,150,50));			// couleur de background random pour test (r,g,b)
 			//g.fillRect(0, 0, this.getWidth(), this.getHeight());
 			
-			g.drawImage(img, 0, 0, null);					// a 10x 10y du coin haut-gauche et de taille auto (observer=null)
-			g.drawImage(img, 0, 0, null);
-			//g.setColor(new Color(60,40,90));
-			//g.fillRect(700, 400, 50, 270);					// a 700x 400y du coin, 50x270px
+			g.drawImage(img_fond[0], 0, 0, null);											// dessine le fond d'ecran
+			g.drawImage(img_element[0], 0, 0, 1024, img_element[0].getHeight(null), null);	// dessine le header
 			
 			//g.setColor(new Color(255, 255, 255));
 			//g.setFont(new Font("Courier New", Font.BOLD, 36));
 			//g.drawString("Yoo!", 400, 600);
 	}
 }
-
