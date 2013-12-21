@@ -19,6 +19,7 @@ public class Fenetre extends JFrame {
 		
 		Accueil accueil = new Accueil();		// creation du JPanel accueil
 		setLayout(new GridLayout(1, 1));		// Layout grid (tableau)  1 colonne 1 ligne
+		accueil.addMouseListener(accueil);		// 'accueil' implemente les methodes relatif a l'ecoute de la souris
 		this.setContentPane(accueil);			// ajout du JPanel au JFrame (gridLayout)
 		
 		setVisible(true);
