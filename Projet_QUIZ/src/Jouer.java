@@ -9,16 +9,15 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 
-public class Credits extends JPanel implements MouseListener{
+public class Jouer extends JPanel implements MouseListener{
 
-	
 	private Image[] img_fond = new Image[20];			// regroupe les images de fonds
 	private Image[] img_element = new Image[20];		// regroupe les images qui forment les fenetre (barre du haut etc.)
 	
 	/**
 	 * Constructeur
 	 */
-	public Credits() {
+	public Jouer() {
 		initImage();	// initialisation des images
 	}	
 	
@@ -55,12 +54,14 @@ public class Credits extends JPanel implements MouseListener{
 		g.drawImage(img_fond[0], 0, 0, this.getWidth(), this.getHeight(), null);						// dessine le fond d'ecran
 		g.drawImage(img_element[0], 0, 0, this.getWidth(), (int)(this.getHeight() / 6.1230), null);		// dessine le header
 		
-	}	
+	}		
+	
 	
 	public void mouseClicked(MouseEvent e) {}
 	public void mouseEntered(MouseEvent e) {}
 	public void mouseExited(MouseEvent e) {}
 	public void mousePressed(MouseEvent e) {}
 	public void mouseReleased(MouseEvent e) {}
+	
 
 }
