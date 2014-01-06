@@ -99,6 +99,7 @@ public class Accueil extends JPanel implements MouseListener {
 		/*
 		 * ici il faut un test pour verifier la position de pt sur un bouton et changer l'image.
 		 */
+		
 	}
 	
 	/**
