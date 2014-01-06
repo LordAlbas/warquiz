@@ -27,8 +27,9 @@ public class Accueil extends JPanel implements MouseListener {
 	/**
 	 * Constructeur
 	 */
-	public Accueil() {
+	public Accueil() {//Fenetre fen en parametre pour relier à fenetre
 		initImage();	// initialisation des images
+		
 	}
 	
 	/**
@@ -82,7 +83,9 @@ public class Accueil extends JPanel implements MouseListener {
 	 * Methodes obligatoires de l'interface MouseListener.
 	 * Elles sont appelees automatiquement selon l'action de la souris
 	 */
-	public void mouseClicked(MouseEvent e) {}
+	public void mouseClicked(MouseEvent e) {
+		//fen.gotoStat(); appel d'une future fonction goToStat pour afficher les stat
+	}
 	public void mousePressed(MouseEvent e) {}
 	public void mouseReleased(MouseEvent e) {}
 	public void mouseEntered(MouseEvent e) {
