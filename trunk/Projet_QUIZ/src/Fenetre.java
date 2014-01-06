@@ -18,9 +18,19 @@ public class Fenetre extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		Accueil accueil = new Accueil();		// creation du JPanel accueil
+		Statistiques statistiques = new Statistiques(); // creation du JPanel statistiques
+		Credits credits = new Credits();        // creation du JPanel credits
+		
 		setLayout(new GridLayout(1, 1));		// Layout grid (tableau)  1 colonne 1 ligne
 		accueil.addMouseListener(accueil);		// 'accueil' implemente les methodes relatif a l'ecoute de la souris
 		this.setContentPane(accueil);			// ajout du JPanel au JFrame (gridLayout)
+		
+		
+		//statistiques.addMouseListener(statistiques);		// 'statistiques' implemente les methodes relatif a l'ecoute de la souris
+		//this.setContentPane(statistiques);			// ajout du JPanel au JFrame (gridLayout)		
+		
+		//statistiques.addMouseListener(credits);		// 'statistiques' implemente les methodes relatif a l'ecoute de la souris
+		//this.setContentPane(credits);			// ajout du JPanel au JFrame (gridLayout)
 		
 		setVisible(true);
 	}
