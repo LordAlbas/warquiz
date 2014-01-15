@@ -24,18 +24,19 @@ public class Accueil extends JPanel implements MouseListener, MouseMotionListene
 	String image_select = "rien";			// defini l'image survolé (rien si pas survolé sinon [nom_image]_hover)
 	String bouton_deco ="rien";				// defini l'image survolé bouton deco
 	int val_i;								// defini l'emplacement de l'image survolé dans le tableau img_bouton_hover
+	static String selection; 				// defini quel bouton est selectionné
 	
 	private Image[] img_fond = new Image[20];			// regroupe les images de fonds
 	private Image[] img_element = new Image[20];		// regroupe les images qui forment les fenetre (barre du haut etc.)
 	private Image[] img_bouton = new Image[20];			// regroupe les images des boutons
 	private Image[] img_bouton_hover = new Image[20];	// regroupe les images des boutons quand la souris passe dessus
-	
+	private Fenetre fenetre;
 	/**
 	 * Constructeur
 	 */
-	public Accueil() {//Fenetre fen en parametre pour relier à fenetre
+	public Accueil(Fenetre fen) {//Fenetre fen en parametre pour relier à fenetre
 		initImage();	// initialisation des images
-		
+		fenetre = fen; // on récupère la classe mère
 	}
 	
 	/**
@@ -90,17 +91,56 @@ public class Accueil extends JPanel implements MouseListener, MouseMotionListene
 		}
 	}
 	
+	
+	
 	/**
 	 * Methodes obligatoires de l'interface MouseListener.
 	 * Elles sont appelees automatiquement selon l'action de la souris
 	 */
 	public void mouseClicked(MouseEvent e) { // On récupère X et Y au click
 		//fen.gotoStat(); appel d'une future fonction goToStat pour afficher les stat
-		X = e.getX();
-		Y = e.getY();
-		System.out.print("X = "+ X);
-		System.out.print("Y = "+ Y);
+		//X = e.getX();
+		//Y = e.getY();
+		//System.out.print("X = "+ X);
+		//System.out.print("Y = "+ Y);
+		
+		if(e.getX() >= 120 && e.getX() <= 490 && e.getY() >= 260 && e.getY() <= 345){ // JOUER
+			System.out.print("JOUER");
+			selection = "jouer";
+			fenetre.goToStatistiques(selection); // on appel la fonction qui va changer de panel
+		}
+		if(e.getX() >= 120 && e.getX() <= 490 && e.getY() >= 360 && e.getY() <= 445){ // STATS
+			System.out.print("STATS");
+			selection = "statistiques";
+			fenetre.goToStatistiques(selection); // on appel la fonction qui va changer de panel
+
+			// ajout du JPanel au JFrame (gridLayout)	
+		}			
+		if(e.getX() >= 120 && e.getX() <= 490 && e.getY() >= 460 && e.getY() <= 545){ // CREDITS
+			System.out.print("CREDITS");
+			selection = "credits";
+			fenetre.goToStatistiques(selection); // on appel la fonction qui va changer de panel
+
+		}
+		if(e.getX() >= 120 && e.getX() <= 490 && e.getY() >= 560 && e.getY() <= 645){ // QUITTER
+			System.out.print("QUITTER");
+			selection = "quitter";
+			fenetre.goToStatistiques(selection); // on appel la fonction qui va changer de panel
+
+		}	
+	
+		if(e.getX() >= 959 && e.getX() <= 1022 && e.getY() >= 1 && e.getY() <= 47){ // CO/DECO
+			System.out.print("CO/DECO");
+			selection = "decoreco";
+			fenetre.goToStatistiques(selection); // on appel la fonction qui va changer de panel
+
+		}
+		
 	}
+	
+
+	
+	
 	public void mousePressed(MouseEvent e) {}
 	public void mouseReleased(MouseEvent e) {}
 	
