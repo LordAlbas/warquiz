@@ -69,6 +69,8 @@ public class Accueil extends JPanel implements MouseListener, MouseMotionListene
 			img_bouton[2] = ImageIO.read(new File("images/accueil_bouton_credit.png"));
 			img_bouton[3] = ImageIO.read(new File("images/accueil_bouton_quitter.png"));
 			img_bouton[4] = ImageIO.read(new File("images/deco.png"));
+			img_bouton[5] = ImageIO.read(new File("images/barre_verticale.png"));
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -82,6 +84,7 @@ public class Accueil extends JPanel implements MouseListener, MouseMotionListene
 			img_bouton_hover[2] = ImageIO.read(new File("images/accueil_bouton_credit_mouseover.png"));
 			img_bouton_hover[3] = ImageIO.read(new File("images/accueil_bouton_quitter_mouseover.png"));
 			img_bouton_hover[4] = ImageIO.read(new File("images/deco_hover.png"));
+			img_bouton_hover[5] = ImageIO.read(new File("images/barre_verticale.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -169,6 +172,8 @@ public class Accueil extends JPanel implements MouseListener, MouseMotionListene
 		g.drawImage(img_fond[0], 0, 0, this.getWidth(), this.getHeight(), null);						// dessine le fond d'ecran
 		g.drawImage(img_element[0], 0, 0, this.getWidth(), (int)(this.getHeight() / 6.1230), null);		// dessine le header
 		
+		
+		
 		/*
 		 * On boucle sur tous les boutons (de [0] a [3]).
 		 * Chaque bouton obtient une position X (hauteur) en fonction de son numero (i).
@@ -237,7 +242,7 @@ public class Accueil extends JPanel implements MouseListener, MouseMotionListene
 			}
 		}
 			
-		
+		g.drawImage(img_bouton[5], 140, 113, 8, 655, null);
 		
 		// exemple de bouton survole par la souris (en dur pour test)
 		//g.drawImage(img_bouton_hover[0], 120, 260+(0*(hauteur_bouton+ecart_bouton)), largeur_bouton, hauteur_bouton, null);
