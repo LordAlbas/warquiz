@@ -30,8 +30,6 @@ public class Fenetre extends JFrame {
 		accueil.addMouseListener(accueil);		// 'accueil' implemente les methodes relatif a l'ecoute de la souris
 		accueil.addMouseMotionListener(accueil);
 		this.setContentPane(accueil);			// ajout du JPanel au JFrame (gridLayout)
-		
-		
 		setVisible(true);
 	}
 	
@@ -80,7 +78,7 @@ public class Fenetre extends JFrame {
 			this.setContentPane(jouer);				// ajout du JPanel au JFrame (gridLayout)		
 			this.getContentPane().setVisible(true);
 		}	
-		
+
 		public void goToQuitter(String selection){
 			this.dispose();
 		}
@@ -92,8 +90,9 @@ public class Fenetre extends JFrame {
 			credits.addMouseListener(credits);			// 'credits' implemente les methodes relatif a l'ecoute de la souris
 			//accueil.addMouseMotionListener(credits);
 			this.setContentPane(credits);				// ajout du JPanel au JFrame (gridLayout)			
+>>>>>>> .r38
 		}
-		**/
+		
 		
 	
 	
