@@ -6,7 +6,7 @@ public class Connect {
 	public Connect() {
 		// TODO Auto-generated constructor stub
 	}
-	public static void main(String[] args) {
+	public static void tryConnect() {
 		try {
             // Load the SQLServerDriver class, build the
             // connection string, and get a connection
@@ -16,6 +16,7 @@ public class Connect {
                     + "user=b3i_groupe_5;"
                     + "password=123Soleil";
             Connection conn = DriverManager.getConnection(connectionUrl);
+            System.out.println("Connecté");
 		} 
 		catch (Exception e) {
             System.out.println(e.getMessage());
