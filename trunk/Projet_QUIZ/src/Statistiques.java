@@ -146,11 +146,4 @@ public class Statistiques extends JPanel implements MouseListener, MouseMotionLi
 		
 	}	
 	
-	
-	
-	
-	
-	
-
-	
 }
