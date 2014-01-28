@@ -2,6 +2,7 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.io.File;
 import java.io.IOException;
 
@@ -9,17 +10,19 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
 
-public class Credits extends JPanel implements MouseListener{
+public class Credits extends JPanel implements MouseListener, MouseMotionListener{
 
 	
 	private Image[] img_fond = new Image[20];			// regroupe les images de fonds
 	private Image[] img_element = new Image[20];		// regroupe les images qui forment les fenetre (barre du haut etc.)
+	private Fenetre fenetre;
 	
 	/**
 	 * Constructeur
 	 */
-	public Credits() {
+	public Credits(Fenetre fen) {
 		initImage();	// initialisation des images
+		fenetre = fen;  // on récupère la classe mère
 	}	
 	
 	/**
@@ -62,5 +65,17 @@ public class Credits extends JPanel implements MouseListener{
 	public void mouseExited(MouseEvent e) {}
 	public void mousePressed(MouseEvent e) {}
 	public void mouseReleased(MouseEvent e) {}
+
+	@Override
+	public void mouseDragged(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseMoved(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
 
 }
