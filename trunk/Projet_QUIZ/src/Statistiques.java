@@ -99,6 +99,14 @@ public class Statistiques extends JPanel implements MouseListener, MouseMotionLi
 
 			// ajout du JPanel au JFrame (gridLayout)	
 		}					
+		if(e.getX() >= 1 && e.getX() <= 85 && e.getY() >= 685 && e.getY() <= 768){ // STATS
+			System.out.print("STATS");
+			selection = "accueil";
+			fenetre.goToAccueil(selection); // on appel la fonction qui va changer de panel
+	
+		}		
+		
+		
 		
 	}
 	public void mouseEntered(MouseEvent e) {}
@@ -164,7 +172,7 @@ public class Statistiques extends JPanel implements MouseListener, MouseMotionLi
 	
 	
 	
-		g.drawImage(img_bouton[3], 120, 260+((hauteur_bouton+ecart_bouton)), largeur_bouton, hauteur_bouton, null);
+		
 		
 		
 	}	

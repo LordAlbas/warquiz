@@ -2,6 +2,7 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 public class Fenetre extends JFrame {
 	public static String titreFenetre = "(> o _ o )>          --[__W  A  R___Q  U  I  Z__]--          <[ x _ x <]";		// titre de la fenetre
@@ -80,7 +81,13 @@ public class Fenetre extends JFrame {
 		}	
 
 		public void goToQuitter(String selection){
-			this.dispose();
+			int rep;
+			 rep = JOptionPane.showConfirmDialog(null, "Voulez-vous vraiment quitter ?");
+
+			if(rep == 0){
+			 this.dispose();
+			}
+			
 		}
 		
 		
