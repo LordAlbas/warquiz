@@ -108,7 +108,7 @@ public class Accueil extends JPanel implements MouseListener, MouseMotionListene
 		if(e.getX() >= 120 && e.getX() <= 490 && e.getY() >= 260 && e.getY() <= 345){ // JOUER
 			System.out.print("JOUER");
 			selection = "jouer";
-			fenetre.goToStatistiques(selection); // on appel la fonction qui va changer de panel
+			fenetre.goToJouer(selection); // on appel la fonction qui va changer de panel
 		}
 		if(e.getX() >= 120 && e.getX() <= 490 && e.getY() >= 360 && e.getY() <= 445){ // STATS
 			System.out.print("STATS");
@@ -120,13 +120,13 @@ public class Accueil extends JPanel implements MouseListener, MouseMotionListene
 		if(e.getX() >= 120 && e.getX() <= 490 && e.getY() >= 460 && e.getY() <= 545){ // CREDITS
 			System.out.print("CREDITS");
 			selection = "credits";
-			fenetre.goToStatistiques(selection); // on appel la fonction qui va changer de panel
+			fenetre.goToCredits(selection); // on appel la fonction qui va changer de panel
 
 		}
 		if(e.getX() >= 120 && e.getX() <= 490 && e.getY() >= 560 && e.getY() <= 645){ // QUITTER
 			System.out.print("QUITTER");
 			selection = "quitter";
-			fenetre.goToStatistiques(selection); // on appel la fonction qui va changer de panel
+			fenetre.goToQuitter(selection); // on appel la fonction qui va changer de panel
 
 		}	
 	
