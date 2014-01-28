@@ -22,6 +22,7 @@ public class Credits extends JPanel implements MouseListener, MouseMotionListene
 	private Fenetre fenetre;
 	String image_select = "rien";			// defini l'image survolé (rien si pas survolé sinon [nom_image]_hover)
 	String bouton_deco ="rien";				// defini l'image survolé bouton deco
+	String bouton_retour ="rien";
 	int val_i;								// defini l'emplacement de l'image survolé dans le tableau img_bouton_hover
 	static String selection; 				// defini quel bouton est selectionné
 	
@@ -60,7 +61,7 @@ public class Credits extends JPanel implements MouseListener, MouseMotionListene
 			img_bouton[2] = ImageIO.read(new File("images/accueil_bouton_credit.png"));
 			img_bouton[3] = ImageIO.read(new File("images/accueil_bouton_quitter.png"));
 			img_bouton[4] = ImageIO.read(new File("images/deco.png"));
-			img_bouton[5] = ImageIO.read(new File("images/barre_verticale.png"));
+			img_bouton[5] = ImageIO.read(new File("images/retour.png"));
 			
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -75,7 +76,7 @@ public class Credits extends JPanel implements MouseListener, MouseMotionListene
 			img_bouton_hover[2] = ImageIO.read(new File("images/accueil_bouton_credit_mouseover.png"));
 			img_bouton_hover[3] = ImageIO.read(new File("images/accueil_bouton_quitter_mouseover.png"));
 			img_bouton_hover[4] = ImageIO.read(new File("images/deco_hover.png"));
-			img_bouton_hover[5] = ImageIO.read(new File("images/barre_verticale.png"));
+			img_bouton_hover[5] = ImageIO.read(new File("images/retour_hover.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -100,20 +101,35 @@ public class Credits extends JPanel implements MouseListener, MouseMotionListene
 				g.drawImage(img_bouton_hover[4], 960, 1, 46, 46, null);
 				bouton_deco = "rien";
 				break;	
-		}		
+			}		
+				
+				
+			switch (bouton_retour)	{
+			case "rien" :
+				g.drawImage(img_bouton[5], 1, 685, 84, 83, null);
+				break;				
+			case "retour_hover" :
+				g.drawImage(img_bouton_hover[5], 1, 685, 84, 83, null);
+				bouton_retour = "rien";
+				break;	
 			
-			g.drawImage(img_bouton[3], 120, 260+((hauteur_bouton+ecart_bouton)), largeur_bouton, hauteur_bouton, null);
+			}
 		
 	}	
 	
 	public void mouseClicked(MouseEvent e) {
-		if(e.getX() >= 120 && e.getX() <= 490 && e.getY() >= 360 && e.getY() <= 445){ // STATS
-			System.out.print("STATS");
+		// SELECT ZONE BOUTON_RETOUR
+		if(e.getX() >= 1 && e.getX() <= 85 && e.getY() >= 685 && e.getY() <= 768){ // STATS
 			selection = "accueil";
 			fenetre.goToAccueil(selection); // on appel la fonction qui va changer de panel
-
-			// ajout du JPanel au JFrame (gridLayout)	
 		}
+		// SELECT ZONE WARQUIZ
+		if(e.getX() >= 1 && e.getX() <= 400 && e.getY() >= 1 && e.getY() <= 130){ // STATS
+			selection = "accueil";
+			fenetre.goToAccueil(selection); // on appel la fonction qui va changer de panel
+		}		
+		
+		
 	}
 	public void mouseEntered(MouseEvent e) {}
 	public void mouseExited(MouseEvent e) {}
@@ -129,6 +145,23 @@ public class Credits extends JPanel implements MouseListener, MouseMotionListene
 	@Override
 	public void mouseMoved(MouseEvent e) {
 		// TODO Auto-generated method stub
-		
+		if(e.getX() >= 120 && e.getX() <= 490 && e.getY() >= 560 && e.getY() <= 645){ // QUITTER
+			//System.out.print("QUITTER_hover");
+			image_select = "QUITTER_hover";
+			val_i = 3;
+		}	
+		repaint(); // On re dessine
+	
+		if(e.getX() >= 959 && e.getX() <= 1022 && e.getY() >= 1 && e.getY() <= 47){ // CO/DECO
+			//System.out.print("CO/DECO_hover");
+			bouton_deco = "CO/DECO_hover";
+			//val_i = 4;
+			repaint(); // On re dessine
+		}	
+		if(e.getX() >= 1 && e.getX() <= 85 && e.getY() >= 685 && e.getY() <= 768){ // retour
+			bouton_retour = "retour_hover";
+			//val_i = 4;
+			repaint(); // On re dessine
+		}			
 	}
 }
