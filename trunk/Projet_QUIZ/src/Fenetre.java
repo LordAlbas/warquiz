@@ -21,7 +21,7 @@ public class Fenetre extends JFrame {
 		setResizable(false);
 		setLocationRelativeTo(null);			// la fenetre apparait au milieu de l'ecran
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
+		Connect.tryConnect();
 		accueil = new Accueil(this);		// creation du JPanel accueil
 		statistiques = new Statistiques(this); // creation du JPanel statistiques
 		credits = new Credits(this);        // creation du JPanel credits
@@ -89,19 +89,6 @@ public class Fenetre extends JFrame {
 			}
 			
 		}
-		
-		
-		
-		
-		/*public void goToCredits(String selection){
-			credits.addMouseListener(credits);			// 'credits' implemente les methodes relatif a l'ecoute de la souris
-			//accueil.addMouseMotionListener(credits);
-			this.setContentPane(credits);				// ajout du JPanel au JFrame (gridLayout)			
->>>>>>> .r38
-		}
-		
-		
-	
 	
 	/**
 	 * MAIN
