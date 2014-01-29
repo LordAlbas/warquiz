@@ -41,6 +41,7 @@ public class Fenetre extends JFrame {
 	}
 	
 	/**
+	 * Redirige sur l'ACCUEIL
 	 * @param selection
 	 */
 	public void goToAccueil(String selection){
@@ -52,6 +53,7 @@ public class Fenetre extends JFrame {
 	}
 	
 	/**
+	 * Redirige sur les STATISTIQUES
 	 * @param selection
 	 */
 	public void goToStatistiques(String selection){
@@ -63,6 +65,7 @@ public class Fenetre extends JFrame {
 	}
 	
 	/**
+	 * Redirige sur les CREDITS
 	 * @param selection
 	 */
 	public void goToCredits(String selection){
@@ -74,6 +77,7 @@ public class Fenetre extends JFrame {
 	}
 	
 	/**
+	 * Redirige sur JOUER
 	 * @param selection
 	 */
 	public void goToJouer(String selection){
@@ -85,6 +89,7 @@ public class Fenetre extends JFrame {
 	}
 	
 	/**
+	 * QUITTE l'application
 	 * @param selection
 	 */
 	public void goToQuitter(String selection){

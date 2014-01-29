@@ -32,7 +32,6 @@ public class Accueil extends JPanel implements MouseListener, MouseMotionListene
 	 * Elles sont appelees automatiquement selon l'action de la souris
 	 */
 	public void mouseClicked(MouseEvent e) { // On r�cup�re X et Y au click
-		//fen.gotoStat(); appel d'une future fonction goToStat pour afficher les stat
 		//X = e.getX();
 		//Y = e.getY();
 		//System.out.print("X = "+ X);
