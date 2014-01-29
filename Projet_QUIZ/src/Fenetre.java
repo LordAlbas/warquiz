@@ -23,7 +23,9 @@ public class Fenetre extends JFrame {
 		setResizable(false);
 		setLocationRelativeTo(null);			// la fenetre apparait au milieu de l'ecran
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		Connect.tryConnect();
+		
+		//Connect.tryConnect();	// !! LIGNE EN COMMENTAIRE JUSTE POUR TRAVAILLER EN DEHORS DE L'EPSI !!
+		
 		accueil = new Accueil(this);		// creation du JPanel accueil
 		statistiques = new Statistiques(this); // creation du JPanel statistiques
 		credits = new Credits(this);        // creation du JPanel credits
