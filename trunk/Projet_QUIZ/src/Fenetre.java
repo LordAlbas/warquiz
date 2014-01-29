@@ -4,6 +4,7 @@ import java.awt.GridLayout;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
+
 public class Fenetre extends JFrame {
 	public static String titreFenetre = "(> o _ o )>          --[__W  A  R___Q  U  I  Z__]--          <[ x _ x <]";		// titre de la fenetre
 	public static Dimension tailleFenetre = new Dimension(1030, 796);	// taille de la fenetre
@@ -12,6 +13,7 @@ public class Fenetre extends JFrame {
 	Accueil accueil;
 	Credits credits;
 	Jouer jouer;
+	
 	/**
 	 * Constructeur
 	 */
@@ -34,61 +36,62 @@ public class Fenetre extends JFrame {
 		setVisible(true);
 	}
 	
-		/**
-		 * 
-		 * @param selection
-		 */
-		public void goToAccueil(String selection){
-			this.getContentPane().setVisible(false);
-			accueil.addMouseListener(accueil);		// 'accueil' implemente les methodes relatif a l'ecoute de la souris
-			accueil.addMouseMotionListener(accueil);
-			this.setContentPane(accueil);				// ajout du JPanel au JFrame (gridLayout)		
-			this.getContentPane().setVisible(true);
-		}
+	/**
+	 * @param selection
+	 */
+	public void goToAccueil(String selection){
+		this.getContentPane().setVisible(false);
+		accueil.addMouseListener(accueil);		// 'accueil' implemente les methodes relatif a l'ecoute de la souris
+		accueil.addMouseMotionListener(accueil);
+		this.setContentPane(accueil);				// ajout du JPanel au JFrame (gridLayout)		
+		this.getContentPane().setVisible(true);
+	}
 	
-		/**
-		 * 
-		 * @param selection
-		 */
-		public void goToStatistiques(String selection){
-			this.getContentPane().setVisible(false);
-			statistiques.addMouseListener(statistiques);	// 'statistiques' implemente les methodes relatif a l'ecoute de la souris
-			statistiques.addMouseMotionListener(statistiques);
-			this.setContentPane(statistiques);				// ajout du JPanel au JFrame (gridLayout)		
-			this.getContentPane().setVisible(true);
-		}
-		/**
-		 * 
-		 * @param selection
-		 */
-		public void goToCredits(String selection){
-			this.getContentPane().setVisible(false);
-			credits.addMouseListener(credits);	// 'statistiques' implemente les methodes relatif a l'ecoute de la souris
-			credits.addMouseMotionListener(credits);
-			this.setContentPane(credits);				// ajout du JPanel au JFrame (gridLayout)		
-			this.getContentPane().setVisible(true);
-		}	
-		/**
-		 * 
-		 * @param selection
-		 */
-		public void goToJouer(String selection){
-			this.getContentPane().setVisible(false);
-			jouer.addMouseListener(jouer);	// 'statistiques' implemente les methodes relatif a l'ecoute de la souris
-			jouer.addMouseMotionListener(jouer);
-			this.setContentPane(jouer);				// ajout du JPanel au JFrame (gridLayout)		
-			this.getContentPane().setVisible(true);
-		}	
+	/**
+	 * @param selection
+	 */
+	public void goToStatistiques(String selection){
+		this.getContentPane().setVisible(false);
+		statistiques.addMouseListener(statistiques);	// 'statistiques' implemente les methodes relatif a l'ecoute de la souris
+		statistiques.addMouseMotionListener(statistiques);
+		this.setContentPane(statistiques);				// ajout du JPanel au JFrame (gridLayout)		
+		this.getContentPane().setVisible(true);
+	}
+	
+	/**
+	 * @param selection
+	 */
+	public void goToCredits(String selection){
+		this.getContentPane().setVisible(false);
+		credits.addMouseListener(credits);	// 'statistiques' implemente les methodes relatif a l'ecoute de la souris
+		credits.addMouseMotionListener(credits);
+		this.setContentPane(credits);				// ajout du JPanel au JFrame (gridLayout)		
+		this.getContentPane().setVisible(true);
+	}
+	
+	/**
+	 * @param selection
+	 */
+	public void goToJouer(String selection){
+		this.getContentPane().setVisible(false);
+		jouer.addMouseListener(jouer);	// 'statistiques' implemente les methodes relatif a l'ecoute de la souris
+		jouer.addMouseMotionListener(jouer);
+		this.setContentPane(jouer);				// ajout du JPanel au JFrame (gridLayout)		
+		this.getContentPane().setVisible(true);
+	}
+	
+	/**
+	 * @param selection
+	 */
+	public void goToQuitter(String selection){
+		int rep;
+		 rep = JOptionPane.showConfirmDialog(null, "Voulez-vous vraiment quitter ?");
 
-		public void goToQuitter(String selection){
-			int rep;
-			 rep = JOptionPane.showConfirmDialog(null, "Voulez-vous vraiment quitter ?");
-
-			if(rep == 0){
-			 this.dispose();
-			}
-			
+		if(rep == 0){
+		 this.dispose();
 		}
+		
+	}
 	
 	/**
 	 * MAIN
