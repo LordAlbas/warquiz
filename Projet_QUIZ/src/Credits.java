@@ -33,6 +33,7 @@ public class Credits extends JPanel implements MouseListener, MouseMotionListene
 		if(e.getX() >= 1 && e.getX() <= 85 && e.getY() >= 685 && e.getY() <= 768){ // STATS
 			selection = "accueil";
 			fenetre.goToAccueil(selection); // on appel la fonction qui va changer de panel
+			
 		}
 		// SELECT ZONE WARQUIZ
 		if(e.getX() >= 1 && e.getX() <= 400 && e.getY() >= 1 && e.getY() <= 130){ // STATS
