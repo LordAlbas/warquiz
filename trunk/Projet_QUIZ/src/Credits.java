@@ -10,10 +10,7 @@ import javax.swing.JPanel;
 
 
 public class Credits extends JPanel implements MouseListener, MouseMotionListener, ActionListener{
-
-	private int hauteur_bouton = 85;		// defini la taille en hauteur des boutons du menu
-	private int largeur_bouton = 366;		// defini la taille en largeur
-	private int ecart_bouton = 15;			// defini l'ecart entre les boutons	
+	
 	private Fenetre fenetre;
 	String image_select = "rien";			// defini l'image survol� (rien si pas survol� sinon [nom_image]_hover)
 	String bouton_deco ="rien";				// defini l'image survol� bouton deco

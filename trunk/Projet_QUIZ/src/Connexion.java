@@ -16,6 +16,11 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 	private int hauteur_bouton = 85;		// defini la taille en hauteur des boutons du menu
 	private int largeur_bouton = 366;		// defini la taille en largeur
 	private int ecart_bouton = 15;			// defini l'ecart entre les boutons
+	
+	/**
+	 * Constructor
+	 * @param fen
+	 */
 	public Connexion(Fenetre fen) {
 		fenetre = fen;
 	}

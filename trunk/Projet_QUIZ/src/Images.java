@@ -22,6 +22,10 @@ public class Images {
 	public static Image[] img_bouton = new Image[20];			// regroupe les images des boutons
 	public static Image[] img_bouton_hover = new Image[20];	// regroupe les images des boutons quand la souris passe dessus
 	
+	public static int hauteur_bouton = 85;		// defini la taille en hauteur des boutons du menu
+	public static int largeur_bouton = 366;		// defini la taille en largeur
+	public static int ecart_bouton = 15;			// defini l'ecart entre les boutons
+	
 	/**
 	 * Initialise les banques d'images a partir des fichier .png
 	 */
@@ -57,7 +61,6 @@ public class Images {
 			img_bouton[3] = ImageIO.read(new File("images/accueil_bouton_quitter.png"));
 			img_bouton[4] = ImageIO.read(new File("images/deco.png"));
 			img_bouton[5] = ImageIO.read(new File("images/retour.png"));
-			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
