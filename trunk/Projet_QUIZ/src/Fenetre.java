@@ -26,7 +26,7 @@ public class Fenetre extends JFrame {
 		
 		Images.initImage();
 		//Images img = new Images();
-		//Connect.tryConnect();	// !! LIGNE EN COMMENTAIRE JUSTE POUR TRAVAILLER EN DEHORS DE L'EPSI !!
+		Connect.tryConnect();	// !! LIGNE EN COMMENTAIRE JUSTE POUR TRAVAILLER EN DEHORS DE L'EPSI !!
 		
 		accueil = new Accueil(this);		// creation du JPanel accueil
 		statistiques = new Statistiques(this); // creation du JPanel statistiques
