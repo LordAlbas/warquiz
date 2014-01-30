@@ -13,6 +13,8 @@ public class Fenetre extends JFrame {
 	Accueil accueil;
 	Credits credits;
 	Jouer jouer;
+	Inscription inscription;
+	Connexion connexion;
 	
 	/**
 	 * Constructeur
@@ -29,11 +31,12 @@ public class Fenetre extends JFrame {
 		//Images img = new Images();
 		SQL_Connect.tryConnect();	// !! LIGNE EN COMMENTAIRE JUSTE POUR TRAVAILLER EN DEHORS DE L'EPSI !!
 		
-		accueil = new Accueil(this);		// creation du JPanel accueil
+		accueil = new Accueil(this);			// creation du JPanel accueil
 		statistiques = new Statistiques(this); // creation du JPanel statistiques
-		credits = new Credits(this);        // creation du JPanel credits
-		jouer = new Jouer(this);
-		
+		credits = new Credits(this);        	// creation du JPanel credits
+		jouer = new Jouer(this);				// creation du JPanel jouer
+		inscription = new Inscription(this);	// creation du JPanel inscription
+		connexion = new Connexion();			// creation du JPanel conexion
 		
 		accueil.addMouseListener(accueil);		// 'accueil' implemente les methodes relatif a l'ecoute de la souris
 		accueil.addMouseMotionListener(accueil);		
@@ -41,6 +44,30 @@ public class Fenetre extends JFrame {
 		this.setContentPane(accueil);			// ajout du JPanel au JFrame (gridLayout)
 		setVisible(true);
 	}
+	
+	/**
+	 * Redirige sur INSCRIPTION
+	 * @param selection
+	 */
+	public void goToInscription(String selection){
+		this.getContentPane().setVisible(false);
+		inscription.addMouseListener(inscription);	// 'inscription' implemente les methodes relatif a l'ecoute de la souris
+		inscription.addMouseMotionListener(inscription);		
+		this.setContentPane(inscription);				// ajout du JPanel au JFrame (gridLayout)		
+		this.getContentPane().setVisible(true);
+	}	
+	
+	/**
+	 * Redirige sur CONNEXION
+	 * @param selection
+	 */
+	public void goToConnexion(String selection){
+		this.getContentPane().setVisible(false);
+		connexion.addMouseListener(connexion);	// 'connexion' implemente les methodes relatif a l'ecoute de la souris
+		connexion.addMouseMotionListener(connexion);		
+		this.setContentPane(connexion);				// ajout du JPanel au JFrame (gridLayout)		
+		this.getContentPane().setVisible(true);
+	}	
 	
 	/**
 	 * Redirige sur l'ACCUEIL
