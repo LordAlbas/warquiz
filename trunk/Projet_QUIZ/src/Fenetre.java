@@ -65,7 +65,7 @@ public class Fenetre extends JFrame {
 	 * @param selection
 	 */
 	public void goToConnexion(String selection){
-		//this.getContentPane().setVisible(false);	
+		this.getContentPane().setVisible(false);	
 		this.setContentPane(connexion);				// ajout du JPanel au JFrame (gridLayout)		
 		this.getContentPane().setVisible(true);
 		
