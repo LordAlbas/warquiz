@@ -8,7 +8,7 @@ import javax.swing.JOptionPane;
 public class Fenetre extends JFrame {
 	public static String titreFenetre = "(> o _ o )>          --[__W  A  R___Q  U  I  Z__]--          <[ x _ x <]";		// titre de la fenetre
 	public static Dimension tailleFenetre = new Dimension(1030, 796);	// taille de la fenetre
-	
+
 	Statistiques statistiques ;
 	Accueil accueil;
 	Credits credits;
@@ -24,6 +24,7 @@ public class Fenetre extends JFrame {
 		setLocationRelativeTo(null);			// la fenetre apparait au milieu de l'ecran
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
+		//Connect.tryConnect();
 		Images.initImage();
 		//Images img = new Images();
 		Connect.tryConnect();	// !! LIGNE EN COMMENTAIRE JUSTE POUR TRAVAILLER EN DEHORS DE L'EPSI !!
@@ -33,9 +34,10 @@ public class Fenetre extends JFrame {
 		credits = new Credits(this);        // creation du JPanel credits
 		jouer = new Jouer(this);
 		
-		setLayout(new GridLayout(1, 1));		// Layout grid (tableau)  1 colonne 1 ligne
+		
 		accueil.addMouseListener(accueil);		// 'accueil' implemente les methodes relatif a l'ecoute de la souris
-		accueil.addMouseMotionListener(accueil);
+		accueil.addMouseMotionListener(accueil);		
+		setLayout(new GridLayout(1, 1));		// Layout grid (tableau)  1 colonne 1 ligne
 		this.setContentPane(accueil);			// ajout du JPanel au JFrame (gridLayout)
 		setVisible(true);
 	}
@@ -106,6 +108,7 @@ public class Fenetre extends JFrame {
 	 */
 	public static void main(String[] args) {
 		Fenetre fenetre = new Fenetre();
+		
 		// et roule ma poule
 	}
 	
