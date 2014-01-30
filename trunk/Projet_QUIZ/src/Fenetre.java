@@ -29,7 +29,7 @@ public class Fenetre extends JFrame {
 		//Connect.tryConnect();
 		Images.initImage();
 		//Images img = new Images();
-		//SQL_Connect.tryConnect();	// !! LIGNE EN COMMENTAIRE JUSTE POUR TRAVAILLER EN DEHORS DE L'EPSI !!
+		SQL_Connect.tryConnect();	// !! LIGNE EN COMMENTAIRE JUSTE POUR TRAVAILLER EN DEHORS DE L'EPSI !!
 		
 		accueil = new Accueil(this);			// creation du JPanel accueil
 		statistiques = new Statistiques(this); // creation du JPanel statistiques
@@ -46,7 +46,7 @@ public class Fenetre extends JFrame {
 		inscription.addMouseMotionListener(inscription);
 		
 		setLayout(new GridLayout(1, 1));		// Layout grid (tableau)  1 colonne 1 ligne
-		this.setContentPane(accueil);			// ajout du JPanel au JFrame (gridLayout)
+		this.setContentPane(connexion);			// ajout du JPanel au JFrame (gridLayout)
 		setVisible(true);
 	}
 	
@@ -65,7 +65,7 @@ public class Fenetre extends JFrame {
 	 * @param selection
 	 */
 	public void goToConnexion(String selection){
-		this.getContentPane().setVisible(false);	
+		//this.getContentPane().setVisible(false);	
 		this.setContentPane(connexion);				// ajout du JPanel au JFrame (gridLayout)		
 		this.getContentPane().setVisible(true);
 		
@@ -79,7 +79,7 @@ public class Fenetre extends JFrame {
 		 rep_deco = JOptionPane.showConfirmDialog(null, "Voulez-vous vraiment vous déconnecter ?");
 
 		if(rep_deco == 0){
-			this.getContentPane().setVisible(false);	
+			//this.getContentPane().setVisible(false);	
 			this.setContentPane(connexion);				// ajout du JPanel au JFrame (gridLayout)		
 			this.getContentPane().setVisible(true);
 		}
