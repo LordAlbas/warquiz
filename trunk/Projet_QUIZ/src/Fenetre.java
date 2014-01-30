@@ -36,7 +36,7 @@ public class Fenetre extends JFrame {
 		credits = new Credits(this);        	// creation du JPanel credits
 		jouer = new Jouer(this);				// creation du JPanel jouer
 		inscription = new Inscription(this);	// creation du JPanel inscription
-		connexion = new Connexion();			// creation du JPanel conexion
+		connexion = new Connexion(this);			// creation du JPanel conexion
 		
 		accueil.addMouseListener(accueil);		// 'accueil' implemente les methodes relatif a l'ecoute de la souris
 		accueil.addMouseMotionListener(accueil);		

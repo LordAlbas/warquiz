@@ -12,6 +12,11 @@ import javax.swing.JPanel;
  */
 public class Connexion extends JPanel implements MouseListener, MouseMotionListener {
 	
+	private Fenetre fenetre;
+	
+	public Connexion(Fenetre fen) {
+		fenetre = fen;
+	}
 	/**
 	 * Implement les mehtod pour MouseListener et MouseMotionListener.
 	 */
@@ -29,6 +34,7 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		
+		fenetre.accueil.repaint();
 		g.drawImage(Images.img_fond[1], 0, 0, this.getWidth(), this.getHeight(), null);	
 	}
 	
