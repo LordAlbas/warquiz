@@ -65,7 +65,7 @@ public class Accueil extends JPanel implements MouseListener, MouseMotionListene
 		if(e.getX() >= 959 && e.getX() <= 1022 && e.getY() >= 1 && e.getY() <= 47){ // CO/DECO
 			System.out.print("CO/DECO");
 			selection = "decoreco";
-			fenetre.goToStatistiques(selection); // on appel la fonction qui va changer de panel
+			fenetre.goToConnexion(selection); // on appel la fonction qui va changer de panel
 
 		}
 		
