@@ -8,9 +8,6 @@ import javax.swing.JPanel;
 
 public class Accueil extends JPanel implements MouseListener, MouseMotionListener {
 	
-	private int hauteur_bouton = 85;		// defini la taille en hauteur des boutons du menu
-	private int largeur_bouton = 366;		// defini la taille en largeur
-	private int ecart_bouton = 15;			// defini l'ecart entre les boutons
 	public int X;							// defini la position X du click
 	public int Y;							// defini la position Y du click
 	String image_select = "rien";			// defini l'image survol� (rien si pas survol� sinon [nom_image]_hover)
@@ -141,41 +138,41 @@ public class Accueil extends JPanel implements MouseListener, MouseMotionListene
 			switch (image_select){
 			case "rien" :
 				//System.out.print(image_select);
-				g.drawImage(Images.img_bouton[i], 120, 260+(i*(hauteur_bouton+ecart_bouton)), largeur_bouton, hauteur_bouton, null);
+				g.drawImage(Images.img_bouton[i], 120, 260+(i*(Images.hauteur_bouton+Images.ecart_bouton)), Images.largeur_bouton, Images.hauteur_bouton, null);
 				break;
 			case "JOUER_hover" :
 				//System.out.print(image_select);
-				g.drawImage(Images.img_bouton_hover[0], 120, 260+(i*(hauteur_bouton+ecart_bouton)), largeur_bouton, hauteur_bouton, null);
+				g.drawImage(Images.img_bouton_hover[0], 120, 260+(i*(Images.hauteur_bouton+Images.ecart_bouton)), Images.largeur_bouton, Images.hauteur_bouton, null);
 				image_select = "rien";
 				break;
 			case "STATS_hover" :
 				if (val_i == i){
 					//System.out.print(image_select);
-					g.drawImage(Images.img_bouton_hover[1], 120, 260+(i*(hauteur_bouton+ecart_bouton)), largeur_bouton, hauteur_bouton, null);
+					g.drawImage(Images.img_bouton_hover[1], 120, 260+(i*(Images.hauteur_bouton+Images.ecart_bouton)), Images.largeur_bouton, Images.hauteur_bouton, null);
 					image_select = "rien";
 				}
 				else{
-					g.drawImage(Images.img_bouton[i], 120, 260+(i*(hauteur_bouton+ecart_bouton)), largeur_bouton, hauteur_bouton, null);
+					g.drawImage(Images.img_bouton[i], 120, 260+(i*(Images.hauteur_bouton+Images.ecart_bouton)), Images.largeur_bouton, Images.hauteur_bouton, null);
 				}
 				break;
 			case "CREDITS_hover" :
 				if(val_i == i){
 					//System.out.print(image_select);
-					g.drawImage(Images.img_bouton_hover[2], 120, 260+(i*(hauteur_bouton+ecart_bouton)), largeur_bouton, hauteur_bouton, null);
+					g.drawImage(Images.img_bouton_hover[2], 120, 260+(i*(Images.hauteur_bouton+Images.ecart_bouton)), Images.largeur_bouton, Images.hauteur_bouton, null);
 					image_select = "rien";
 				}
 				else{
-					g.drawImage(Images.img_bouton[i], 120, 260+(i*(hauteur_bouton+ecart_bouton)), largeur_bouton, hauteur_bouton, null);
+					g.drawImage(Images.img_bouton[i], 120, 260+(i*(Images.hauteur_bouton+Images.ecart_bouton)), Images.largeur_bouton, Images.hauteur_bouton, null);
 				}
 				break;					
 			case "QUITTER_hover" :
 				if(val_i == i){
 					//System.out.print(image_select);
-					g.drawImage(Images.img_bouton_hover[3], 120, 260+(i*(hauteur_bouton+ecart_bouton)), largeur_bouton, hauteur_bouton, null);
+					g.drawImage(Images.img_bouton_hover[3], 120, 260+(i*(Images.hauteur_bouton+Images.ecart_bouton)), Images.largeur_bouton, Images.hauteur_bouton, null);
 					image_select = "rien";
 				}
 				else{
-					g.drawImage(Images.img_bouton[i], 120, 260+(i*(hauteur_bouton+ecart_bouton)), largeur_bouton, hauteur_bouton, null);
+					g.drawImage(Images.img_bouton[i], 120, 260+(i*(Images.hauteur_bouton+Images.ecart_bouton)), Images.largeur_bouton, Images.hauteur_bouton, null);
 				}
 				break;
 			}
