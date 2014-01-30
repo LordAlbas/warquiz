@@ -20,7 +20,7 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 		fenetre = fen;
 	}
 	/**
-	 * Implement les mehtod pour MouseListener et MouseMotionListener.
+	 * Implement les mehtodes pour MouseListener et MouseMotionListener.
 	 */
 	public void mouseClicked(MouseEvent e) {}
 	public void mousePressed(MouseEvent e) {}
@@ -48,9 +48,7 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 			g.drawImage(Images.img_bouton[i], 120, 260+(i*(hauteur_bouton+ecart_bouton)), largeur_bouton, hauteur_bouton, null);
 			g.drawImage(Images.img_bouton[i], 120, 260+(i*(hauteur_bouton+ecart_bouton)), largeur_bouton, hauteur_bouton, null);
 			g.drawImage(Images.img_bouton[i], 120, 260+(i*(hauteur_bouton+ecart_bouton)), largeur_bouton, hauteur_bouton, null);
-
-			}
-				
+		}
 		
 		g.drawImage(Images.img_fond[1], 0, 0, this.getWidth(), this.getHeight(), null);	
 		
