@@ -1,27 +1,38 @@
+import java.awt.Color;
+import java.awt.Cursor;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 
 /**
  * Class de connexion, s'affiche en tout debut de programme en pop-up style.
  * Invite l'utilisateur a se connecter avant toute action.
  * @author Merovee
  */
-public class Connexion extends JPanel implements MouseListener, MouseMotionListener {
+public class Connexion extends JPanel implements MouseListener, MouseMotionListener{
 	
 	private Fenetre fenetre;
 	static String selection; 				// defini quel bouton est selectionn�
+	private JTextField textField_pseudo;	// création du champ pseudo
+	private JPasswordField textField_mdp;	// création du cham mdp cypté
 	
 	/**
 	 * Constructor
 	 * @param fen
 	 */
-	public Connexion(Fenetre fen) {
+	public Connexion(Fenetre fen) {	
 		fenetre = fen;
+		setLayout(null); // on met le layout en absolute pour mettre les JTextbox où on veut
+
 	}
+	
 	/**
 	 * Implement les mehtodes pour MouseListener et MouseMotionListener.
 	 */
@@ -40,7 +51,18 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 	public void mouseEntered(MouseEvent e) {}
 	public void mouseExited(MouseEvent e) {}
 	public void mouseDragged(MouseEvent e) {}
-	public void mouseMoved(MouseEvent e) {}
+	public void mouseMoved(MouseEvent e) {
+		if(e.getX() >= 400 && e.getX() <= 585 && e.getY() >= 462 && e.getY() <= 510){ // changement de curseur sur le bouton inscription
+			setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+
+		}
+		else if(e.getX() >= 605 && e.getX() <= 790 && e.getY() >= 465 && e.getY() <= 513){ // changement de curseur sur le bouton valider
+			setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		}	
+		else{
+			setCursor(Cursor.getDefaultCursor());
+		}
+	}
 	
 	/**
 	 * PAINT
@@ -64,7 +86,23 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 		}
 		g.drawImage(Images.img_element[1], 140, 113, 8, 655, null);
 		g.drawImage(Images.img_fond[1], 0, 0, this.getWidth(), this.getHeight(), null);	
-
+		
+		
+		// Création du textBox pseudo et placement + suppression du style
+		textField_pseudo = new JTextField();
+		textField_pseudo.setBounds(398, 328, 366, 36);
+		add(textField_pseudo);
+		textField_pseudo.setBorder(null);
+		textField_pseudo.setFont(new Font("Arial", Font.PLAIN, 25)); 
+		textField_pseudo.setOpaque(false);
+		// Création du textBox pseudo et placement + suppression du style
+		textField_mdp = new JPasswordField();
+		textField_mdp.setBounds(398, 392, 366, 36);
+		add(textField_mdp);
+		textField_mdp.setBorder(null);
+		textField_mdp.setFont(new Font("Arial", Font.PLAIN, 25)); 
+		textField_mdp.setOpaque(false);
+		repaint();
 		
 	}
 	

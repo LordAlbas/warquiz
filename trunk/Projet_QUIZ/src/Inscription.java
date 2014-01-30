@@ -1,3 +1,4 @@
+import java.awt.Cursor;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -16,7 +17,18 @@ public class Inscription extends JPanel implements MouseListener, MouseMotionLis
 	}
 	
 	public void mouseDragged(MouseEvent e) {}
-	public void mouseMoved(MouseEvent e) {}
+	public void mouseMoved(MouseEvent e) {
+		if(e.getX() >= 400 && e.getX() <= 585 && e.getY() >= 462 && e.getY() <= 510){ // changement de curseur sur le bouton retour
+			setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+
+		}
+		else if(e.getX() >= 605 && e.getX() <= 790 && e.getY() >= 465 && e.getY() <= 513){ // changement de curseur sur le bouton valider
+			setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		}	
+		else{
+			setCursor(Cursor.getDefaultCursor());
+		}
+	}
 	public void mouseClicked(MouseEvent e) {
 		if(e.getX() >= 400 && e.getX() <= 585 && e.getY() >= 462 && e.getY() <= 510){ // Bouton de retour
 			System.out.print("CONNEXION");
