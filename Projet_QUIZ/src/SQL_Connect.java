@@ -1,9 +1,9 @@
 import java.sql.*;
 
 
-public class Connect {
+public class SQL_Connect {
 
-	public Connect() {
+	public SQL_Connect() {
 		// TODO Auto-generated constructor stub
 	}
 	public static void tryConnect() {
