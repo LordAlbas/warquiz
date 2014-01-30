@@ -46,8 +46,6 @@ public class Fenetre extends JFrame {
 	 */
 	public void goToAccueil(String selection){
 		this.getContentPane().setVisible(false);
-		accueil.addMouseListener(accueil);		// 'accueil' implemente les methodes relatif a l'ecoute de la souris
-		accueil.addMouseMotionListener(accueil);
 		this.setContentPane(accueil);				// ajout du JPanel au JFrame (gridLayout)		
 		this.getContentPane().setVisible(true);
 	}
