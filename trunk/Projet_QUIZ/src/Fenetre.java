@@ -62,11 +62,16 @@ public class Fenetre extends JFrame {
 	 * @param selection
 	 */
 	public void goToConnexion(String selection){
-		this.getContentPane().setVisible(false);
-		connexion.addMouseListener(connexion);	// 'connexion' implemente les methodes relatif a l'ecoute de la souris
-		connexion.addMouseMotionListener(connexion);		
-		this.setContentPane(connexion);				// ajout du JPanel au JFrame (gridLayout)		
-		this.getContentPane().setVisible(true);
+		int rep_deco;
+		 rep_deco = JOptionPane.showConfirmDialog(null, "Voulez-vous vraiment vous déconnecter ?");
+
+		if(rep_deco == 0){
+			this.getContentPane().setVisible(false);
+			connexion.addMouseListener(connexion);	// 'connexion' implemente les methodes relatif a l'ecoute de la souris
+			connexion.addMouseMotionListener(connexion);		
+			this.setContentPane(connexion);				// ajout du JPanel au JFrame (gridLayout)		
+			this.getContentPane().setVisible(true);
+		}
 	}	
 	
 	/**
