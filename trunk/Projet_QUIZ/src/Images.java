@@ -31,6 +31,8 @@ public class Images {
 		 */
 		try {
 			img_fond[0] = ImageIO.read(new File("images/accueil_fond.png"));	// Lecture du fichier .png
+			img_fond[1] = ImageIO.read(new File("images/connexion.png"));	// Lecture du fichier .png
+			img_fond[2] = ImageIO.read(new File("images/inscription.png"));	// Lecture du fichier .png
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
