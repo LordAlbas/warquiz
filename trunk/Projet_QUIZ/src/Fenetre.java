@@ -26,7 +26,6 @@ public class Fenetre extends JFrame {
 		setLocationRelativeTo(null);			// la fenetre apparait au milieu de l'ecran
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		//Connect.tryConnect();
 		Images.initImage();
 		//Images img = new Images();
 		SQL_Connect.tryConnect();	// !! LIGNE EN COMMENTAIRE JUSTE POUR TRAVAILLER EN DEHORS DE L'EPSI !!
