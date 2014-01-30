@@ -29,7 +29,7 @@ public class Fenetre extends JFrame {
 		//Connect.tryConnect();
 		Images.initImage();
 		//Images img = new Images();
-		SQL_Connect.tryConnect();	// !! LIGNE EN COMMENTAIRE JUSTE POUR TRAVAILLER EN DEHORS DE L'EPSI !!
+		//SQL_Connect.tryConnect();	// !! LIGNE EN COMMENTAIRE JUSTE POUR TRAVAILLER EN DEHORS DE L'EPSI !!
 		
 		accueil = new Accueil(this);			// creation du JPanel accueil
 		statistiques = new Statistiques(this); // creation du JPanel statistiques
@@ -39,7 +39,12 @@ public class Fenetre extends JFrame {
 		connexion = new Connexion(this);			// creation du JPanel conexion
 		
 		accueil.addMouseListener(accueil);		// 'accueil' implemente les methodes relatif a l'ecoute de la souris
-		accueil.addMouseMotionListener(accueil);		
+		accueil.addMouseMotionListener(accueil);	
+		connexion.addMouseListener(connexion);		// 'accueil' implemente les methodes relatif a l'ecoute de la souris
+		connexion.addMouseMotionListener(connexion);
+		inscription.addMouseListener(inscription);	// 'inscription' implemente les methodes relatif a l'ecoute de la souris
+		inscription.addMouseMotionListener(inscription);
+		
 		setLayout(new GridLayout(1, 1));		// Layout grid (tableau)  1 colonne 1 ligne
 		this.setContentPane(accueil);			// ajout du JPanel au JFrame (gridLayout)
 		setVisible(true);
@@ -51,24 +56,30 @@ public class Fenetre extends JFrame {
 	 */
 	public void goToInscription(String selection){
 		this.getContentPane().setVisible(false);
-		inscription.addMouseListener(inscription);	// 'inscription' implemente les methodes relatif a l'ecoute de la souris
-		inscription.addMouseMotionListener(inscription);		
 		this.setContentPane(inscription);				// ajout du JPanel au JFrame (gridLayout)		
 		this.getContentPane().setVisible(true);
-	}	
+	}
 	
+	/**
+	 * Redirige sur CONNEXION SANS AFFICHER D'ALERTE
+	 * @param selection
+	 */
+	public void goToConnexion(String selection){
+		this.getContentPane().setVisible(false);	
+		this.setContentPane(connexion);				// ajout du JPanel au JFrame (gridLayout)		
+		this.getContentPane().setVisible(true);
+		
+	}	
 	/**
 	 * Redirige sur CONNEXION
 	 * @param selection
 	 */
-	public void goToConnexion(String selection){
+	public void goToConnexionAlerte(String selection){
 		int rep_deco;
 		 rep_deco = JOptionPane.showConfirmDialog(null, "Voulez-vous vraiment vous déconnecter ?");
 
 		if(rep_deco == 0){
-			this.getContentPane().setVisible(false);
-			connexion.addMouseListener(connexion);	// 'connexion' implemente les methodes relatif a l'ecoute de la souris
-			connexion.addMouseMotionListener(connexion);		
+			this.getContentPane().setVisible(false);	
 			this.setContentPane(connexion);				// ajout du JPanel au JFrame (gridLayout)		
 			this.getContentPane().setVisible(true);
 		}

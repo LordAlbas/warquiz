@@ -9,18 +9,28 @@ import javax.swing.JPanel;
 public class Inscription extends JPanel implements MouseListener, MouseMotionListener{
 
 	private Fenetre fenetre;
+	static String selection; 				// defini quel bouton est selectionnï¿½
 	
 	public Inscription(Fenetre fen){
-		fenetre = fen; // On récupère la classe Fenetre
+		fenetre = fen; // On rÃ©cupÃ¨re la classe Fenetre
 	}
 	
-	public void mouseDragged(MouseEvent arg0) {}
-	public void mouseMoved(MouseEvent arg0) {}
-	public void mouseClicked(MouseEvent arg0) {}
-	public void mouseEntered(MouseEvent arg0) {}
-	public void mouseExited(MouseEvent arg0) {}
-	public void mousePressed(MouseEvent arg0) {}
-	public void mouseReleased(MouseEvent arg0) {}
+	public void mouseDragged(MouseEvent e) {}
+	public void mouseMoved(MouseEvent e) {}
+	public void mouseClicked(MouseEvent e) {
+		if(e.getX() >= 400 && e.getX() <= 585 && e.getY() >= 462 && e.getY() <= 510){ // Bouton de retour
+			System.out.print("CONNEXION");
+			fenetre.goToConnexion(selection); // on appel la fonction qui va changer de panel
+		}		
+		if(e.getX() >= 605 && e.getX() <= 790 && e.getY() >= 465 && e.getY() <= 513){ // Bouton de validation
+			System.out.print("CONNEXION");
+			fenetre.goToAccueil(selection); // on appel la fonction qui va changer de panel
+		}			
+	}
+	public void mouseEntered(MouseEvent e) {}
+	public void mouseExited(MouseEvent e) {}
+	public void mousePressed(MouseEvent e) {}
+	public void mouseReleased(MouseEvent e) {}
 	
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);

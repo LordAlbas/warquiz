@@ -13,9 +13,7 @@ import javax.swing.JPanel;
 public class Connexion extends JPanel implements MouseListener, MouseMotionListener {
 	
 	private Fenetre fenetre;
-	private int hauteur_bouton = 85;		// defini la taille en hauteur des boutons du menu
-	private int largeur_bouton = 366;		// defini la taille en largeur
-	private int ecart_bouton = 15;			// defini l'ecart entre les boutons
+	static String selection; 				// defini quel bouton est selectionn�
 	
 	/**
 	 * Constructor
@@ -27,7 +25,16 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 	/**
 	 * Implement les mehtodes pour MouseListener et MouseMotionListener.
 	 */
-	public void mouseClicked(MouseEvent e) {}
+	public void mouseClicked(MouseEvent e) {
+		if(e.getX() >= 400 && e.getX() <= 585 && e.getY() >= 462 && e.getY() <= 510){ // JOUER
+			System.out.print("INSCRIPTION");
+			fenetre.goToInscription(selection); // on appel la fonction qui va changer de panel
+		}
+		if(e.getX() >= 605 && e.getX() <= 790 && e.getY() >= 465 && e.getY() <= 513){ // Bouton de validation
+			System.out.print("CONNEXION");
+			fenetre.goToAccueil(selection); // on appel la fonction qui va changer de panel
+		}		
+	}
 	public void mousePressed(MouseEvent e) {}
 	public void mouseReleased(MouseEvent e) {}
 	public void mouseEntered(MouseEvent e) {}
@@ -49,10 +56,10 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 		 * Les positions en durs (ici 120 et 260) correspondent au coin haut-gauche du bloc de bouton.
 		 */
 		for (int i=0; i<4; i++) {
-			g.drawImage(Images.img_bouton[i], 120, 260+(i*(hauteur_bouton+ecart_bouton)), largeur_bouton, hauteur_bouton, null);
-			g.drawImage(Images.img_bouton[i], 120, 260+(i*(hauteur_bouton+ecart_bouton)), largeur_bouton, hauteur_bouton, null);
-			g.drawImage(Images.img_bouton[i], 120, 260+(i*(hauteur_bouton+ecart_bouton)), largeur_bouton, hauteur_bouton, null);
-			g.drawImage(Images.img_bouton[i], 120, 260+(i*(hauteur_bouton+ecart_bouton)), largeur_bouton, hauteur_bouton, null);
+			g.drawImage(Images.img_bouton[i], 120, 260+(i*(Images.hauteur_bouton+Images.ecart_bouton)), Images.largeur_bouton, Images.hauteur_bouton, null);
+			g.drawImage(Images.img_bouton[i], 120, 260+(i*(Images.hauteur_bouton+Images.ecart_bouton)), Images.largeur_bouton, Images.hauteur_bouton, null);
+			g.drawImage(Images.img_bouton[i], 120, 260+(i*(Images.hauteur_bouton+Images.ecart_bouton)), Images.largeur_bouton, Images.hauteur_bouton, null);
+			g.drawImage(Images.img_bouton[i], 120, 260+(i*(Images.hauteur_bouton+Images.ecart_bouton)), Images.largeur_bouton, Images.hauteur_bouton, null);
 		}
 		
 		g.drawImage(Images.img_fond[1], 0, 0, this.getWidth(), this.getHeight(), null);	
