@@ -62,7 +62,7 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 			g.drawImage(Images.img_bouton[i], 120, 260+(i*(Images.hauteur_bouton+Images.ecart_bouton)), Images.largeur_bouton, Images.hauteur_bouton, null);
 			g.drawImage(Images.img_bouton[i], 120, 260+(i*(Images.hauteur_bouton+Images.ecart_bouton)), Images.largeur_bouton, Images.hauteur_bouton, null);
 		}
-	
+		g.drawImage(Images.img_element[1], 140, 113, 8, 655, null);
 		g.drawImage(Images.img_fond[1], 0, 0, this.getWidth(), this.getHeight(), null);	
 
 		
