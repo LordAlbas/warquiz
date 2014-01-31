@@ -1,19 +1,29 @@
 import java.awt.Cursor;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 
 
 public class Inscription extends JPanel implements MouseListener, MouseMotionListener{
 
 	private Fenetre fenetre;
 	static String selection; 				// defini quel bouton est selectionn�
+	private JTextField textField_pseudo;	// création du champ pseudo
+	private JPasswordField textField_mdp;	// création du cham mdp cypté
+	private JPasswordField textField_mdp_conf;	// création du champ mdp confirmation
+	private JTextField textField_mail; // création du champ mail
+
+
 	
 	public Inscription(Fenetre fen){
 		fenetre = fen; // On récupère la classe Fenetre
+		setLayout(null); // on met le layout en absolute pour mettre les JTextbox où on veut
 	}
 	
 	public void mouseDragged(MouseEvent e) {}
@@ -62,6 +72,41 @@ public class Inscription extends JPanel implements MouseListener, MouseMotionLis
 		}
 		g.drawImage(Images.img_element[1], 140, 113, 8, 655, null);
 		g.drawImage(Images.img_fond[2], 0, 0, this.getWidth(), this.getHeight(), null);	
+		
+		
+		// Création du textBox PEUDO et placement + suppression du style
+		textField_pseudo = new JTextField();
+		textField_pseudo.setBounds(398, 288, 366, 36);
+		add(textField_pseudo);
+		textField_pseudo.setBorder(null);
+		textField_pseudo.setFont(new Font("Arial", Font.PLAIN, 25)); 
+		textField_pseudo.setOpaque(false);
+		
+		// Création du textBox MDP et placement + suppression du style
+		textField_mdp = new JPasswordField();
+		textField_mdp.setBounds(398, 328, 366, 36);
+		add(textField_mdp);
+		textField_mdp.setBorder(null);
+		textField_mdp.setFont(new Font("Arial", Font.PLAIN, 25)); 
+		textField_mdp.setOpaque(false);	
+		
+		// Création du textBox MDP_CONF et placement + suppression du style
+		textField_mdp_conf = new JPasswordField();
+		textField_mdp_conf.setBounds(398, 368, 366, 36);
+		add(textField_mdp_conf);
+		textField_mdp_conf.setBorder(null);
+		textField_mdp_conf.setFont(new Font("Arial", Font.PLAIN, 25)); 
+		textField_mdp_conf.setOpaque(false);
+		
+		// Création du textBox MAIL et placement + suppression du style
+		textField_mail = new JTextField();
+		textField_mail.setBounds(398, 408, 366, 36);
+		add(textField_mail);
+		textField_mail.setBorder(null);
+		textField_mail.setFont(new Font("Arial", Font.PLAIN, 25)); 
+		textField_mail.setOpaque(false);
+		
+		repaint();		
 	}
 	
 
