@@ -17,7 +17,6 @@ public class Credits extends JPanel implements MouseListener, MouseMotionListene
 	String bouton_retour ="rien";
 	int val_i;								// defini l'emplacement de l'image survol� dans le tableau img_bouton_hover
 	static String selection; 				// defini quel bouton est selectionn�
-
 	
 	/**
 	 * Constructor
