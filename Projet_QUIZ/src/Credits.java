@@ -17,17 +17,15 @@ public class Credits extends JPanel implements MouseListener, MouseMotionListene
 	String bouton_retour ="rien";
 	int val_i;								// defini l'emplacement de l'image survol� dans le tableau img_bouton_hover
 	static String selection; 				// defini quel bouton est selectionn�
-	JButton bouton = new JButton("Lancer Requête");
 
 	
 	/**
 	 * Constructor
 	 */
 	public Credits(Fenetre fen) {
-		this.add(bouton);                                      //Ajout du bouton à la fenêtre
-	    bouton.setBounds(500, 500, 100, 30);                     //Position et dimension du bouton
-	    bouton.addActionListener(this); 
+		
 		fenetre = fen;  // on r�cup�re la classe m�re
+		
 	}
 	
 	/**
@@ -44,22 +42,6 @@ public class Credits extends JPanel implements MouseListener, MouseMotionListene
 		if(e.getX() >= 1 && e.getX() <= 400 && e.getY() >= 1 && e.getY() <= 130){ // STATS
 			selection = "accueil";
 			fenetre.goToAccueil(selection); // on appel la fonction qui va changer de panel
-		}
-	}
-	public void executeRequest(){
-		Connection conn = null;
-		try {
-            // Load the SQLServerDriver class, build the
-            // connection string, and get a connection	
-            Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-            conn = DriverManager.getConnection("jdbc:sqlserver://193.252.48.189\\SQLEXPRESS:1433;" + "database=BDD_B3I_groupe_5;" + "user=b3i_groupe_5;" + "password=123Soleil");
-            Statement requete = conn.createStatement();
-            ResultSet resultatTest = requete.executeQuery("select * from ADMIN"); 
-            System.out.println(resultatTest);
-		} 	
-		catch (Exception e) {
-            System.out.println(e.getMessage());
-            System.exit(0);
 		}
 	}
 	
@@ -119,15 +101,14 @@ public class Credits extends JPanel implements MouseListener, MouseMotionListene
 			bouton_retour = "rien";
 			break;
 		}
+		
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		if(e.getSource() == bouton)                                                            //On s'assure que l'événement provient du bouton
-	    {
-	       executeRequest();                                                                    //Lance la requête
-	    }
+		
 	}
+	
 	
 }
