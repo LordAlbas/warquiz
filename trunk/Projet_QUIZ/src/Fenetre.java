@@ -15,7 +15,7 @@ public class Fenetre extends JFrame {
 	Jouer jouer;
 	Inscription inscription;
 	Connexion connexion;
-	Creation_quiz creation_quiz;
+	Admin_ajout_reponses creation_quiz;
 	
 	/**
 	 * Constructeur
@@ -36,7 +36,9 @@ public class Fenetre extends JFrame {
 		jouer = new Jouer(this);				// creation du JPanel jouer
 		inscription = new Inscription(this);	// creation du JPanel inscription
 		connexion = new Connexion(this);			// creation du JPanel conexion
-		creation_quiz = new Creation_quiz(this);
+		creation_quiz = new Admin_ajout_reponses(this);
+		
+		
 		
 		accueil.addMouseListener(accueil);		// 'accueil' implemente les methodes relatif a l'ecoute de la souris
 		accueil.addMouseMotionListener(accueil);	
@@ -45,7 +47,7 @@ public class Fenetre extends JFrame {
 		inscription.addMouseListener(inscription);	// 'inscription' implemente les methodes relatif a l'ecoute de la souris
 		inscription.addMouseMotionListener(inscription);
 		creation_quiz.addMouseListener(creation_quiz);	// 'inscription' implemente les methodes relatif a l'ecoute de la souris
-		creation_quiz.addMouseMotionListener(creation_quiz);
+		//creation_quiz.addMouseMotionListener(creation_quiz);
 		
 		setLayout(new GridLayout(1, 1));		// Layout grid (tableau)  1 colonne 1 ligne
 		this.setContentPane(connexion);			// ajout du JPanel au JFrame (gridLayout)
@@ -57,7 +59,7 @@ public class Fenetre extends JFrame {
 	 * @param selection
 	 */
 	public void goToInscription(String selection){
-		this.getContentPane().setVisible(false);
+		//this.getContentPane().setVisible(false);
 		this.setContentPane(inscription);				// ajout du JPanel au JFrame (gridLayout)		
 		this.getContentPane().setVisible(true);
 	}
@@ -128,7 +130,7 @@ public class Fenetre extends JFrame {
 	public void goToJouer(String selection){
 		this.getContentPane().setVisible(false);
 		creation_quiz.addMouseListener(creation_quiz);	// 'statistiques' implemente les methodes relatif a l'ecoute de la souris
-		creation_quiz.addMouseMotionListener(creation_quiz);
+		//creation_quiz.addMouseMotionListener(creation_quiz);
 		this.setContentPane(creation_quiz);				// ajout du JPanel au JFrame (gridLayout)		
 		this.getContentPane().setVisible(true);
 	}
