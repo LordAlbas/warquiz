@@ -59,7 +59,7 @@ public class Fenetre extends JFrame {
 	 * @param selection
 	 */
 	public void goToInscription(String selection){
-		//this.getContentPane().setVisible(false);
+		this.getContentPane().setVisible(false);
 		this.setContentPane(inscription);				// ajout du JPanel au JFrame (gridLayout)		
 		this.getContentPane().setVisible(true);
 	}
@@ -88,6 +88,7 @@ public class Fenetre extends JFrame {
 			this.getContentPane().setVisible(true);
 		}
 	}	
+	/**
 	
 	/**
 	 * Redirige sur l'ACCUEIL
