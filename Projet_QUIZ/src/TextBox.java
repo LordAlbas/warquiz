@@ -17,6 +17,9 @@ public class TextBox extends JTextField implements MouseListener, MouseMotionLis
 	
 	public TextBox (){
 		
+		
+		super();
+		
 		//test.setText("nijonijoni");
 		//test.setBorder(null);
 		
@@ -68,6 +71,7 @@ public class TextBox extends JTextField implements MouseListener, MouseMotionLis
 	}
 	
 	public void paintComponent(Graphics g) {
+		setText("ghj");
 		super.paintComponent(g);
 		test = new JTextField();
 		add(test);

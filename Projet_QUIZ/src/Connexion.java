@@ -37,7 +37,7 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 	 * Implement les mehtodes pour MouseListener et MouseMotionListener.
 	 */
 	public void mouseClicked(MouseEvent e) {
-		if(e.getX() >= 400 && e.getX() <= 585 && e.getY() >= 462 && e.getY() <= 510){ // JOUER
+		if(e.getX() >= 400 && e.getX() <= 585 && e.getY() >= 462 && e.getY() <= 510){ // Inscription
 			System.out.print("INSCRIPTION");
 			fenetre.goToInscription(selection); // on appel la fonction qui va changer de panel
 		}
