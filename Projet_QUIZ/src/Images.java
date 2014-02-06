@@ -47,6 +47,7 @@ public class Images {
 		try {
 			img_element[0] = ImageIO.read(new File("images/header.png"));
 			img_element[1] = ImageIO.read(new File("images/barre_verticale.png"));
+			img_element[2] = ImageIO.read(new File("images/background_textbox.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
