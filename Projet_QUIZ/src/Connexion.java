@@ -29,6 +29,7 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 	private JPasswordField textField_mdp;	// création du cham mdp cypté
 	public int bad_pseudo=0; // le champ n'est pas encore invalide
 	public int bad_mdp=0; // le champ n'est pas encore invalide
+	public int tentative = 0;
 	/**
 	 * Constructor
 	 * @param fen
@@ -72,18 +73,26 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 			public void keyPressed(java.awt.event.KeyEvent evt){
 				if(evt.getKeyCode() == evt.VK_ENTER ){
 					if(textField_pseudo.getText().length() != 0){							
-						System.out.println(" ENTER PSEUDO ");						
+						//System.out.println(" ENTER PSEUDO ");	
 						//fenetre.goToAccueil(selection);	
 						if(textField_mdp.getText().length() == 0){
 							System.out.println(" ENTER PSEUDO ERROR ");
 							textField_mdp.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.RED));
 							bad_mdp=1;
+							tentative++;
 							repaint();
+						}
+						else if(textField_mdp.getText().length() != 0){
+							tentative=0;
+							textField_pseudo.setText("");
+							textField_mdp.setText("");	
+							fenetre.goToAccueil(selection);	
 						}
 					}else{
 						System.out.println(" ENTER PSEUDO ERROR ");
 						textField_pseudo.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.RED));
 						bad_pseudo=1;
+						tentative++;
 						repaint();
 						if(textField_mdp.getText().length() == 0){
 							System.out.println(" ENTER PSEUDO ERROR ");
@@ -99,18 +108,27 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 			public void keyPressed(java.awt.event.KeyEvent evt){
 				if(evt.getKeyCode() == evt.VK_ENTER ){
 					if(textField_mdp.getText().length() != 0){
-						System.out.println(" ENTER PSEUDO ");
-						//fenetre.goToAccueil(selection);	
+						//System.out.println(" ENTER PSEUDO ");
+						//fenetre.goToAccueil(selection);
 						if(textField_pseudo.getText().length() == 0){
 							System.out.println(" ENTER PSEUDO ERROR ");
 							textField_pseudo.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.RED));
 							bad_pseudo=1;
+							tentative++;
 							repaint();
+						}
+						else if(textField_pseudo.getText().length() != 0){
+							textField_pseudo.setText("");
+							textField_mdp.setText("");	
+							tentative=0;
+							fenetre.goToAccueil(selection);	
+
 						}
 					}else{
 						System.out.println(" ENTER PSEUDO ERROR ");
 						textField_mdp.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.RED));
 						bad_mdp=1;
+						tentative++;
 						repaint();
 						//textField_pseudo.setBorder(BorderFactory.createMatteBorder(1, 36, 1, 0, icon));
 						if(textField_pseudo.getText().length() == 0){
@@ -143,11 +161,43 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 		}
 		if(e.getX() >= 400 && e.getX() <= 585 && e.getY() >= 462 && e.getY() <= 510){ // Bouton d'inscription
 			System.out.print("INSCRIPTION");
+			tentative = 0;
 			fenetre.goToInscription(selection); // on appel la fonction qui va changer de panel
 		}
 		if(e.getX() >= 605 && e.getX() <= 790 && e.getY() >= 465 && e.getY() <= 513){ // Bouton de validation
 			System.out.print("CONNEXION");
-			fenetre.goToAccueil(selection); // on appel la fonction qui va changer de panel
+			
+			if(textField_mdp.getText().length() != 0){
+				if(textField_pseudo.getText().length() == 0){
+					textField_pseudo.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.RED));
+					bad_pseudo=1;
+					tentative++;
+					repaint();
+				}
+				else if(textField_pseudo.getText().length() != 0){
+					textField_pseudo.setText("");
+					textField_mdp.setText("");
+					tentative=0;
+					fenetre.goToAccueil(selection);	
+				}
+			}else{
+				System.out.println(" ENTER PSEUDO ERROR ");
+				textField_mdp.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.RED));
+				bad_mdp=1;
+				tentative++;
+				repaint();
+				//textField_pseudo.setBorder(BorderFactory.createMatteBorder(1, 36, 1, 0, icon));
+				if(textField_pseudo.getText().length() == 0){
+					//System.out.println(" ENTER PSEUDO ERROR ");
+					textField_pseudo.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.RED));
+					bad_pseudo=1;
+					repaint();
+				}
+			}
+			
+			
+			
+			//fenetre.goToAccueil(selection); // on appel la fonction qui va changer de panel
 		}		
 	}
 	public void mousePressed(MouseEvent e) {}
@@ -180,21 +230,21 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		
-		//g.drawImage(Images.img_fond[0], 0, 0, this.getWidth(), this.getHeight(), null);
-		//g.drawImage(Images.img_element[0], 0, 0, this.getWidth(), (int)(this.getHeight() / 6.1230), null);		// dessine le header	
-		//g.drawImage(Images.img_bouton[4], 960, 1, 46, 46, null);
+		g.drawImage(Images.img_fond[0], 0, 0, this.getWidth(), this.getHeight(), null);
+		g.drawImage(Images.img_element[0], 0, 0, this.getWidth(), (int)(this.getHeight() / 6.1230), null);		// dessine le header	
+		g.drawImage(Images.img_bouton[4], 960, 1, 46, 46, null);
 		/*
 		 * On boucle sur tous les boutons (de [0] a [3]).
 		 * Chaque bouton obtient une position X (hauteur) en fonction de son numero (i).
 		 * Les positions en durs (ici 120 et 260) correspondent au coin haut-gauche du bloc de bouton.
 		 */
-		//for (int i=0; i<4; i++) {
-		//	g.drawImage(Images.img_bouton[i], 120, 260+(i*(Images.hauteur_bouton+Images.ecart_bouton)), Images.largeur_bouton, Images.hauteur_bouton, null);
-		//	g.drawImage(Images.img_bouton[i], 120, 260+(i*(Images.hauteur_bouton+Images.ecart_bouton)), Images.largeur_bouton, Images.hauteur_bouton, null);
-		//	g.drawImage(Images.img_bouton[i], 120, 260+(i*(Images.hauteur_bouton+Images.ecart_bouton)), Images.largeur_bouton, Images.hauteur_bouton, null);
-		//	g.drawImage(Images.img_bouton[i], 120, 260+(i*(Images.hauteur_bouton+Images.ecart_bouton)), Images.largeur_bouton, Images.hauteur_bouton, null);
-		//}
-		//g.drawImage(Images.img_element[1], 140, 113, 8, 655, null);
+		for (int i=0; i<4; i++) {
+			g.drawImage(Images.img_bouton[i], 120, 260+(i*(Images.hauteur_bouton+Images.ecart_bouton)), Images.largeur_bouton, Images.hauteur_bouton, null);
+			g.drawImage(Images.img_bouton[i], 120, 260+(i*(Images.hauteur_bouton+Images.ecart_bouton)), Images.largeur_bouton, Images.hauteur_bouton, null);
+			g.drawImage(Images.img_bouton[i], 120, 260+(i*(Images.hauteur_bouton+Images.ecart_bouton)), Images.largeur_bouton, Images.hauteur_bouton, null);
+			g.drawImage(Images.img_bouton[i], 120, 260+(i*(Images.hauteur_bouton+Images.ecart_bouton)), Images.largeur_bouton, Images.hauteur_bouton, null);
+		}
+		g.drawImage(Images.img_element[1], 140, 113, 8, 655, null);
 		g.drawImage(Images.img_fond[1], 0, 0, this.getWidth(), this.getHeight(), null);	
 		
 		// On affiche ou non la banderole info
@@ -204,7 +254,10 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 		if(bad_mdp==1){
 			g.drawImage(Images.img_element[3], 768, 390, 170, 46, null);	
 		}
-
+		
+		if(tentative >= 3){
+			g.drawImage(Images.img_element[4], 140, 50, 800, 130, null);	
+		}
 		
 	}
 
