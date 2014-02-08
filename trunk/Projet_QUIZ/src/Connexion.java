@@ -74,6 +74,12 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 					if(textField_pseudo.getText().length() != 0){							
 						System.out.println(" ENTER PSEUDO ");						
 						//fenetre.goToAccueil(selection);	
+						if(textField_mdp.getText().length() == 0){
+							System.out.println(" ENTER PSEUDO ERROR ");
+							textField_mdp.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.RED));
+							bad_mdp=1;
+							repaint();
+						}
 					}else{
 						System.out.println(" ENTER PSEUDO ERROR ");
 						textField_pseudo.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.RED));
@@ -94,7 +100,13 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 				if(evt.getKeyCode() == evt.VK_ENTER ){
 					if(textField_mdp.getText().length() != 0){
 						System.out.println(" ENTER PSEUDO ");
-						//fenetre.goToAccueil(selection);						
+						//fenetre.goToAccueil(selection);	
+						if(textField_pseudo.getText().length() == 0){
+							System.out.println(" ENTER PSEUDO ERROR ");
+							textField_pseudo.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.RED));
+							bad_pseudo=1;
+							repaint();
+						}
 					}else{
 						System.out.println(" ENTER PSEUDO ERROR ");
 						textField_mdp.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.RED));
