@@ -2,6 +2,7 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 
 import javax.swing.JFrame;
+import javax.swing.JLayeredPane;
 import javax.swing.JOptionPane;
 
 
@@ -16,7 +17,7 @@ public class Fenetre extends JFrame {
 	Inscription inscription;
 	Connexion connexion;
 	Admin_ajout_reponses creation_quiz;
-	
+	private JLayeredPane jlp = new JLayeredPane();
 	/**
 	 * Constructeur
 	 */
@@ -51,7 +52,10 @@ public class Fenetre extends JFrame {
 		
 		setLayout(new GridLayout(1, 1));		// Layout grid (tableau)  1 colonne 1 ligne
 		this.setContentPane(connexion);			// ajout du JPanel au JFrame (gridLayout)
+
+		connexion.setOpaque(false);
 		setVisible(true);
+		//this.goToConnexion("jouer");
 	}
 	
 	/**
@@ -69,9 +73,21 @@ public class Fenetre extends JFrame {
 	 * @param selection
 	 */
 	public void goToConnexion(String selection){
-		this.getContentPane().setVisible(false);	
+		//this.getContentPane().setVisible(false);
 		this.setContentPane(connexion);				// ajout du JPanel au JFrame (gridLayout)		
-		this.getContentPane().setVisible(true);
+		//this.getContentPane().setVisible(true);
+		//jlp.add(accueil, new Integer(0));
+	
+		//jlp.setPreferredSize(new Dimension (200, 200));
+		
+		
+		
+		this.add(jlp);
+		//jlp.setVisible(true);
+		//jlp.add(connexion, new Integer (1));
+		//jlp.moveToFront(connexion);
+		//jlp.setOpaque(false);
+		
 		
 	}	
 	/**
@@ -84,8 +100,12 @@ public class Fenetre extends JFrame {
 
 		if(rep_deco == 0){
 			//this.getContentPane().setVisible(false);	
-			this.setContentPane(connexion);				// ajout du JPanel au JFrame (gridLayout)		
-			this.getContentPane().setVisible(true);
+			//this.setContentPane(connexion);				// ajout du JPanel au JFrame (gridLayout)
+
+			//this.getContentPane().setVisible(true);
+			jlp.add(accueil, new Integer(0));
+			jlp.add(connexion, new Integer(1));
+			//jlp.setVisible(true);
 		}
 	}	
 	/**
