@@ -63,7 +63,7 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 		this.pushKeyboard();
 	
 	
-	}
+	} 
 	/**
 	 * Défini les actions du bouton ENTREE
 	 */
@@ -156,7 +156,6 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 			setCursor(Cursor.getDefaultCursor());
 		}
 	}
-
 	public void focusGained(FocusEvent e) {}		
 	public void focusLost(FocusEvent arg0) {}
 	
