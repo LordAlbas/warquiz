@@ -128,6 +128,7 @@ public class Accueil extends JPanel implements MouseListener, MouseMotionListene
 			break;	
 		}
 		
+		g.drawImage(Images.img_bouton[6], 910, 1, 46, 46, null);
 		/*
 		 * On boucle sur tous les boutons (de [0] a [3]).
 		 * Chaque bouton obtient une position X (hauteur) en fonction de son numero (i).

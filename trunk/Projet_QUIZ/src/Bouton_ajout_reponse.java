@@ -15,8 +15,9 @@ public class Bouton_ajout_reponse extends JButton implements MouseListener{
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
-		if(Admin_ajout_reponses.list.getItemCount() < 10){
+		if(Admin_ajout_reponses.list.getItemCount() < 10 && Admin_ajout_reponses.reponse.getText().length() != 0){
 			Admin_ajout_reponses.list.add(Admin_ajout_reponses.reponse.getText());
+			Admin_ajout_reponses.reponse.setText("");
 		}else{System.out.println("ERRUER LIST PLEINE");}
 	}
 

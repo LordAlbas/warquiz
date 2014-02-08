@@ -49,6 +49,7 @@ public class Images {
 			img_element[1] = ImageIO.read(new File("images/barre_verticale.png"));
 			//img_element[2] = ImageIO.read(new File("images/background_textbox.png"));
 			img_element[3] = ImageIO.read(new File("images/invalide.png"));
+			img_element[4] = ImageIO.read(new File("images/information_connexion.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -63,6 +64,7 @@ public class Images {
 			img_bouton[3] = ImageIO.read(new File("images/accueil_bouton_quitter.png"));
 			img_bouton[4] = ImageIO.read(new File("images/deco.png"));
 			img_bouton[5] = ImageIO.read(new File("images/retour.png"));
+			img_bouton[6] = ImageIO.read(new File("images/bouton_option.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

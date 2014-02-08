@@ -73,16 +73,16 @@ public class Fenetre extends JFrame {
 	 * @param selection
 	 */
 	public void goToConnexion(String selection){
-		//this.getContentPane().setVisible(false);
+		this.getContentPane().setVisible(false);
 		this.setContentPane(connexion);				// ajout du JPanel au JFrame (gridLayout)		
-		//this.getContentPane().setVisible(true);
+		this.getContentPane().setVisible(true);
 		//jlp.add(accueil, new Integer(0));
 	
 		//jlp.setPreferredSize(new Dimension (200, 200));
 		
+	
 		
-		
-		this.add(jlp);
+		//this.add(jlp);
 		//jlp.setVisible(true);
 		//jlp.add(connexion, new Integer (1));
 		//jlp.moveToFront(connexion);
@@ -99,12 +99,12 @@ public class Fenetre extends JFrame {
 		 rep_deco = JOptionPane.showConfirmDialog(null, "Voulez-vous vraiment vous déconnecter ?");
 
 		if(rep_deco == 0){
-			//this.getContentPane().setVisible(false);	
-			//this.setContentPane(connexion);				// ajout du JPanel au JFrame (gridLayout)
+			this.getContentPane().setVisible(false);	
+			this.setContentPane(connexion);				// ajout du JPanel au JFrame (gridLayout)
 
-			//this.getContentPane().setVisible(true);
-			jlp.add(accueil, new Integer(0));
-			jlp.add(connexion, new Integer(1));
+			this.getContentPane().setVisible(true);
+			//jlp.add(accueil, new Integer(0));
+			//jlp.add(connexion, new Integer(1));
 			//jlp.setVisible(true);
 		}
 	}	
