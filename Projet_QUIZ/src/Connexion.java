@@ -6,11 +6,17 @@ import java.awt.Image;
 import java.awt.event.*;
 import java.io.File;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
@@ -30,6 +36,11 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 	public int bad_pseudo=0; // le champ n'est pas encore invalide
 	public int bad_mdp=0; // le champ n'est pas encore invalide
 	public int tentative = 0;
+	public String login_admin;
+	public String mdp_admin;
+	public String query;
+	public String dbUsername, dbPassword;
+    boolean login = false;
 	/**
 	 * Constructor
 	 * @param fen
@@ -65,6 +76,8 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 	
 	
 	} 
+
+	
 	/**
 	 * Défini les actions du bouton ENTREE
 	 */
@@ -83,10 +96,37 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 							repaint();
 						}
 						else if(textField_mdp.getText().length() != 0){
-							tentative=0;
+							/*tentative=0;
 							textField_pseudo.setText("");
 							textField_mdp.setText("");	
-							fenetre.goToAccueil(selection);	
+							fenetre.goToAccueil(selection);	*/
+							try {
+					        	Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+					            Connection conn = DriverManager.getConnection("jdbc:sqlserver://193.252.48.189\\SQLEXPRESS:1433;" + "database=BDD_B3I_groupe_5;" + "user=b3i_groupe_5;" + "password=123Soleil");
+					            Statement stmt = (Statement) conn.createStatement();
+					            query = "SELECT login_admin, mdp_admin FROM ADMIN;";
+					            stmt.executeQuery(query);
+					            ResultSet rs = stmt.getResultSet();
+					            
+					            while(rs.next()){
+					                dbUsername = rs.getString("login_admin");
+					                dbPassword = rs.getString("mdp_admin");
+
+					                if(dbUsername.equals(textField_pseudo.getText()) && dbPassword.equals(textField_mdp.getText())){
+					                    System.out.println("OK");
+					                    login = true;
+					                    fenetre.goToAccueil(selection);	
+					                }
+					                System.out.println(login_admin + mdp_admin + " " + dbUsername + dbPassword);
+					            }
+					            
+					        } catch (ClassNotFoundException eeee) {
+					            eeee.printStackTrace();
+					            System.out.println("FAUX");
+					        } catch (SQLException eeee) {
+					            eeee.printStackTrace();
+					            System.out.println("FAUX");
+					        }
 						}
 					}else{
 						System.out.println(" ENTER PSEUDO ERROR ");
@@ -103,7 +143,13 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 					}
 				}
 			}
+		
 		});	
+		
+	        
+
+	        
+	    
 		textField_mdp.addKeyListener(new java.awt.event.KeyAdapter(){
 			public void keyPressed(java.awt.event.KeyEvent evt){
 				if(evt.getKeyCode() == evt.VK_ENTER ){
@@ -118,10 +164,37 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 							repaint();
 						}
 						else if(textField_pseudo.getText().length() != 0){
-							textField_pseudo.setText("");
+							/*textField_pseudo.setText("");
 							textField_mdp.setText("");	
 							tentative=0;
-							fenetre.goToAccueil(selection);	
+							fenetre.goToAccueil(selection);	*/
+							try {
+					        	Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+					            Connection conn = DriverManager.getConnection("jdbc:sqlserver://193.252.48.189\\SQLEXPRESS:1433;" + "database=BDD_B3I_groupe_5;" + "user=b3i_groupe_5;" + "password=123Soleil");
+					            Statement stmt = (Statement) conn.createStatement();
+					            query = "SELECT login_admin, mdp_admin FROM ADMIN;";
+					            stmt.executeQuery(query);
+					            ResultSet rs = stmt.getResultSet();
+					            
+					            while(rs.next()){
+					                dbUsername = rs.getString("login_admin");
+					                dbPassword = rs.getString("mdp_admin");
+
+					                if(dbUsername.equals(textField_pseudo.getText()) && dbPassword.equals(textField_mdp.getText())){
+					                    System.out.println("OK");
+					                    login = true;
+					                    fenetre.goToAccueil(selection);	
+					                }
+					                System.out.println(login_admin + mdp_admin + " " + dbUsername + dbPassword);
+					            }
+					            
+					        } catch (ClassNotFoundException eeee) {
+					            eeee.printStackTrace();
+					            System.out.println("FAUX");
+					        } catch (SQLException eeee) {
+					            eeee.printStackTrace();
+					            System.out.println("FAUX");
+					        }
 
 						}
 					}else{
@@ -140,7 +213,7 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 					}
 				}
 			}
-		});			
+		});	
 	}
 
 
@@ -175,10 +248,37 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 					repaint();
 				}
 				else if(textField_pseudo.getText().length() != 0){
-					textField_pseudo.setText("");
+					/*textField_pseudo.setText("");
 					textField_mdp.setText("");
-					tentative=0;
-					fenetre.goToAccueil(selection);	
+					tentative=0;*/
+					try {
+			        	Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+			            Connection conn = DriverManager.getConnection("jdbc:sqlserver://193.252.48.189\\SQLEXPRESS:1433;" + "database=BDD_B3I_groupe_5;" + "user=b3i_groupe_5;" + "password=123Soleil");
+			            Statement stmt = (Statement) conn.createStatement();
+			            query = "SELECT login_admin, mdp_admin FROM ADMIN;";
+			            stmt.executeQuery(query);
+			            ResultSet rs = stmt.getResultSet();
+			            
+			            while(rs.next()){
+			                dbUsername = rs.getString("login_admin");
+			                dbPassword = rs.getString("mdp_admin");
+
+			                if(dbUsername.equals(textField_pseudo.getText()) && dbPassword.equals(textField_mdp.getText())){
+			                    System.out.println("OK");
+			                    login = true;
+			                    fenetre.goToAccueil(selection);	
+			                }
+			                System.out.println(login_admin + mdp_admin + " " + dbUsername + dbPassword);
+			            }
+			            
+			        } catch (ClassNotFoundException eeee) {
+			            eeee.printStackTrace();
+			            System.out.println("FAUX");
+			        } catch (SQLException eeee) {
+			            eeee.printStackTrace();
+			            System.out.println("FAUX");
+			        }
+					
 				}
 			}else{
 				System.out.println(" ENTER PSEUDO ERROR ");
