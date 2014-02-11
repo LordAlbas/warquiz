@@ -36,10 +36,13 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 	public int bad_pseudo=0; // le champ n'est pas encore invalide
 	public int bad_mdp=0; // le champ n'est pas encore invalide
 	public int tentative = 0;
-	public String login_admin;
-	public String mdp_admin;
-	public String query;
-	public String dbUsername, dbPassword;
+	public String login_admin; //variable prenant en compte les donnees de la colonne login_admin dans la BDD
+	public String mdp_admin; //variable prenant en compte les donnees de la colonne mdp_admin dans la BDD
+	public String login_usr; //variable prenant en compte les donnees de la colonne login_usr dans la BDD
+	public String mdp_usr; //variable prenant en compte les donnees de la colonne mdp_usr dans la BDD
+	public String query_admin, query_user; //variable dans lesquelles sont placées les requetes
+	public String dbUsername_admin, dbPassword_admin; // Variables permettant de comparer le champ de login/mdp avec les champs de la bdd de la table ADMIN
+	public String dbUsername_user, dbPassword_user; // Variables permettant de comparer le champ de login/mdp avec les champs de la bdd de la table UTILISATEUR
     boolean login = false;
 	/**
 	 * Constructor
@@ -100,27 +103,44 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 							textField_pseudo.setText("");
 							textField_mdp.setText("");	
 							fenetre.goToAccueil(selection);	*/
+							//*Try catch permettant de se connecter selon si on est admin ou user
 							try {
 					        	Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 					            Connection conn = DriverManager.getConnection("jdbc:sqlserver://193.252.48.189\\SQLEXPRESS:1433;" + "database=BDD_B3I_groupe_5;" + "user=b3i_groupe_5;" + "password=123Soleil");
-					            Statement stmt = (Statement) conn.createStatement();
-					            query = "SELECT login_admin, mdp_admin FROM ADMIN;";
-					            stmt.executeQuery(query);
-					            ResultSet rs = stmt.getResultSet();
+					            Statement stmt_admin = (Statement) conn.createStatement();
+					            Statement stmt_user = (Statement) conn.createStatement();
+					            query_admin = "SELECT login_admin, mdp_admin FROM ADMIN";
+					            query_user = "SELECT login_usr, mdp_usr FROM UTILISATEUR";
+					            stmt_admin.executeQuery(query_admin);
+					            stmt_user.executeQuery(query_user);
+					            ResultSet rs_admin = stmt_admin.getResultSet();
+					            ResultSet rs_user = stmt_user.getResultSet();
 					            
-					            while(rs.next()){
-					                dbUsername = rs.getString("login_admin");
-					                dbPassword = rs.getString("mdp_admin");
+					            while(rs_admin.next()){
+					                dbUsername_admin = rs_admin.getString("login_admin");
+					                dbPassword_admin = rs_admin.getString("mdp_admin");
 
-					                if(dbUsername.equals(textField_pseudo.getText()) && dbPassword.equals(textField_mdp.getText())){
+					                if(dbUsername_admin.equals(textField_pseudo.getText()) && dbPassword_admin.equals(textField_mdp.getText())){
 					                    System.out.println("OK");
 					                    login = true;
 					                    fenetre.goToAccueil(selection);	
 					                }
-					                System.out.println(login_admin + mdp_admin + " " + dbUsername + dbPassword);
+					                
+					            }
+					            while(rs_user.next()){
+					            	dbUsername_user = rs_user.getString("login_usr");
+					            	dbPassword_user = rs_user.getString("mdp_usr");
+
+					                if(dbUsername_user.equals(textField_pseudo.getText()) && dbPassword_user.equals(textField_mdp.getText())){
+					                    System.out.println("OK");
+					                    login = true;
+					                    fenetre.goToAccueil(selection);	
+					                }
+					                
 					            }
 					            
-					        } catch (ClassNotFoundException eeee) {
+					        }
+							catch (ClassNotFoundException eeee) {
 					            eeee.printStackTrace();
 					            System.out.println("FAUX");
 					        } catch (SQLException eeee) {
@@ -168,24 +188,41 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 							textField_mdp.setText("");	
 							tentative=0;
 							fenetre.goToAccueil(selection);	*/
+							//*Try catch permettant de se connecter selon si on est admin ou user
 							try {
 					        	Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 					            Connection conn = DriverManager.getConnection("jdbc:sqlserver://193.252.48.189\\SQLEXPRESS:1433;" + "database=BDD_B3I_groupe_5;" + "user=b3i_groupe_5;" + "password=123Soleil");
-					            Statement stmt = (Statement) conn.createStatement();
-					            query = "SELECT login_admin, mdp_admin FROM ADMIN;";
-					            stmt.executeQuery(query);
-					            ResultSet rs = stmt.getResultSet();
+					            Statement stmt_admin = (Statement) conn.createStatement();
+					            Statement stmt_user = (Statement) conn.createStatement();
+					            query_admin = "SELECT login_admin, mdp_admin FROM ADMIN";
+					            query_user = "SELECT login_usr, mdp_usr FROM UTILISATEUR";
+					            stmt_admin.executeQuery(query_admin);
+					            stmt_user.executeQuery(query_user);
+					            ResultSet rs_admin = stmt_admin.getResultSet();
+					            ResultSet rs_user = stmt_user.getResultSet();
 					            
-					            while(rs.next()){
-					                dbUsername = rs.getString("login_admin");
-					                dbPassword = rs.getString("mdp_admin");
+					            
+					            while(rs_admin.next()){
+					                dbUsername_admin = rs_admin.getString("login_admin");
+					                dbPassword_admin = rs_admin.getString("mdp_admin");
 
-					                if(dbUsername.equals(textField_pseudo.getText()) && dbPassword.equals(textField_mdp.getText())){
+					                if(dbUsername_admin.equals(textField_pseudo.getText()) && dbPassword_admin.equals(textField_mdp.getText())){
 					                    System.out.println("OK");
 					                    login = true;
 					                    fenetre.goToAccueil(selection);	
 					                }
-					                System.out.println(login_admin + mdp_admin + " " + dbUsername + dbPassword);
+					                
+					            }
+					            while(rs_user.next()){
+					            	dbUsername_user = rs_user.getString("login_usr");
+					            	dbPassword_user = rs_user.getString("mdp_usr");
+
+					                if(dbUsername_user.equals(textField_pseudo.getText()) && dbPassword_user.equals(textField_mdp.getText())){
+					                    System.out.println("OK");
+					                    login = true;
+					                    fenetre.goToAccueil(selection);	
+					                }
+					                
 					            }
 					            
 					        } catch (ClassNotFoundException eeee) {
@@ -251,24 +288,40 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 					/*textField_pseudo.setText("");
 					textField_mdp.setText("");
 					tentative=0;*/
+					//*Try catch permettant de se connecter selon si on est admin ou user
 					try {
 			        	Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 			            Connection conn = DriverManager.getConnection("jdbc:sqlserver://193.252.48.189\\SQLEXPRESS:1433;" + "database=BDD_B3I_groupe_5;" + "user=b3i_groupe_5;" + "password=123Soleil");
-			            Statement stmt = (Statement) conn.createStatement();
-			            query = "SELECT login_admin, mdp_admin FROM ADMIN;";
-			            stmt.executeQuery(query);
-			            ResultSet rs = stmt.getResultSet();
+			            Statement stmt_admin = (Statement) conn.createStatement();
+			            Statement stmt_user = (Statement) conn.createStatement();
+			            query_admin = "SELECT login_admin, mdp_admin FROM ADMIN";
+			            query_user = "SELECT login_usr, mdp_usr FROM UTILISATEUR";
+			            stmt_admin.executeQuery(query_admin);
+			            stmt_user.executeQuery(query_user);
+			            ResultSet rs_admin = stmt_admin.getResultSet();
+			            ResultSet rs_user = stmt_user.getResultSet();
 			            
-			            while(rs.next()){
-			                dbUsername = rs.getString("login_admin");
-			                dbPassword = rs.getString("mdp_admin");
+			            while(rs_admin.next()){
+			                dbUsername_admin = rs_admin.getString("login_admin");
+			                dbPassword_admin = rs_admin.getString("mdp_admin");
 
-			                if(dbUsername.equals(textField_pseudo.getText()) && dbPassword.equals(textField_mdp.getText())){
+			                if(dbUsername_admin.equals(textField_pseudo.getText()) && dbPassword_admin.equals(textField_mdp.getText())){
 			                    System.out.println("OK");
 			                    login = true;
 			                    fenetre.goToAccueil(selection);	
 			                }
-			                System.out.println(login_admin + mdp_admin + " " + dbUsername + dbPassword);
+			                
+			            }
+			            while(rs_user.next()){
+			            	dbUsername_user = rs_user.getString("login_usr");
+			            	dbPassword_user = rs_user.getString("mdp_usr");
+
+			                if(dbUsername_user.equals(textField_pseudo.getText()) && dbPassword_user.equals(textField_mdp.getText())){
+			                    System.out.println("OK");
+			                    login = true;
+			                    fenetre.goToAccueil(selection);	
+			                }
+			                
 			            }
 			            
 			        } catch (ClassNotFoundException eeee) {
