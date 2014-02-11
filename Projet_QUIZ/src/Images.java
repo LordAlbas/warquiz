@@ -45,7 +45,7 @@ public class Images {
 		 * charge les images d'elements dans img_element[]
 		 */
 		try {
-			img_element[0] = ImageIO.read(new File("images/header1.png"));
+			img_element[0] = ImageIO.read(new File("images/header2.png"));
 			img_element[1] = ImageIO.read(new File("images/barre_verticale.png"));
 			//img_element[2] = ImageIO.read(new File("images/background_textbox.png"));
 			img_element[3] = ImageIO.read(new File("images/invalide.png"));
