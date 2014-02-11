@@ -2,6 +2,7 @@ import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.util.*;
 
 import javax.swing.JPanel;
 
@@ -14,15 +15,45 @@ public class Accueil extends JPanel implements MouseListener, MouseMotionListene
 	String bouton_deco ="rien";				// defini l'image survol� bouton deco
 	int val_i;								// defini l'emplacement de l'image survol� dans le tableau img_bouton_hover
 	static String selection; 				// defini quel bouton est selectionn�
-	
+	Timer timer;
+	public int delay = 0; // premiere execution dans 5sec
+	public int period = 10; // répéter toutes les 1 sec
 	private Fenetre fenetre;
-	
+	public int coordX = 0;
+	public int coordY = 0;
+	public boolean up=false;
 	/**
 	 * Constructeur
 	 */
 	public Accueil(Fenetre fen) {//Fenetre fen en parametre pour relier � fenetre
 		fenetre = fen; // on r�cup�re la classe m�re
+		timer = new Timer();
+		//timer.scheduleAtFixedRate(new RemindTask(), delay, period);
+		timer.schedule(new RemindTask(), delay, period);
 	}
+
+	
+	class RemindTask extends TimerTask {
+		public void run() {
+			if(!up){
+				coordY -= 1;
+				if(coordY == -98){
+					timer.cancel();
+					up = true;
+				}	
+				}else{
+					coordY += 1;
+					if(coordY == 0){
+					timer.cancel();
+					up = false;
+					}
+				}
+			System.out.println(coordY);
+			repaint();	
+		}
+	}
+			
+	
 	
 	/**
 	 * Methodes obligatoires de l'interface MouseListener.
@@ -65,17 +96,24 @@ public class Accueil extends JPanel implements MouseListener, MouseMotionListene
 			fenetre.goToConnexionAlerte(selection); // on appel la fonction qui va changer de panel
 
 		}
-		
+		if(e.getX() >= 0 && e.getX() <= 400 && e.getY() >= 0 && e.getY() <= 50){ // JOUER
+			timer = new Timer();
+			//timer.scheduleAtFixedRate(new RemindTask(), delay, period);
+			timer.schedule(new RemindTask(), delay, period);
+			
+		}
 	}
 	
 	public void mousePressed(MouseEvent e) {}
 	public void mouseReleased(MouseEvent e) {}
-	public void mouseEntered(MouseEvent e) {}
+	public void mouseEntered(MouseEvent e) {
+
+	}
 	public void mouseExited(MouseEvent e) {}
 	public void mouseDragged(MouseEvent e){}
 	
 	public void mouseMoved(MouseEvent e){ // On r�cup�re constamment la position del a souris
-		
+
 			if(e.getX() >= 120 && e.getX() <= 490 && e.getY() >= 260 && e.getY() <= 345){ // JOUER
 				//System.out.print("JOUER_hover");
 				image_select = "JOUER_hover";
@@ -115,20 +153,22 @@ public class Accueil extends JPanel implements MouseListener, MouseMotionListene
 		
 		// le fond et les elements sont en fonction de la taille de la fenetre, donc pas de soucis de redimensionnement de la fenetre
 		g.drawImage(Images.img_fond[0], 0, 0, this.getWidth(), this.getHeight(), null);						// dessine le fond d'ecran
-		g.drawImage(Images.img_element[0], 0, 0, this.getWidth(), (int)(this.getHeight() / 6.1230), null);		// dessine le header
+		
+		
+		g.drawImage(Images.img_element[0], 0, coordY, this.getWidth(), (int)(this.getHeight() / 6.1230), null);		// dessine le header
 		
 		//g.drawImage(img_bouton[4], 960, 1, 46, 46, null);
 		switch (bouton_deco){
 		case "rien" :
-			g.drawImage(Images.img_bouton[4], 960, 1, 46, 46, null);
+			g.drawImage(Images.img_bouton[4], 960, coordY+1, 46, 46, null);
 			break;				
 		case "CO/DECO_hover" :
-			g.drawImage(Images.img_bouton_hover[4], 960, 1, 46, 46, null);
+			g.drawImage(Images.img_bouton_hover[4], 960, coordY+1, 46, 46, null);
 			bouton_deco = "rien";
 			break;	
 		}
 		
-		g.drawImage(Images.img_bouton[6], 910, 1, 46, 46, null);
+		g.drawImage(Images.img_bouton[6], 910, coordY+1, 46, 46, null);
 		/*
 		 * On boucle sur tous les boutons (de [0] a [3]).
 		 * Chaque bouton obtient une position X (hauteur) en fonction de son numero (i).
