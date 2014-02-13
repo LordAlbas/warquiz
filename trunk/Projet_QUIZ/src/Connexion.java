@@ -45,8 +45,9 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 	public String dbUsername_user, dbPassword_user; // Variables permettant de comparer le champ de login/mdp avec les champs de la bdd de la table UTILISATEUR
     boolean login = false;
     public Boolean erreur_log = false;
-    public Boolean recherche_bdd = false;
-    public Boolean erreur_bdd = false;
+    static Boolean recherche_bdd = false;
+    static Boolean erreur_bdd = false;
+   // public ImageIcon imgLoading = new ImageIcon(this.getClass().getResource(Images.img_element[7]));
 	/**
 	 * Constructor
 	 * @param fen
@@ -79,8 +80,31 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 		//textField_pseudo.setFocusTraversalKeysEnabled(false);
 		//repaint();
 		this.pushKeyboard();
-	
-	
+		
+        try {
+            //setDefaultCloseOperation(EXIT_ON_CLOSE);
+            //contentPane = (JPanel) getContentPane();
+            //contentPane.setLayout(new BorderLayout());
+            //setSize(new Dimension(400, 300));
+            //setTitle("Your Job Crashed!");
+            // add the header label
+            //headerLabel.setFont(new java.awt.Font("Comic Sans MS", Font.BOLD, 16));
+            //headerLabel.setText("   Your job crashed during the save process!");
+            //contentPane.add(headerLabel, java.awt.BorderLayout.NORTH);
+            // add the image label
+           // ImageIcon ii = new ImageIcon(this.getClass().getResource("images/loading.gif"));
+            //imgLoading.setIcon(ii);
+            //this.add(imgLoading);
+            // show it
+            //imageLabel.setLocation(null);
+           // this.setVisible(true);
+            
+        } catch (Exception exception) {
+            exception.printStackTrace();
+        }
+        
+        
+        
 	} 
 
 	
@@ -91,6 +115,7 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 		textField_pseudo.addKeyListener(new java.awt.event.KeyAdapter(){
 			public void keyPressed(java.awt.event.KeyEvent evt){
 				if(evt.getKeyCode() == evt.VK_ENTER ){
+					
 					if(textField_pseudo.getText().length() != 0){	// Si le PSEUDO est entré						
 						//System.out.println(" ENTER PSEUDO ");	
 						//fenetre.goToAccueil(selection);	
@@ -108,6 +133,8 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 							fenetre.goToAccueil(selection);	*/
 							//*Try catch permettant de se connecter selon si on est admin ou user
 							try {
+								recherche_bdd=true;
+								repaint();
 					        	Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 					            Connection conn = DriverManager.getConnection("jdbc:sqlserver://193.252.48.189\\SQLEXPRESS:1433;" + "database=BDD_B3I_groupe_5;" + "user=b3i_groupe_5;" + "password=123Soleil");
 					            Statement stmt_admin = (Statement) conn.createStatement();
@@ -126,12 +153,15 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 					                if(dbUsername_admin.equals(textField_pseudo.getText()) && dbPassword_admin.equals(textField_mdp.getText())){ // On compare avec la BDD
 					                    System.out.println("OK");
 					                    login = true;
+					                    
 					                    fenetre.goToAccueil(selection);	
 					                }
 					                else{
 					                	erreur_log = true;
+					                	
 					                }  
 					            }
+					            
 					            repaint(); 
 					            while(rs_user.next()){ // On parcours la BDD user
 					            	dbUsername_user = rs_user.getString("login_usr");	// on récupère le pseudo
@@ -147,17 +177,22 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 					                }
 					                
 					            }
+					            recherche_bdd=false;
 					            repaint(); 
 					            
 					        }
 							catch (ClassNotFoundException eeee) {
-					            eeee.printStackTrace();
+					            //eeee.printStackTrace();
 					            System.out.println("FAUX");
 					            erreur_bdd = true;
+					            recherche_bdd=false;
+					            repaint();
 					        } catch (SQLException eeee) {
-					            eeee.printStackTrace();
+					           // eeee.printStackTrace();
 					            System.out.println("FAUX");
 					            erreur_bdd = true;
+					            recherche_bdd=false;
+					            repaint();
 					        }
 						}
 					}else{
@@ -202,6 +237,8 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 							fenetre.goToAccueil(selection);	*/
 							//*Try catch permettant de se connecter selon si on est admin ou user
 							try {
+								recherche_bdd=true;
+								repaint();
 					        	Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 					            Connection conn = DriverManager.getConnection("jdbc:sqlserver://193.252.48.189\\SQLEXPRESS:1433;" + "database=BDD_B3I_groupe_5;" + "user=b3i_groupe_5;" + "password=123Soleil");
 					            Statement stmt_admin = (Statement) conn.createStatement();
@@ -229,6 +266,7 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 					                }
 					                
 					            }
+					            
 					            repaint(); 
 					            while(rs_user.next()){
 					            	dbUsername_user = rs_user.getString("login_usr");
@@ -244,16 +282,21 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 					                	erreur_log = true;
 					                }   
 					            }
+					            recherche_bdd=false;
 					            repaint();
 					            
 					        } catch (ClassNotFoundException eeee) {
-					            eeee.printStackTrace();
+					            //eeee.printStackTrace();
 					            System.out.println("FAUX");
 					            erreur_bdd = true;
+					            recherche_bdd=false;
+					            repaint();
 					        } catch (SQLException eeee) {
-					            eeee.printStackTrace();
+					           // eeee.printStackTrace();
 					            System.out.println("FAUX");
 					            erreur_bdd = true;
+					            recherche_bdd=false;
+					            repaint();
 					        }
 
 						}
@@ -313,6 +356,8 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 					tentative=0;*/
 					//*Try catch permettant de se connecter selon si on est admin ou user
 					try {
+						recherche_bdd=true;
+						repaint();
 			        	Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 			            Connection conn = DriverManager.getConnection("jdbc:sqlserver://193.252.48.189\\SQLEXPRESS:1433;" + "database=BDD_B3I_groupe_5;" + "user=b3i_groupe_5;" + "password=123Soleil");
 			            Statement stmt_admin = (Statement) conn.createStatement();
@@ -339,12 +384,14 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 			                }
 			                
 			            }
+			       
 			            repaint(); 
 			            while(rs_user.next()){
 			            	dbUsername_user = rs_user.getString("login_usr");
 			            	dbPassword_user = rs_user.getString("mdp_usr");
 			            	recherche_bdd = true;
 			            	erreur_log = false;
+			            	repaint();
 			                if(dbUsername_user.equals(textField_pseudo.getText()) && dbPassword_user.equals(textField_mdp.getText())){
 			                    System.out.println("OK");
 			                    login = true;
@@ -355,15 +402,20 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 			                }
 			                
 			            }
+			            recherche_bdd=false;
 			            repaint(); 
 			        } catch (ClassNotFoundException eeee) {
-			            eeee.printStackTrace();
+			            //eeee.printStackTrace();
 			            System.out.println("FAUX");
 			            erreur_bdd = true;
+			            recherche_bdd=false;
+			            repaint();
 			        } catch (SQLException eeee) {
-			            eeee.printStackTrace();
+			            //eeee.printStackTrace();
 			            System.out.println("FAUX");
 			            erreur_bdd = true;
+			            recherche_bdd=false;
+			            repaint();
 			        }
 					
 				}
@@ -445,6 +497,7 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 
 		
 		if(erreur_log){
+			erreur_bdd = false;
 			g.drawImage(Images.img_element[5], 140, 50, 800, 130, null);
 		}
 		
@@ -457,7 +510,15 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 			erreur_log = false;
 			repaint();
 			g.drawImage(Images.img_element[4], 140, 50, 800, 130, null);	
-		}		
+		}
+		
+		if(recherche_bdd){
+			g.drawImage(Images.img_element[7], 440, 550, 160, 160, this);
+		}
+		
+		
 	}
+	
+	  
 
 }
