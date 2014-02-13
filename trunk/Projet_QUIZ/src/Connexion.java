@@ -66,7 +66,7 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 		textField_pseudo.addMouseListener(this);
 		textField_pseudo.setBounds(398, 328, 366, 36);
 		add(textField_pseudo);
-		textField_pseudo.setBorder(null);
+		//textField_pseudo.setBorder(null);
 		textField_pseudo.setFont(new Font("Arial", Font.PLAIN, 25)); 
 		textField_pseudo.setOpaque(false);
 		// Création du textBox pseudo et placement + suppression du style
@@ -74,7 +74,7 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 		textField_mdp.setBounds(398, 392, 366, 36);
 		textField_mdp.addMouseListener(this);
 		add(textField_mdp);
-		textField_mdp.setBorder(null);
+		//textField_mdp.setBorder(null);
 		textField_mdp.setFont(new Font("Arial", Font.PLAIN, 25)); 
 		textField_mdp.setOpaque(false);
 		//textField_pseudo.setFocusTraversalKeysEnabled(false);
