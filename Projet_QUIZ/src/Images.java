@@ -50,6 +50,8 @@ public class Images {
 			//img_element[2] = ImageIO.read(new File("images/background_textbox.png"));
 			img_element[3] = ImageIO.read(new File("images/invalide.png"));
 			img_element[4] = ImageIO.read(new File("images/information_connexion.png"));
+			img_element[5] = ImageIO.read(new File("images/information_pseudo_mdp.png"));
+			img_element[6] = ImageIO.read(new File("images/information_bdd.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
