@@ -29,7 +29,7 @@ public class Fenetre extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		Images.initImage();
 		//Images img = new Images();
-		SQL_Connect.tryConnect();	// !! LIGNE EN COMMENTAIRE JUSTE POUR TRAVAILLER EN DEHORS DE L'EPSI !!
+		
 		
 		accueil = new Accueil(this);			// creation du JPanel accueil
 		statistiques = new Statistiques(this); // creation du JPanel statistiques
@@ -55,6 +55,8 @@ public class Fenetre extends JFrame {
 
 		connexion.setOpaque(false);
 		setVisible(true);
+		SQL_Connect.tryConnect();	// !! LIGNE EN COMMENTAIRE JUSTE POUR TRAVAILLER EN DEHORS DE L'EPSI !!
+		repaint();
 		//this.goToConnexion("jouer");
 	}
 	
