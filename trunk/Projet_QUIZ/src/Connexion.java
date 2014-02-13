@@ -44,6 +44,9 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 	public String dbUsername_admin, dbPassword_admin; // Variables permettant de comparer le champ de login/mdp avec les champs de la bdd de la table ADMIN
 	public String dbUsername_user, dbPassword_user; // Variables permettant de comparer le champ de login/mdp avec les champs de la bdd de la table UTILISATEUR
     boolean login = false;
+    public Boolean erreur_log = false;
+    public Boolean recherche_bdd = false;
+    public Boolean erreur_bdd = false;
 	/**
 	 * Constructor
 	 * @param fen
@@ -88,17 +91,17 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 		textField_pseudo.addKeyListener(new java.awt.event.KeyAdapter(){
 			public void keyPressed(java.awt.event.KeyEvent evt){
 				if(evt.getKeyCode() == evt.VK_ENTER ){
-					if(textField_pseudo.getText().length() != 0){							
+					if(textField_pseudo.getText().length() != 0){	// Si le PSEUDO est entré						
 						//System.out.println(" ENTER PSEUDO ");	
 						//fenetre.goToAccueil(selection);	
-						if(textField_mdp.getText().length() == 0){
+						if(textField_mdp.getText().length() == 0){	// MDP est pas entré
 							System.out.println(" ENTER PSEUDO ERROR ");
 							textField_mdp.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.RED));
 							bad_mdp=1;
 							tentative++;
 							repaint();
 						}
-						else if(textField_mdp.getText().length() != 0){
+						else if(textField_mdp.getText().length() != 0){ // Sinon si le MDP est entré
 							/*tentative=0;
 							textField_pseudo.setText("");
 							textField_mdp.setText("");	
@@ -116,36 +119,45 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 					            ResultSet rs_admin = stmt_admin.getResultSet();
 					            ResultSet rs_user = stmt_user.getResultSet();
 					            
-					            while(rs_admin.next()){
-					                dbUsername_admin = rs_admin.getString("login_admin");
-					                dbPassword_admin = rs_admin.getString("mdp_admin");
-
-					                if(dbUsername_admin.equals(textField_pseudo.getText()) && dbPassword_admin.equals(textField_mdp.getText())){
+					            while(rs_admin.next()){ // On parcours la BDD admin
+					                dbUsername_admin = rs_admin.getString("login_admin"); // on récupère le pseudo
+					                dbPassword_admin = rs_admin.getString("mdp_admin");   // on récupère le mdp
+					                erreur_log = false;
+					                if(dbUsername_admin.equals(textField_pseudo.getText()) && dbPassword_admin.equals(textField_mdp.getText())){ // On compare avec la BDD
 					                    System.out.println("OK");
 					                    login = true;
 					                    fenetre.goToAccueil(selection);	
 					                }
-					                
+					                else{
+					                	erreur_log = true;
+					                }  
 					            }
-					            while(rs_user.next()){
-					            	dbUsername_user = rs_user.getString("login_usr");
-					            	dbPassword_user = rs_user.getString("mdp_usr");
-
+					            repaint(); 
+					            while(rs_user.next()){ // On parcours la BDD user
+					            	dbUsername_user = rs_user.getString("login_usr");	// on récupère le pseudo
+					            	dbPassword_user = rs_user.getString("mdp_usr");		// on récupère le mdp
+					            	erreur_log = false;
 					                if(dbUsername_user.equals(textField_pseudo.getText()) && dbPassword_user.equals(textField_mdp.getText())){
 					                    System.out.println("OK");
 					                    login = true;
 					                    fenetre.goToAccueil(selection);	
 					                }
+					                else{
+					                	erreur_log = true;
+					                }
 					                
 					            }
+					            repaint(); 
 					            
 					        }
 							catch (ClassNotFoundException eeee) {
 					            eeee.printStackTrace();
 					            System.out.println("FAUX");
+					            erreur_bdd = true;
 					        } catch (SQLException eeee) {
 					            eeee.printStackTrace();
 					            System.out.println("FAUX");
+					            erreur_bdd = true;
 					        }
 						}
 					}else{
@@ -205,32 +217,43 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 					            while(rs_admin.next()){
 					                dbUsername_admin = rs_admin.getString("login_admin");
 					                dbPassword_admin = rs_admin.getString("mdp_admin");
-
+					                recherche_bdd = true;
+					                erreur_log = false;
 					                if(dbUsername_admin.equals(textField_pseudo.getText()) && dbPassword_admin.equals(textField_mdp.getText())){
 					                    System.out.println("OK");
 					                    login = true;
 					                    fenetre.goToAccueil(selection);	
 					                }
+					                else{
+					                	erreur_log = true;
+					                }
 					                
 					            }
+					            repaint(); 
 					            while(rs_user.next()){
 					            	dbUsername_user = rs_user.getString("login_usr");
 					            	dbPassword_user = rs_user.getString("mdp_usr");
-
+					            	recherche_bdd = true;
+					            	erreur_log = false;
 					                if(dbUsername_user.equals(textField_pseudo.getText()) && dbPassword_user.equals(textField_mdp.getText())){
 					                    System.out.println("OK");
 					                    login = true;
 					                    fenetre.goToAccueil(selection);	
 					                }
-					                
+					                else{
+					                	erreur_log = true;
+					                }   
 					            }
+					            repaint();
 					            
 					        } catch (ClassNotFoundException eeee) {
 					            eeee.printStackTrace();
 					            System.out.println("FAUX");
+					            erreur_bdd = true;
 					        } catch (SQLException eeee) {
 					            eeee.printStackTrace();
 					            System.out.println("FAUX");
+					            erreur_bdd = true;
 					        }
 
 						}
@@ -304,32 +327,43 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 			            while(rs_admin.next()){
 			                dbUsername_admin = rs_admin.getString("login_admin");
 			                dbPassword_admin = rs_admin.getString("mdp_admin");
-
+			                recherche_bdd = true;
+			                erreur_log = false;
 			                if(dbUsername_admin.equals(textField_pseudo.getText()) && dbPassword_admin.equals(textField_mdp.getText())){
 			                    System.out.println("OK");
 			                    login = true;
 			                    fenetre.goToAccueil(selection);	
 			                }
+			                else{
+			                	erreur_log = true;
+			                }
 			                
 			            }
+			            repaint(); 
 			            while(rs_user.next()){
 			            	dbUsername_user = rs_user.getString("login_usr");
 			            	dbPassword_user = rs_user.getString("mdp_usr");
-
+			            	recherche_bdd = true;
+			            	erreur_log = false;
 			                if(dbUsername_user.equals(textField_pseudo.getText()) && dbPassword_user.equals(textField_mdp.getText())){
 			                    System.out.println("OK");
 			                    login = true;
 			                    fenetre.goToAccueil(selection);	
 			                }
+			                else{
+			                	erreur_log = true;
+			                }
 			                
 			            }
-			            
+			            repaint(); 
 			        } catch (ClassNotFoundException eeee) {
 			            eeee.printStackTrace();
 			            System.out.println("FAUX");
+			            erreur_bdd = true;
 			        } catch (SQLException eeee) {
 			            eeee.printStackTrace();
 			            System.out.println("FAUX");
+			            erreur_bdd = true;
 			        }
 					
 				}
@@ -408,10 +442,22 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 			g.drawImage(Images.img_element[3], 768, 390, 170, 46, null);	
 		}
 		
-		if(tentative >= 3){
-			g.drawImage(Images.img_element[4], 140, 50, 800, 130, null);	
+
+		
+		if(erreur_log){
+			g.drawImage(Images.img_element[5], 140, 50, 800, 130, null);
 		}
 		
+		if(erreur_bdd){
+			erreur_log = false;
+			g.drawImage(Images.img_element[6], 140, 50, 800, 130, null);
+		}
+		
+		if(tentative >= 3){
+			erreur_log = false;
+			repaint();
+			g.drawImage(Images.img_element[4], 140, 50, 800, 130, null);	
+		}		
 	}
 
 }
