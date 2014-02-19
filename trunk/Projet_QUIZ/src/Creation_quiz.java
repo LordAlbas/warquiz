@@ -1,8 +1,11 @@
 import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -19,12 +22,42 @@ import java.awt.SystemColor;
 public class Creation_quiz extends JPanel implements MouseListener, MouseMotionListener{
 	
 	private Fenetre fenetre;
+	private Admin_ajout_reponses admin_ajout_reponses;
+	private Admin_ajout_questions admin_ajout_questions;
 	private JTextField textField;
 	private JTextField textField_1;
 	private JTextField textField_2;
 	
 	public Creation_quiz(Fenetre fen){
 		setLayout(null);
+		admin_ajout_reponses = new Admin_ajout_reponses(fenetre);
+		admin_ajout_questions = new Admin_ajout_questions(fenetre);
+		
+		JButton ajout_question = new JButton("Ajouter des questions");
+		ajout_question.setBounds(160, 180, 200, 40);
+		ajout_question.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				fenetre.getContentPane().setVisible(false);
+				admin_ajout_questions.addMouseListener(admin_ajout_questions);
+				fenetre.setContentPane(admin_ajout_questions);
+				fenetre.getContentPane().setVisible(true);
+			}
+		});
+		add(ajout_question);
+		
+		JButton ajout_reponses = new JButton("Ajouter des reponses");
+		ajout_reponses.setBounds(160, 240, 200, 40);
+		ajout_reponses.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				fenetre.getContentPane().setVisible(false);
+				admin_ajout_reponses.addMouseListener(admin_ajout_reponses);
+				fenetre.setContentPane(admin_ajout_reponses);
+				fenetre.getContentPane().setVisible(true);
+			}
+		});
+		add(ajout_reponses);
 		
 		textField = new JTextField();
 		textField.setBounds(756, 169, 204, 20);
@@ -53,10 +86,9 @@ public class Creation_quiz extends JPanel implements MouseListener, MouseMotionL
 		label.setBounds(621, 136, 177, 22);
 		add(label);
 		
-		
-		
 		fenetre = fen;
 	}
+	
 	public void mouseDragged(MouseEvent arg0) {}
 	public void mouseMoved(MouseEvent arg0) {}
 	public void mouseClicked(MouseEvent arg0) {}
