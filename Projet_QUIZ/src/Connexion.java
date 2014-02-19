@@ -1,9 +1,6 @@
-import java.awt.Color;
-import java.awt.Cursor;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Image;
-import java.awt.LayoutManager;
+
+
+import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
 import java.io.IOException;
@@ -16,15 +13,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import javax.imageio.ImageIO;
-import javax.swing.BorderFactory;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JLayeredPane;
-import javax.swing.JPanel;
-import javax.swing.JPasswordField;
-import javax.swing.JTextField;
+import javax.swing.*;
 
 /**
  * Class de connexion, s'affiche en tout debut de programme en pop-up style.
@@ -61,7 +50,7 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 	public Connexion(Fenetre fen) {	
 		fenetre = fen;
 		setLayout(null); // on met le layout en absolute pour mettre les JTextbox où on veut
-		this.setOpaque(false);
+		//this.setOpaque(false);
 		
 
 		
@@ -86,56 +75,41 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 		//repaint();
 		this.pushKeyboard();
 		
-       // try {
-            //setDefaultCloseOperation(EXIT_ON_CLOSE);
-            //contentPane = (JPanel) getContentPane();
-            //contentPane.setLayout(new BorderLayout());
-            //setSize(new Dimension(400, 300));
-            //setTitle("Your Job Crashed!");
-            // add the header label
-            //headerLabel.setFont(new java.awt.Font("Comic Sans MS", Font.BOLD, 16));
-            //headerLabel.setText("   Your job crashed during the save process!");
-            //contentPane.add(headerLabel, java.awt.BorderLayout.NORTH);
-            // add the image label
-           // ImageIcon ii = new ImageIcon(this.getClass().getResource("images/loading.gif"));
-            //imgLoading.setIcon(ii);
-            //this.add(imgLoading);
-            // show it
-            //imageLabel.setLocation(null);
-           // this.setVisible(true);
-            
-       // } catch (Exception exception) {
-       //     exception.printStackTrace();
-        //}
-        
-		//layeredPane.add();
-			
-		
-		
-        URL url;
-		try {
-			
-			url = new URL("images/loading.gif");
-			Icon gif = new ImageIcon(url);
-			JLabel label = new JLabel(gif);
-			JPanel panel = new JPanel((LayoutManager) label);
-			layeredPane = new JLayeredPane();
-			layeredPane.add(panel, new Integer(2), 0);
-			panel.setVisible(true);
-			
-			
-			
-			
-		} catch (MalformedURLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-        
-		
-		
+
+		//file:///C:/Users/Sinardet/Documents/ProjetOracle/warquiz/Projet_QUIZ/images/loading.gif
+		//URL url = new URL("images/loading.gif");
+		Gif_anime panel = new Gif_anime(load("file:///C:/Users/Sinardet/Documents/ProjetOracle/warquiz/Projet_QUIZ/images/loading.gif"));
+		panel.setBounds(650, 235, 100, 100);
+        add(panel);
+       
+        //panel.setVisible(true);
+ 
+       
+	
+	
 	} 
 
 	
+	 private Image load(final String url) {
+	       try {
+	           final Toolkit tk = Toolkit.getDefaultToolkit();
+	           final Image img = tk.createImage(new URL(url));
+	           tk.prepareImage(img, -1, -1, null);
+	           System.out.println("PASSAGE IMG GIF");
+	           return img;
+	         
+	       }catch (Exception e) {
+	           e.printStackTrace();
+	           return null;
+	       }
+	  }
+	  
+
+
+	   
+	 
+	 
+	 
 	/**
 	 * Défini les actions du bouton ENTREE
 	 */
@@ -242,7 +216,7 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 		});	
 		
 	        
-
+		// UTILISER getPassword() AU LIEU DE GETTEXT POUR MDP !!
 	        
 	    
 		textField_mdp.addKeyListener(new java.awt.event.KeyAdapter(){
