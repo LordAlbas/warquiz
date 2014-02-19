@@ -7,24 +7,24 @@ import java.net.URL;
 	
 public class Gif_anime extends JPanel{
 
-	public Gif_anime() throws MalformedURLException{
-        URL url = new URL("images/loading.gif");
-        Icon gif = new ImageIcon(url);
-        JLabel label = new JLabel(gif);
-        setVisible(true);
-        
-        
-        
-        
-        
-        //JFrame f = new JFrame("Animation");
-        //f.getContentPane().add(label);
-        //f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        //f.pack();
-        //f.setLocationRelativeTo(null);
-        //f.setVisible(true);	
-	}
-	
-    public static void main(String[] args){}
 
-}
+        private Image image;
+
+        public Gif_anime(Image image){
+            this.image = image;
+        }
+
+        @Override
+        protected void paintComponent(Graphics g){
+            super.paintComponent(g);
+            g.drawImage(image, 100, 100, this);
+        }
+
+        @Override
+       public Dimension getPreferredSize(){
+            return new Dimension(this.getWidth(), this.getHeight());
+        }
+
+    }
+
+
