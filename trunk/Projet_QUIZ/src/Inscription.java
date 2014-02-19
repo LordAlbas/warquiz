@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -5,6 +6,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
+import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -18,13 +20,190 @@ public class Inscription extends JPanel implements MouseListener, MouseMotionLis
 	private JPasswordField textField_mdp;	// création du cham mdp cypté
 	private JPasswordField textField_mdp_conf;	// création du champ mdp confirmation
 	private JTextField textField_mail; // création du champ mail
-
+	public int bad_pseudo=0; // le champ n'est pas encore invalide
+	public int bad_mdp=0; // le champ n'est pas encore invalide
+	public int bad_mdp_conf=0; // le champ n'est pas encore invalide
+	public int bad_mail=0; // le champ n'est pas encore invalide
+	public int tentative = 0;
 
 	
 	public Inscription(Fenetre fen){
 		fenetre = fen; // On récupère la classe Fenetre
 		setLayout(null); // on met le layout en absolute pour mettre les JTextbox où on veut
+		
+
+		// Création du textBox PEUDO et placement + suppression du style
+		textField_pseudo = new JTextField();
+		textField_pseudo.setBounds(398, 288, 366, 36);
+		add(textField_pseudo);
+		textField_pseudo.setBorder(null);
+		textField_pseudo.setFont(new Font("Arial", Font.PLAIN, 25)); 
+		textField_pseudo.setOpaque(false);
+		
+		// Création du textBox MDP et placement + suppression du style
+		textField_mdp = new JPasswordField();
+		textField_mdp.setBounds(398, 328, 366, 36);
+		add(textField_mdp);
+		textField_mdp.setBorder(null);
+		textField_mdp.setFont(new Font("Arial", Font.PLAIN, 25)); 
+		textField_mdp.setOpaque(false);	
+		
+		// Création du textBox MDP_CONF et placement + suppression du style
+		textField_mdp_conf = new JPasswordField();
+		textField_mdp_conf.setBounds(398, 368, 366, 36);
+		add(textField_mdp_conf);
+		textField_mdp_conf.setBorder(null);
+		textField_mdp_conf.setFont(new Font("Arial", Font.PLAIN, 25)); 
+		textField_mdp_conf.setOpaque(false);
+		
+		// Création du textBox MAIL et placement + suppression du style
+		textField_mail = new JTextField();
+		textField_mail.setBounds(398, 408, 366, 36);
+		add(textField_mail);
+		textField_mail.setBorder(null);
+		textField_mail.setFont(new Font("Arial", Font.PLAIN, 25)); 
+		textField_mail.setOpaque(false);
+		
+		this.pushKeyboard();
 	}
+	
+	
+	public void pushKeyboard(){ // On défini les action des touches  ENTER	
+		textField_pseudo.addKeyListener(new java.awt.event.KeyAdapter(){
+			public void keyPressed(java.awt.event.KeyEvent evt){
+				if(evt.getKeyCode() == evt.VK_ENTER ){
+					if(textField_pseudo.getText().length() != 0){	// Si le PSEUDO est entré	
+						if(textField_mdp.getText().length() == 0){	// MDP est pas entré
+							System.out.println(" Veuillez entrer le mdp ");
+							textField_mdp.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.RED));
+							bad_mdp=1;
+							tentative++;
+							repaint();
+						}
+						else if(textField_mdp_conf.getText().length() == 0){	// MDP_CONF est pas entré
+							System.out.println(" Veuillez entrer le mdp de confirmation ");
+							textField_mdp_conf.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.RED));
+							bad_mdp_conf=1;
+							tentative++;
+							repaint();
+						}
+						else if(textField_mail.getText().length() == 0){	// MAIL est pas entré
+							System.out.println(" Veuillez entrer le mail ");
+							textField_mail.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.RED));
+							bad_mail=1;
+							tentative++;
+							repaint();
+						}
+						else if(textField_mdp.getText().length() != 0 && textField_mdp_conf.getText().length() != 0 && textField_mail.getText().length() != 0 && textField_mdp_conf.getText() == textField_mdp.getText()){ //Si tout est rentré et que les mdp sont les mêmes
+							//requete BDD
+						}
+						
+					}
+				}
+			}
+		});
+		textField_mdp.addKeyListener(new java.awt.event.KeyAdapter(){
+			public void keyPressed(java.awt.event.KeyEvent evt){
+				if(evt.getKeyCode() == evt.VK_ENTER ){
+					if(textField_mdp.getText().length() != 0){	// Si le MDP est entré
+						if(textField_pseudo.getText().length() == 0){	// PSEUDO est pas entré
+							System.out.println(" Veuillez entrer le mdp ");
+							textField_pseudo.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.RED));
+							bad_pseudo=1;
+							tentative++;
+							repaint();
+						}
+						else if(textField_mdp_conf.getText().length() == 0){	// MDP_CONF est pas entré
+							System.out.println(" Veuillez entrer le mdp de confirmation ");
+							textField_mdp_conf.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.RED));
+							bad_mdp_conf=1;
+							tentative++;
+							repaint();
+						}
+						else if(textField_mail.getText().length() == 0){	// MAIL est pas entré
+							System.out.println(" Veuillez entrer le mail ");
+							textField_mail.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.RED));
+							bad_mail=1;
+							tentative++;
+							repaint();
+						}
+						else if(textField_pseudo.getText().length() != 0 && textField_mdp_conf.getText().length() != 0 && textField_mail.getText().length() != 0 && textField_mdp_conf.getText() == textField_mdp.getText()){ //Si tout est rentré et que les mdp sont les mêmes
+							//requete BDD
+						}
+						
+					}
+				}
+			}
+		});
+		textField_mdp_conf.addKeyListener(new java.awt.event.KeyAdapter(){
+			public void keyPressed(java.awt.event.KeyEvent evt){
+				if(evt.getKeyCode() == evt.VK_ENTER ){
+					if(textField_mdp_conf.getText().length() != 0){	// Si le MDP_CONF est entré
+						if(textField_pseudo.getText().length() == 0){	// PSEUDO est pas entré
+							System.out.println(" Veuillez entrer le pseudo ");
+							textField_pseudo.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.RED));
+							bad_pseudo=1;
+							tentative++;
+							repaint();
+						}
+						else if(textField_mdp.getText().length() == 0){	// MDP est pas entré
+							System.out.println(" Veuillez entrer le mdp ");
+							textField_mdp.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.RED));
+							bad_mdp=1;
+							tentative++;
+							repaint();
+						}
+						else if(textField_mail.getText().length() == 0){	// MAIL est pas entré
+							System.out.println(" Veuillez entrer le mail ");
+							textField_mail.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.RED));
+							bad_mail=1;
+							tentative++;
+							repaint();
+						}
+						else if(textField_pseudo.getText().length() != 0 && textField_mdp.getText().length() != 0 && textField_mail.getText().length() != 0 && textField_mdp_conf.getText() == textField_mdp.getText()){
+							//requete BDD
+						}
+						
+					}
+				}
+			}
+		});
+		textField_mail.addKeyListener(new java.awt.event.KeyAdapter(){
+			public void keyPressed(java.awt.event.KeyEvent evt){
+				if(evt.getKeyCode() == evt.VK_ENTER ){
+					if(textField_mail.getText().length() != 0){	// Si le MAIL est entré	
+						if(textField_pseudo.getText().length() == 0){	// PSEUDO est pas entré
+							System.out.println(" Veuillez entrer le pseudo ");
+							textField_pseudo.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.RED));
+							bad_pseudo=1;
+							tentative++;
+							repaint();
+						}
+						else if(textField_mdp.getText().length() == 0){	// MDP est pas entré
+							System.out.println(" Veuillez entrer le mdp ");
+							textField_mdp.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.RED));
+							bad_mdp=1;
+							tentative++;
+							repaint();
+						}
+						else if(textField_mdp_conf.getText().length() == 0){	// MDP_CONF est pas entré
+							System.out.println(" Veuillez entrer le mail ");
+							textField_mdp_conf.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.RED));
+							bad_mdp_conf=1;
+							tentative++;
+							repaint();
+						}
+						else if(textField_pseudo.getText().length() != 0 && textField_mdp.getText().length() != 0 && textField_mdp_conf.getText().length() != 0 && textField_mdp_conf.getText() == textField_mdp.getText()){
+							//requete BDD
+						}
+						
+					}
+				}
+			}
+		});
+	}
+	
+	
 	
 	public void mouseDragged(MouseEvent e) {}
 	public void mouseMoved(MouseEvent e) {
@@ -40,6 +219,27 @@ public class Inscription extends JPanel implements MouseListener, MouseMotionLis
 		}
 	}
 	public void mouseClicked(MouseEvent e) {
+		if(textField_pseudo.isFocusOwner() == true){ // Si le champ pseudo est selectionné on réinitialise le style
+			bad_pseudo=0;
+			textField_pseudo.setBorder(null);
+			repaint();
+		}
+		if(textField_mdp.isFocusOwner() == true){ // Si le champ mdp est selectionné on réinitialise le style
+			bad_mdp=0;
+			textField_mdp.setBorder(null);
+			repaint();
+		}
+		if(textField_mdp_conf.isFocusOwner() == true){ // Si le champ mdp_conf est selectionné on réinitialise le style
+			bad_mdp_conf=0;
+			textField_mdp_conf.setBorder(null);
+			repaint();
+		}
+		if(textField_mail.isFocusOwner() == true){ // Si le champ mail est selectionné on réinitialise le style
+			bad_mail=0;
+			textField_mail.setBorder(null);
+			repaint();
+		}
+		
 		if(e.getX() >= 400 && e.getX() <= 585 && e.getY() >= 462 && e.getY() <= 510){ // Bouton de retour
 			System.out.print("CONNEXION");
 			fenetre.goToConnexion(selection); // on appel la fonction qui va changer de panel
@@ -73,38 +273,19 @@ public class Inscription extends JPanel implements MouseListener, MouseMotionLis
 		g.drawImage(Images.img_element[1], 140, 113, 8, 655, null);
 		g.drawImage(Images.img_fond[2], 0, 0, this.getWidth(), this.getHeight(), null);	
 		
+		if(bad_pseudo==1){
+			g.drawImage(Images.img_element[3], 768, 326, 170, 46, null);	
+		}
+		if(bad_mdp==1){
+			g.drawImage(Images.img_element[3], 768, 390, 170, 46, null);	
+		}
+		if(bad_mdp_conf==1){
+			g.drawImage(Images.img_element[3], 768, 454, 170, 46, null);	
+		}
+		if(bad_mail==1){
+			g.drawImage(Images.img_element[3], 768, 518, 170, 46, null);	
+		}
 		
-		// Création du textBox PEUDO et placement + suppression du style
-		textField_pseudo = new JTextField();
-		textField_pseudo.setBounds(398, 288, 366, 36);
-		add(textField_pseudo);
-		textField_pseudo.setBorder(null);
-		textField_pseudo.setFont(new Font("Arial", Font.PLAIN, 25)); 
-		textField_pseudo.setOpaque(false);
-		
-		// Création du textBox MDP et placement + suppression du style
-		textField_mdp = new JPasswordField();
-		textField_mdp.setBounds(398, 328, 366, 36);
-		add(textField_mdp);
-		textField_mdp.setBorder(null);
-		textField_mdp.setFont(new Font("Arial", Font.PLAIN, 25)); 
-		textField_mdp.setOpaque(false);	
-		
-		// Création du textBox MDP_CONF et placement + suppression du style
-		textField_mdp_conf = new JPasswordField();
-		textField_mdp_conf.setBounds(398, 368, 366, 36);
-		add(textField_mdp_conf);
-		textField_mdp_conf.setBorder(null);
-		textField_mdp_conf.setFont(new Font("Arial", Font.PLAIN, 25)); 
-		textField_mdp_conf.setOpaque(false);
-		
-		// Création du textBox MAIL et placement + suppression du style
-		textField_mail = new JTextField();
-		textField_mail.setBounds(398, 408, 366, 36);
-		add(textField_mail);
-		textField_mail.setBorder(null);
-		textField_mail.setFont(new Font("Arial", Font.PLAIN, 25)); 
-		textField_mail.setOpaque(false);
 		
 		repaint();		
 	}
