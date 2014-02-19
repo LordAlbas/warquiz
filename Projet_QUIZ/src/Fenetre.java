@@ -16,7 +16,8 @@ public class Fenetre extends JFrame {
 	Jouer jouer;
 	Inscription inscription;
 	Connexion connexion;
-	Admin_ajout_reponses creation_quiz;
+	Admin_ajout_reponses admin_ajout_reponses;
+	Creation_quiz creation_quiz;
 	private JLayeredPane jlp = new JLayeredPane();
 	/**
 	 * Constructeur
@@ -37,7 +38,8 @@ public class Fenetre extends JFrame {
 		jouer = new Jouer(this);				// creation du JPanel jouer
 		inscription = new Inscription(this);	// creation du JPanel inscription
 		connexion = new Connexion(this);			// creation du JPanel conexion
-		creation_quiz = new Admin_ajout_reponses(this);
+		//admin_ajout_reponses = new Admin_ajout_reponses(this);
+		creation_quiz = new Creation_quiz(this);
 		
 		
 		
@@ -98,7 +100,7 @@ public class Fenetre extends JFrame {
 	 */
 	public void goToConnexionAlerte(String selection){
 		int rep_deco;
-		 rep_deco = JOptionPane.showConfirmDialog(null, "Voulez-vous vraiment vous déconnecter ?");
+		 rep_deco = JOptionPane.showConfirmDialog(null, "Voulez-vous vraiment vous dï¿½connecter ?");
 
 		if(rep_deco == 0){
 			this.getContentPane().setVisible(false);	
