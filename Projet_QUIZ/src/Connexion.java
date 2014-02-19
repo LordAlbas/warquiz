@@ -3,9 +3,12 @@ import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.LayoutManager;
 import java.awt.event.*;
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -18,6 +21,7 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -47,6 +51,7 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
     public Boolean erreur_log = false;
     static Boolean recherche_bdd = false;
     static Boolean erreur_bdd = false;
+    JLayeredPane layeredPane;
    // public ImageIcon imgLoading = new ImageIcon(this.getClass().getResource(Images.img_element[7]));
 	/**
 	 * Constructor
@@ -81,7 +86,7 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 		//repaint();
 		this.pushKeyboard();
 		
-        try {
+       // try {
             //setDefaultCloseOperation(EXIT_ON_CLOSE);
             //contentPane = (JPanel) getContentPane();
             //contentPane.setLayout(new BorderLayout());
@@ -99,12 +104,35 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
             //imageLabel.setLocation(null);
            // this.setVisible(true);
             
-        } catch (Exception exception) {
-            exception.printStackTrace();
-        }
+       // } catch (Exception exception) {
+       //     exception.printStackTrace();
+        //}
         
+		//layeredPane.add();
+			
+		
+		
+        URL url;
+		try {
+			
+			url = new URL("images/loading.gif");
+			Icon gif = new ImageIcon(url);
+			JLabel label = new JLabel(gif);
+			JPanel panel = new JPanel((LayoutManager) label);
+			layeredPane = new JLayeredPane();
+			layeredPane.add(panel, new Integer(2), 0);
+			panel.setVisible(true);
+			
+			
+			
+			
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         
-        
+		
+		
 	} 
 
 	
