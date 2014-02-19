@@ -3,6 +3,7 @@
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.LayoutManager;
 import java.awt.Toolkit;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -14,6 +15,7 @@ import java.util.*;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
 
 
@@ -33,6 +35,7 @@ public class Accueil extends JPanel implements MouseListener, MouseMotionListene
 	public int coordX = 0;
 	public int coordY = 0;
 	public boolean up=false;
+	JLayeredPane layeredPane;
 	/**
 	 * Constructeur
 	 *  
@@ -44,27 +47,22 @@ public class Accueil extends JPanel implements MouseListener, MouseMotionListene
 		//timer.schedule(new RemindTask(), delay, period);
 		
 		
-			
 		
-		//URL url = new URL("images/loading.gif");
-		//Icon gif = new ImageIcon(url);
-		
-        //URL url = new URL("images/loading.gif");
-        //Icon gif = new ImageIcon(url);
-        //JLabel label = new JLabel(gif);
+
+
 		
 		
 	}
 	
 	
 	
-	   public class GifPanel extends JPanel {
+	    //public class GifPanel extends JPanel {
+		//
+	     //   private final Image image;
 
-	        private final Image image;
-
-	        public GifPanel(Image image){
-	            this.image = Images.img_element[7];
-	        }
+	     //   public GifPanel(Image image){
+	     //       this.image = Images.img_element[7];
+	     //   }
 
 	       // @Override
 	        //protected void paintComponent(Graphics g){
