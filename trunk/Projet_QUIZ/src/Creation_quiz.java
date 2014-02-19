@@ -32,9 +32,22 @@ public class Creation_quiz extends JPanel implements MouseListener, MouseMotionL
 		setLayout(null);
 		admin_ajout_reponses = new Admin_ajout_reponses(fenetre);
 		admin_ajout_questions = new Admin_ajout_questions(fenetre);
+		fenetre = fen;
 		
+		/*
+		 * JLabel affichage NOM QUIZ
+		 */
+		JLabel lb_nomQuiz = new JLabel("QUIZ Nºxx : \"Mega Quiz sur les Ponney\"");
+		lb_nomQuiz.setForeground(Color.WHITE);
+		lb_nomQuiz.setFont(new Font("Arial", Font.PLAIN, 22)); 
+		lb_nomQuiz.setBounds(555, 125, 400, 30);
+		add(lb_nomQuiz);
+		
+		/*
+		 * Bouton d'AJOUT QUESTIONS
+		 */
 		JButton ajout_question = new JButton("Ajouter des questions");
-		ajout_question.setBounds(160, 180, 200, 40);
+		ajout_question.setBounds(700, 180, 200, 40);
 		ajout_question.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -46,8 +59,11 @@ public class Creation_quiz extends JPanel implements MouseListener, MouseMotionL
 		});
 		add(ajout_question);
 		
+		/*
+		 * Bouton d'AJOUT REPONSES
+		 */
 		JButton ajout_reponses = new JButton("Ajouter des reponses");
-		ajout_reponses.setBounds(160, 240, 200, 40);
+		ajout_reponses.setBounds(700, 240, 200, 40);
 		ajout_reponses.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
@@ -59,8 +75,9 @@ public class Creation_quiz extends JPanel implements MouseListener, MouseMotionL
 		});
 		add(ajout_reponses);
 		
+		/*
 		textField = new JTextField();
-		textField.setBounds(756, 169, 204, 20);
+		textField.setBounds(280, 300, 204, 20);
 		add(textField);
 		textField.setColumns(10);
 		
@@ -78,15 +95,8 @@ public class Creation_quiz extends JPanel implements MouseListener, MouseMotionL
 		Choice choice = new Choice();
 		choice.setBounds(280, 489, 204, 27);
 		add(choice);
+		*/
 		
-		JLabel label = new JLabel("TITRE DU QUIZ");
-		
-		label.setForeground(Color.WHITE);
-		label.setFont(new Font("Arial", Font.PLAIN, 25)); 
-		label.setBounds(621, 136, 177, 22);
-		add(label);
-		
-		fenetre = fen;
 	}
 	
 	public void mouseDragged(MouseEvent arg0) {}
