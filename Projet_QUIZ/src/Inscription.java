@@ -88,14 +88,14 @@ public class Inscription extends JPanel implements MouseListener, MouseMotionLis
 							tentative++;
 							repaint();
 						}
-						else if(textField_mdp_conf.getPassword().length == 0){	// MDP_CONF est pas entré
+						if(textField_mdp_conf.getPassword().length == 0){	// MDP_CONF est pas entré
 							System.out.println(" Veuillez entrer le mdp de confirmation ");
 							textField_mdp_conf.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.RED));
 							bad_mdp_conf=1;
 							tentative++;
 							repaint();
 						}
-						else if(textField_mail.getText().length() == 0){	// MAIL est pas entré
+						if(textField_mail.getText().length() == 0){	// MAIL est pas entré
 							System.out.println(" Veuillez entrer le mail ");
 							textField_mail.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.RED));
 							bad_mail=1;
@@ -134,6 +134,30 @@ public class Inscription extends JPanel implements MouseListener, MouseMotionLis
 					        }
 						}
 						
+					}else{
+						System.out.println(" ENTER PSEUDO ERROR ");
+						textField_pseudo.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.RED));
+						bad_pseudo=1;
+						tentative++;
+						repaint();
+						if(textField_mdp.getPassword().length == 0){
+							System.out.println(" ENTER MDP ERROR ");
+							textField_mdp.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.RED));
+							bad_mdp=1;
+							repaint();
+						}
+						if(textField_mdp_conf.getPassword().length == 0){
+							System.out.println(" ENTER MDP CONF ERROR ");
+							textField_mdp_conf.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.RED));
+							bad_mdp_conf=1;
+							repaint();
+						}
+						if(textField_mail.getText().length() == 0){
+							System.out.println(" ENTER MAIL ERROR ");
+							textField_mail.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.RED));
+							bad_mail=1;
+							repaint();
+						}
 					}
 				}
 			}
@@ -149,14 +173,14 @@ public class Inscription extends JPanel implements MouseListener, MouseMotionLis
 							tentative++;
 							repaint();
 						}
-						else if(textField_mdp_conf.getPassword().length == 0){	// MDP_CONF est pas entré
+						if(textField_mdp_conf.getPassword().length == 0){	// MDP_CONF est pas entré
 							System.out.println(" Veuillez entrer le mdp de confirmation ");
 							textField_mdp_conf.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.RED));
 							bad_mdp_conf=1;
 							tentative++;
 							repaint();
 						}
-						else if(textField_mail.getText().length() == 0){	// MAIL est pas entré
+						if(textField_mail.getText().length() == 0){	// MAIL est pas entré
 							System.out.println(" Veuillez entrer le mail ");
 							textField_mail.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.RED));
 							bad_mail=1;
@@ -195,6 +219,30 @@ public class Inscription extends JPanel implements MouseListener, MouseMotionLis
 					        }
 						}
 						
+					}else{
+						System.out.println(" ENTER MDP ERROR ");
+						textField_mdp.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.RED));
+						bad_mdp=1;
+						tentative++;
+						repaint();
+						if(textField_pseudo.getText().length() == 0){
+							System.out.println(" ENTER PSEUDO ERROR ");
+							textField_pseudo.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.RED));
+							bad_pseudo=1;
+							repaint();
+						}
+						if(textField_mdp_conf.getPassword().length == 0){
+							System.out.println(" ENTER MDP CONF ERROR ");
+							textField_mdp_conf.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.RED));
+							bad_mdp_conf=1;
+							repaint();
+						}
+						if(textField_mail.getText().length() == 0){
+							System.out.println(" ENTER MAIL ERROR ");
+							textField_mail.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.RED));
+							bad_mail=1;
+							repaint();
+						}
 					}
 				}
 			}
@@ -210,14 +258,14 @@ public class Inscription extends JPanel implements MouseListener, MouseMotionLis
 							tentative++;
 							repaint();
 						}
-						else if(textField_mdp.getPassword().length == 0){	// MDP est pas entré
+						if(textField_mdp.getPassword().length == 0){	// MDP est pas entré
 							System.out.println(" Veuillez entrer le mdp ");
 							textField_mdp.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.RED));
 							bad_mdp=1;
 							tentative++;
 							repaint();
 						}
-						else if(textField_mail.getText().length() == 0){	// MAIL est pas entré
+						if(textField_mail.getText().length() == 0){	// MAIL est pas entré
 							System.out.println(" Veuillez entrer le mail ");
 							textField_mail.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.RED));
 							bad_mail=1;
@@ -256,6 +304,30 @@ public class Inscription extends JPanel implements MouseListener, MouseMotionLis
 					        }
 						}
 						
+					}else{
+						System.out.println(" ENTER MDP CONF ERROR ");
+						textField_mdp_conf.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.RED));
+						bad_mdp_conf=1;
+						tentative++;
+						repaint();
+						if(textField_pseudo.getText().length() == 0){
+							System.out.println(" ENTER PSEUDO ERROR ");
+							textField_pseudo.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.RED));
+							bad_pseudo=1;
+							repaint();
+						}
+						if(textField_mdp.getPassword().length == 0){
+							System.out.println(" ENTER MDP ERROR ");
+							textField_mdp.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.RED));
+							bad_mdp=1;
+							repaint();
+						}
+						if(textField_mail.getText().length() == 0){
+							System.out.println(" ENTER MAIL ERROR ");
+							textField_mail.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.RED));
+							bad_mail=1;
+							repaint();
+						}
 					}
 				}
 			}
@@ -271,14 +343,14 @@ public class Inscription extends JPanel implements MouseListener, MouseMotionLis
 							tentative++;
 							repaint();
 						}
-						else if(textField_mdp.getPassword().length == 0){	// MDP est pas entré
+						if(textField_mdp.getPassword().length == 0){	// MDP est pas entré
 							System.out.println(" Veuillez entrer le mdp ");
 							textField_mdp.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.RED));
 							bad_mdp=1;
 							tentative++;
 							repaint();
 						}
-						else if(textField_mdp_conf.getPassword().length == 0){	// MDP_CONF est pas entré
+						if(textField_mdp_conf.getPassword().length == 0){	// MDP_CONF est pas entré
 							System.out.println(" Veuillez entrer le mail ");
 							textField_mdp_conf.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.RED));
 							bad_mdp_conf=1;
@@ -317,6 +389,30 @@ public class Inscription extends JPanel implements MouseListener, MouseMotionLis
 					        }
 						}
 						
+					}else{
+						System.out.println(" ENTER MAIL ERROR ");
+						textField_mail.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.RED));
+						bad_mail=1;
+						tentative++;
+						repaint();
+						if(textField_pseudo.getText().length() == 0){
+							System.out.println(" ENTER PSEUDO ERROR ");
+							textField_pseudo.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.RED));
+							bad_pseudo=1;
+							repaint();
+						}
+						if(textField_mdp.getPassword().length == 0){
+							System.out.println(" ENTER MDP ERROR ");
+							textField_mdp.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.RED));
+							bad_mdp=1;
+							repaint();
+						}
+						if(textField_mdp_conf.getPassword().length == 0){
+							System.out.println(" ENTER MDP CONF ERROR ");
+							textField_mdp_conf.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.RED));
+							bad_mdp_conf=1;
+							repaint();
+						}
 					}
 				}
 			}
@@ -366,7 +462,87 @@ public class Inscription extends JPanel implements MouseListener, MouseMotionLis
 		}		
 		if(e.getX() >= 605 && e.getX() <= 790 && e.getY() >= 465 && e.getY() <= 513){ // Bouton de validation
 			System.out.print("CONNEXION");
-			fenetre.goToAccueil(selection); // on appel la fonction qui va changer de panel
+			if(textField_mdp.getPassword().length != 0){
+				if(textField_pseudo.getText().length() == 0){
+					
+					textField_pseudo.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.RED));
+					bad_pseudo=1;
+					tentative++;
+					repaint();
+				}
+				else if(textField_mdp_conf.getPassword().length == 0){
+					
+					textField_mdp_conf.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.RED));
+					bad_mdp_conf=1;
+					tentative++;
+					repaint();
+				}
+				else if(textField_mail.getText().length() == 0){
+					
+					textField_mail.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.RED));
+					bad_mail=1;
+					tentative++;
+					repaint();
+				}
+				else if(textField_pseudo.getText().length() != 0 && textField_mdp_conf.getPassword().length != 0 && textField_mail.getText().length() != 0 && textField_mdp_conf.getText().equals(textField_mdp.getText())){
+					System.out.println("ENTRE BOUCLE");
+					//*Try catch permettant de se connecter selon si on est admin ou user
+					try {
+						System.out.println("ENTRE TRY");
+						recherche_bdd=true;
+						repaint();
+			        	Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+			            Connection conn = DriverManager.getConnection("jdbc:sqlserver://193.252.48.189\\SQLEXPRESS:1433;" + "database=BDD_B3I_groupe_5;" + "user=b3i_groupe_5;" + "password=123Soleil");
+			            Statement stmt_ajout = (Statement) conn.createStatement();
+			            Statement stmt_ajout2 = (Statement) conn.createStatement();
+			            query_ajout = "INSERT INTO UTILISATEUR (LOGIN_USR,MDP_USR,ADR_MAIL_USR,NB_QUIZ_JOUE,NB_PARTIE_JOUE)"
+			            			+ "VALUES ('"+textField_pseudo.getText()+"','"+textField_mdp.getText()+"','"+textField_mail.getText()+"','0','0');";
+			            stmt_ajout.execute(query_ajout);
+			            stmt_ajout.close();
+			            fenetre.goToConnexion(selection);
+					}
+					catch (ClassNotFoundException eeee) {
+			            eeee.printStackTrace();
+			            System.out.println("FAUX1");
+			            erreur_bdd = true;
+			            recherche_bdd=false;
+			            erreur_requete=true;
+			            repaint();
+			        } catch (SQLException eeee) {
+			            eeee.printStackTrace();
+			            System.out.println("FAUX2");
+			            erreur_bdd = true;
+			            recherche_bdd=false;
+			            erreur_requete=true;
+			            repaint();
+			        }
+					
+				}
+			}else if(textField_mdp.getPassword().length == 0){
+				System.out.println(" ENTER MDP2 ERROR ");
+				textField_mdp.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.RED));
+				bad_mdp=1;
+				tentative++;
+				repaint();
+				if(textField_pseudo.getText().length() == 0){
+					System.out.println(" ENTER PSEUDO ERROR ");
+					textField_pseudo.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.RED));
+					bad_pseudo=1;
+					repaint();
+				}
+				if(textField_mdp_conf.getPassword().length == 0){
+					System.out.println(" ENTER MDP CONF ERROR ");
+					textField_mdp_conf.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.RED));
+					bad_mdp_conf=1;
+					repaint();
+				}
+				if(textField_mail.getText().length() == 0){
+					System.out.println(" ENTER MAIL ERROR ");
+					textField_mail.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.RED));
+					bad_mail=1;
+					repaint();
+				}
+			}
 		}			
 	}
 	public void mouseEntered(MouseEvent e) {}
