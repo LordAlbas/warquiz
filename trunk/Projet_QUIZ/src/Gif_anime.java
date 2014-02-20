@@ -8,22 +8,20 @@ import java.net.URL;
 public class Gif_anime extends JPanel{
 
 
-        private Image image;
+        private final Image image;
 
         public Gif_anime(Image image){
             this.image = image;
+            setOpaque(false);
         }
 
         @Override
         protected void paintComponent(Graphics g){
             super.paintComponent(g);
-            g.drawImage(image, 100, 100, this);
+            g.drawImage(image, 0, 0, 350, 100, this);
         }
 
-        @Override
-       public Dimension getPreferredSize(){
-            return new Dimension(this.getWidth(), this.getHeight());
-        }
+
 
     }
 
