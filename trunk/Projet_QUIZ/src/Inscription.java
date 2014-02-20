@@ -5,6 +5,11 @@ import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
@@ -25,6 +30,9 @@ public class Inscription extends JPanel implements MouseListener, MouseMotionLis
 	public int bad_mdp_conf=0; // le champ n'est pas encore invalide
 	public int bad_mail=0; // le champ n'est pas encore invalide
 	public int tentative = 0;
+    public static Boolean erreur_log,recherche_bdd, erreur_bdd = false;
+    public static Boolean erreur_requete = true;
+    public String query_ajout;
 
 	
 	public Inscription(Fenetre fen){
@@ -73,14 +81,14 @@ public class Inscription extends JPanel implements MouseListener, MouseMotionLis
 			public void keyPressed(java.awt.event.KeyEvent evt){
 				if(evt.getKeyCode() == evt.VK_ENTER ){
 					if(textField_pseudo.getText().length() != 0){	// Si le PSEUDO est entré	
-						if(textField_mdp.getText().length() == 0){	// MDP est pas entré
+						if(textField_mdp.getPassword().length == 0){	// MDP est pas entré
 							System.out.println(" Veuillez entrer le mdp ");
 							textField_mdp.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.RED));
 							bad_mdp=1;
 							tentative++;
 							repaint();
 						}
-						else if(textField_mdp_conf.getText().length() == 0){	// MDP_CONF est pas entré
+						else if(textField_mdp_conf.getPassword().length == 0){	// MDP_CONF est pas entré
 							System.out.println(" Veuillez entrer le mdp de confirmation ");
 							textField_mdp_conf.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.RED));
 							bad_mdp_conf=1;
@@ -94,8 +102,36 @@ public class Inscription extends JPanel implements MouseListener, MouseMotionLis
 							tentative++;
 							repaint();
 						}
-						else if(textField_mdp.getText().length() != 0 && textField_mdp_conf.getText().length() != 0 && textField_mail.getText().length() != 0 && textField_mdp_conf.getText() == textField_mdp.getText()){ //Si tout est rentré et que les mdp sont les mêmes
+						else if(textField_mdp.getPassword().length != 0 && textField_mdp_conf.getPassword().length != 0 && textField_mail.getText().length() != 0 && textField_mdp_conf.equals(textField_mdp.getPassword())){ //Si tout est rentré et que les mdp sont les mêmes
 							//requete BDD
+							try {
+								recherche_bdd=true;
+								repaint();
+					        	Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+					            Connection conn = DriverManager.getConnection("jdbc:sqlserver://193.252.48.189\\SQLEXPRESS:1433;" + "database=BDD_B3I_groupe_5;" + "user=b3i_groupe_5;" + "password=123Soleil");
+					            Statement stmt_ajout = (Statement) conn.createStatement();
+					            query_ajout = "INSERT INTO UTILISATEUR (LOGIN_USR,MDP_USR,ADR_MAIL_USR)"
+					            			+ "VALUES ("+textField_pseudo.getText()+","+textField_mdp.getPassword()+","+textField_mail.getText()+")";
+					            stmt_ajout.executeQuery(query_ajout);
+					            erreur_requete = false;
+					            if(erreur_requete == false){
+					            	fenetre.goToConnexion(selection);
+					            }
+							}
+							catch (ClassNotFoundException eeee) {
+					            //eeee.printStackTrace();
+					            System.out.println("FAUX");
+					            erreur_bdd = true;
+					            recherche_bdd=false;
+					            erreur_requete=true;
+					            repaint();
+					        } catch (SQLException eeee) {
+					           // eeee.printStackTrace();
+					            System.out.println("FAUX");
+					            erreur_bdd = true;
+					            recherche_bdd=false;
+					            repaint();
+					        }
 						}
 						
 					}
@@ -105,7 +141,7 @@ public class Inscription extends JPanel implements MouseListener, MouseMotionLis
 		textField_mdp.addKeyListener(new java.awt.event.KeyAdapter(){
 			public void keyPressed(java.awt.event.KeyEvent evt){
 				if(evt.getKeyCode() == evt.VK_ENTER ){
-					if(textField_mdp.getText().length() != 0){	// Si le MDP est entré
+					if(textField_mdp.getPassword().length != 0){	// Si le MDP est entré
 						if(textField_pseudo.getText().length() == 0){	// PSEUDO est pas entré
 							System.out.println(" Veuillez entrer le mdp ");
 							textField_pseudo.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.RED));
@@ -113,7 +149,7 @@ public class Inscription extends JPanel implements MouseListener, MouseMotionLis
 							tentative++;
 							repaint();
 						}
-						else if(textField_mdp_conf.getText().length() == 0){	// MDP_CONF est pas entré
+						else if(textField_mdp_conf.getPassword().length == 0){	// MDP_CONF est pas entré
 							System.out.println(" Veuillez entrer le mdp de confirmation ");
 							textField_mdp_conf.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.RED));
 							bad_mdp_conf=1;
@@ -127,8 +163,36 @@ public class Inscription extends JPanel implements MouseListener, MouseMotionLis
 							tentative++;
 							repaint();
 						}
-						else if(textField_pseudo.getText().length() != 0 && textField_mdp_conf.getText().length() != 0 && textField_mail.getText().length() != 0 && textField_mdp_conf.getText() == textField_mdp.getText()){ //Si tout est rentré et que les mdp sont les mêmes
+						else if(textField_pseudo.getText().length() != 0 && textField_mdp_conf.getPassword().length != 0 && textField_mail.getText().length() != 0 && textField_mdp_conf.equals(textField_mdp.getPassword())){ //Si tout est rentré et que les mdp sont les mêmes
 							//requete BDD
+							try {
+								recherche_bdd=true;
+								repaint();
+					        	Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+					            Connection conn = DriverManager.getConnection("jdbc:sqlserver://193.252.48.189\\SQLEXPRESS:1433;" + "database=BDD_B3I_groupe_5;" + "user=b3i_groupe_5;" + "password=123Soleil");
+					            Statement stmt_ajout = (Statement) conn.createStatement();
+					            query_ajout = "INSERT INTO UTILISATEUR (LOGIN_USR,MDP_USR,ADR_MAIL_USR)"
+					            			+ "VALUES ("+textField_pseudo.getText()+","+textField_mdp.getPassword()+","+textField_mail.getText()+")";
+					            stmt_ajout.executeQuery(query_ajout);
+					            erreur_requete = false;
+					            if(erreur_requete == false){
+					            	fenetre.goToConnexion(selection);
+					            }
+							}
+							catch (ClassNotFoundException eeee) {
+					            //eeee.printStackTrace();
+					            System.out.println("FAUX");
+					            erreur_bdd = true;
+					            recherche_bdd=false;
+					            erreur_requete=true;
+					            repaint();
+					        } catch (SQLException eeee) {
+					           // eeee.printStackTrace();
+					            System.out.println("FAUX");
+					            erreur_bdd = true;
+					            recherche_bdd=false;
+					            repaint();
+					        }
 						}
 						
 					}
@@ -138,7 +202,7 @@ public class Inscription extends JPanel implements MouseListener, MouseMotionLis
 		textField_mdp_conf.addKeyListener(new java.awt.event.KeyAdapter(){
 			public void keyPressed(java.awt.event.KeyEvent evt){
 				if(evt.getKeyCode() == evt.VK_ENTER ){
-					if(textField_mdp_conf.getText().length() != 0){	// Si le MDP_CONF est entré
+					if(textField_mdp_conf.getPassword().length != 0){	// Si le MDP_CONF est entré
 						if(textField_pseudo.getText().length() == 0){	// PSEUDO est pas entré
 							System.out.println(" Veuillez entrer le pseudo ");
 							textField_pseudo.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.RED));
@@ -146,7 +210,7 @@ public class Inscription extends JPanel implements MouseListener, MouseMotionLis
 							tentative++;
 							repaint();
 						}
-						else if(textField_mdp.getText().length() == 0){	// MDP est pas entré
+						else if(textField_mdp.getPassword().length == 0){	// MDP est pas entré
 							System.out.println(" Veuillez entrer le mdp ");
 							textField_mdp.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.RED));
 							bad_mdp=1;
@@ -160,8 +224,36 @@ public class Inscription extends JPanel implements MouseListener, MouseMotionLis
 							tentative++;
 							repaint();
 						}
-						else if(textField_pseudo.getText().length() != 0 && textField_mdp.getText().length() != 0 && textField_mail.getText().length() != 0 && textField_mdp_conf.getText() == textField_mdp.getText()){
+						else if(textField_pseudo.getText().length() != 0 && textField_mdp.getPassword().length != 0 && textField_mail.getText().length() != 0 && textField_mdp_conf.equals(textField_mdp.getPassword())){ //Si tout est rentré et que les mdp sont les mêmes
 							//requete BDD
+							try {
+								recherche_bdd=true;
+								repaint();
+					        	Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+					            Connection conn = DriverManager.getConnection("jdbc:sqlserver://193.252.48.189\\SQLEXPRESS:1433;" + "database=BDD_B3I_groupe_5;" + "user=b3i_groupe_5;" + "password=123Soleil");
+					            Statement stmt_ajout = (Statement) conn.createStatement();
+					            query_ajout = "INSERT INTO UTILISATEUR (LOGIN_USR,MDP_USR,ADR_MAIL_USR)"
+					            			+ "VALUES ("+textField_pseudo.getText()+","+textField_mdp.getPassword()+","+textField_mail.getText()+")";
+					            stmt_ajout.executeQuery(query_ajout);
+					            erreur_requete = false;
+					            if(erreur_requete == false){
+					            	fenetre.goToConnexion(selection);
+					            }
+							}
+							catch (ClassNotFoundException eeee) {
+					            //eeee.printStackTrace();
+					            System.out.println("FAUX");
+					            erreur_bdd = true;
+					            recherche_bdd=false;
+					            erreur_requete=true;
+					            repaint();
+					        } catch (SQLException eeee) {
+					           // eeee.printStackTrace();
+					            System.out.println("FAUX");
+					            erreur_bdd = true;
+					            recherche_bdd=false;
+					            repaint();
+					        }
 						}
 						
 					}
@@ -179,22 +271,50 @@ public class Inscription extends JPanel implements MouseListener, MouseMotionLis
 							tentative++;
 							repaint();
 						}
-						else if(textField_mdp.getText().length() == 0){	// MDP est pas entré
+						else if(textField_mdp.getPassword().length == 0){	// MDP est pas entré
 							System.out.println(" Veuillez entrer le mdp ");
 							textField_mdp.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.RED));
 							bad_mdp=1;
 							tentative++;
 							repaint();
 						}
-						else if(textField_mdp_conf.getText().length() == 0){	// MDP_CONF est pas entré
+						else if(textField_mdp_conf.getPassword().length == 0){	// MDP_CONF est pas entré
 							System.out.println(" Veuillez entrer le mail ");
 							textField_mdp_conf.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.RED));
 							bad_mdp_conf=1;
 							tentative++;
 							repaint();
 						}
-						else if(textField_pseudo.getText().length() != 0 && textField_mdp.getText().length() != 0 && textField_mdp_conf.getText().length() != 0 && textField_mdp_conf.getText() == textField_mdp.getText()){
+						else if(textField_pseudo.getText().length() != 0 && textField_mdp.getPassword().length != 0 && textField_mdp_conf.getPassword().length != 0 && textField_mdp_conf.equals(textField_mdp.getPassword())){ //Si tout est rentré et que les mdp sont les mêmes
 							//requete BDD
+							try {
+								recherche_bdd=true;
+								repaint();
+					        	Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+					            Connection conn = DriverManager.getConnection("jdbc:sqlserver://193.252.48.189\\SQLEXPRESS:1433;" + "database=BDD_B3I_groupe_5;" + "user=b3i_groupe_5;" + "password=123Soleil");
+					            Statement stmt_ajout = (Statement) conn.createStatement();
+					            query_ajout = "INSERT INTO UTILISATEUR (LOGIN_USR,MDP_USR,ADR_MAIL_USR)"
+					            			+ "VALUES ("+textField_pseudo.getText()+","+textField_mdp.getPassword()+","+textField_mail.getText()+")";
+					            stmt_ajout.executeQuery(query_ajout);
+					            erreur_requete = false;
+					            if(erreur_requete == false){
+					            	fenetre.goToConnexion(selection);
+					            }
+							}
+							catch (ClassNotFoundException eeee) {
+					            //eeee.printStackTrace();
+					            System.out.println("FAUX");
+					            erreur_bdd = true;
+					            recherche_bdd=false;
+					            erreur_requete=true;
+					            repaint();
+					        } catch (SQLException eeee) {
+					           // eeee.printStackTrace();
+					            System.out.println("FAUX");
+					            erreur_bdd = true;
+					            recherche_bdd=false;
+					            repaint();
+					        }
 						}
 						
 					}
