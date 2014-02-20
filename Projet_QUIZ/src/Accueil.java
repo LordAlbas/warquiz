@@ -31,11 +31,11 @@ public class Accueil extends JPanel implements MouseListener, MouseMotionListene
 	public int delay = 0; // premiere execution dans 5sec
 	public int period = 10; // répéter toutes les 1 sec
 	private Fenetre fenetre;
-	//private Gif_anime gif ;
+
 	public int coordX = 0;
 	public int coordY = 0;
 	public boolean up=false;
-	JLayeredPane layeredPane;
+	
 	/**
 	 * Constructeur
 	 *  

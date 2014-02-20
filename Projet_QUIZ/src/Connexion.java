@@ -41,6 +41,7 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
     static Boolean recherche_bdd = false;
     static Boolean erreur_bdd = false;
     JLayeredPane layeredPane;
+    Gif_anime panel;
    // public ImageIcon imgLoading = new ImageIcon(this.getClass().getResource(Images.img_element[7]));
 	/**
 	 * Constructor
@@ -78,13 +79,11 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 
 		//file:///C:/Users/Sinardet/Documents/ProjetOracle/warquiz/Projet_QUIZ/images/loading.gif
 		//URL url = new URL("images/loading.gif");
-		Gif_anime panel = new Gif_anime(load("file:///C:/Users/Sinardet/Documents/ProjetOracle/warquiz/Projet_QUIZ/images/loading.gif"));
-		panel.setBounds(650, 235, 100, 100);
-        add(panel);
-       
-        //panel.setVisible(true);
- 
-       
+		
+
+        panel = new Gif_anime(load("file:///C:/Users/Sinardet/Documents/ProjetOracle/warquiz/Projet_QUIZ/images/logo_loading.gif"));
+        panel.setBounds(646, 629, 350, 100);
+        add(panel);  
 	
 	
 	} 
@@ -514,10 +513,22 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 			g.drawImage(Images.img_element[4], 140, 50, 800, 130, null);	
 		}
 		
-		if(recherche_bdd){
-			g.drawImage(Images.img_element[7], 440, 550, 160, 160, this);
-		}
+		//if(recherche_bdd){
+		//	g.drawImage(Images.img_element[7], 440, 550, 160, 160, this);
+		//}
 		
+
+    
+        
+        if(recherche_bdd == true){
+        	panel.setVisible(true);
+        	repaint();
+        }
+        
+        if(recherche_bdd == false){	
+        	panel.setVisible(false);
+        	repaint();
+        }
 		
 	}
 	
