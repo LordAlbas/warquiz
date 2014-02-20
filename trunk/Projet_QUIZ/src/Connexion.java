@@ -344,7 +344,7 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 		if(e.getX() >= 605 && e.getX() <= 790 && e.getY() >= 465 && e.getY() <= 513){ // Bouton de validation
 			System.out.print("CONNEXION");
 			
-			if(textField_mdp.getText().length() != 0){
+			if(textField_mdp.getPassword().length != 0){
 				if(textField_pseudo.getText().length() == 0){
 					textField_pseudo.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.RED));
 					bad_pseudo=1;
@@ -352,9 +352,6 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 					repaint();
 				}
 				else if(textField_pseudo.getText().length() != 0){
-					/*textField_pseudo.setText("");
-					textField_mdp.setText("");
-					tentative=0;*/
 					//*Try catch permettant de se connecter selon si on est admin ou user
 					try {
 						recherche_bdd=true;
@@ -393,7 +390,7 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 			            	recherche_bdd = true;
 			            	erreur_log = false;
 			            	repaint();
-			                if(dbUsername_user.equals(textField_pseudo.getText()) && dbPassword_user.equals(textField_mdp.getText())){
+			                if(dbUsername_user.equals(textField_pseudo.getText()) && dbPassword_user.equals(textField_mdp.getPassword())){
 			                    System.out.println("OK");
 			                    login = true;
 			                    fenetre.goToAccueil(selection);	
