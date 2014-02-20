@@ -18,7 +18,7 @@ public class Gif_anime extends JPanel{
         @Override
         protected void paintComponent(Graphics g){
             super.paintComponent(g);
-            g.drawImage(image, 0, 0, 350, 100, this);
+            g.drawImage(image, 0, 0, 94, 90, this);
         }
 
 

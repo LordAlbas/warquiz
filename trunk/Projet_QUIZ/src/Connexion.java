@@ -81,8 +81,8 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 		//URL url = new URL("images/loading.gif");
 		
 
-        panel = new Gif_anime(load("file:///C:/Users/Sinardet/Documents/ProjetOracle/warquiz/Projet_QUIZ/images/logo_loading.gif"));
-        panel.setBounds(646, 629, 350, 100);
+        panel = new Gif_anime(load("file:///C:/Users/Sinardet/Documents/ProjetOracle/warquiz/Projet_QUIZ/images/chargement_anime.gif"));
+        panel.setBounds(646, 632, 95, 90);
         add(panel);  
 	
 	
@@ -522,6 +522,7 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 		
         if(recherche_bdd == true){ // image de chargement.
         	panel.setVisible(true);
+        	g.drawImage(Images.img_element[8], 646, 629, 350, 100, null);	
         	repaint();
         }
         
