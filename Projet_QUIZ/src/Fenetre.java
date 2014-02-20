@@ -100,7 +100,7 @@ public class Fenetre extends JFrame {
 	 */
 	public void goToConnexionAlerte(String selection){
 		int rep_deco;
-		 rep_deco = JOptionPane.showConfirmDialog(null, "Voulez-vous vraiment vous dï¿½connecter ?");
+		 rep_deco = JOptionPane.showConfirmDialog(null, "Voulez-vous vraiment vous déconnecter ?");
 
 		if(rep_deco == 0){
 			this.getContentPane().setVisible(false);	

@@ -25,6 +25,7 @@ public class Accueil extends JPanel implements MouseListener, MouseMotionListene
 	public int Y;							// defini la position Y du click
 	String image_select = "rien";			// defini l'image survol� (rien si pas survol� sinon [nom_image]_hover)
 	String bouton_deco ="rien";				// defini l'image survol� bouton deco
+	String bouton_option ="rien";
 	int val_i;								// defini l'emplacement de l'image survol� dans le tableau img_bouton_hover
 	static String selection; 				// defini quel bouton est selectionn�
 	Timer timer;
@@ -183,12 +184,17 @@ public class Accueil extends JPanel implements MouseListener, MouseMotionListene
 			}	
 			repaint(); // On re dessine
 		
-			if(e.getX() >= 959 && e.getX() <= 1022 && e.getY() >= 1 && e.getY() <= 47){ // CO/DECO
+			if(e.getX() >= 970 && e.getX() <= 1022 && e.getY() >= 1 && e.getY() <= 47){ // CO/DECO
 				//System.out.print("CO/DECO_hover");
 				bouton_deco = "CO/DECO_hover";
 				repaint(); // On re dessine
 			}
 			
+			if(e.getX() >= 905 && e.getX() <= 969 && e.getY() >= 1 && e.getY() <= 47){ // CO/DECO
+				//System.out.print("CO/DECO_hover");
+				bouton_option = "OPTION_hover";
+				repaint(); // On re dessine
+			}
 	}
 	
 	/**
@@ -206,15 +212,24 @@ public class Accueil extends JPanel implements MouseListener, MouseMotionListene
 		//g.drawImage(img_bouton[4], 960, 1, 46, 46, null);
 		switch (bouton_deco){
 		case "rien" :
-			g.drawImage(Images.img_bouton[4], 960, 0, 46, 46, null);
+			g.drawImage(Images.img_bouton[4], 970, 0, 46, 46, null);
 			break;				
 		case "CO/DECO_hover" :
-			g.drawImage(Images.img_bouton_hover[4], 960, 0, 46, 46, null);
+			g.drawImage(Images.img_bouton_hover[4], 970, 0, 46, 46, null);
 			bouton_deco = "rien";
 			break;	
 		}
 		
-		g.drawImage(Images.img_bouton[6], 910, coordY+1, 46, 46, null);
+		switch (bouton_option){
+		case "rien" :
+			g.drawImage(Images.img_bouton[6], 905, 0, 46, 46, null);
+			break;				
+		case "OPTION_hover" :
+			g.drawImage(Images.img_bouton_hover[6], 905, 0, 46, 46, null);
+			bouton_option = "rien";
+			break;	
+		}		
+		//g.drawImage(Images.img_bouton[6], 910, 0, 46, 46, null);
 		/*
 		 * On boucle sur tous les boutons (de [0] a [3]).
 		 * Chaque bouton obtient une position X (hauteur) en fonction de son numero (i).

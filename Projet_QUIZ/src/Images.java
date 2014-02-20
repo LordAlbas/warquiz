@@ -45,7 +45,7 @@ public class Images {
 		 * charge les images d'elements dans img_element[]
 		 */
 		try {
-			img_element[0] = ImageIO.read(new File("images/header2.png"));
+			img_element[0] = ImageIO.read(new File("images/header5.png"));
 			img_element[1] = ImageIO.read(new File("images/barre_verticale.png"));
 			//img_element[2] = ImageIO.read(new File("images/background_textbox.png"));
 			img_element[3] = ImageIO.read(new File("images/invalide.png"));
@@ -65,7 +65,7 @@ public class Images {
 			img_bouton[1] = ImageIO.read(new File("images/accueil_bouton_statistiques.png"));
 			img_bouton[2] = ImageIO.read(new File("images/accueil_bouton_credit.png"));
 			img_bouton[3] = ImageIO.read(new File("images/accueil_bouton_quitter.png"));
-			img_bouton[4] = ImageIO.read(new File("images/deco.png"));
+			img_bouton[4] = ImageIO.read(new File("images/bouton_deco.png"));
 			img_bouton[5] = ImageIO.read(new File("images/retour.png"));
 			img_bouton[6] = ImageIO.read(new File("images/bouton_option.png"));
 		} catch (IOException e) {
@@ -80,8 +80,9 @@ public class Images {
 			img_bouton_hover[1] = ImageIO.read(new File("images/accueil_bouton_statistiques_mouseover.png"));
 			img_bouton_hover[2] = ImageIO.read(new File("images/accueil_bouton_credit_mouseover.png"));
 			img_bouton_hover[3] = ImageIO.read(new File("images/accueil_bouton_quitter_mouseover.png"));
-			img_bouton_hover[4] = ImageIO.read(new File("images/deco_hover.png"));
+			img_bouton_hover[4] = ImageIO.read(new File("images/bouton_deco_hover.png"));
 			img_bouton_hover[5] = ImageIO.read(new File("images/retour_hover.png"));
+			img_bouton_hover[6] = ImageIO.read(new File("images/bouton_option_hover.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
