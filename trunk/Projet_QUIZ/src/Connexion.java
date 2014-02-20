@@ -519,8 +519,8 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 		
 
     
-        
-        if(recherche_bdd == true){
+		
+        if(recherche_bdd == true){ // image de chargement.
         	panel.setVisible(true);
         	repaint();
         }
