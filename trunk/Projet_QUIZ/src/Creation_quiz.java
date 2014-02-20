@@ -21,23 +21,42 @@ import java.awt.SystemColor;
 
 public class Creation_quiz extends JPanel implements MouseListener, MouseMotionListener{
 	
+	/*
+	 * ATTRIBUTS DE CLASSES
+	 */
+	// pour les dialogues entre classes
 	private Fenetre fenetre;
 	private Admin_ajout_reponses admin_ajout_reponses;
 	private Admin_ajout_questions admin_ajout_questions;
+	
+	// pour rien
 	private JTextField textField;
 	private JTextField textField_1;
 	private JTextField textField_2;
+	
+	// pour les hover sur les images boutons
 	private String selection;
 	private String bouton_deco ="rien";
 	private String bouton_retour ="rien";
-	private String image_select = "rien";
+	private String image_select;
 	private int val_i;
 	
+	// pour gestions des questions
+	private JButton[] tabQuest = new JButton[20];
+	
+	/**
+	 * CONSTRUCTOR
+	 * @param fen
+	 */
 	public Creation_quiz(Fenetre fen){
 		setLayout(null);
+		
+		/*
+		 * Initialisation des attributs de classes
+		 */
+		fenetre = fen;
 		admin_ajout_reponses = new Admin_ajout_reponses(fenetre);
 		admin_ajout_questions = new Admin_ajout_questions(fenetre);
-		fenetre = fen;
 		
 		/*
 		 * JLabel affichage NOM QUIZ
@@ -56,16 +75,14 @@ public class Creation_quiz extends JPanel implements MouseListener, MouseMotionL
 		ajout_question.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				fenetre.getContentPane().setVisible(false);
-				admin_ajout_questions.addMouseListener(admin_ajout_questions);
-				fenetre.setContentPane(admin_ajout_questions);
-				fenetre.getContentPane().setVisible(true);
+				// AJOUTE UNE QUESTION AU CLICK
+				addQuestion(nextNull(tabQuest), tabQuest);
 			}
 		});
 		add(ajout_question);
 		
 		/*
-		 * Bouton d'AJOUT REPONSES
+		 * Bouton d'AJOUT REPONSES (va disparaitre soon...)
 		 */
 		JButton ajout_reponses = new JButton("Ajouter des reponses");
 		ajout_reponses.setBounds(700, 240, 200, 40);
@@ -104,13 +121,48 @@ public class Creation_quiz extends JPanel implements MouseListener, MouseMotionL
 		
 	}
 	
+	/**
+	 * Parcour le tabQuestion de JButton pour trouver la prochaine case vide (null)
+	 * @param tabQ
+	 * @return
+	 */
+	public int nextNull(JButton[] tabQ) {
+		int i = 0;
+		while(i<20 && tabQ[i] != null) {
+			i++;
+		}
+		return i;
+	}
+	
+	/**
+	 * Ecrit dans la prochaine case vide de tabQuestion un nouveau bouton
+	 * (sauf si le tableau est plein)
+	 * @param i
+	 * @param tabQ
+	 */
+	public void addQuestion(int i, JButton[] tabQ) {
+		if (i < 20) {
+			System.out.println("Next NULL = tabQuest["+i+"], ecriture dedans ...");
+			tabQuest[i] = new JButton("Yo!");
+			tabQuest[i].setBounds(280, 200+(i*22), 200, 20);
+			add(tabQuest[i]);
+			repaint();
+			// print de debug du tabQuest
+			for (byte j = 0; j<20; j++) {
+				System.out.println("\t tabQuest["+j+"] = "+tabQuest[j]);
+			}
+		} else {
+			System.out.println("tableau plein j'imagine (i = "+i+")");
+		}
+	}
+	
 	public void mouseDragged(MouseEvent arg0) {}
 	public void mouseMoved(MouseEvent e) {
 		if(e.getX() >= 120 && e.getX() <= 490 && e.getY() >= 560 && e.getY() <= 645){ // QUITTER
 			//System.out.print("QUITTER_hover");
 			image_select = "QUITTER_hover";
 			val_i = 3;
-		}	
+		}
 		repaint(); // On re dessine
 	
 		if(e.getX() >= 959 && e.getX() <= 1022 && e.getY() >= 1 && e.getY() <= 47){ // CO/DECO
@@ -118,12 +170,12 @@ public class Creation_quiz extends JPanel implements MouseListener, MouseMotionL
 			bouton_deco = "CO/DECO_hover";
 			//val_i = 4;
 			repaint(); // On re dessine
-		}	
+		}
 		if(e.getX() >= 1 && e.getX() <= 85 && e.getY() >= 685 && e.getY() <= 768){ // retour
 			bouton_retour = "retour_hover";
 			//val_i = 4;
 			repaint(); // On re dessine
-		}	
+		}
 	}
 	
 	public void mouseClicked(MouseEvent e) {
