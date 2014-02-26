@@ -102,36 +102,39 @@ public class Inscription extends JPanel implements MouseListener, MouseMotionLis
 							tentative++;
 							repaint();
 						}
-						else if(textField_mdp.getPassword().length != 0 && textField_mdp_conf.getPassword().length != 0 && textField_mail.getText().length() != 0 && textField_mdp_conf.equals(textField_mdp.getPassword())){ //Si tout est rentré et que les mdp sont les mêmes
-							//requete BDD
+						else if(textField_mdp.getPassword().length != 0 && textField_mdp_conf.getPassword().length != 0 && textField_mail.getText().length() != 0 && textField_mdp_conf.getText().equals(textField_mdp.getText())){
+							System.out.println("ENTRE BOUCLE");
+							//*Try catch permettant de se connecter selon si on est admin ou user
 							try {
+								System.out.println("ENTRE TRY");
 								recherche_bdd=true;
 								repaint();
 					        	Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 					            Connection conn = DriverManager.getConnection("jdbc:sqlserver://193.252.48.189\\SQLEXPRESS:1433;" + "database=BDD_B3I_groupe_5;" + "user=b3i_groupe_5;" + "password=123Soleil");
 					            Statement stmt_ajout = (Statement) conn.createStatement();
-					            query_ajout = "INSERT INTO UTILISATEUR (LOGIN_USR,MDP_USR,ADR_MAIL_USR)"
-					            			+ "VALUES ("+textField_pseudo.getText()+","+textField_mdp.getPassword()+","+textField_mail.getText()+")";
-					            stmt_ajout.executeQuery(query_ajout);
-					            erreur_requete = false;
-					            if(erreur_requete == false){
-					            	fenetre.goToConnexion(selection);
-					            }
+					            query_ajout = "INSERT INTO UTILISATEUR (LOGIN_USR,MDP_USR,ADR_MAIL_USR,NB_QUIZ_JOUE,NB_PARTIE_JOUE)"
+					            			+ "VALUES ('"+textField_pseudo.getText()+"','"+textField_mdp.getText()+"','"+textField_mail.getText()+"',0,0);";
+					            System.out.println("requete ajoutee");
+					            stmt_ajout.execute(query_ajout);
+					            stmt_ajout.close();
+					            fenetre.goToConnexion(selection);
 							}
 							catch (ClassNotFoundException eeee) {
-					            //eeee.printStackTrace();
-					            System.out.println("FAUX");
+					            eeee.printStackTrace();
+					            System.out.println("FAUX1");
 					            erreur_bdd = true;
 					            recherche_bdd=false;
 					            erreur_requete=true;
 					            repaint();
 					        } catch (SQLException eeee) {
-					           // eeee.printStackTrace();
-					            System.out.println("FAUX");
+					            eeee.printStackTrace();
+					            System.out.println("FAUX2");
 					            erreur_bdd = true;
 					            recherche_bdd=false;
+					            erreur_requete=true;
 					            repaint();
 					        }
+							
 						}
 						
 					}else{
@@ -187,36 +190,39 @@ public class Inscription extends JPanel implements MouseListener, MouseMotionLis
 							tentative++;
 							repaint();
 						}
-						else if(textField_pseudo.getText().length() != 0 && textField_mdp_conf.getPassword().length != 0 && textField_mail.getText().length() != 0 && textField_mdp_conf.equals(textField_mdp.getPassword())){ //Si tout est rentré et que les mdp sont les mêmes
-							//requete BDD
+						else if(textField_pseudo.getText().length() != 0 && textField_mdp_conf.getPassword().length != 0 && textField_mail.getText().length() != 0 && textField_mdp_conf.getText().equals(textField_mdp.getText())){
+							System.out.println("ENTRE BOUCLE");
+							//*Try catch permettant de se connecter selon si on est admin ou user
 							try {
+								System.out.println("ENTRE TRY");
 								recherche_bdd=true;
 								repaint();
 					        	Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 					            Connection conn = DriverManager.getConnection("jdbc:sqlserver://193.252.48.189\\SQLEXPRESS:1433;" + "database=BDD_B3I_groupe_5;" + "user=b3i_groupe_5;" + "password=123Soleil");
 					            Statement stmt_ajout = (Statement) conn.createStatement();
-					            query_ajout = "INSERT INTO UTILISATEUR (LOGIN_USR,MDP_USR,ADR_MAIL_USR)"
-					            			+ "VALUES ("+textField_pseudo.getText()+","+textField_mdp.getPassword()+","+textField_mail.getText()+")";
-					            stmt_ajout.executeQuery(query_ajout);
-					            erreur_requete = false;
-					            if(erreur_requete == false){
-					            	fenetre.goToConnexion(selection);
-					            }
+					            query_ajout = "INSERT INTO UTILISATEUR (LOGIN_USR,MDP_USR,ADR_MAIL_USR,NB_QUIZ_JOUE,NB_PARTIE_JOUE)"
+					            			+ "VALUES ('"+textField_pseudo.getText()+"','"+textField_mdp.getText()+"','"+textField_mail.getText()+"',0,0);";
+					            System.out.println("requete ajoutee");
+					            stmt_ajout.execute(query_ajout);
+					            stmt_ajout.close();
+					            fenetre.goToConnexion(selection);
 							}
 							catch (ClassNotFoundException eeee) {
-					            //eeee.printStackTrace();
-					            System.out.println("FAUX");
+					            eeee.printStackTrace();
+					            System.out.println("FAUX1");
 					            erreur_bdd = true;
 					            recherche_bdd=false;
 					            erreur_requete=true;
 					            repaint();
 					        } catch (SQLException eeee) {
-					           // eeee.printStackTrace();
-					            System.out.println("FAUX");
+					            eeee.printStackTrace();
+					            System.out.println("FAUX2");
 					            erreur_bdd = true;
 					            recherche_bdd=false;
+					            erreur_requete=true;
 					            repaint();
 					        }
+							
 						}
 						
 					}else{
@@ -272,36 +278,39 @@ public class Inscription extends JPanel implements MouseListener, MouseMotionLis
 							tentative++;
 							repaint();
 						}
-						else if(textField_pseudo.getText().length() != 0 && textField_mdp.getPassword().length != 0 && textField_mail.getText().length() != 0 && textField_mdp_conf.equals(textField_mdp.getPassword())){ //Si tout est rentré et que les mdp sont les mêmes
-							//requete BDD
+						else if(textField_pseudo.getText().length() != 0 && textField_mdp.getPassword().length != 0 && textField_mail.getText().length() != 0 && textField_mdp_conf.getText().equals(textField_mdp.getText())){
+							System.out.println("ENTRE BOUCLE");
+							//*Try catch permettant de se connecter selon si on est admin ou user
 							try {
+								System.out.println("ENTRE TRY");
 								recherche_bdd=true;
 								repaint();
 					        	Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 					            Connection conn = DriverManager.getConnection("jdbc:sqlserver://193.252.48.189\\SQLEXPRESS:1433;" + "database=BDD_B3I_groupe_5;" + "user=b3i_groupe_5;" + "password=123Soleil");
 					            Statement stmt_ajout = (Statement) conn.createStatement();
-					            query_ajout = "INSERT INTO UTILISATEUR (LOGIN_USR,MDP_USR,ADR_MAIL_USR)"
-					            			+ "VALUES ("+textField_pseudo.getText()+","+textField_mdp.getPassword()+","+textField_mail.getText()+")";
-					            stmt_ajout.executeQuery(query_ajout);
-					            erreur_requete = false;
-					            if(erreur_requete == false){
-					            	fenetre.goToConnexion(selection);
-					            }
+					            query_ajout = "INSERT INTO UTILISATEUR (LOGIN_USR,MDP_USR,ADR_MAIL_USR,NB_QUIZ_JOUE,NB_PARTIE_JOUE)"
+					            			+ "VALUES ('"+textField_pseudo.getText()+"','"+textField_mdp.getText()+"','"+textField_mail.getText()+"',0,0);";
+					            System.out.println("requete ajoutee");
+					            stmt_ajout.execute(query_ajout);
+					            stmt_ajout.close();
+					            fenetre.goToConnexion(selection);
 							}
 							catch (ClassNotFoundException eeee) {
-					            //eeee.printStackTrace();
-					            System.out.println("FAUX");
+					            eeee.printStackTrace();
+					            System.out.println("FAUX1");
 					            erreur_bdd = true;
 					            recherche_bdd=false;
 					            erreur_requete=true;
 					            repaint();
 					        } catch (SQLException eeee) {
-					           // eeee.printStackTrace();
-					            System.out.println("FAUX");
+					            eeee.printStackTrace();
+					            System.out.println("FAUX2");
 					            erreur_bdd = true;
 					            recherche_bdd=false;
+					            erreur_requete=true;
 					            repaint();
 					        }
+							
 						}
 						
 					}else{
@@ -357,36 +366,39 @@ public class Inscription extends JPanel implements MouseListener, MouseMotionLis
 							tentative++;
 							repaint();
 						}
-						else if(textField_pseudo.getText().length() != 0 && textField_mdp.getPassword().length != 0 && textField_mdp_conf.getPassword().length != 0 && textField_mdp_conf.equals(textField_mdp.getPassword())){ //Si tout est rentré et que les mdp sont les mêmes
-							//requete BDD
+						else if(textField_pseudo.getText().length() != 0 && textField_mdp_conf.getPassword().length != 0 && textField_mdp.getPassword().length != 0 && textField_mdp_conf.getText().equals(textField_mdp.getText())){
+							System.out.println("ENTRE BOUCLE");
+							//*Try catch permettant de se connecter selon si on est admin ou user
 							try {
+								System.out.println("ENTRE TRY");
 								recherche_bdd=true;
 								repaint();
 					        	Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 					            Connection conn = DriverManager.getConnection("jdbc:sqlserver://193.252.48.189\\SQLEXPRESS:1433;" + "database=BDD_B3I_groupe_5;" + "user=b3i_groupe_5;" + "password=123Soleil");
 					            Statement stmt_ajout = (Statement) conn.createStatement();
-					            query_ajout = "INSERT INTO UTILISATEUR (LOGIN_USR,MDP_USR,ADR_MAIL_USR)"
-					            			+ "VALUES ("+textField_pseudo.getText()+","+textField_mdp.getPassword()+","+textField_mail.getText()+")";
-					            stmt_ajout.executeQuery(query_ajout);
-					            erreur_requete = false;
-					            if(erreur_requete == false){
-					            	fenetre.goToConnexion(selection);
-					            }
+					            query_ajout = "INSERT INTO UTILISATEUR (LOGIN_USR,MDP_USR,ADR_MAIL_USR,NB_QUIZ_JOUE,NB_PARTIE_JOUE)"
+					            			+ "VALUES ('"+textField_pseudo.getText()+"','"+textField_mdp.getText()+"','"+textField_mail.getText()+"',0,0);";
+					            System.out.println("requete ajoutee");
+					            stmt_ajout.execute(query_ajout);
+					            stmt_ajout.close();
+					            fenetre.goToConnexion(selection);
 							}
 							catch (ClassNotFoundException eeee) {
-					            //eeee.printStackTrace();
-					            System.out.println("FAUX");
+					            eeee.printStackTrace();
+					            System.out.println("FAUX1");
 					            erreur_bdd = true;
 					            recherche_bdd=false;
 					            erreur_requete=true;
 					            repaint();
 					        } catch (SQLException eeee) {
-					           // eeee.printStackTrace();
-					            System.out.println("FAUX");
+					            eeee.printStackTrace();
+					            System.out.println("FAUX2");
 					            erreur_bdd = true;
 					            recherche_bdd=false;
+					            erreur_requete=true;
 					            repaint();
 					        }
+							
 						}
 						
 					}else{
@@ -494,9 +506,9 @@ public class Inscription extends JPanel implements MouseListener, MouseMotionLis
 			        	Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 			            Connection conn = DriverManager.getConnection("jdbc:sqlserver://193.252.48.189\\SQLEXPRESS:1433;" + "database=BDD_B3I_groupe_5;" + "user=b3i_groupe_5;" + "password=123Soleil");
 			            Statement stmt_ajout = (Statement) conn.createStatement();
-			            Statement stmt_ajout2 = (Statement) conn.createStatement();
 			            query_ajout = "INSERT INTO UTILISATEUR (LOGIN_USR,MDP_USR,ADR_MAIL_USR,NB_QUIZ_JOUE,NB_PARTIE_JOUE)"
-			            			+ "VALUES ('"+textField_pseudo.getText()+"','"+textField_mdp.getText()+"','"+textField_mail.getText()+"','0','0');";
+			            			+ "VALUES ('"+textField_pseudo.getText()+"','"+textField_mdp.getText()+"','"+textField_mail.getText()+"',0,0);";
+			            System.out.println("requete ajoutee");
 			            stmt_ajout.execute(query_ajout);
 			            stmt_ajout.close();
 			            fenetre.goToConnexion(selection);
