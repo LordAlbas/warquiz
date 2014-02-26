@@ -1,0 +1,17 @@
+  ___— [BUG TRACKER] —_____
+
+// Rassemblement de bugs et d’idées en tout genre
+
+
+___BUGS___
+
+- Petit bug d’affichage des champs erroné dans la connexion/inscription.
+
+- Blabla
+
+
+___IDEA___
+
+- Remplacer le type d’alerte (exemple: deco, quitter) pour avoir seulement les choix YES et NO (ou YES et CANCEL) à la place des trois choix YES, NO, CANCEL.
+
+- Blabla
