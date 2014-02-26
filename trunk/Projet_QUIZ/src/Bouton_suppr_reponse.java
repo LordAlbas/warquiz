@@ -1,3 +1,4 @@
+import java.awt.List;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -5,20 +6,24 @@ import javax.swing.JButton;
 
 
 public class Bouton_suppr_reponse extends JButton implements MouseListener{
-
-	public void bouton_suppr_reponse(){
-		JButton bouton = new JButton();
-		bouton.addMouseListener(this);
+	
+	private List list_reponses;
+	
+	public Bouton_suppr_reponse(String name, List list_rep){
+		super(name);
+		addMouseListener(this);
+		list_reponses = list_rep;
 	}
 	
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		if(Admin_ajout_reponses.list.getItemCount() > 0){
+		if(list_reponses.getItemCount() > 0){
 			System.out.println("DEMANDE SUPPRESSION");
-			Admin_ajout_reponses.list.remove(Admin_ajout_reponses.list.getSelectedItem());
+			list_reponses.remove(list_reponses.getSelectedItem());
 			//Admin_ajout_reponses.list.removeAll();
-		}else {System.out.println("ERREUR SUPPRESSION");}
+		} else {
+			System.out.println("ERREUR SUPPRESSION");
+		}
 	}
 
 	@Override

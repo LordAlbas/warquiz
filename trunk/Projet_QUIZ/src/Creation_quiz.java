@@ -21,18 +21,12 @@ import java.awt.SystemColor;
 
 public class Creation_quiz extends JPanel implements MouseListener, MouseMotionListener{
 	
-	/*
+	/**
 	 * ATTRIBUTS DE CLASSES
 	 */
 	// pour les dialogues entre classes
 	private Fenetre fenetre;
 	private Admin_ajout_reponses admin_ajout_reponses;
-	private Admin_ajout_questions admin_ajout_questions;
-	
-	// pour rien
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
 	
 	// pour les hover sur les images boutons
 	private String selection;
@@ -40,6 +34,9 @@ public class Creation_quiz extends JPanel implements MouseListener, MouseMotionL
 	private String bouton_retour ="rien";
 	private String image_select;
 	private int val_i;
+	
+	// objet quiz qui se fait traiter actuelement
+	private JLabel lb_nomQuiz;
 	
 	// pour gestions des questions
 	private JButton[] tabQuest = new JButton[20];
@@ -55,13 +52,12 @@ public class Creation_quiz extends JPanel implements MouseListener, MouseMotionL
 		 * Initialisation des attributs de classes
 		 */
 		fenetre = fen;
-		admin_ajout_reponses = new Admin_ajout_reponses(fenetre);
-		admin_ajout_questions = new Admin_ajout_questions(fenetre);
 		
 		/*
 		 * JLabel affichage NOM QUIZ
 		 */
-		JLabel lb_nomQuiz = new JLabel("QUIZ Nºxx : \"Mega Quiz sur les Ponney\"");
+		// ICI ON ENVOI LE NOM DU QUIZ (ou nom racourcis)
+		lb_nomQuiz = new JLabel("Mega Quiz de la mort qui tue (pro only plz no noob no leaver)");
 		lb_nomQuiz.setForeground(Color.WHITE);
 		lb_nomQuiz.setFont(new Font("Arial", Font.PLAIN, 22)); 
 		lb_nomQuiz.setBounds(555, 125, 400, 30);
@@ -80,45 +76,6 @@ public class Creation_quiz extends JPanel implements MouseListener, MouseMotionL
 			}
 		});
 		add(ajout_question);
-		
-		/*
-		 * Bouton d'AJOUT REPONSES (va disparaitre soon...)
-		 */
-		JButton ajout_reponses = new JButton("Ajouter des reponses");
-		ajout_reponses.setBounds(700, 240, 200, 40);
-		ajout_reponses.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				fenetre.getContentPane().setVisible(false);
-				admin_ajout_reponses.addMouseListener(admin_ajout_reponses);
-				fenetre.setContentPane(admin_ajout_reponses);
-				fenetre.getContentPane().setVisible(true);
-			}
-		});
-		add(ajout_reponses);
-		
-		/*
-		textField = new JTextField();
-		textField.setBounds(280, 300, 204, 20);
-		add(textField);
-		textField.setColumns(10);
-		
-		textField_1 = new JTextField();
-		textField_1.setBounds(280, 373, 204, 20);
-		add(textField_1);
-		textField_1.setColumns(10);
-		
-		textField_2 = new JTextField();
-		textField_2.setBounds(280, 430, 204, 20);
-		add(textField_2);
-		textField_2.setColumns(10);
-		
-		
-		Choice choice = new Choice();
-		choice.setBounds(280, 489, 204, 27);
-		add(choice);
-		*/
-		
 	}
 	
 	/**
@@ -144,16 +101,36 @@ public class Creation_quiz extends JPanel implements MouseListener, MouseMotionL
 		if (i < 20) {
 			System.out.println("Next NULL = tabQuest["+i+"], ecriture dedans ...");
 			tabQuest[i] = new JButton("Yo!");
+			tabQuest[i].addActionListener(new ActionListener() {
+				// ACTIONLISTENER DES BOUTONS DE QUESTIONS
+				// redirige sur la page admin_ajout_reponses.
+				public void actionPerformed(ActionEvent e) {
+					fenetre.getContentPane().setVisible(false);
+					admin_ajout_reponses = new Admin_ajout_reponses(fenetre, fenetre.creation_quiz);
+					admin_ajout_reponses.addMouseListener(admin_ajout_reponses);
+					fenetre.setContentPane(admin_ajout_reponses);
+					fenetre.getContentPane().setVisible(true);
+				}
+			});
 			tabQuest[i].setBounds(280, 200+(i*22), 200, 20);
 			add(tabQuest[i]);
 			repaint();
+			
 			// print de debug du tabQuest
-			for (byte j = 0; j<20; j++) {
+			/*for (byte j = 0; j<20; j++) {
 				System.out.println("\t tabQuest["+j+"] = "+tabQuest[j]);
-			}
+			}*/
 		} else {
 			System.out.println("tableau plein j'imagine (i = "+i+")");
 		}
+	}
+	
+	/**
+	 * Getter pour le text du label lb_nomQuiz
+	 * @return
+	 */
+	public String getLb_nomQuiz() {
+		return lb_nomQuiz.getText();
 	}
 	
 	public void mouseDragged(MouseEvent arg0) {}
