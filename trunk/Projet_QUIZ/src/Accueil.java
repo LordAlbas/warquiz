@@ -36,6 +36,7 @@ public class Accueil extends JPanel implements MouseListener, MouseMotionListene
 	public int coordX = 0;
 	public int coordY = 0;
 	public boolean up=false;
+	Header header;
 	
 	/**
 	 * Constructeur
@@ -43,62 +44,23 @@ public class Accueil extends JPanel implements MouseListener, MouseMotionListene
 	 */
 	public Accueil(Fenetre fen){//Fenetre fen en parametre pour relier � fenetre
 		fenetre = fen; // on r�cup�re la classe m�re
+        setLayout(null);
 		
-		//timer = new Timer();
-		//timer.schedule(new RemindTask(), delay, period);
+
 		
 		
-		
+        header = new Header(fen);
+        header.setBounds(0, 0, 1025, 130);
+        header.addMouseListener(header);
+        header.addMouseMotionListener(header);
+        this.add(header); 
 
 
 		
 		
 	}
 	
-	
-	
-	    //public class GifPanel extends JPanel {
-		//
-	     //   private final Image image;
 
-	     //   public GifPanel(Image image){
-	     //       this.image = Images.img_element[7];
-	     //   }
-
-	       // @Override
-	        //protected void paintComponent(Graphics g){
-	        //    super.paintComponent(g);
-	        //    g.drawImage(image, 10, 10, this);
-	       // }
-
-	       // @Override
-	       //public Dimension getPreferredSize(){
-	        //    return new Dimension(50, 50);
-	        //}	
-	        
-	        
-	        
-	        
-	
-	//class RemindTask extends TimerTask {
-	//	public void run() {
-	//		if(!up){
-	//			coordY -= 1;
-	//			if(coordY == -98){
-	//				timer.cancel();
-	//				up = true;
-	//			}	
-	//			}else{
-	//				coordY += 1;
-	//				if(coordY == 0){
-	//				timer.cancel();
-	//				up = false;
-	//				}
-	//			}
-	//		System.out.println(coordY);
-	//		repaint();	
-	//	}
-	//}
 			
 	
 	
@@ -107,10 +69,7 @@ public class Accueil extends JPanel implements MouseListener, MouseMotionListene
 	 * Elles sont appelees automatiquement selon l'action de la souris
 	 */
 	public void mouseClicked(MouseEvent e) { // On r�cup�re X et Y au click
-		//X = e.getX();
-		//Y = e.getY();
-		//System.out.print("X = "+ X);
-		//System.out.print("Y = "+ Y);
+
 		
 		if(e.getX() >= 120 && e.getX() <= 490 && e.getY() >= 260 && e.getY() <= 345){ // JOUER
 			System.out.print("JOUER");
@@ -130,25 +89,22 @@ public class Accueil extends JPanel implements MouseListener, MouseMotionListene
 			fenetre.goToCredits(selection); // on appel la fonction qui va changer de panel
 
 		}
+		
 		if(e.getX() >= 120 && e.getX() <= 490 && e.getY() >= 560 && e.getY() <= 645){ // QUITTER
 			System.out.print("QUITTER");
 			selection = "quitter";
 			fenetre.goToQuitter(selection); // on appel la fonction qui va changer de panel
 
 		}	
-	
+		/**
 		if(e.getX() >= 959 && e.getX() <= 1022 && e.getY() >= 1 && e.getY() <= 47){ // CO/DECO
 			System.out.print("CO/DECO");
 			selection = "decoreco";
 			fenetre.goToConnexionAlerte(selection); // on appel la fonction qui va changer de panel
 
 		}
-		//if(e.getX() >= 0 && e.getX() <= 400 && e.getY() >= 0 && e.getY() <= 50){ // JOUER
-			//timer = new Timer();
-			//timer.scheduleAtFixedRate(new RemindTask(), delay, period);
-			//timer.schedule(new RemindTask(), delay, period);
-			
-		//}
+		**/
+
 	}
 	
 	public void mousePressed(MouseEvent e) {}
@@ -184,6 +140,7 @@ public class Accueil extends JPanel implements MouseListener, MouseMotionListene
 			}	
 			repaint(); // On re dessine
 		
+			/**
 			if(e.getX() >= 970 && e.getX() <= 1022 && e.getY() >= 1 && e.getY() <= 47){ // CO/DECO
 				//System.out.print("CO/DECO_hover");
 				bouton_deco = "CO/DECO_hover";
@@ -195,6 +152,7 @@ public class Accueil extends JPanel implements MouseListener, MouseMotionListene
 				bouton_option = "OPTION_hover";
 				repaint(); // On re dessine
 			}
+			**/
 	}
 	
 	/**
@@ -207,9 +165,10 @@ public class Accueil extends JPanel implements MouseListener, MouseMotionListene
 		g.drawImage(Images.img_fond[0], 0, 0, this.getWidth(), this.getHeight(), null);						// dessine le fond d'ecran
 		
 		
-		g.drawImage(Images.img_element[0], 0, 0, this.getWidth(), (int)(this.getHeight() / 6.1230), null);		// dessine le header
+		//g.drawImage(Images.img_element[0], 0, 0, this.getWidth(), (int)(this.getHeight() / 6.1230), null);		// dessine le header
 		
 		//g.drawImage(img_bouton[4], 960, 1, 46, 46, null);
+		/**
 		switch (bouton_deco){
 		case "rien" :
 			g.drawImage(Images.img_bouton[4], 970, 0, 46, 46, null);
@@ -228,7 +187,9 @@ public class Accueil extends JPanel implements MouseListener, MouseMotionListene
 			g.drawImage(Images.img_bouton_hover[6], 905, 0, 46, 46, null);
 			bouton_option = "rien";
 			break;	
-		}		
+		}	
+		**/
+		
 		//g.drawImage(Images.img_bouton[6], 910, 0, 46, 46, null);
 		/*
 		 * On boucle sur tous les boutons (de [0] a [3]).
