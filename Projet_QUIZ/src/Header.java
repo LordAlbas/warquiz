@@ -1,3 +1,4 @@
+import java.awt.Cursor;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -16,18 +17,22 @@ public class Header extends JPanel implements MouseListener, MouseMotionListener
 	
 	public Header(Fenetre fen){
 		setLayout(null);
-		//setOpaque(false);
+		setOpaque(false);
 		fenetre = fen;
 	}
 
 	
 	public void mouseClicked(MouseEvent e) {
+		setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		fenetre.goToConnexionAlerte(selection1);
+		
+		/*
 		if(e.getX() >= 959 && e.getX() <= 1022 && e.getY() >= 1 && e.getY() <= 47){ // CO/DECO
 			System.out.print("CO/DECO");
 			selection1 = "decoreco";
 			fenetre.goToConnexionAlerte(selection1); // on appel la fonction qui va changer de panel
 
-		}	
+		}	*/
 	}
 	
 	public void mouseEntered(MouseEvent arg0) {}
@@ -56,8 +61,9 @@ public class Header extends JPanel implements MouseListener, MouseMotionListener
     @Override
     protected void paintComponent(Graphics g){
         super.paintComponent(g);
-        g.drawImage(Images.img_element[0], 0, 0, this.getWidth(), this.getHeight(), this);
         
+        g.drawImage(Images.img_element[9], 0, 0, this.getWidth(), this.getHeight(), this);
+        /**
 		switch (bouton_deco){
 		case "rien" :
 			g.drawImage(Images.img_bouton[4], 970, 0, 46, 46, null);
@@ -76,7 +82,7 @@ public class Header extends JPanel implements MouseListener, MouseMotionListener
 			g.drawImage(Images.img_bouton_hover[6], 905, 0, 46, 46, null);
 			bouton_option = "rien";
 			break;	
-		}	
+		}	*/
     }
 
 }
