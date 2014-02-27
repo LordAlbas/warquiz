@@ -36,8 +36,8 @@ public class Accueil extends JPanel implements MouseListener, MouseMotionListene
 	public int coordX = 0;
 	public int coordY = 0;
 	public boolean up=false;
-	Header header;
-	
+	Header header1;
+	Header_menu header2;	
 	/**
 	 * Constructeur
 	 *  
@@ -49,13 +49,17 @@ public class Accueil extends JPanel implements MouseListener, MouseMotionListene
 
 		
 		
-        header = new Header(fen);
-        header.setBounds(0, 0, 1025, 130);
-        header.addMouseListener(header);
-        header.addMouseMotionListener(header);
-        this.add(header); 
+        header1 = new Header(fen);
+        header1.setBounds(0, 0, 444, 130);
+        header1.addMouseListener(header1);
+        header1.addMouseMotionListener(header1);
+        this.add(header1); 
 
-
+        header2 = new Header_menu(fen);
+        header2.setBounds(444, 0, 580, 58);
+        header2.addMouseListener(header2);
+        header2.addMouseMotionListener(header2);
+        this.add(header2); 
 		
 		
 	}
