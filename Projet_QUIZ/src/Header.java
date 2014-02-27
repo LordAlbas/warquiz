@@ -24,7 +24,7 @@ public class Header extends JPanel implements MouseListener, MouseMotionListener
 	
 	public void mouseClicked(MouseEvent e) {
 		setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		fenetre.goToConnexionAlerte(selection1);
+		fenetre.goToAccueil(selection1);
 		
 		/*
 		if(e.getX() >= 959 && e.getX() <= 1022 && e.getY() >= 1 && e.getY() <= 47){ // CO/DECO

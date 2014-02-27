@@ -48,7 +48,7 @@ public class Accueil extends JPanel implements MouseListener, MouseMotionListene
 		
 
 		
-		
+		//****Inclusion du Header en 2 parties ****
         header1 = new Header(fen);
         header1.setBounds(0, 0, 444, 130);
         header1.addMouseListener(header1);
@@ -60,6 +60,7 @@ public class Accueil extends JPanel implements MouseListener, MouseMotionListene
         header2.addMouseListener(header2);
         header2.addMouseMotionListener(header2);
         this.add(header2); 
+        //****************************************
 		
 		
 	}

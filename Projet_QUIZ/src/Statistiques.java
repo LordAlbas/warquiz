@@ -20,20 +20,37 @@ public class Statistiques extends JPanel implements MouseListener, MouseMotionLi
 	
 	int val_i;								// defini l'emplacement de l'image survol� dans le tableau img_bouton_hover
 	static String selection; 				// defini quel bouton est selectionn�
-	
+	Header header1;
+	Header_menu header2;
 	
 	/**
 	 * Constructeur
 	 */
 	public Statistiques(Fenetre fen) {
 		fenetre = fen; // on r�cup�re la classe m�re
+		setLayout(null);
 		repaint();
+		//****Inclusion du Header en 2 parties ****
+        header1 = new Header(fen);
+        header1.setBounds(0, 0, 444, 130);
+        header1.addMouseListener(header1);
+        header1.addMouseMotionListener(header1);
+        this.add(header1); 
+     
+
+        header2 = new Header_menu(fen);
+        header2.setBounds(444, 0, 580, 58);
+        header2.addMouseListener(header2);
+        header2.addMouseMotionListener(header2);
+        this.add(header2); 
+        //****************************************
 	}
 	
 	/**
 	 * Methodes override du MouseListener
 	 */
 	public void mouseClicked(MouseEvent e) {
+		/**
 		if(e.getX() >= 120 && e.getX() <= 490 && e.getY() >= 360 && e.getY() <= 445){ // STATS
 			System.out.print("STATS");
 			selection = "accueil";
@@ -46,6 +63,7 @@ public class Statistiques extends JPanel implements MouseListener, MouseMotionLi
 			selection = "accueil";
 			fenetre.goToAccueil(selection); // on appel la fonction qui va changer de panel
 		}
+		**/
 	}
 	
 	public void mouseEntered(MouseEvent e) {}
@@ -55,6 +73,7 @@ public class Statistiques extends JPanel implements MouseListener, MouseMotionLi
 	public void mouseDragged(MouseEvent e){}
 	
 	public void mouseMoved(MouseEvent e){
+		/**
 		if(e.getX() >= 120 && e.getX() <= 490 && e.getY() >= 560 && e.getY() <= 645){ // QUITTER
 			//System.out.print("QUITTER_hover");
 			image_select = "QUITTER_hover";
@@ -72,7 +91,8 @@ public class Statistiques extends JPanel implements MouseListener, MouseMotionLi
 			bouton_retour = "retour_hover";
 			//val_i = 4;
 			repaint(); // On re dessine
-		}			
+		}	
+		**/		
 		
 	}
 	
@@ -84,8 +104,8 @@ public class Statistiques extends JPanel implements MouseListener, MouseMotionLi
 		
 		// le fond et les elements sont en fonction de la taille de la fenetre, donc pas de soucis de redimensionnement de la fenetre
 		g.drawImage(Images.img_fond[0], 0, 0, this.getWidth(), this.getHeight(), null);						// dessine le fond d'ecran
-		g.drawImage(Images.img_element[0], 0, 0, this.getWidth(), (int)(this.getHeight() / 6.1230), null);		// dessine le header
-		
+		//g.drawImage(Images.img_element[0], 0, 0, this.getWidth(), (int)(this.getHeight() / 6.1230), null);		// dessine le header
+		/**
 		switch (bouton_deco){
 		case "rien" :
 			g.drawImage(Images.img_bouton[4], 960, 1, 46, 46, null);
@@ -105,5 +125,6 @@ public class Statistiques extends JPanel implements MouseListener, MouseMotionLi
 			bouton_retour = "rien";
 			break;
 		}
+		**/
 	}
 }

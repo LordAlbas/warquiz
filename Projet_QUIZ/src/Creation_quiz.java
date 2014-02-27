@@ -34,6 +34,8 @@ public class Creation_quiz extends JPanel implements MouseListener, MouseMotionL
 	private String bouton_retour ="rien";
 	private String image_select;
 	private int val_i;
+	Header header1;
+	Header_menu header2;
 	
 	// objet quiz qui se fait traiter actuelement
 	private JLabel lb_nomQuiz;
@@ -76,6 +78,22 @@ public class Creation_quiz extends JPanel implements MouseListener, MouseMotionL
 			}
 		});
 		add(ajout_question);
+		
+		
+		//****Inclusion du Header en 2 parties ****
+        header1 = new Header(fen);
+        header1.setBounds(0, 0, 444, 130);
+        header1.addMouseListener(header1);
+        header1.addMouseMotionListener(header1);
+        this.add(header1); 
+     
+
+        header2 = new Header_menu(fen);
+        header2.setBounds(444, 0, 580, 58);
+        header2.addMouseListener(header2);
+        header2.addMouseMotionListener(header2);
+        this.add(header2); 
+        //****************************************
 	}
 	
 	/**
@@ -170,7 +188,7 @@ public class Creation_quiz extends JPanel implements MouseListener, MouseMotionL
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		g.drawImage(Images.img_fond[0], 0, 0, this.getWidth(), this.getHeight(), null);
-		g.drawImage(Images.img_element[0], 0, 0, this.getWidth(), (int)(this.getHeight() / 6.1230), null);		// dessine le header	
+		//g.drawImage(Images.img_element[0], 0, 0, this.getWidth(), (int)(this.getHeight() / 6.1230), null);		// dessine le header	
 		g.drawImage(Images.img_bouton[4], 960, 1, 46, 46, null);
 		
 		switch (bouton_deco){

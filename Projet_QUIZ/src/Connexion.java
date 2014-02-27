@@ -81,7 +81,7 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 		//URL url = new URL("images/loading.gif");
 		
 
-        panel = new Gif_anime(load("file:///C:/Users/quent_000/Desktop/warquiz/Projet_QUIZ/images/chargement_anime.gif"));
+        panel = new Gif_anime(load("file:///C:/Users/Sinardet/Documents/ProjetOracle/warquiz/Projet_QUIZ/images/chargement_anime.gif"));
         panel.setBounds(646, 632, 95, 90);
         add(panel);  
 	
