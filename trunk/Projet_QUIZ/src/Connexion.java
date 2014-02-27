@@ -42,6 +42,7 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
     static Boolean erreur_bdd = false;
     JLayeredPane layeredPane;
     Gif_anime panel;
+    public static boolean connexion_admin = false;
    // public ImageIcon imgLoading = new ImageIcon(this.getClass().getResource(Images.img_element[7]));
 	/**
 	 * Constructor
@@ -154,6 +155,7 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 					                if(dbUsername_admin.equals(textField_pseudo.getText()) && dbPassword_admin.equals(textField_mdp.getText())){ // On compare avec la BDD
 					                    System.out.println("OK");
 					                    login = true;
+					                    connexion_admin = true;
 					                    
 					                    fenetre.goToAccueil(selection);	
 					                }
@@ -260,7 +262,9 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 					                if(dbUsername_admin.equals(textField_pseudo.getText()) && dbPassword_admin.equals(textField_mdp.getText())){
 					                    System.out.println("OK");
 					                    login = true;
-					                    fenetre.goToAccueil(selection);	
+					                    connexion_admin = true;
+					                    fenetre.goToAccueil(selection);
+					                    
 					                }
 					                else{
 					                	erreur_log = true;
@@ -375,6 +379,7 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 			                if(dbUsername_admin.equals(textField_pseudo.getText()) && dbPassword_admin.equals(textField_mdp.getText())){
 			                    System.out.println("OK");
 			                    login = true;
+			                    connexion_admin = true;
 			                    fenetre.goToAccueil(selection);	
 			                }
 			                else{

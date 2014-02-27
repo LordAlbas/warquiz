@@ -71,6 +71,7 @@ public class Images {
 			img_bouton[4] = ImageIO.read(new File("images/bouton_deco.png"));
 			img_bouton[5] = ImageIO.read(new File("images/retour.png"));
 			img_bouton[6] = ImageIO.read(new File("images/bouton_option.png"));
+			img_bouton[7] = ImageIO.read(new File("images/accueil_bouton_gerer.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -86,6 +87,7 @@ public class Images {
 			img_bouton_hover[4] = ImageIO.read(new File("images/bouton_deco_hover.png"));
 			img_bouton_hover[5] = ImageIO.read(new File("images/retour_hover.png"));
 			img_bouton_hover[6] = ImageIO.read(new File("images/bouton_option_hover.png"));
+			img_bouton_hover[7] = ImageIO.read(new File("images/accueil_bouton_gerer_mouseover.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

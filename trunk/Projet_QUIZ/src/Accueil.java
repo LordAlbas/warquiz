@@ -47,7 +47,6 @@ public class Accueil extends JPanel implements MouseListener, MouseMotionListene
         setLayout(null);
 		
 
-		
 		//****Inclusion du Header en 2 parties ****
         header1 = new Header(fen);
         header1.setBounds(0, 0, 444, 130);
@@ -125,6 +124,7 @@ public class Accueil extends JPanel implements MouseListener, MouseMotionListene
 			if(e.getX() >= 120 && e.getX() <= 490 && e.getY() >= 260 && e.getY() <= 345){ // JOUER
 				//System.out.print("JOUER_hover");
 				image_select = "JOUER_hover";
+				val_i = 0;
 
 			}
 			if(e.getX() >= 120 && e.getX() <= 490 && e.getY() >= 360 && e.getY() <= 445){ // STATS
@@ -206,18 +206,59 @@ public class Accueil extends JPanel implements MouseListener, MouseMotionListene
 			switch (image_select){
 			case "rien" :
 				//System.out.print(image_select);
-				g.drawImage(Images.img_bouton[i], 120, 260+(i*(Images.hauteur_bouton+Images.ecart_bouton)), Images.largeur_bouton, Images.hauteur_bouton, null);
+							// 7 = gérer
+							// 0 = jouer
+				
+				
+				
+				
+				
+				
+				
+				if(Connexion.connexion_admin){	
+					if(i==0){
+						g.drawImage(Images.img_bouton[7], 120, 260+(i*(Images.hauteur_bouton+Images.ecart_bouton)), Images.largeur_bouton, Images.hauteur_bouton, null);
+					}
+					else{
+						g.drawImage(Images.img_bouton[i], 120, 260+(i*(Images.hauteur_bouton+Images.ecart_bouton)), Images.largeur_bouton, Images.hauteur_bouton, null);
+					}
+				}
+				else{
+					g.drawImage(Images.img_bouton[i], 120, 260+(i*(Images.hauteur_bouton+Images.ecart_bouton)), Images.largeur_bouton, Images.hauteur_bouton, null);
+				}
+				
+				
+				
+				
 				break;
 			case "JOUER_hover" :
-				//System.out.print(image_select);
-				g.drawImage(Images.img_bouton_hover[0], 120, 260+(i*(Images.hauteur_bouton+Images.ecart_bouton)), Images.largeur_bouton, Images.hauteur_bouton, null);
-				image_select = "rien";
+				if (val_i == i){
+					if(Connexion.connexion_admin && image_select=="JOUER_hover"){
+						g.drawImage(Images.img_bouton_hover[7], 120, 260+(i*(Images.hauteur_bouton+Images.ecart_bouton)), Images.largeur_bouton, Images.hauteur_bouton, null);
+					}
+					else{
+						g.drawImage(Images.img_bouton_hover[0], 120, 260+(i*(Images.hauteur_bouton+Images.ecart_bouton)), Images.largeur_bouton, Images.hauteur_bouton, null);
+					}
+					//System.out.print(image_select);
+					
+					image_select = "rien";
+				}else{
+					if(Connexion.connexion_admin && image_select=="JOUER_hover"){
+						g.drawImage(Images.img_bouton_hover[7], 120, 260+(i*(Images.hauteur_bouton+Images.ecart_bouton)), Images.largeur_bouton, Images.hauteur_bouton, null);
+					}
+					else{
+						g.drawImage(Images.img_bouton_hover[0], 120, 260+(i*(Images.hauteur_bouton+Images.ecart_bouton)), Images.largeur_bouton, Images.hauteur_bouton, null);
+					}
+				}
 				break;
 			case "STATS_hover" :
 				if (val_i == i){
 					//System.out.print(image_select);
 					g.drawImage(Images.img_bouton_hover[1], 120, 260+(i*(Images.hauteur_bouton+Images.ecart_bouton)), Images.largeur_bouton, Images.hauteur_bouton, null);
 					image_select = "rien";
+				}
+				else if(i==0 && Connexion.connexion_admin){
+					g.drawImage(Images.img_bouton[7], 120, 260+(i*(Images.hauteur_bouton+Images.ecart_bouton)), Images.largeur_bouton, Images.hauteur_bouton, null);
 				}
 				else{
 					g.drawImage(Images.img_bouton[i], 120, 260+(i*(Images.hauteur_bouton+Images.ecart_bouton)), Images.largeur_bouton, Images.hauteur_bouton, null);
@@ -229,6 +270,9 @@ public class Accueil extends JPanel implements MouseListener, MouseMotionListene
 					g.drawImage(Images.img_bouton_hover[2], 120, 260+(i*(Images.hauteur_bouton+Images.ecart_bouton)), Images.largeur_bouton, Images.hauteur_bouton, null);
 					image_select = "rien";
 				}
+				else if(i==0 && Connexion.connexion_admin){
+					g.drawImage(Images.img_bouton[7], 120, 260+(i*(Images.hauteur_bouton+Images.ecart_bouton)), Images.largeur_bouton, Images.hauteur_bouton, null);
+				}
 				else{
 					g.drawImage(Images.img_bouton[i], 120, 260+(i*(Images.hauteur_bouton+Images.ecart_bouton)), Images.largeur_bouton, Images.hauteur_bouton, null);
 				}
@@ -238,6 +282,9 @@ public class Accueil extends JPanel implements MouseListener, MouseMotionListene
 					//System.out.print(image_select);
 					g.drawImage(Images.img_bouton_hover[3], 120, 260+(i*(Images.hauteur_bouton+Images.ecart_bouton)), Images.largeur_bouton, Images.hauteur_bouton, null);
 					image_select = "rien";
+				}
+				else if(i==0 && Connexion.connexion_admin){
+					g.drawImage(Images.img_bouton[7], 120, 260+(i*(Images.hauteur_bouton+Images.ecart_bouton)), Images.largeur_bouton, Images.hauteur_bouton, null);
 				}
 				else{
 					g.drawImage(Images.img_bouton[i], 120, 260+(i*(Images.hauteur_bouton+Images.ecart_bouton)), Images.largeur_bouton, Images.hauteur_bouton, null);
