@@ -43,6 +43,7 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
     JLayeredPane layeredPane;
     Gif_anime panel;
     public static boolean connexion_admin = false;
+
    // public ImageIcon imgLoading = new ImageIcon(this.getClass().getResource(Images.img_element[7]));
 	/**
 	 * Constructor
@@ -150,6 +151,7 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 					            
 					            while(rs_admin.next()){ // On parcours la BDD admin
 					                dbUsername_admin = rs_admin.getString("login_admin"); // on récupère le pseudo
+					          
 					                dbPassword_admin = rs_admin.getString("mdp_admin");   // on récupère le mdp
 					                erreur_log = false;
 					                if(dbUsername_admin.equals(textField_pseudo.getText()) && dbPassword_admin.equals(textField_mdp.getText())){ // On compare avec la BDD
