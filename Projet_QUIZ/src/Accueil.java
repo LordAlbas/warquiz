@@ -17,6 +17,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
+import com.jgoodies.forms.factories.DefaultComponentFactory;
 
 
 public class Accueil extends JPanel implements MouseListener, MouseMotionListener {
@@ -38,6 +39,7 @@ public class Accueil extends JPanel implements MouseListener, MouseMotionListene
 	public boolean up=false;
 	Header header1;
 	Header_menu header2;	
+
 	/**
 	 * Constructeur
 	 *  
@@ -59,9 +61,14 @@ public class Accueil extends JPanel implements MouseListener, MouseMotionListene
         header2.addMouseListener(header2);
         header2.addMouseMotionListener(header2);
         this.add(header2); 
+        
         //****************************************
 		
-		
+        
+        
+
+        //message.setText("Bienvenue");
+
 	}
 	
 
