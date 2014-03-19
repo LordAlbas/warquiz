@@ -5,12 +5,12 @@ import java.awt.event.MouseMotionListener;
 
 import javax.swing.JPanel;
 import javax.swing.JLabel;
-import com.jgoodies.forms.factories.DefaultComponentFactory;
+//import com.jgoodies.forms.factories.DefaultComponentFactory;
 
 
 public class Header_menu extends JPanel implements MouseListener, MouseMotionListener{
 	
-	String bouton_deco ="rien";				// defini l'image survol� bouton deco
+	String bouton_deco ="rien";				// defini l'image survol��� bouton deco
 	String bouton_option ="rien";
 	private Fenetre fenetre;
 	static String selection1; 
@@ -20,7 +20,8 @@ public class Header_menu extends JPanel implements MouseListener, MouseMotionLis
 		setLayout(null);
 		setOpaque(false);
 		
-		JLabel textMessage = DefaultComponentFactory.getInstance().createLabel("Bonjour");
+		//JLabel textMessage = DefaultComponentFactory.getInstance().createLabel("Bonjour");
+		JLabel textMessage = new JLabel("Bonjour");
 		textMessage.setBounds(48, 11, 92, 14);
 		add(textMessage);
 		fenetre = fen;
