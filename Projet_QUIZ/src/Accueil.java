@@ -17,7 +17,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
-import com.jgoodies.forms.factories.DefaultComponentFactory;
 
 
 public class Accueil extends JPanel implements MouseListener, MouseMotionListener {
