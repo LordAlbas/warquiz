@@ -1,12 +1,10 @@
 import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
-
 import javax.imageio.ImageIO;
 
-
 /**
- * Ceci est une classe non objet, elle n'est jamais instancié.
+ * Ceci est une classe non objet, elle n'est jamais instanciée.
  * C'est la methode static initImage() qui est appelée (depuis le constructeur
  * de Fenetre) et charge les images dans les attributs static.
  * Pour appeler les attributs, c'est 'Class.attributsStatic'.
@@ -40,7 +38,6 @@ public class Images {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
 		/*
 		 * charge les images d'elements dans img_element[]
 		 */
@@ -55,11 +52,9 @@ public class Images {
 			img_element[7] = ImageIO.read(new File("images/header_bleu.png"));
 			img_element[8] = ImageIO.read(new File("images/fond_chargement.png"));
 			img_element[9] = ImageIO.read(new File("images/header_logo.png"));
-			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
 		/*
 		 * charge les images de boutons dans img_bouton[]
 		 */
@@ -75,7 +70,6 @@ public class Images {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
 		/*
 		 * charge les images de boutons en mouseover dans img_bouton_hover[]
 		 */
