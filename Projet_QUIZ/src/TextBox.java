@@ -3,8 +3,6 @@ import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
-
-import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 
@@ -12,63 +10,28 @@ public class TextBox extends JTextField implements MouseListener, MouseMotionLis
 	
 	JTextField test;
 	
-	
-
-	
 	public TextBox (){
-		
-		
 		super();
 		
 		//test.setText("nijonijoni");
 		//test.setBorder(null);
-		
 		//test.setOpaque(false);
-
-
 	}
 
 	@Override
-	public void mouseDragged(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
+	public void mouseDragged(MouseEvent arg0) {}
 	@Override
-	public void mouseMoved(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
+	public void mouseMoved(MouseEvent arg0) {}
 	@Override
-	public void mouseClicked(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
+	public void mouseClicked(MouseEvent arg0) {}
 	@Override
-	public void mouseEntered(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
+	public void mouseEntered(MouseEvent arg0) {}
 	@Override
-	public void mouseExited(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
+	public void mouseExited(MouseEvent arg0) {}
 	@Override
-	public void mousePressed(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-
+	public void mousePressed(MouseEvent arg0) {}
 	@Override
-	public void mouseReleased(MouseEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
+	public void mouseReleased(MouseEvent arg0) {}
 	
 	public void paintComponent(Graphics g) {
 		setText("ghj");
@@ -81,6 +44,5 @@ public class TextBox extends JTextField implements MouseListener, MouseMotionLis
 		this.setBorder(null);
 		
 		repaint();
-	}
-	
+	}	
 }
