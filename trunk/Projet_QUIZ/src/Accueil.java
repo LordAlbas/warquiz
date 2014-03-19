@@ -1,5 +1,3 @@
-
-
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -81,28 +79,23 @@ public class Accueil extends JPanel implements MouseListener, MouseMotionListene
 	
 	public void mouseMoved(MouseEvent e) { // On recupere constamment la position de la souris
 		if (e.getX() >= 120 && e.getX() <= 490 && e.getY() >= 260 && e.getY() <= 345) { // JOUER
-			//System.out.print("JOUER_hover");
 			image_select = "JOUER_hover";
 			val_i = 0;
 		}
 		
 		if (e.getX() >= 120 && e.getX() <= 490 && e.getY() >= 360 && e.getY() <= 445) { // STATS
-			//System.out.print("STATS_hover");
 			image_select = "STATS_hover";
 			val_i = 1;
 		}
 		
 		if (e.getX() >= 120 && e.getX() <= 490 && e.getY() >= 460 && e.getY() <= 545) { // CREDITS
-			//System.out.print("CREDITS_hover");
 			image_select = "CREDITS_hover";
 			val_i = 2;
 		}
 		if (e.getX() >= 120 && e.getX() <= 490 && e.getY() >= 560 && e.getY() <= 645) { // QUITTER
-			//System.out.print("QUITTER_hover");
 			image_select = "QUITTER_hover";
 			val_i = 3;
 		}
-		
 		repaint(); // On re dessine
 	}
 	
