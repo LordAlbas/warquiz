@@ -4,19 +4,11 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
-
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.JTable;
-import javax.swing.JSeparator;
-
-import java.awt.Choice;
 import java.awt.Font;
-import java.awt.Label;
 import java.awt.Color;
-import java.awt.SystemColor;
 
 
 public class Creation_quiz extends JPanel implements MouseListener, MouseMotionListener{
@@ -34,8 +26,8 @@ public class Creation_quiz extends JPanel implements MouseListener, MouseMotionL
 	private String bouton_retour ="rien";
 	private String image_select;
 	private int val_i;
-	Header header1;
-	Header_menu header2;
+	private Header header1;
+	private Header_menu header2;
 	
 	// objet quiz qui se fait traiter actuelement
 	private JLabel lb_nomQuiz;
@@ -58,7 +50,7 @@ public class Creation_quiz extends JPanel implements MouseListener, MouseMotionL
 		/*
 		 * JLabel affichage NOM QUIZ
 		 */
-		// ICI ON ENVOI LE NOM DU QUIZ (ou nom racourcis)
+		// ICI ON ENVOI LE NOM DU QUIZ (ou nom racourci)
 		lb_nomQuiz = new JLabel("Mega Quiz de la mort qui tue (pro only plz no noob no leaver)");
 		lb_nomQuiz.setForeground(Color.WHITE);
 		lb_nomQuiz.setFont(new Font("Arial", Font.PLAIN, 22)); 
