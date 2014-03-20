@@ -2,6 +2,7 @@ import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 //import com.jgoodies.forms.factories.DefaultComponentFactory;
@@ -20,7 +21,7 @@ public class Header_menu extends JPanel implements MouseListener, MouseMotionLis
 		setOpaque(false);
 		
 		//JLabel textMessage = DefaultComponentFactory.getInstance().createLabel("Bonjour");
-		JLabel textMessage = new JLabel("Bonjour");
+		JLabel textMessage = new JLabel("Bonjour" + " " + Connexion.login_general);
 		textMessage.setBounds(48, 11, 92, 14);
 		add(textMessage);
 		fenetre = fen;
