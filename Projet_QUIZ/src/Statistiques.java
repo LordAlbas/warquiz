@@ -25,17 +25,21 @@ public class Statistiques extends JPanel implements MouseListener, MouseMotionLi
 	public String query_nb_parties;
 	public String query_nb_quiz;
 	public String query_quiz_joue;
+	public String query_nb_participants_quiz;
 	private String db_score; // le score sorti de la bdd
 	private String db_moyenne; // la moyenne
 	private String db_num_quiz; // le numéro du quiz 
 	private String db_nb_parties; // le nombre de parties
 	private String db_nb_quiz; // le nombre de quiz
 	private String db_quiz_joue; //le nombre de quiz joué
+	private String db_nb_participants_quiz; // le nombre de participnt pour un quiz
 	public JLabel score; // le score d'un joueur pour un quiz
+	public JLabel titre; //  = ADMIN
 	public JLabel score_moyen; // le score moyen
 	public JLabel nb_parties; // le nombre de parties
 	public JLabel nb_quiz; // le nombre de quiz
 	public JLabel quiz_joue; // le nombre de quiz joué
+	public JLabel nb_participants_quiz; // le nombre de participant par quiz
 	/**
 	 * Constructeur
 	 */
@@ -60,6 +64,11 @@ public class Statistiques extends JPanel implements MouseListener, MouseMotionLi
         
         
         //*******TEST FONCTIONS NOUVELLES
+    	titre = new JLabel("STATS ADMIN");
+    	titre.setBounds(48, 120, 600,600);
+    	titre.setForeground(Color.WHITE); 
+		add(titre);
+        
         try {
 			Score();
 		} catch (SQLException e) {
@@ -82,6 +91,13 @@ public class Statistiques extends JPanel implements MouseListener, MouseMotionLi
 		}
         try {
 			nbQuizJouees();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        
+        try {
+			nbParticiants(11);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -208,6 +224,40 @@ public class Statistiques extends JPanel implements MouseListener, MouseMotionLi
 	public void meilleurScore(){}
 	//public 
 	
+	/**
+	 * Le nombre de personnes qui on paticipé à un quiz donné
+	 * @param num_quiz
+	 * @throws SQLException
+	 */
+	public void nbParticiants(int num_quiz) throws SQLException{
+		try{
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+	        Connection conn = DriverManager.getConnection("jdbc:sqlserver://193.252.48.189\\SQLEXPRESS:1433;" + "database=BDD_B3I_groupe_5;" + "user=b3i_groupe_5;" + "password=123Soleil");
+	        
+	        Statement stmt_nb_participants_quiz = (Statement) conn.createStatement();
+	        query_nb_participants_quiz = "SELECT COUNT (LOGIN_USR) AS nb_participants_quiz FROM JOUER WHERE ID_QUIZ = " + num_quiz ;	       
+	        stmt_nb_participants_quiz.executeQuery(query_nb_participants_quiz);	
+	        ResultSet rs_nb_participants_quiz = stmt_nb_participants_quiz.getResultSet();
+	        
+
+	        
+	        while(rs_nb_participants_quiz.next()){
+	        	db_nb_participants_quiz = rs_nb_participants_quiz.getString("nb_participants_quiz"); // on récupère le nombre
+	        	
+	        	
+	        	nb_participants_quiz = new JLabel("Nombre de participant pour le quiz "+num_quiz+" : "+db_nb_participants_quiz);
+	        	nb_participants_quiz.setBounds(48, 100, 600,600);
+	        	nb_participants_quiz.setForeground(Color.WHITE); 
+	    		add(nb_participants_quiz);	        	
+	        }
+	        
+
+
+	        
+		} catch(ClassNotFoundException e){
+			e.printStackTrace();
+		}
+	}
 	
 	
 	/**
