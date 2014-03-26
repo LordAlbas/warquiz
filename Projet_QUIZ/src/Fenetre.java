@@ -16,7 +16,7 @@ public class Fenetre extends JFrame {
 	public Jouer jouer;
 	public Inscription inscription;
 	public Connexion connexion;
-	public Creation_quiz creation_quiz;
+	public Gestion_quiz gestion_quiz;
 
 	/**
 	 * Constructeur
@@ -36,7 +36,7 @@ public class Fenetre extends JFrame {
 		jouer = new Jouer(this);				// creation du JPanel jouer
 		inscription = new Inscription(this);	// creation du JPanel inscription
 		connexion = new Connexion(this);			// creation du JPanel conexion
-		creation_quiz = new Creation_quiz(this);
+		gestion_quiz = new Gestion_quiz(this);
 		
 		// ajout des mouseListener
 		accueil.addMouseListener(accueil);		// 'accueil' implemente les methodes relatif a l'ecoute de la souris
@@ -45,7 +45,7 @@ public class Fenetre extends JFrame {
 		connexion.addMouseMotionListener(connexion);
 		inscription.addMouseListener(inscription);	// 'inscription' implemente les methodes relatif a l'ecoute de la souris
 		inscription.addMouseMotionListener(inscription);
-		creation_quiz.addMouseListener(creation_quiz);	// 'creation_quiz' implemente les methodes relatif a l'ecoute de la souris
+		gestion_quiz.addMouseListener(gestion_quiz);	// 'creation_quiz' implemente les methodes relatif a l'ecoute de la souris
 		//creation_quiz.addMouseMotionListener(creation_quiz);
 		
 		setLayout(new GridLayout(1, 1));		// Layout grid (tableau)  1 colonne 1 ligne
@@ -83,7 +83,7 @@ public class Fenetre extends JFrame {
 	 * @param selection
 	 */
 	public void goToConnexionAlerte(String selection) {
-		int rep_deco = JOptionPane.showConfirmDialog(null, "Voulez-vous vraiment vous déconnecter ?");
+		int rep_deco = JOptionPane.showConfirmDialog(null, "Voulez-vous vraiment vous dï¿½connecter ?");
 		if(rep_deco == 0){
 			this.getContentPane().setVisible(false);	
 			this.setContentPane(connexion);
@@ -132,9 +132,9 @@ public class Fenetre extends JFrame {
 	 */
 	public void goToJouer(String selection) {
 		this.getContentPane().setVisible(false);
-		creation_quiz.addMouseListener(creation_quiz);	// 'statistiques' implemente les methodes relatif a l'ecoute de la souris
+		gestion_quiz.addMouseListener(gestion_quiz);	// 'statistiques' implemente les methodes relatif a l'ecoute de la souris
 		//creation_quiz.addMouseMotionListener(creation_quiz);
-		this.setContentPane(creation_quiz);
+		this.setContentPane(gestion_quiz);
 		this.getContentPane().setVisible(true);
 	}
 	
