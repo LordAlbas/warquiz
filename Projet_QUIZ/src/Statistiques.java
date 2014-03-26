@@ -21,10 +21,21 @@ public class Statistiques extends JPanel implements MouseListener, MouseMotionLi
 	private Header header1;
 	private Header_menu header2;
 	public String query_score;
+	public String query_moyenne;
+	public String query_nb_parties;
+	public String query_nb_quiz;
+	public String query_quiz_joue;
 	private String db_score; // le score sorti de la bdd
+	private String db_moyenne; // la moyenne
 	private String db_num_quiz; // le numéro du quiz 
-	public JLabel score; // le nouveau score de l'utilisateur pour un quiz
-	
+	private String db_nb_parties; // le nombre de parties
+	private String db_nb_quiz; // le nombre de quiz
+	private String db_quiz_joue; //le nombre de quiz joué
+	public JLabel score; // le score d'un joueur pour un quiz
+	public JLabel score_moyen; // le score moyen
+	public JLabel nb_parties; // le nombre de parties
+	public JLabel nb_quiz; // le nombre de quiz
+	public JLabel quiz_joue; // le nombre de quiz joué
 	/**
 	 * Constructeur
 	 */
@@ -56,10 +67,32 @@ public class Statistiques extends JPanel implements MouseListener, MouseMotionLi
 			e.printStackTrace();
 		}
         
+        try {
+			scoreMoyen();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         
+        try {
+			nbPartiesJouees();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        try {
+			nbQuizJouees();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         //*******
 	}
 	
+	/**
+	 * Récupère le numéro et le score de chaques quiz que le joueur à fait.
+	 * @throws SQLException
+	 */
 	public void Score() throws SQLException{
 		try{
 			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
@@ -68,26 +101,110 @@ public class Statistiques extends JPanel implements MouseListener, MouseMotionLi
 	        query_score = "SELECT DISTINCT * FROM JOUER WHERE LOGIN_USR = 'ClaraMorgane'";	       
 	        stmt_score.executeQuery(query_score);	
 	        ResultSet rs_score = stmt_score.getResultSet();
-	        
 	        int cpt = 200;
 	        while(rs_score.next()){
 	        	db_score = rs_score.getString("SCORE_USR_QUIZ"); // on récupère le score
-	        	db_num_quiz = rs_score.getString("ID_QUIZ"); // on récupère le score
+	        	db_num_quiz = rs_score.getString("ID_QUIZ"); // on récupère le num quiz
 	        	
 	        	score = new JLabel("Votre score pour le quiz n°" + db_num_quiz + " est de : " + db_score);
 	    		score.setBounds(48, cpt, 600,600);
 	    		score.setForeground(Color.WHITE); 
 	    		add(score);
-	    		
 	    		cpt = cpt +20;
-	        	
 	        }
 		} catch(ClassNotFoundException e){
-			e.printStackTrace();}
+			e.printStackTrace();
+		}
 	}
 	
 	
-	public void nbPartiesJouees(){}
+	/**
+	 * Calcule et affiche le score moyen du joueur
+	 * @throws SQLException 
+	 */
+	public void scoreMoyen() throws SQLException{
+		try{
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+	        Connection conn = DriverManager.getConnection("jdbc:sqlserver://193.252.48.189\\SQLEXPRESS:1433;" + "database=BDD_B3I_groupe_5;" + "user=b3i_groupe_5;" + "password=123Soleil");
+	        Statement stmt_moyenne = (Statement) conn.createStatement();
+	        query_moyenne = "SELECT AVG(SCORE_USR_QUIZ) AS score_moyen FROM JOUER WHERE LOGIN_USR = 'ClaraMorgane'";	       
+	        stmt_moyenne.executeQuery(query_moyenne);	
+	        ResultSet rs_moyenne = stmt_moyenne.getResultSet();
+	        
+	        while(rs_moyenne.next()){
+	        	db_moyenne = rs_moyenne.getString("score_moyen"); // on récupère la moyenne
+	        	score_moyen = new JLabel("Votre score moyen est de : " + db_moyenne);
+	    		score_moyen.setBounds(48, 180, 600,600);
+	    		score_moyen.setForeground(Color.WHITE); 
+	    		add(score_moyen);
+	        }
+		} catch(ClassNotFoundException e){
+			e.printStackTrace();
+		}		
+	}
+	
+	
+	/**
+	 * Calcule le nombre de parties jouées par l'utilisateur.
+	 * @throws SQLException
+	 */
+	public void nbPartiesJouees() throws SQLException{
+		try{
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+	        Connection conn = DriverManager.getConnection("jdbc:sqlserver://193.252.48.189\\SQLEXPRESS:1433;" + "database=BDD_B3I_groupe_5;" + "user=b3i_groupe_5;" + "password=123Soleil");
+	        Statement stmt_nb_parties = (Statement) conn.createStatement();
+	        query_nb_parties = "SELECT NB_PARTIE_JOUE AS nb_parties FROM UTILISATEUR WHERE LOGIN_USR = 'ClaraMorgane'";	       
+	        stmt_nb_parties.executeQuery(query_nb_parties);	
+	        ResultSet rs_nb_parties = stmt_nb_parties.getResultSet();
+	        
+	        while(rs_nb_parties.next()){
+	        	db_nb_parties = rs_nb_parties.getString("nb_parties"); // on récupère la moyenne
+	        	nb_parties = new JLabel("Vous avez joué un total de " + db_nb_parties + " parties.");
+	    		nb_parties.setBounds(48, 160, 600,600);
+	    		nb_parties.setForeground(Color.WHITE); 
+	    		add(nb_parties);
+	        }
+		} catch(ClassNotFoundException e){
+			e.printStackTrace();
+		}			
+		
+	}
+	
+	/**
+	 * Calcule le nombre de quiz joué parmis le nombre max.
+	 * @throws SQLException 
+	 */
+	public void nbQuizJouees() throws SQLException{
+		try{
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+	        Connection conn = DriverManager.getConnection("jdbc:sqlserver://193.252.48.189\\SQLEXPRESS:1433;" + "database=BDD_B3I_groupe_5;" + "user=b3i_groupe_5;" + "password=123Soleil");
+	        
+	        Statement stmt_nb_quiz = (Statement) conn.createStatement();
+	        query_nb_quiz = "SELECT COUNT (ID_QUIZ) AS nb_quiz FROM QUIZ";	       
+	        stmt_nb_quiz.executeQuery(query_nb_quiz);	
+	        ResultSet rs_nb_quiz = stmt_nb_quiz.getResultSet();
+	        
+	        Statement stmt_quiz_joue = (Statement) conn.createStatement();
+	        query_quiz_joue = "SELECT NB_QUIZ_JOUE FROM UTILISATEUR WHERE LOGIN_USR = 'ClaraMorgane'";	       
+	        stmt_quiz_joue.executeQuery(query_quiz_joue);	
+	        ResultSet rs_quiz_joue = stmt_quiz_joue.getResultSet();
+	        
+	        while(rs_quiz_joue.next()){
+	        	db_quiz_joue = rs_quiz_joue.getString("NB_QUIZ_JOUE"); // on récupère la moyenne
+	        	
+	        }
+	        while(rs_nb_quiz.next()){
+	        	db_nb_quiz = rs_nb_quiz.getString("nb_quiz"); // on récupère la moyenne
+	        	nb_quiz = new JLabel("Nombre de quiz joué(s) : " + db_quiz_joue + " / " + db_nb_quiz);
+	        	nb_quiz.setBounds(48, 140, 600,600);
+	    		nb_quiz.setForeground(Color.WHITE); 
+	    		add(nb_quiz);
+	        }
+		} catch(ClassNotFoundException e){
+			e.printStackTrace();
+		}			
+	}
+	
 	public void meilleurScore(){}
 	//public 
 	
