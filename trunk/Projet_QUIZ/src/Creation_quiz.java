@@ -116,7 +116,7 @@ public class Creation_quiz extends JPanel implements MouseListener, MouseMotionL
 				// redirige sur la page admin_ajout_reponses.
 				public void actionPerformed(ActionEvent e) {
 					fenetre.getContentPane().setVisible(false);
-					admin_ajout_reponses = new Admin_ajout_reponses(fenetre, fenetre.creation_quiz);
+					//admin_ajout_reponses = new Admin_ajout_reponses(fenetre, fenetre.creation_quiz);
 					admin_ajout_reponses.addMouseListener(admin_ajout_reponses);
 					fenetre.setContentPane(admin_ajout_reponses);
 					fenetre.getContentPane().setVisible(true);
