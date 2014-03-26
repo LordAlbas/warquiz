@@ -85,9 +85,6 @@ public class Fenetre extends JFrame {
 	public void goToConnexionAlerte(String selection) {
 		int rep_deco = JOptionPane.showConfirmDialog(null, "Voulez-vous vraiment vous d�connecter ?");
 		if(rep_deco == 0){
-			/*Fenetre fenetre = new Fenetre();
-			this.dispose();*/
-			SQL_Connect.tryConnect();
 			this.getContentPane().setVisible(false);	
 			this.setContentPane(connexion);
 			this.getContentPane().setVisible(true);
