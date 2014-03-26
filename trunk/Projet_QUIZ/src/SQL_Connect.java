@@ -1,20 +1,29 @@
 import java.sql.*;
+
 import javax.swing.*;
+
 import java.awt.Graphics;
 
 public class SQL_Connect extends JPanel{
 
 	private Fenetre fenetre;
-	private static String selection; 
+	private static String selection;
+	public static String login_admin; //variable prenant en compte les donnees de la colonne login_admin dans la BDD
+	public static String mdp_admin; //variable prenant en compte les donnees de la colonne mdp_admin dans la BDD
+	public static String login_usr; //variable prenant en compte les donnees de la colonne login_usr dans la BDD
+	public static String mdp_usr; //variable prenant en compte les donnees de la colonne mdp_usr dans la BDD
+	public static String query_admin; //variable dans lesquelles sont placées les requetes
+	public static String query_user; //variable dans lesquelles sont placées les requetes
 	
 	public SQL_Connect(Fenetre fen) {
 		fenetre = fen;
 		fenetre.goToAccueil(selection);
 	}
-	
+	    
+	  
 	public static void tryConnect() {
 		Connection conn = null;
-		try {
+		try{
 			Connexion.recherche_bdd=true;
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             conn = DriverManager.getConnection("jdbc:sqlserver://193.252.48.189\\SQLEXPRESS:1433;" + "database=BDD_B3I_groupe_5;" + "user=b3i_groupe_5;" + "password=123Soleil");
@@ -34,10 +43,11 @@ public class SQL_Connect extends JPanel{
 			conn = DriverManager.getConnection("jdbc:sqlserver://193.252.48.189\\SQLEXPRESS:1433;" + "database=BDD_B3I_groupe_5;" + "user=b3i_groupe_5;" + "password=123Soleil");
 			Statement stmt_admin = (Statement) conn.createStatement();
             Statement stmt_user = (Statement) conn.createStatement();
-            Connexion.query_admin = "SELECT login_admin, mdp_admin FROM ADMIN";
-            Connexion.query_user = "SELECT login_usr, mdp_usr FROM UTILISATEUR";
-            stmt_admin.executeQuery(Connexion.query_admin);
-            stmt_user.executeQuery(Connexion.query_user);
+            query_admin = "SELECT login_admin, mdp_admin FROM ADMIN";
+            query_user = "SELECT login_usr, mdp_usr FROM UTILISATEUR";
+            stmt_admin.executeQuery(query_admin);
+            stmt_user.executeQuery(query_user);
+            
             ResultSet rs_admin = stmt_admin.getResultSet();
             ResultSet rs_user = stmt_user.getResultSet();
             
@@ -56,6 +66,7 @@ public class SQL_Connect extends JPanel{
                 else{
                 	Connexion.erreur_log = true;
                 }
+                
             }
        
             //repaint(); 
