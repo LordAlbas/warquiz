@@ -29,12 +29,6 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 	public int tentative = 0; //le nombre de tentative d'authentification
 	
 	static String selection; 	// defini quel bouton est selectionne
-	public static String login_admin; //variable prenant en compte les donnees de la colonne login_admin dans la BDD
-	public static String mdp_admin; //variable prenant en compte les donnees de la colonne mdp_admin dans la BDD
-	public static String login_usr; //variable prenant en compte les donnees de la colonne login_usr dans la BDD
-	public static String mdp_usr; //variable prenant en compte les donnees de la colonne mdp_usr dans la BDD
-	public static String query_admin; //variable dans lesquelles sont placées les requetes
-	public static String query_user; //variable dans lesquelles sont placées les requetes
 	public static String dbUsername_admin, dbPassword_admin; // Variables permettant de comparer le champ de login/mdp avec les champs de la bdd de la table ADMIN
 	public static String dbUsername_user, dbPassword_user; // Variables permettant de comparer le champ de login/mdp avec les champs de la bdd de la table UTILISATEUR
     public static String login_general;
@@ -44,8 +38,6 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
     public static boolean recherche_bdd = false;
     public static boolean erreur_bdd = false;
     public static boolean connexion_admin = false; 
-
-    Connection conn = null;
     
 	/**
 	 * Constructor
