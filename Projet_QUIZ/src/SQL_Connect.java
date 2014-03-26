@@ -65,7 +65,7 @@ public class SQL_Connect extends JPanel{
             	Connexion.recherche_bdd = true;
             	Connexion.erreur_log = false;
             	//repaint();
-                if(Connexion.dbUsername_user.equals(Connexion.textField_pseudo.getText()) && Connexion.dbPassword_user.equals(Connexion.textField_mdp.getPassword())){
+                if(Connexion.dbUsername_user.equals(Connexion.textField_pseudo.getText()) && Connexion.dbPassword_user.equals(Connexion.textField_mdp.getText())){
                 	Connexion.login = true;
                 	Connexion.fenetre.goToAccueil(selection);
                 	Connexion.login_general = Connexion.dbUsername_user;

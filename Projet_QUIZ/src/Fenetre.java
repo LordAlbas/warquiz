@@ -83,11 +83,12 @@ public class Fenetre extends JFrame {
 	 * @param selection
 	 */
 	public void goToConnexionAlerte(String selection) {
-		int rep_deco = JOptionPane.showConfirmDialog(null, "Voulez-vous vraiment vous dï¿½connecter ?");
+		int rep_deco = JOptionPane.showConfirmDialog(null, "Voulez-vous vraiment vous déconnecter ?");
 		if(rep_deco == 0){
 			this.getContentPane().setVisible(false);	
 			this.setContentPane(connexion);
 			this.getContentPane().setVisible(true);
+			SQL_Connect.tryConnect();	
 		}
 	}
 	
