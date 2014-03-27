@@ -22,6 +22,8 @@ public class Gestion_quiz extends JPanel implements MouseListener, ItemListener 
 	 * ATTRIBUTS DE CLASSES
 	 */
 	private Fenetre fenetre;
+	private Creation_quiz creation_quiz;
+	private Quiz monQuiz;
 	
 	private String bouton_deco ="rien";
 	private String bouton_retour ="rien";
@@ -50,10 +52,10 @@ public class Gestion_quiz extends JPanel implements MouseListener, ItemListener 
 		lb_titreGestion.setBounds(575, 105, 400, 50);
 		add(lb_titreGestion);
 		
-		lb_descrGestion = new JLabel("<html>Cette section vous permet de gerer et de creer vos propres quiz.</html>");
+		lb_descrGestion = new JLabel("<html>Cette section vous permet de g&eacute;rer et de cr&eacute;er vos propres quiz.</html>");
 		lb_descrGestion.setForeground(Color.WHITE);
 		lb_descrGestion.setFont(new Font("Arial", Font.PLAIN, 20));
-		lb_descrGestion.setBounds(635, 165, 320, 50);
+		lb_descrGestion.setBounds(655, 175, 320, 50);
 		add(lb_descrGestion);
 		
 		// Titre de la liste (au centre)
@@ -79,12 +81,22 @@ public class Gestion_quiz extends JPanel implements MouseListener, ItemListener 
 		bt_creerQuiz.setBounds(370, 350, 120, 35);
 		bt_creerQuiz.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//String nonQuiz = (String)JOptionPane.showInputDialog(frame,"Complete the sentence:\n" + "\"Green eggs and...\"","Customized Dialog",JOptionPane.PLAIN_MESSAGE,icon,possibilities,"ham");
-				String nonQuiz = (String)JOptionPane.showInputDialog("Nom du quiz :");
+				String nomQuiz = (String)JOptionPane.showInputDialog("Nom du quiz :");
 				
-				if ((nonQuiz != null) && (nonQuiz.length() > 0)) {
-					System.out.println("Entry = "+nonQuiz);
-					list_quizcree.add(nonQuiz);
+				if ((nomQuiz != null) && (nomQuiz.length() > 0)) {
+					System.out.println("Entry = "+nomQuiz);
+					// On ecrit pas encore dans la liste, ca sera fait avec une requete SQL au chargement de cette page
+					// donc tant que le quiz en creation n'a pas ete valide, il n'apparaitra pas ici.
+					//list_quizcree.add(nonQuiz);
+					// creation d'un nouveau quiz
+					monQuiz = new Quiz(nomQuiz);
+					// qui est le parametre de Creation_quiz
+					creation_quiz = new Creation_quiz(fenetre, monQuiz);
+					// changement de fenetre sur Creation_quiz
+					fenetre.getContentPane().setVisible(false);
+					creation_quiz.addMouseListener(creation_quiz);
+					fenetre.setContentPane(creation_quiz);
+					fenetre.getContentPane().setVisible(true);
 				} else {
 					System.out.println("Aucune string retournee");
 				}

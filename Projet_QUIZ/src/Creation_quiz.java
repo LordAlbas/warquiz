@@ -4,9 +4,12 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+
 import java.awt.Font;
 import java.awt.Color;
 
@@ -19,6 +22,7 @@ public class Creation_quiz extends JPanel implements MouseListener, MouseMotionL
 	// pour les dialogues entre classes
 	private Fenetre fenetre;
 	private Admin_ajout_reponses admin_ajout_reponses;
+	private Quiz monQuiz;
 	
 	// pour les hover sur les images boutons
 	private String selection;
@@ -28,6 +32,8 @@ public class Creation_quiz extends JPanel implements MouseListener, MouseMotionL
 	private int val_i;
 	private Header header1;
 	private Header_menu header2;
+	
+	private int current_quest;
 	
 	// objet quiz qui se fait traiter actuelement
 	private JLabel lb_nomQuiz;
@@ -39,19 +45,20 @@ public class Creation_quiz extends JPanel implements MouseListener, MouseMotionL
 	 * CONSTRUCTOR
 	 * @param fen
 	 */
-	public Creation_quiz(Fenetre fen){
+	public Creation_quiz(Fenetre fen, Quiz quiz){
 		setLayout(null);
 		
 		/*
 		 * Initialisation des attributs de classes
 		 */
 		fenetre = fen;
+		monQuiz = quiz;
 		
 		/*
 		 * JLabel affichage NOM QUIZ
 		 */
 		// ICI ON ENVOI LE NOM DU QUIZ (ou nom racourci)
-		lb_nomQuiz = new JLabel("Mega Quiz de la mort qui tue (pro only plz no noob no leaver)");
+		lb_nomQuiz = new JLabel(monQuiz.getNom());
 		lb_nomQuiz.setForeground(Color.WHITE);
 		lb_nomQuiz.setFont(new Font("Arial", Font.PLAIN, 22)); 
 		lb_nomQuiz.setBounds(555, 125, 400, 30);
@@ -63,10 +70,16 @@ public class Creation_quiz extends JPanel implements MouseListener, MouseMotionL
 		JButton ajout_question = new JButton("Ajouter des questions");
 		ajout_question.setBounds(700, 180, 200, 40);
 		ajout_question.addActionListener(new ActionListener() {
-			@Override
 			public void actionPerformed(ActionEvent e) {
 				// AJOUTE UNE QUESTION AU CLICK
-				addQuestion(nextNull(tabQuest), tabQuest);
+				String nomQuest = (String)JOptionPane.showInputDialog("Texte de la question :");
+				if ((nomQuest != null) && (nomQuest.length() > 0)) {
+					System.out.println("Entry = "+nomQuest);
+					// Ajout d'une question au tableau de boutons (local) (il se charge lui-meme de l'ajouter a l'objet Quiz)
+					addQuestion(nextNull(tabQuest), tabQuest, nomQuest);
+				} else {
+					System.out.println("Aucune string retournee");
+				}
 			}
 		});
 		add(ajout_question);
@@ -107,16 +120,18 @@ public class Creation_quiz extends JPanel implements MouseListener, MouseMotionL
 	 * @param i
 	 * @param tabQ
 	 */
-	public void addQuestion(int i, JButton[] tabQ) {
+	public void addQuestion(int i, JButton[] tabQ, String nomQuest) {
 		if (i < 20) {
+			current_quest = i;
 			System.out.println("Next NULL = tabQuest["+i+"], ecriture dedans ...");
-			tabQuest[i] = new JButton("Yo!");
+			monQuiz.ajoutQuestion(nomQuest);
+			tabQuest[i] = new JButton(nomQuest);
 			tabQuest[i].addActionListener(new ActionListener() {
 				// ACTIONLISTENER DES BOUTONS DE QUESTIONS
 				// redirige sur la page admin_ajout_reponses.
 				public void actionPerformed(ActionEvent e) {
+					admin_ajout_reponses = new Admin_ajout_reponses(fenetre, monQuiz, current_quest);
 					fenetre.getContentPane().setVisible(false);
-					//admin_ajout_reponses = new Admin_ajout_reponses(fenetre, fenetre.creation_quiz);
 					admin_ajout_reponses.addMouseListener(admin_ajout_reponses);
 					fenetre.setContentPane(admin_ajout_reponses);
 					fenetre.getContentPane().setVisible(true);
@@ -133,14 +148,6 @@ public class Creation_quiz extends JPanel implements MouseListener, MouseMotionL
 		} else {
 			System.out.println("tableau plein j'imagine (i = "+i+")");
 		}
-	}
-	
-	/**
-	 * Getter pour le text du label lb_nomQuiz
-	 * @return
-	 */
-	public String getLb_nomQuiz() {
-		return lb_nomQuiz.getText();
 	}
 	
 	public void mouseDragged(MouseEvent arg0) {}
