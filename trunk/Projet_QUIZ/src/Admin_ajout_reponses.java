@@ -16,7 +16,7 @@ import java.awt.List;
 public class Admin_ajout_reponses extends JPanel  implements MouseListener, ItemListener{
 	
 	private Fenetre fenetre;
-	private Creation_quiz current_quiz;
+	private Quiz current_quiz;
 	
 	private JTextField txf_nomQuiz;
 	private JTextField txf_nomQuest;
@@ -34,12 +34,12 @@ public class Admin_ajout_reponses extends JPanel  implements MouseListener, Item
 	 * @param fen
 	 * @param quiz
 	 */
-	public Admin_ajout_reponses(Fenetre fen, Creation_quiz quiz){
+	public Admin_ajout_reponses(Fenetre fen, Quiz monQuiz, int numQuest){
 		setLayout(null);
 		
 		// recuperation des attributs
 		fenetre = fen;
-		current_quiz = quiz;
+		current_quiz = monQuiz;
 		
 		// creation du titre qui recupere le nom du Quiz (avec son JLabel qui va bien)
 		JLabel lb_nomQuiz = new JLabel("Nom du Quiz : ");
@@ -49,7 +49,7 @@ public class Admin_ajout_reponses extends JPanel  implements MouseListener, Item
 		add(lb_nomQuiz);
 		txf_nomQuiz = new JTextField();
 		txf_nomQuiz.setBounds(150, 150, 493, 30);
-		txf_nomQuiz.setText(current_quiz.getLb_nomQuiz());		// recupere le nom du Quiz
+		txf_nomQuiz.setText(current_quiz.getNom());		// recupere le nom du Quiz
 		add(txf_nomQuiz);
 		txf_nomQuiz.setColumns(10);		// Ca sert a quoi ? rep svp
 		
@@ -61,7 +61,7 @@ public class Admin_ajout_reponses extends JPanel  implements MouseListener, Item
 		add(lb_nomQuest);
 		txf_nomQuest = new JTextField();
 		txf_nomQuest.setBounds(150, 180, 493, 30);
-		txf_nomQuest.setText("Nom de la questionnnn laaaa puta de tu madreeeee !!!!");		// recupere le nom de la question
+		txf_nomQuest.setText(monQuiz.getQuest(numQuest));		// recupere le nom de la question
 		add(txf_nomQuest);
 		
 		// creation de la liste de reponses (type List)
