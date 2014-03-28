@@ -53,7 +53,7 @@ public class Accueil extends JPanel implements MouseListener, MouseMotionListene
 		if (e.getX() >= 120 && e.getX() <= 490 && e.getY() >= 260 && e.getY() <= 345) { // JOUER
 			System.out.print("JOUER");
 			selection = "jouer";
-			fenetre.goToJouer(selection); // on appel la fonction qui va changer de panel
+			fenetre.goToGerer(selection); // on appel la fonction qui va changer de panel
 		}
 		
 		if (e.getX() >= 120 && e.getX() <= 490 && e.getY() >= 360 && e.getY() <= 445) { // STATS
