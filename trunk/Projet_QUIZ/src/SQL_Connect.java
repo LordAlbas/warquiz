@@ -61,6 +61,7 @@ public class SQL_Connect extends JPanel{
                 	Connexion.login = true;
                 	Connexion.connexion_admin = true;
                 	Connexion.fenetre.goToAccueil(selection);
+                	Connexion.dbUsername_admin = Connexion.textField_pseudo.getText();
                 	Connexion.login_general = Connexion.dbUsername_admin;
                 }
                 else{
@@ -78,6 +79,7 @@ public class SQL_Connect extends JPanel{
             	//repaint();
                 if(Connexion.dbUsername_user.equals(Connexion.textField_pseudo.getText()) && Connexion.dbPassword_user.equals(Connexion.textField_mdp.getText())){
                 	Connexion.login = true;
+                	Connexion.connexion_admin = false;
                 	Connexion.fenetre.goToAccueil(selection);
                 	Connexion.login_general = Connexion.dbUsername_user;
                 }

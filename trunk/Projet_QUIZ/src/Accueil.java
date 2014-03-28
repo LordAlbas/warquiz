@@ -2,6 +2,7 @@ import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+
 import javax.swing.JPanel;
 
 
@@ -25,6 +26,7 @@ public class Accueil extends JPanel implements MouseListener, MouseMotionListene
 		fenetre = fen; // on recupere la classe mere
         setLayout(null);
 
+		System.out.println(Connexion.login_general);
 		//****Inclusion du Header en 2 parties ****
         header1 = new Header(fen);
         header1.setBounds(0, 0, 444, 130);
@@ -37,6 +39,8 @@ public class Accueil extends JPanel implements MouseListener, MouseMotionListene
         header2.addMouseListener(header2);
         header2.addMouseMotionListener(header2);
         this.add(header2);
+        repaint();
+		
         //****************************************
 	}
 	
