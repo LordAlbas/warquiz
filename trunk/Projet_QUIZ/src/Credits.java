@@ -1,5 +1,9 @@
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.*;
+
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 public class Credits extends JPanel implements MouseListener, MouseMotionListener, ActionListener{
@@ -12,6 +16,11 @@ public class Credits extends JPanel implements MouseListener, MouseMotionListene
 	private static String selection; 				// defini quel bouton est selectionn�
 	private Header header1;
 	private Header_menu header2;
+	private JLabel lb_titreCredits; // Titre de la partie
+	private JLabel credit1;
+	private JLabel credit2;
+	private JLabel credit3;
+	private JLabel credit4;
 	/**
 	 * Constructor
 	 */
@@ -32,6 +41,36 @@ public class Credits extends JPanel implements MouseListener, MouseMotionListene
         header2.addMouseMotionListener(header2);
         this.add(header2); 
         //****************************************
+        
+        credit1 = new JLabel("Réalisé par :");
+        credit1.setForeground(Color.WHITE);
+        credit1.setFont(new Font("Arial", Font.PLAIN, 30));
+        credit1.setBounds(60, 350, 500, 50);
+		add(credit1);
+		
+        credit2 = new JLabel("CHARRUE Mérovée");
+        credit2.setForeground(Color.WHITE);
+        credit2.setFont(new Font("Arial", Font.PLAIN, 30));
+        credit2.setBounds(130, 450, 500, 50);
+		add(credit2);
+		
+        credit3 = new JLabel("CURTET Quentin");
+        credit3.setForeground(Color.WHITE);
+        credit3.setFont(new Font("Arial", Font.PLAIN, 30));
+        credit3.setBounds(130, 500, 500, 50);
+		add(credit3);
+		
+        credit4 = new JLabel("SINARDET Mickaël");
+        credit4.setForeground(Color.WHITE);
+        credit4.setFont(new Font("Arial", Font.PLAIN, 30));
+        credit4.setBounds(130, 550, 500, 50);
+		add(credit4);
+		
+		lb_titreCredits = new JLabel("Crédits");
+		lb_titreCredits.setForeground(Color.WHITE);
+		lb_titreCredits.setFont(new Font("Arial", Font.PLAIN, 42));
+		lb_titreCredits.setBounds(575, 105, 400, 50);
+		add(lb_titreCredits);
 	}
 	
 	/**

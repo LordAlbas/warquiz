@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -26,7 +27,11 @@ public class Statistiques extends JPanel implements MouseListener, MouseMotionLi
 	public String query_nb_quiz;
 	public String query_quiz_joue;
 	public String query_nb_participants_quiz;
+	public String query_score_diff;
 	private String db_score; // le score sorti de la bdd
+	private String db_score_diff; // score avec filtre
+	private String db_num_quiz_diff; // num quiz avec filtre
+	private String db_diff;// la difficulté sorti de la bdd
 	private String db_moyenne; // la moyenne
 	private String db_num_quiz; // le numéro du quiz 
 	private String db_nb_parties; // le nombre de parties
@@ -40,6 +45,8 @@ public class Statistiques extends JPanel implements MouseListener, MouseMotionLi
 	public JLabel nb_quiz; // le nombre de quiz
 	public JLabel quiz_joue; // le nombre de quiz joué
 	public JLabel nb_participants_quiz; // le nombre de participant par quiz
+	private JLabel lb_titreStatistiques;
+	private JLabel score_diff; // le score avec difficulté
 	/**
 	 * Constructeur
 	 */
@@ -62,6 +69,11 @@ public class Statistiques extends JPanel implements MouseListener, MouseMotionLi
         this.add(header2); 
         //****************************************
         
+		lb_titreStatistiques = new JLabel("Statistiques");
+		lb_titreStatistiques.setForeground(Color.WHITE);
+		lb_titreStatistiques.setFont(new Font("Arial", Font.PLAIN, 42));
+		lb_titreStatistiques.setBounds(575, 105, 400, 50);
+		add(lb_titreStatistiques);
         
         //*******TEST FONCTIONS NOUVELLES
     	titre = new JLabel("STATS ADMIN");
@@ -102,6 +114,12 @@ public class Statistiques extends JPanel implements MouseListener, MouseMotionLi
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+        try {
+			ScoreDifficulte(3);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         //*******
 	}
 	
@@ -133,6 +151,34 @@ public class Statistiques extends JPanel implements MouseListener, MouseMotionLi
 		}
 	}
 	
+	/**
+	 * Récupère le numéro et le score des quiz 1:FACILE 2:MOYEN ou 3:DIFFICILE que le joueur à fait.
+	 * @throws SQLException
+	 */
+	public void ScoreDifficulte(int diff) throws SQLException{
+		try{
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+	        Connection conn = DriverManager.getConnection("jdbc:sqlserver://193.252.48.189\\SQLEXPRESS:1433;" + "database=BDD_B3I_groupe_5;" + "user=b3i_groupe_5;" + "password=123Soleil");
+	        Statement stmt_score_diff = (Statement) conn.createStatement();
+	        query_score_diff = "SELECT DISTINCT * FROM JOUER, QUIZ WHERE LOGIN_USR = 'ClaraMorgane' AND JOUER.ID_QUIZ = QUIZ.ID_QUIZ AND QUIZ.DIFFICULTE_QUIZ ="+diff;	       
+	        stmt_score_diff.executeQuery(query_score);	
+	        ResultSet rs_score_diff = stmt_score_diff.getResultSet();
+	        int cpt_diff = 500;
+	        while(rs_score_diff.next()){
+	        	db_score_diff = rs_score_diff.getString("SCORE_USR_QUIZ"); // on récupère le score
+	        	db_num_quiz_diff = rs_score_diff.getString("ID_QUIZ"); // on récupère le num quiz
+	        	//db_diff = rs_score_diff.getString("DIFFICULTE_QUIZ"); // on récupère la difficulte
+	        	
+	        	score_diff = new JLabel("[SELECT DIFF] Votre score pour le quiz n°" + db_num_quiz_diff + " est de : " + db_score_diff);
+	    		score_diff.setBounds(48, cpt_diff, 600,600);
+	    		score_diff.setForeground(Color.WHITE); 
+	    		add(score_diff);
+	    		cpt_diff = cpt_diff +20;
+	        }
+		} catch(ClassNotFoundException e){
+			e.printStackTrace();
+		}
+	}
 	
 	/**
 	 * Calcule et affiche le score moyen du joueur
