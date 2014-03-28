@@ -131,12 +131,22 @@ public class Fenetre extends JFrame {
 	 * Redirige sur JOUER
 	 * @param selection
 	 */
-	public void goToJouer(String selection) {
+	public void goToGerer(String selection) {
 		this.getContentPane().setVisible(false);
 		gestion_quiz.addMouseListener(gestion_quiz);	// 'statistiques' implemente les methodes relatif a l'ecoute de la souris
 		//creation_quiz.addMouseMotionListener(creation_quiz);
 		this.setContentPane(gestion_quiz);
 		this.getContentPane().setVisible(true);
+	}
+	
+	/**
+	 * Redirige sur JOUER
+	 * @param selection
+	 */
+	
+	public void goToJouer(String selection) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	/**
@@ -158,4 +168,7 @@ public class Fenetre extends JFrame {
 		Fenetre fenetre = new Fenetre();
 		// et roule ma poule
 	}
+
+
+	
 }

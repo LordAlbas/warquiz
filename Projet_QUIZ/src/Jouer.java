@@ -1,18 +1,124 @@
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class Jouer extends JPanel implements MouseListener, MouseMotionListener{
 
 	private Fenetre fenetre;
+	private String bouton_deco ="rien";
+	private String bouton_retour ="rien";
+	
+	private Header header1;
+	private Header_menu header2;
+	
+	private JLabel lb_titreBienvenue;
+	private JLabel lb_descrJouer;
+	private JLabel lb_titreListeQuiz;
+	
+	private JButton bt_afficherQuizFacile;
+	private JButton bt_afficherQuizMoyen;
+	private JButton bt_afficherQuizDifficile;
+	private JButton bt_afficherAllQuiz;
+	
+	public String query_facile;
+	public String query_moyen;
+	public String query_difficile;
+	public String query_all_quiz;
+	
+	private String db_facile; // le score sorti de la bdd
+	private String db_moyen; // la moyenne
+	private String db_difficile; // le numéro du quiz 
+	private String db_all_quiz; // le nombre de parties
 	
 	/**
 	 * Constructeur
 	 */
 	public Jouer(Fenetre fen) {
 		fenetre = fen;  // on r�cup�re la classe m�re
+		
+		lb_titreBienvenue = new JLabel("Bienvenue sur Warquiz !");
+		lb_titreBienvenue.setForeground(Color.WHITE);
+		lb_titreBienvenue.setFont(new Font("Arial", Font.PLAIN, 42));
+		lb_titreBienvenue.setBounds(575, 105, 400, 50);
+		add(lb_titreBienvenue);
+		
+		lb_descrJouer = new JLabel("<html>Cette section vous permet de jouer aux quiz.</html>");
+		lb_descrJouer.setForeground(Color.WHITE);
+		lb_descrJouer.setFont(new Font("Arial", Font.PLAIN, 20));
+		lb_descrJouer.setBounds(655, 175, 320, 50);
+		add(lb_descrJouer);
+		
+		lb_titreListeQuiz = new JLabel("Liste des quiz existants");
+		lb_titreListeQuiz.setForeground(Color.WHITE);
+		lb_titreListeQuiz.setFont(new Font("Arial", Font.PLAIN, 18));
+		lb_titreListeQuiz.setBounds(155, 275, 300, 20);
+		add(lb_titreListeQuiz);
+		
+		bt_afficherQuizFacile = new JButton("Quiz Faciles");
+		bt_afficherQuizFacile.setBounds(370, 350, 120, 35);
+		bt_afficherQuizFacile.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+					
+			}
+		});
+		add(bt_afficherQuizFacile);
+		
+		bt_afficherQuizMoyen = new JButton("Quiz Moyens");
+		bt_afficherQuizMoyen.setBounds(500, 350, 120, 35);
+		bt_afficherQuizMoyen.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
+		add(bt_afficherQuizMoyen);
+		
+		bt_afficherQuizDifficile = new JButton("Quiz Difficiles");
+		bt_afficherQuizDifficile.setBounds(620, 350, 120, 35);
+		bt_afficherQuizDifficile.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
+		add(bt_afficherQuizDifficile);
+		
+		bt_afficherAllQuiz = new JButton("Tous les Quiz");
+		bt_afficherAllQuiz.setBounds(740, 350, 120, 35);
+		bt_afficherAllQuiz.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
+		add(bt_afficherAllQuiz);
+		
+		//****Inclusion du Header en 2 parties ****
+        header1 = new Header(fen);
+        header1.setBounds(0, 0, 444, 130);
+        header1.addMouseListener(header1);
+        header1.addMouseMotionListener(header1);
+        this.add(header1); 
+     
+
+        header2 = new Header_menu(fen);
+        header2.setBounds(444, 0, 580, 58);
+        header2.addMouseListener(header2);
+        header2.addMouseMotionListener(header2);
+        this.add(header2); 
+        //****************************************
 	}
 	
 	/**
@@ -30,9 +136,28 @@ public class Jouer extends JPanel implements MouseListener, MouseMotionListener{
 	 * Paint
 	 */
 	public void paintComponent(Graphics g) {
-		//super.paintComponents(g);
-		// le fond et les elements sont en fonction de la taille de la fenetre, donc pas de soucis de redimensionnement de la fenetre
-		g.drawImage(Images.img_fond[0], 0, 0, this.getWidth(), this.getHeight(), null);						// dessine le fond d'ecran
-		g.drawImage(Images.img_element[0], 0, 0, this.getWidth(), (int)(this.getHeight() / 6.1230), null);		// dessine le header	
+		super.paintComponent(g);
+		g.drawImage(Images.img_fond[0], 0, 0, this.getWidth(), this.getHeight(), null);
+		//g.drawImage(Images.img_element[0], 0, 0, this.getWidth(), (int)(this.getHeight() / 6.1230), null);		// dessine le header
+		
+		switch (bouton_deco){
+		case "rien" :
+			g.drawImage(Images.img_bouton[4], 960, 1, 46, 46, null);
+			break;				
+		case "CO/DECO_hover" :
+			g.drawImage(Images.img_bouton_hover[4], 960, 1, 46, 46, null);
+			bouton_deco = "rien";
+			break;
+		}
+		
+		switch (bouton_retour)	{
+		case "rien" :
+			g.drawImage(Images.img_bouton[5], 1, 685, 84, 83, null);
+			break;				
+		case "retour_hover" :
+			g.drawImage(Images.img_bouton_hover[5], 1, 685, 84, 83, null);
+			bouton_retour = "rien";
+			break;
+		}
 	}
 }
