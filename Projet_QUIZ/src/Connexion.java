@@ -104,6 +104,7 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 							bad_mdp=1;
 							tentative++;
 							repaint();
+							
 						}
 						else if(textField_mdp.getText().length() != 0){ // Sinon si le MDP est entré
 							//Méthode permettant de se connecter selon si on est admin ou user

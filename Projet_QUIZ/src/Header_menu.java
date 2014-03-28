@@ -14,7 +14,7 @@ public class Header_menu extends JPanel implements MouseListener, MouseMotionLis
 	String bouton_option ="rien";
 	private Fenetre fenetre;
 	static String selection1; 
-	JLabel textMessage;
+	public JLabel textMessage;
 	
 	public Header_menu(Fenetre fen){
 		setLayout(null);
@@ -25,6 +25,7 @@ public class Header_menu extends JPanel implements MouseListener, MouseMotionLis
 		textMessage.setBounds(48, 11, 92, 14);
 		add(textMessage);
 		fenetre = fen;
+
 	}
 	
 	public void mouseDragged(MouseEvent e) {}
