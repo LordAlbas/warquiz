@@ -122,21 +122,10 @@ public class Creation_quiz extends JPanel implements MouseListener, MouseMotionL
 	 */
 	public void addQuestion(int i, JButton[] tabQ, String nomQuest) {
 		if (i < 20) {
-			current_quest = i;
 			System.out.println("Next NULL = tabQuest["+i+"], ecriture dedans ...");
-			monQuiz.ajoutQuestion(nomQuest);
 			tabQuest[i] = new JButton(nomQuest);
-			tabQuest[i].addActionListener(new ActionListener() {
-				// ACTIONLISTENER DES BOUTONS DE QUESTIONS
-				// redirige sur la page admin_ajout_reponses.
-				public void actionPerformed(ActionEvent e) {
-					admin_ajout_reponses = new Admin_ajout_reponses(fenetre, monQuiz, current_quest);
-					fenetre.getContentPane().setVisible(false);
-					admin_ajout_reponses.addMouseListener(admin_ajout_reponses);
-					fenetre.setContentPane(admin_ajout_reponses);
-					fenetre.getContentPane().setVisible(true);
-				}
-			});
+			Question maQuest = monQuiz.ajoutQuestion(nomQuest);
+			tabQuest[i].addActionListener(maQuest);
 			tabQuest[i].setBounds(280, 200+(i*22), 200, 20);
 			add(tabQuest[i]);
 			repaint();

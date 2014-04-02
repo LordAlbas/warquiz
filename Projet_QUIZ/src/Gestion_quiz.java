@@ -88,8 +88,9 @@ public class Gestion_quiz extends JPanel implements MouseListener, ItemListener 
 					// On ecrit pas encore dans la liste, ca sera fait avec une requete SQL au chargement de cette page
 					// donc tant que le quiz en creation n'a pas ete valide, il n'apparaitra pas ici.
 					//list_quizcree.add(nonQuiz);
+					
 					// creation d'un nouveau quiz
-					monQuiz = new Quiz(nomQuiz);
+					monQuiz = new Quiz(nomQuiz, fenetre);
 					// qui est le parametre de Creation_quiz
 					creation_quiz = new Creation_quiz(fenetre, monQuiz);
 					// changement de fenetre sur Creation_quiz
