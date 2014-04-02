@@ -23,28 +23,35 @@ public class Statistiques extends JPanel implements MouseListener, MouseMotionLi
 	private Header_menu header2;
 	public String query_score;
 	public String query_moyenne;
+	public String query_moyenne_total;
 	public String query_nb_parties;
 	public String query_nb_quiz;
 	public String query_quiz_joue;
 	public String query_nb_participants_quiz;
 	public String query_score_diff;
+	public String query_nb_quiz_dispo;
 	private String db_score; // le score sorti de la bdd
 	private String db_score_diff; // score avec filtre
 	private String db_num_quiz_diff; // num quiz avec filtre
 	private String db_diff;// la difficulté sorti de la bdd
 	private String db_moyenne; // la moyenne
+	private String db_moyenne_total; // la moyenne total
 	private String db_num_quiz; // le numéro du quiz 
 	private String db_nb_parties; // le nombre de parties
 	private String db_nb_quiz; // le nombre de quiz
 	private String db_quiz_joue; //le nombre de quiz joué
 	private String db_nb_participants_quiz; // le nombre de participnt pour un quiz
+	private String db_nb_quiz_dispo; // nb quiz dispo
 	public JLabel score; // le score d'un joueur pour un quiz
-	public JLabel titre; //  = ADMIN
+	public JLabel titreA; //  = ADMIN
+	public JLabel titreU; //  = USER
 	public JLabel score_moyen; // le score moyen
+	public JLabel score_moyen_total; // le score moyen total
 	public JLabel nb_parties; // le nombre de parties
 	public JLabel nb_quiz; // le nombre de quiz
 	public JLabel quiz_joue; // le nombre de quiz joué
 	public JLabel nb_participants_quiz; // le nombre de participant par quiz
+	public JLabel nb_quiz_dispo;
 	private JLabel lb_titreStatistiques;
 	private JLabel score_diff; // le score avec difficulté
 	/**
@@ -75,12 +82,46 @@ public class Statistiques extends JPanel implements MouseListener, MouseMotionLi
 		lb_titreStatistiques.setBounds(575, 105, 400, 50);
 		add(lb_titreStatistiques);
         
+		int var = 1;
+		
         //*******TEST FONCTIONS NOUVELLES
-    	titre = new JLabel("STATS ADMIN");
-    	titre.setBounds(48, 120, 600,600);
-    	titre.setForeground(Color.WHITE); 
-		add(titre);
-        
+		
+		if(var == 0){
+			titreA = new JLabel("STATS ADMIN");
+			titreA.setForeground(Color.WHITE);
+			titreA.setFont(new Font("Arial", Font.PLAIN, 30));
+    		titreA.setBounds(72, 120, 200,200);
+			add(titreA);	
+			
+	        try {
+				nbQuiz(); //nombre de quiz
+			} catch (SQLException e) {e.printStackTrace();}
+			
+	        try {
+				scoreMoyenTotal(); //score moyen des quiz
+			} catch (SQLException e) {e.printStackTrace();}
+		}
+		
+		
+		if(var == 1){
+			titreU = new JLabel("STATS USER");
+			titreU.setForeground(Color.WHITE);
+			titreU.setFont(new Font("Arial", Font.PLAIN, 30));
+    		titreU.setBounds(72, 120, 200,200); 
+			add(titreU);
+			
+			try {
+				nbQuizJouees();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+
+		
+
+		/**
         try {
 			Score();
 		} catch (SQLException e) {
@@ -120,6 +161,8 @@ public class Statistiques extends JPanel implements MouseListener, MouseMotionLi
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+        
+		 **/
         //*******
 	}
 	
@@ -189,7 +232,7 @@ public class Statistiques extends JPanel implements MouseListener, MouseMotionLi
 			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 	        Connection conn = DriverManager.getConnection("jdbc:sqlserver://193.252.48.189\\SQLEXPRESS:1433;" + "database=BDD_B3I_groupe_5;" + "user=b3i_groupe_5;" + "password=123Soleil");
 	        Statement stmt_moyenne = (Statement) conn.createStatement();
-	        query_moyenne = "SELECT AVG(SCORE_USR_QUIZ) AS score_moyen FROM JOUER WHERE LOGIN_USR = 'ClaraMorgane'";	       
+	        query_moyenne = "SELECT AVG(SCORE_USR_QUIZ) AS score_moyen FROM JOUER";	       
 	        stmt_moyenne.executeQuery(query_moyenne);	
 	        ResultSet rs_moyenne = stmt_moyenne.getResultSet();
 	        
@@ -205,6 +248,30 @@ public class Statistiques extends JPanel implements MouseListener, MouseMotionLi
 		}		
 	}
 	
+	/**
+	 * Calcule et affiche la moyenne des scores des quiz
+	 * @throws SQLException 
+	 */
+	public void scoreMoyenTotal() throws SQLException{
+		try{
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+	        Connection conn = DriverManager.getConnection("jdbc:sqlserver://193.252.48.189\\SQLEXPRESS:1433;" + "database=BDD_B3I_groupe_5;" + "user=b3i_groupe_5;" + "password=123Soleil");
+	        Statement stmt_moyenne_total = (Statement) conn.createStatement();
+	        query_moyenne_total = "SELECT AVG(SCORE_USR_QUIZ) AS score_moyen_total FROM JOUER WHERE LOGIN_USR = 'ClaraMorgane'";	       
+	        stmt_moyenne_total.executeQuery(query_moyenne_total);	
+	        ResultSet rs_moyenne_total = stmt_moyenne_total.getResultSet();
+	        
+	        while(rs_moyenne_total.next()){
+	        	db_moyenne_total = rs_moyenne_total.getString("score_moyen_total"); // on récupère la moyenne
+	        	score_moyen_total = new JLabel("Le score moyen aux quiz est de : " + db_moyenne_total);
+	    		score_moyen_total.setBounds(148, 140, 250, 250);
+	    		score_moyen_total.setForeground(Color.WHITE); 
+	    		add(score_moyen_total);
+	        }
+		} catch(ClassNotFoundException e){
+			e.printStackTrace();
+		}		
+	}
 	
 	/**
 	 * Calcule le nombre de parties jouées par l'utilisateur.
@@ -258,7 +325,7 @@ public class Statistiques extends JPanel implements MouseListener, MouseMotionLi
 	        while(rs_nb_quiz.next()){
 	        	db_nb_quiz = rs_nb_quiz.getString("nb_quiz"); // on récupère la moyenne
 	        	nb_quiz = new JLabel("Nombre de quiz joué(s) : " + db_quiz_joue + " / " + db_nb_quiz);
-	        	nb_quiz.setBounds(48, 140, 600,600);
+	        	nb_quiz.setBounds(148, 140, 250,220);
 	    		nb_quiz.setForeground(Color.WHITE); 
 	    		add(nb_quiz);
 	        }
@@ -267,8 +334,7 @@ public class Statistiques extends JPanel implements MouseListener, MouseMotionLi
 		}			
 	}
 	
-	public void meilleurScore(){}
-	//public 
+	public void meilleurScore(){} 
 	
 	/**
 	 * Le nombre de personnes qui on paticipé à un quiz donné
@@ -297,14 +363,36 @@ public class Statistiques extends JPanel implements MouseListener, MouseMotionLi
 	    		add(nb_participants_quiz);	        	
 	        }
 	        
-
-
-	        
 		} catch(ClassNotFoundException e){
 			e.printStackTrace();
 		}
 	}
 	
+	/**
+	 * Calcule le nombre de quiz.
+	 * @throws SQLException 
+	 */
+	public void nbQuiz() throws SQLException{
+		try{
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+	        Connection conn = DriverManager.getConnection("jdbc:sqlserver://193.252.48.189\\SQLEXPRESS:1433;" + "database=BDD_B3I_groupe_5;" + "user=b3i_groupe_5;" + "password=123Soleil");
+	        
+	        Statement stmt_nb_quiz_dispo = (Statement) conn.createStatement();
+	        query_nb_quiz_dispo = "SELECT COUNT (ID_QUIZ) AS nb_quiz_dispo FROM QUIZ";	       
+	        stmt_nb_quiz_dispo.executeQuery(query_nb_quiz_dispo);	
+	        ResultSet rs_nb_quiz_dispo = stmt_nb_quiz_dispo.getResultSet();
+	        
+	        while(rs_nb_quiz_dispo.next()){
+	        	db_nb_quiz_dispo = rs_nb_quiz_dispo.getString("nb_quiz_dispo"); 
+	        	nb_quiz_dispo = new JLabel("Nombre de quiz disponibles : "+db_nb_quiz_dispo);
+	        	nb_quiz_dispo.setBounds(148, 140, 250,220);
+	    		nb_quiz_dispo.setForeground(Color.WHITE); 
+	    		add(nb_quiz_dispo);
+	        }
+		} catch(ClassNotFoundException e){
+			e.printStackTrace();
+		}			
+	}	
 	
 	/**
 	 * Methodes override du MouseListener
