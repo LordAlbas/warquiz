@@ -1,10 +1,14 @@
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -18,13 +22,13 @@ public class Admin_ajout_reponses extends JPanel  implements MouseListener, Item
 	private Fenetre fenetre;
 	private Quiz current_quiz;
 	
-	private JTextField txf_nomQuiz;
-	private JTextField txf_nomQuest;
+	private JLabel txf_nomQuiz;
+	private JLabel txf_nomQuest;
 	
-	private JTextField textField_1;
-	private JTextField textField_2;
 	private List list_reponses;
 	static JTextField reponse;
+	
+	private JButton bt_retour;
 	
 	Header header1;
 	Header_menu header2;
@@ -47,11 +51,11 @@ public class Admin_ajout_reponses extends JPanel  implements MouseListener, Item
 		lb_nomQuiz.setHorizontalAlignment(SwingConstants.RIGHT);
 		lb_nomQuiz.setBounds(20, 150, 140, 30);
 		add(lb_nomQuiz);
-		txf_nomQuiz = new JTextField();
-		txf_nomQuiz.setBounds(150, 150, 493, 30);
-		txf_nomQuiz.setText(current_quiz.getNom());		// recupere le nom du Quiz
+		txf_nomQuiz = new JLabel(current_quiz.getNom());
+		txf_nomQuiz.setForeground(Color.WHITE);
+		txf_nomQuiz.setFont(new Font("Arial", Font.BOLD, 22));
+		txf_nomQuiz.setBounds(160, 150, 500, 30);
 		add(txf_nomQuiz);
-		txf_nomQuiz.setColumns(10);		// Ca sert a quoi ? rep svp
 		
 		// creation du sous-titre qui recupere le nom de la question (avec son JLabel qui va bien)
 		JLabel lb_nomQuest = new JLabel("Nom de la question : ");
@@ -59,9 +63,10 @@ public class Admin_ajout_reponses extends JPanel  implements MouseListener, Item
 		lb_nomQuiz.setHorizontalAlignment(SwingConstants.RIGHT);
 		lb_nomQuest.setBounds(20, 180, 140, 30);
 		add(lb_nomQuest);
-		txf_nomQuest = new JTextField();
-		txf_nomQuest.setBounds(150, 180, 493, 30);
-		txf_nomQuest.setText(monQuiz.getQuest(numQuest));		// recupere le nom de la question
+		txf_nomQuest = new JLabel(monQuiz.getQuest(numQuest));
+		txf_nomQuest.setForeground(Color.WHITE);
+		txf_nomQuest.setFont(new Font("Arial", Font.BOLD, 16));
+		txf_nomQuest.setBounds(160, 180, 500, 30);
 		add(txf_nomQuest);
 		
 		// creation de la liste de reponses (type List)
@@ -88,20 +93,24 @@ public class Admin_ajout_reponses extends JPanel  implements MouseListener, Item
 		bouton_suppr.setBounds(365, 312, 89, 23);
 		add(bouton_suppr);
 		
-		JLabel lblRponse = new JLabel("R�ponse");
-		lblRponse.setText("bloublou");
-		lblRponse.setBounds(171, 224, 46, 14);
-		add(lblRponse);
+		bt_retour = new JButton("Retour au Quiz");
+		bt_retour.setBounds(700, 700, 130, 40);
+		bt_retour.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				// on retourne sur la fenetre Creation_quiz
+				Creation_quiz creation_quiz = new Creation_quiz(fenetre, current_quiz);
+				// !! BUG !! attention a bien recuperer SOIT la bonne instance de Creaction_quiz (au lieu d'en creer une nouvelle)
+				// SOIT (et ca va etre mieux) faire un nouveau quiz avec le current_quiz en parametre (comme maintenant)
+				// le but c'est que dans Creation_quiz on remplisse le tableau de JButton (quest) avant les traitements
+				// et qu'on puisse dessiner les JButton de question deja existant !!! LET'S DO IT MOFOOO
+				fenetre.getContentPane().setVisible(false);
+				creation_quiz.addMouseListener(creation_quiz);
+				fenetre.setContentPane(creation_quiz);
+				fenetre.getContentPane().setVisible(true);
+			}
+		});
+		add(bt_retour);
 		
-		JLabel lblA = new JLabel("A");
-		lblA.setBounds(145, 250, 23, 14);
-		add(lblA);
-		
-		JLabel lblQuestion = new JLabel("Question");
-		lblQuestion.setBounds(102, 122, 46, 14);
-		add(lblQuestion);
-		
-		//list.addMouseListener(items);
 		//****Inclusion du Header en 2 parties ****
         header1 = new Header(fen);
         header1.setBounds(0, 0, 444, 130);
@@ -131,9 +140,7 @@ public class Admin_ajout_reponses extends JPanel  implements MouseListener, Item
 	public void mousePressed(MouseEvent arg0) {}
 	public void mouseReleased(MouseEvent arg0) {}
 	
-	public void itemStateChanged(ItemEvent arg0) {
-		// TODO Auto-generated method stub
-		
+	public void itemStateChanged(ItemEvent arg0) {		
 	}
 	
 	public void paintComponent(Graphics g) {

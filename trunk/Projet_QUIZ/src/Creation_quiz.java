@@ -74,7 +74,7 @@ public class Creation_quiz extends JPanel implements MouseListener, MouseMotionL
 				// AJOUTE UNE QUESTION AU CLICK
 				String nomQuest = (String)JOptionPane.showInputDialog("Texte de la question :");
 				if ((nomQuest != null) && (nomQuest.length() > 0)) {
-					System.out.println("Entry = "+nomQuest);
+					//System.out.println("Entry = "+nomQuest);
 					// Ajout d'une question au tableau de boutons (local) (il se charge lui-meme de l'ajouter a l'objet Quiz)
 					addQuestion(nextNull(tabQuest), tabQuest, nomQuest);
 				} else {
@@ -122,7 +122,7 @@ public class Creation_quiz extends JPanel implements MouseListener, MouseMotionL
 	 */
 	public void addQuestion(int i, JButton[] tabQ, String nomQuest) {
 		if (i < 20) {
-			System.out.println("Next NULL = tabQuest["+i+"], ecriture dedans ...");
+			//System.out.println("Next NULL = tabQuest["+i+"], ecriture dedans ...");
 			tabQuest[i] = new JButton(nomQuest);
 			Question maQuest = monQuiz.ajoutQuestion(nomQuest);
 			tabQuest[i].addActionListener(maQuest);
