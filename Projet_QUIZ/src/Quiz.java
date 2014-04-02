@@ -30,7 +30,6 @@ public class Quiz {
 	}
 	public String getQuest(int i) {
 		return questQuiz[i].getQuestTxt();
-		// !! Line 64 in Admin_ajout_rep !! returns the last question instead of the current one!
 	}
 	
 	/**
