@@ -23,10 +23,10 @@ public class Accueil extends JPanel implements MouseListener, MouseMotionListene
 	 * @param fen
 	 */
 	public Accueil(Fenetre fen) {
+		repaint();
 		fenetre = fen; // on recupere la classe mere
         setLayout(null);
-
-		System.out.println(Connexion.login_general);
+		
 		//****Inclusion du Header en 2 parties ****
         header1 = new Header(fen);
         header1.setBounds(0, 0, 444, 130);
@@ -40,7 +40,6 @@ public class Accueil extends JPanel implements MouseListener, MouseMotionListene
         header2.addMouseMotionListener(header2);
         this.add(header2);
         repaint();
-		
         //****************************************
 	}
 	
@@ -63,9 +62,10 @@ public class Accueil extends JPanel implements MouseListener, MouseMotionListene
 		}
 		
 		if (e.getX() >= 120 && e.getX() <= 490 && e.getY() >= 460 && e.getY() <= 545) { // CREDITS
-			System.out.print("CREDITS");
+			System.out.println("CREDITS");
 			selection = "credits";
 			fenetre.goToCredits(selection); // on appel la fonction qui va changer de panel
+			System.out.println(Connexion.login_general);
 		}
 		
 		if (e.getX() >= 120 && e.getX() <= 490 && e.getY() >= 560 && e.getY() <= 645) { // QUITTER

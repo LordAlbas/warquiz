@@ -65,7 +65,6 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 		textField_mdp.setFont(new Font("Arial", Font.PLAIN, 25)); 
 		textField_mdp.setOpaque(false);
 		this.pushKeyboard();
-		
 
 		/**
 		 * Ajout de l'image de chargement du loading

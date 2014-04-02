@@ -25,6 +25,7 @@ public class Header_menu extends JPanel implements MouseListener, MouseMotionLis
 		textMessage.setBounds(48, 11, 92, 14);
 		add(textMessage);
 		fenetre = fen;
+		repaint();
 
 	}
 	
