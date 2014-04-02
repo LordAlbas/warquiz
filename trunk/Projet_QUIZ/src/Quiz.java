@@ -2,17 +2,17 @@ import javax.swing.JButton;
 
 
 public class Quiz {
-	
+	private Fenetre fenetre;
 	private String nomQuiz;
-	private String[] questQuiz = new String[20];
+	private Question[] questQuiz = new Question[20];
 	
 	/**
 	 * Constructor
 	 * @param nom
 	 */
-	public Quiz(String nom) {
+	public Quiz(String nom, Fenetre fen) {
+		fenetre = fen;
 		nomQuiz = nom;
-		
 	}
 	
 	/**
@@ -26,10 +26,10 @@ public class Quiz {
 		return nomQuiz;
 	}
 	public void setQuest(String txt, int i) {
-		questQuiz[i] = txt;
+		questQuiz[i].setQuestTxt(txt);
 	}
 	public String getQuest(int i) {
-		return questQuiz[i];
+		return questQuiz[i].getQuestTxt();
 		// !! Line 64 in Admin_ajout_rep !! returns the last question instead of the current one!
 	}
 	
@@ -45,7 +45,9 @@ public class Quiz {
 		return i;
 	}
 	
-	public void ajoutQuestion(String nomQuest) {
-		questQuiz[nextNull()] = nomQuest;
+	public Question ajoutQuestion(String nomQuest) {
+		int i = nextNull();
+		questQuiz[i] = new Question(nomQuest, i, this, fenetre);
+		return questQuiz[i];
 	}
 }

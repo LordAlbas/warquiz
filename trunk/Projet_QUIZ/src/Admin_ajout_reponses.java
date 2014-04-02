@@ -131,7 +131,6 @@ public class Admin_ajout_reponses extends JPanel  implements MouseListener, Item
 	public void mousePressed(MouseEvent arg0) {}
 	public void mouseReleased(MouseEvent arg0) {}
 	
-	@Override
 	public void itemStateChanged(ItemEvent arg0) {
 		// TODO Auto-generated method stub
 		
