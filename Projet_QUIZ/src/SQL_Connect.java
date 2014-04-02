@@ -14,6 +14,7 @@ public class SQL_Connect extends JPanel{
 	public static String mdp_usr; //variable prenant en compte les donnees de la colonne mdp_usr dans la BDD
 	public static String query_admin; //variable dans lesquelles sont placées les requetes
 	public static String query_user; //variable dans lesquelles sont placées les requetes
+	public static String status;
 	
 	public SQL_Connect(Fenetre fen) {
 		fenetre = fen;
@@ -63,6 +64,7 @@ public class SQL_Connect extends JPanel{
                 	Connexion.fenetre.goToAccueil(selection);
                 	Connexion.dbUsername_admin = Connexion.textField_pseudo.getText();
                 	Connexion.login_general = Connexion.dbUsername_admin;
+                	status = "ADMIN";
                 }
                 else{
                 	Connexion.erreur_log = true;
@@ -82,6 +84,7 @@ public class SQL_Connect extends JPanel{
                 	Connexion.connexion_admin = false;
                 	Connexion.fenetre.goToAccueil(selection);
                 	Connexion.login_general = Connexion.dbUsername_user;
+                	status = "USER";
                 }
                 else{
                 	Connexion.erreur_log = true;
@@ -99,6 +102,6 @@ public class SQL_Connect extends JPanel{
 			Connexion.erreur_bdd = true;
 			Connexion.recherche_bdd=false;
             //repaint();
-		}
+		}		
 	}
 }

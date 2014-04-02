@@ -30,32 +30,26 @@ public class Fenetre extends JFrame {
 		Images.initImage();		
 		
 		// initialisation des JPanel
-		accueil = new Accueil(this);			// creation du JPanel accueil
-		statistiques = new Statistiques(this); // creation du JPanel statistiques
-		credits = new Credits(this);        	// creation du JPanel credits
-		jouer = new Jouer(this);				// creation du JPanel jouer
-		inscription = new Inscription(this);	// creation du JPanel inscription
+					
+		
+		 // creation du JPanel statistiques
+		       	// creation du JPanel credits
 		connexion = new Connexion(this);			// creation du JPanel conexion
-		gestion_quiz = new Gestion_quiz(this);
+		
 		
 		// ajout des mouseListener
-		accueil.addMouseListener(accueil);		// 'accueil' implemente les methodes relatif a l'ecoute de la souris
-		accueil.addMouseMotionListener(accueil);	
+		
 		connexion.addMouseListener(connexion);		// 'connexion' implemente les methodes relatif a l'ecoute de la souris
 		connexion.addMouseMotionListener(connexion);
-		inscription.addMouseListener(inscription);	// 'inscription' implemente les methodes relatif a l'ecoute de la souris
-		inscription.addMouseMotionListener(inscription);
-		gestion_quiz.addMouseListener(gestion_quiz);	// 'creation_quiz' implemente les methodes relatif a l'ecoute de la souris
-		//creation_quiz.addMouseMotionListener(creation_quiz);
 		
 		setLayout(new GridLayout(1, 1));		// Layout grid (tableau)  1 colonne 1 ligne
 		this.setContentPane(connexion);			// ajout du JPanel au JFrame (gridLayout)
 
 		connexion.setOpaque(false);
 		setVisible(true);
-		SQL_Connect.tryConnect();	// !! LIGNE EN COMMENTAIRE JUSTE POUR TRAVAILLER EN DEHORS DE L'EPSI !!
 		repaint();
-		//this.goToConnexion("jouer");
+		
+		
 	}
 	
 	/**
@@ -63,6 +57,9 @@ public class Fenetre extends JFrame {
 	 * @param selection
 	 */
 	public void goToInscription(String selection) {
+		inscription = new Inscription(this);
+		inscription.addMouseListener(inscription);	// 'inscription' implemente les methodes relatif a l'ecoute de la souris
+		inscription.addMouseMotionListener(inscription);
 		this.getContentPane().setVisible(false);
 		this.setContentPane(inscription);				// ajout du JPanel au JFrame (gridLayout)		
 		this.getContentPane().setVisible(true);
@@ -98,9 +95,13 @@ public class Fenetre extends JFrame {
 	 * @param selection
 	 */
 	public void goToAccueil(String selection) {
+		accueil = new Accueil(this); // creation du JPanel accueil
+		accueil.addMouseListener(accueil);		// 'accueil' implemente les methodes relatif a l'ecoute de la souris
+		accueil.addMouseMotionListener(accueil);
 		this.getContentPane().setVisible(false);
 		this.setContentPane(accueil);
 		this.getContentPane().setVisible(true);
+		System.out.println(Connexion.login_general);
 	}
 	
 	/**
@@ -108,6 +109,7 @@ public class Fenetre extends JFrame {
 	 * @param selection
 	 */
 	public void goToStatistiques(String selection) {
+		statistiques = new Statistiques(this);
 		this.getContentPane().setVisible(false);
 		statistiques.addMouseListener(statistiques);	// 'statistiques' implemente les methodes relatif a l'ecoute de la souris
 		statistiques.addMouseMotionListener(statistiques);
@@ -120,6 +122,7 @@ public class Fenetre extends JFrame {
 	 * @param selection
 	 */
 	public void goToCredits(String selection) {
+		credits = new Credits(this); 
 		this.getContentPane().setVisible(false);
 		credits.addMouseListener(credits);				// 'statistiques' implemente les methodes relatif a l'ecoute de la souris
 		credits.addMouseMotionListener(credits);
@@ -132,6 +135,8 @@ public class Fenetre extends JFrame {
 	 * @param selection
 	 */
 	public void goToGerer(String selection) {
+		gestion_quiz = new Gestion_quiz(this);
+		gestion_quiz.addMouseListener(gestion_quiz);
 		this.getContentPane().setVisible(false);
 		gestion_quiz.addMouseListener(gestion_quiz);	// 'statistiques' implemente les methodes relatif a l'ecoute de la souris
 		//creation_quiz.addMouseMotionListener(creation_quiz);
@@ -146,6 +151,7 @@ public class Fenetre extends JFrame {
 	
 	public void goToJouer(String selection) {
 		// TODO Auto-generated method stub
+		jouer = new Jouer(this);
 		
 	}
 	

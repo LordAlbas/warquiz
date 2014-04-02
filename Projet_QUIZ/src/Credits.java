@@ -21,6 +21,7 @@ public class Credits extends JPanel implements MouseListener, MouseMotionListene
 	private JLabel credit2;
 	private JLabel credit3;
 	private JLabel credit4;
+
 	/**
 	 * Constructor
 	 */
@@ -71,6 +72,7 @@ public class Credits extends JPanel implements MouseListener, MouseMotionListene
 		lb_titreCredits.setFont(new Font("Arial", Font.PLAIN, 42));
 		lb_titreCredits.setBounds(575, 105, 400, 50);
 		add(lb_titreCredits);
+		
 	}
 	
 	/**
