@@ -86,22 +86,22 @@ public class Statistiques extends JPanel implements MouseListener, MouseMotionLi
         
 		/*******/
 		 Bouton testBouton = new Bouton("Tous");
-		 testBouton.setLocation(260, 190);
+		 testBouton.setLocation(260, 300);
 		 //addMouseListener(testBouton);
 		 add(testBouton);
 		 
 		 Bouton testBouton2 = new Bouton("Facile");
-		 testBouton2.setLocation(341, 190);
+		 testBouton2.setLocation(341, 300);
 		 //addMouseListener(testBouton2);
 		 add(testBouton2);
 		 
 		 Bouton testBouton3 = new Bouton("Moyen");
-		 testBouton3.setLocation(422, 190);
+		 testBouton3.setLocation(422, 300);
 		// addMouseListener(testBouton3);
 		 add(testBouton3);
 		 
 		 Bouton testBouton4 = new Bouton("Difficile");
-		 testBouton4.setLocation(503, 190);
+		 testBouton4.setLocation(503, 300);
 		 //addMouseListener(testBouton4);
 		 add(testBouton4);
 		 
@@ -440,5 +440,6 @@ public class Statistiques extends JPanel implements MouseListener, MouseMotionLi
 		
 		// le fond et les elements sont en fonction de la taille de la fenetre, donc pas de soucis de redimensionnement de la fenetre
 		g.drawImage(Images.img_fond[0], 0, 0, this.getWidth(), this.getHeight(), null);						// dessine le fond d'ecran
+		g.drawImage(Images.img_element[1], 140, 113, 8, 655, null); // barre bleu
 	}
 }
