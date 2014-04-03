@@ -131,7 +131,7 @@ public class Fenetre extends JFrame {
 	}
 	
 	/**
-	 * Redirige sur JOUER
+	 * Redirige sur GERER
 	 * @param selection
 	 */
 	public void goToGerer(String selection) {
@@ -152,6 +152,11 @@ public class Fenetre extends JFrame {
 	public void goToJouer(String selection) {
 		// TODO Auto-generated method stub
 		jouer = new Jouer(this);
+		jouer.addMouseListener(jouer);
+		this.getContentPane().setVisible(false);
+		jouer.addMouseListener(jouer);
+		this.setContentPane(jouer);
+		this.getContentPane().setVisible(true);
 		
 	}
 	
