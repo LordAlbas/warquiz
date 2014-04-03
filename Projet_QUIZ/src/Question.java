@@ -10,6 +10,7 @@ public class Question implements ActionListener {
 	private Quiz currentQuiz;
 	private String QuestTxt;
 	private int QuestNum;
+	private String[] reponses = new String[10];
 	
 	public Question(String nomQuest, int i, Quiz curQuiz, Fenetre fen) {
 		fenetre = fen;
@@ -23,6 +24,18 @@ public class Question implements ActionListener {
 	}
 	public void setQuestTxt(String txt) {
 		QuestTxt = txt;
+	}
+	
+	public String getReponse(int i) {
+		return reponses[i];
+	}
+	
+	public void addReponse(String rep) {
+		int i = 0;
+		while(i<10 && reponses[i] != "") {
+			i++;
+		}
+		reponses[i] = rep;
 	}
 	
 	public void actionPerformed(ActionEvent e) {

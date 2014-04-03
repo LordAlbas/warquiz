@@ -51,7 +51,7 @@ public class Admin_ajout_reponses extends JPanel  implements MouseListener, Item
 		lb_nomQuiz.setHorizontalAlignment(SwingConstants.RIGHT);
 		lb_nomQuiz.setBounds(20, 150, 140, 30);
 		add(lb_nomQuiz);
-		txf_nomQuiz = new JLabel(current_quiz.getNom());
+		txf_nomQuiz = new JLabel(current_quiz.getNom());	// recupere le nom du quiz
 		txf_nomQuiz.setForeground(Color.WHITE);
 		txf_nomQuiz.setFont(new Font("Arial", Font.BOLD, 22));
 		txf_nomQuiz.setBounds(160, 150, 500, 30);
@@ -63,7 +63,7 @@ public class Admin_ajout_reponses extends JPanel  implements MouseListener, Item
 		lb_nomQuiz.setHorizontalAlignment(SwingConstants.RIGHT);
 		lb_nomQuest.setBounds(20, 180, 140, 30);
 		add(lb_nomQuest);
-		txf_nomQuest = new JLabel(monQuiz.getQuest(numQuest));
+		txf_nomQuest = new JLabel(monQuiz.getQuest(numQuest).getQuestTxt());	// recupere le nom de la question
 		txf_nomQuest.setForeground(Color.WHITE);
 		txf_nomQuest.setFont(new Font("Arial", Font.BOLD, 16));
 		txf_nomQuest.setBounds(160, 180, 500, 30);
@@ -74,6 +74,14 @@ public class Admin_ajout_reponses extends JPanel  implements MouseListener, Item
 		list_reponses.setBounds(171, 312, 188, 319);
 		list_reponses.addItemListener(this);
 		add(list_reponses);
+		
+		short y = 0;
+		while (y<10 && current_quiz.getQuest(numQuest).getReponse(y) != null) {
+			System.out.println("Rep = "+current_quiz.getQuest(numQuest).getReponse(y));
+			System.out.println("Add in List -> "+y);
+			list_reponses.add(current_quiz.getQuest(numQuest).getReponse(y));
+			y++;
+		}
 		
 		//list_reponses.add("R�ponse A");
 		
@@ -88,6 +96,12 @@ public class Admin_ajout_reponses extends JPanel  implements MouseListener, Item
 		bouton_addRep.setBounds(365, 246, 89, 23);
 		add(bouton_addRep);
 		
+		/* plzzzz fait toi plaiz et netoie tout le code d'ajout et suppression des reponses !!!
+		 * NEXT STEP c'est ca qu'il faut faire ->> gerer tout ce qui est QUIZ/QUESTION/REPONSES dans leurs classes correspondante
+		 * et absolument PAS dans les classes de traitemets (ex: Admin_ajout_reponses / Bouton_suppr/ajout_reponse etc.)
+		 * GO GO GO !!
+		 */
+		
 		// bouton de suppression d'une reponse de la liste
 		Bouton_suppr_reponse bouton_suppr = new Bouton_suppr_reponse("Supprimer", list_reponses);
 		bouton_suppr.setBounds(365, 312, 89, 23);
@@ -99,10 +113,6 @@ public class Admin_ajout_reponses extends JPanel  implements MouseListener, Item
 			public void actionPerformed(ActionEvent e) {
 				// on retourne sur la fenetre Creation_quiz
 				Creation_quiz creation_quiz = new Creation_quiz(fenetre, current_quiz);
-				// !! BUG !! attention a bien recuperer SOIT la bonne instance de Creaction_quiz (au lieu d'en creer une nouvelle)
-				// SOIT (et ca va etre mieux) faire un nouveau quiz avec le current_quiz en parametre (comme maintenant)
-				// le but c'est que dans Creation_quiz on remplisse le tableau de JButton (quest) avant les traitements
-				// et qu'on puisse dessiner les JButton de question deja existant !!! LET'S DO IT MOFOOO
 				fenetre.getContentPane().setVisible(false);
 				creation_quiz.addMouseListener(creation_quiz);
 				fenetre.setContentPane(creation_quiz);
