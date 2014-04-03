@@ -1,8 +1,11 @@
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 
@@ -16,7 +19,8 @@ public class Accueil extends JPanel implements MouseListener, MouseMotionListene
 	private Fenetre fenetre;
 	
 	private Header header1;
-	private Header_menu header2;	
+	private Header_menu header2;
+	private JLabel L_info;
 
 	/**
 	 * Constructeur
@@ -40,7 +44,15 @@ public class Accueil extends JPanel implements MouseListener, MouseMotionListene
         header2.addMouseMotionListener(header2);
         this.add(header2);
         repaint();
+        	
         //****************************************
+	        L_info = new JLabel("");
+	        L_info.setForeground(Color.WHITE);
+	        L_info.setFont(new Font("Arial", Font.PLAIN, 30));
+	        L_info.setBounds(575, 50, 500, 150);
+			add(L_info);
+
+
 	}
 	
 	/**
@@ -52,7 +64,13 @@ public class Accueil extends JPanel implements MouseListener, MouseMotionListene
 		if (e.getX() >= 120 && e.getX() <= 490 && e.getY() >= 260 && e.getY() <= 345) { // JOUER
 			System.out.print("JOUER");
 			selection = "jouer";
-			fenetre.goToGerer(selection); // on appel la fonction qui va changer de panel
+			if(Connexion.connexion_admin){
+				fenetre.goToGerer(selection); // on appel la fonction qui va changer de panel
+			}
+			else {
+				fenetre.goToJouer(selection); // on appel la fonction qui va changer de panel
+			}
+			
 		}
 		
 		if (e.getX() >= 120 && e.getX() <= 490 && e.getY() >= 360 && e.getY() <= 445) { // STATS
@@ -85,21 +103,34 @@ public class Accueil extends JPanel implements MouseListener, MouseMotionListene
 		if (e.getX() >= 120 && e.getX() <= 490 && e.getY() >= 260 && e.getY() <= 345) { // JOUER
 			image_select = "JOUER_hover";
 			val_i = 0;
+			L_info.setText("<html>Certains pensent que le génie <br>est héréditaire, les autres ont <br>des enfants...</html>");
+			L_info.repaint();
 		}
 		
-		if (e.getX() >= 120 && e.getX() <= 490 && e.getY() >= 360 && e.getY() <= 445) { // STATS
+		else if (e.getX() >= 120 && e.getX() <= 490 && e.getY() >= 360 && e.getY() <= 445) { // STATS
 			image_select = "STATS_hover";
 			val_i = 1;
+			L_info.setText("7² que je retiens 2... + pi... 42 ?");
+			L_info.repaint();
 		}
 		
-		if (e.getX() >= 120 && e.getX() <= 490 && e.getY() >= 460 && e.getY() <= 545) { // CREDITS
+		else if (e.getX() >= 120 && e.getX() <= 490 && e.getY() >= 460 && e.getY() <= 545) { // CREDITS
 			image_select = "CREDITS_hover";
 			val_i = 2;
+			L_info.setText("<html>Ici c'est les BG qui ont fait tout ça <br/>maggle !</html>");
+			L_info.repaint();
 		}
-		if (e.getX() >= 120 && e.getX() <= 490 && e.getY() >= 560 && e.getY() <= 645) { // QUITTER
+		else if (e.getX() >= 120 && e.getX() <= 490 && e.getY() >= 560 && e.getY() <= 645) { // QUITTER
 			image_select = "QUITTER_hover";
 			val_i = 3;
+			L_info.setText("Si tu cliques, tu meurs !");
+			L_info.repaint();
 		}
+		else {
+			L_info.setText("");
+			L_info.repaint();
+		}
+		
 		repaint(); // On re dessine
 	}
 	
