@@ -54,6 +54,8 @@ public class Statistiques extends JPanel implements MouseListener, MouseMotionLi
 	public JLabel nb_quiz_dispo;
 	private JLabel lb_titreStatistiques;
 	private JLabel score_diff; // le score avec difficulté
+	
+	
 	/**
 	 * Constructeur
 	 */
@@ -82,7 +84,32 @@ public class Statistiques extends JPanel implements MouseListener, MouseMotionLi
 		lb_titreStatistiques.setBounds(575, 105, 400, 50);
 		add(lb_titreStatistiques);
         
-		int var = 1;
+		/*******/
+		 Bouton testBouton = new Bouton("Tous");
+		 testBouton.setLocation(260, 190);
+		 //addMouseListener(testBouton);
+		 add(testBouton);
+		 
+		 Bouton testBouton2 = new Bouton("Facile");
+		 testBouton2.setLocation(341, 190);
+		 //addMouseListener(testBouton2);
+		 add(testBouton2);
+		 
+		 Bouton testBouton3 = new Bouton("Moyen");
+		 testBouton3.setLocation(422, 190);
+		// addMouseListener(testBouton3);
+		 add(testBouton3);
+		 
+		 Bouton testBouton4 = new Bouton("Difficile");
+		 testBouton4.setLocation(503, 190);
+		 //addMouseListener(testBouton4);
+		 add(testBouton4);
+		 
+		/********/
+		
+		
+		
+		int var = 0;
 		
         //*******TEST FONCTIONS NOUVELLES
 		
