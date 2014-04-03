@@ -1,8 +1,11 @@
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.List;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
@@ -16,7 +19,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-public class Jouer extends JPanel implements MouseListener, MouseMotionListener{
+public class Jouer extends JPanel implements MouseListener, MouseMotionListener, ItemListener{
 
 	private Fenetre fenetre;
 	
@@ -31,6 +34,7 @@ public class Jouer extends JPanel implements MouseListener, MouseMotionListener{
 	private JButton bt_afficherQuizMoyen;
 	private JButton bt_afficherQuizDifficile;
 	private JButton bt_afficherAllQuiz;
+	private JButton bt_jouer;
 	
 	public String query_facile;
 	public String query_moyen;
@@ -41,6 +45,8 @@ public class Jouer extends JPanel implements MouseListener, MouseMotionListener{
 	private String db_moyen; // la moyenne
 	private String db_difficile; // le numéro du quiz 
 	private String db_all_quiz; // le nombre de parties
+	
+	private List list_quizcree;
 	
 	/**
 	 * Constructeur
@@ -78,12 +84,12 @@ public class Jouer extends JPanel implements MouseListener, MouseMotionListener{
 		
 		lb_titreListeQuiz = new JLabel("Liste des quiz existants");
 		lb_titreListeQuiz.setForeground(Color.WHITE);
-		lb_titreListeQuiz.setFont(new Font("Arial", Font.PLAIN, 18));
-		lb_titreListeQuiz.setBounds(155, 275, 300, 20);
+		lb_titreListeQuiz.setFont(new Font("Arial", Font.PLAIN, 25));
+		lb_titreListeQuiz.setBounds(150, 150, 300, 50);
 		add(lb_titreListeQuiz);
 		
-		bt_afficherQuizFacile = new JButton("Quiz Faciles");
-		bt_afficherQuizFacile.setBounds(370, 350, 120, 35);
+		bt_afficherQuizFacile = new JButton("Facile");
+		bt_afficherQuizFacile.setBounds(20, 210, 120, 35);
 		bt_afficherQuizFacile.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 					
@@ -91,8 +97,8 @@ public class Jouer extends JPanel implements MouseListener, MouseMotionListener{
 		});
 		add(bt_afficherQuizFacile);
 		
-		bt_afficherQuizMoyen = new JButton("Quiz Moyens");
-		bt_afficherQuizMoyen.setBounds(500, 350, 120, 35);
+		bt_afficherQuizMoyen = new JButton("Moyen");
+		bt_afficherQuizMoyen.setBounds(150, 210, 120, 35);
 		bt_afficherQuizMoyen.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -100,8 +106,8 @@ public class Jouer extends JPanel implements MouseListener, MouseMotionListener{
 		});
 		add(bt_afficherQuizMoyen);
 		
-		bt_afficherQuizDifficile = new JButton("Quiz Difficiles");
-		bt_afficherQuizDifficile.setBounds(620, 350, 120, 35);
+		bt_afficherQuizDifficile = new JButton("Difficile");
+		bt_afficherQuizDifficile.setBounds(280, 210, 120, 35);
 		bt_afficherQuizDifficile.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -109,14 +115,36 @@ public class Jouer extends JPanel implements MouseListener, MouseMotionListener{
 		});
 		add(bt_afficherQuizDifficile);
 		
-		bt_afficherAllQuiz = new JButton("Tous les Quiz");
-		bt_afficherAllQuiz.setBounds(740, 350, 120, 35);
+		bt_afficherAllQuiz = new JButton("Tous");
+		bt_afficherAllQuiz.setBounds(410, 210, 120, 35);
 		bt_afficherAllQuiz.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
 			}
 		});
 		add(bt_afficherAllQuiz);
+		
+		bt_jouer = new JButton("Jouer");
+		bt_jouer.setBounds(850, 500, 120, 35);
+		bt_jouer.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
+		add(bt_jouer);
+		
+				
+		// liste des quiz creer par cet admin
+		list_quizcree = new List();
+		list_quizcree.setBounds(100, 300, 500, 319);
+		list_quizcree.addItemListener(this);
+		list_quizcree.setBackground(Color.WHITE);
+		add(list_quizcree);
+		
+		// il faut remplir la liste avec une requete du style "recuperer tout les quiz creer par cet admin"
+		list_quizcree.add("quiz qui rox");
+		list_quizcree.add("quiz qui rox un peu moins");
+		
 		
 	}
 	
@@ -137,5 +165,11 @@ public class Jouer extends JPanel implements MouseListener, MouseMotionListener{
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		g.drawImage(Images.img_fond[0], 0, 0, this.getWidth(), this.getHeight(), null);
+	}
+
+	@Override
+	public void itemStateChanged(ItemEvent arg0) {
+		// TODO Auto-generated method stub
+		
 	}
 }
