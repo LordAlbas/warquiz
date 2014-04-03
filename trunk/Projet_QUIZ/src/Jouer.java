@@ -46,6 +46,7 @@ public class Jouer extends JPanel implements MouseListener, MouseMotionListener{
 	 * Constructeur
 	 */
 	public Jouer(Fenetre fen) {
+		setLayout(null);
 		fenetre = fen;  // on r�cup�re la classe m�re
 		
 		//****Inclusion du Header en 2 parties ****
@@ -63,7 +64,7 @@ public class Jouer extends JPanel implements MouseListener, MouseMotionListener{
         this.add(header2); 
         //****************************************
 		
-		lb_titreBienvenue = new JLabel("Bienvenue sur Warquiz !");
+		lb_titreBienvenue = new JLabel("JOUER");
 		lb_titreBienvenue.setForeground(Color.WHITE);
 		lb_titreBienvenue.setFont(new Font("Arial", Font.PLAIN, 42));
 		lb_titreBienvenue.setBounds(575, 105, 400, 50);
