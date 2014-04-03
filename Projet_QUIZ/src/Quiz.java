@@ -1,10 +1,20 @@
-import javax.swing.JButton;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.Timer;
+
+
 
 
 public class Quiz {
 	private Fenetre fenetre;
-	private String nomQuiz;
 	private Question[] questQuiz = new Question[20];
+	
+	private String nomQuiz;
+	private String difficulteQuiz;
+	private int tempsQuiz = 5000;	// ceci est le temps limite du quiz
+	public Timer timerQuiz; // cela est juste l'objet timer qui permet de decompter jusqu'au tempsQuiz.
+	// pour lancer le timer, faire timerQuiz.start(), et il execute le actionPerformed au bout de tempsQuiz milisecond.
 	
 	/**
 	 * Constructor
@@ -13,6 +23,13 @@ public class Quiz {
 	public Quiz(String nom, Fenetre fen) {
 		fenetre = fen;
 		nomQuiz = nom;
+		
+		timerQuiz = new Timer(tempsQuiz, new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("FIN DU TEMPS DE GAME !!!!");
+			}
+		});
+		timerQuiz.setRepeats(false);
 	}
 	
 	/**

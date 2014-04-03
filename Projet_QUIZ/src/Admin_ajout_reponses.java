@@ -102,6 +102,13 @@ public class Admin_ajout_reponses extends JPanel  implements MouseListener, Item
 		 * GO GO GO !!
 		 */
 		
+		/*
+		 * aussi, NEED repartir les classes dans des packages differents (clarete++)
+		 * ex:	Package CLASSES (les classes de DATA ex: quiz, question, joueur, etc)
+		 * 		Package BTN (toutes les classes de boutons)
+		 * 		Package TRAITEMENT (les classes de traitements comme celle-ci, creation_quiz etc.)
+		 */
+		
 		// bouton de suppression d'une reponse de la liste
 		Bouton_suppr_reponse bouton_suppr = new Bouton_suppr_reponse("Supprimer", list_reponses);
 		bouton_suppr.setBounds(365, 312, 89, 23);
