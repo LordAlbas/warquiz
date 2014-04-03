@@ -64,6 +64,16 @@ public class Creation_quiz extends JPanel implements MouseListener, MouseMotionL
 		lb_nomQuiz.setBounds(555, 125, 400, 30);
 		add(lb_nomQuiz);
 		
+		short y = 0;
+		while (y < 20 && quiz.getQuest(y) != null) {
+			tabQuest[y] = new JButton(quiz.getQuest(y).getQuestTxt());
+			tabQuest[y].addActionListener(quiz.getQuest(y));
+			tabQuest[y].setBounds(280, 200+(y*22), 200, 20);
+			add(tabQuest[y]);
+			y++;
+		}
+		repaint();
+
 		/*
 		 * Bouton d'AJOUT QUESTIONS
 		 */

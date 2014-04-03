@@ -28,8 +28,8 @@ public class Quiz {
 	public void setQuest(String txt, int i) {
 		questQuiz[i].setQuestTxt(txt);
 	}
-	public String getQuest(int i) {
-		return questQuiz[i].getQuestTxt();
+	public Question getQuest(int i) {
+		return questQuiz[i];
 	}
 	
 	/**
