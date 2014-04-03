@@ -7,6 +7,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+
 import javax.swing.*;
 
 /**
@@ -38,6 +39,18 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
     public static boolean recherche_bdd = false;
     public static boolean erreur_bdd = false;
     public static boolean connexion_admin = false; 
+    
+    
+    
+    
+    public static String login_admin; //variable prenant en compte les donnees de la colonne login_admin dans la BDD
+	public static String mdp_admin; //variable prenant en compte les donnees de la colonne mdp_admin dans la BDD
+	public static String login_usr; //variable prenant en compte les donnees de la colonne login_usr dans la BDD
+	public static String mdp_usr; //variable prenant en compte les donnees de la colonne mdp_usr dans la BDD
+	public static String query_admin; //variable dans lesquelles sont placées les requetes
+	public static String query_user; //variable dans lesquelles sont placées les requetes
+	public static String status;
+    
     
 	/**
 	 * Constructor

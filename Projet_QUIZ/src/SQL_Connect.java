@@ -15,6 +15,7 @@ public class SQL_Connect extends JPanel{
 	public static String query_admin; //variable dans lesquelles sont placées les requetes
 	public static String query_user; //variable dans lesquelles sont placées les requetes
 	public static String status;
+	public static int etat = 0;
 	
 	public SQL_Connect(Fenetre fen) {
 		fenetre = fen;
@@ -51,45 +52,50 @@ public class SQL_Connect extends JPanel{
             
             ResultSet rs_admin = stmt_admin.getResultSet();
             ResultSet rs_user = stmt_user.getResultSet();
+            while (etat == 0){
+	            while(rs_admin.next()){
+	            	Connexion.dbUsername_admin = rs_admin.getString("login_admin");
+	            	Connexion.dbPassword_admin = rs_admin.getString("mdp_admin");
+	            	Connexion.recherche_bdd = true;
+	            	Connexion.erreur_log = false;
+	                
+	                if(Connexion.dbUsername_admin.equals(Connexion.textField_pseudo.getText()) && Connexion.dbPassword_admin.equals(Connexion.textField_mdp.getText())){
+	                	Connexion.login = true;
+	                	Connexion.connexion_admin = true;
+	                	Connexion.fenetre.goToAccueil(selection);
+	                	Connexion.dbUsername_admin = Connexion.textField_pseudo.getText();
+	                	Connexion.login_general = Connexion.dbUsername_admin;
+	                	status = "ADMIN";
+	                }
+	                else{
+	                	Connexion.erreur_log = true;
+	                	
+	                }
+	                
+	            }
+	       
+	            //repaint(); 
+	            while(rs_user.next()){
+	            	Connexion.dbUsername_user = rs_user.getString("login_usr");
+	            	Connexion.dbPassword_user = rs_user.getString("mdp_usr");
+	            	Connexion.recherche_bdd = true;
+	            	Connexion.erreur_log = false;
+	            	//repaint();
+	                if(Connexion.dbUsername_user.equals(Connexion.textField_pseudo.getText()) && Connexion.dbPassword_user.equals(Connexion.textField_mdp.getText())){
+	                	Connexion.login = true;
+	                	Connexion.connexion_admin = false;
+	                	Connexion.fenetre.goToAccueil(selection);
+	                	Connexion.login_general = Connexion.dbUsername_user;
+	                	status = "USER";
+	                }
+	                else{
+	                	Connexion.erreur_log = true;
+	                	
+	                }
+	            }
+	            etat = 1;
+            }
             
-            while(rs_admin.next()){
-            	Connexion.dbUsername_admin = rs_admin.getString("login_admin");
-            	Connexion.dbPassword_admin = rs_admin.getString("mdp_admin");
-            	Connexion.recherche_bdd = true;
-            	Connexion.erreur_log = false;
-                
-                if(Connexion.dbUsername_admin.equals(Connexion.textField_pseudo.getText()) && Connexion.dbPassword_admin.equals(Connexion.textField_mdp.getText())){
-                	Connexion.login = true;
-                	Connexion.connexion_admin = true;
-                	Connexion.fenetre.goToAccueil(selection);
-                	Connexion.dbUsername_admin = Connexion.textField_pseudo.getText();
-                	Connexion.login_general = Connexion.dbUsername_admin;
-                	status = "ADMIN";
-                }
-                else{
-                	Connexion.erreur_log = true;
-                }
-                
-            }
-       
-            //repaint(); 
-            while(rs_user.next()){
-            	Connexion.dbUsername_user = rs_user.getString("login_usr");
-            	Connexion.dbPassword_user = rs_user.getString("mdp_usr");
-            	Connexion.recherche_bdd = true;
-            	Connexion.erreur_log = false;
-            	//repaint();
-                if(Connexion.dbUsername_user.equals(Connexion.textField_pseudo.getText()) && Connexion.dbPassword_user.equals(Connexion.textField_mdp.getText())){
-                	Connexion.login = true;
-                	Connexion.connexion_admin = false;
-                	Connexion.fenetre.goToAccueil(selection);
-                	Connexion.login_general = Connexion.dbUsername_user;
-                	status = "USER";
-                }
-                else{
-                	Connexion.erreur_log = true;
-                }
-            }
             Connexion.recherche_bdd=false;
             //repaint(); 
         } catch (SQLException eeee) {

@@ -8,7 +8,6 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -20,8 +19,6 @@ import javax.swing.JPanel;
 public class Jouer extends JPanel implements MouseListener, MouseMotionListener{
 
 	private Fenetre fenetre;
-	private String bouton_deco ="rien";
-	private String bouton_retour ="rien";
 	
 	private Header header1;
 	private Header_menu header2;
@@ -50,6 +47,21 @@ public class Jouer extends JPanel implements MouseListener, MouseMotionListener{
 	 */
 	public Jouer(Fenetre fen) {
 		fenetre = fen;  // on r�cup�re la classe m�re
+		
+		//****Inclusion du Header en 2 parties ****
+        header1 = new Header(fen);
+        header1.setBounds(0, 0, 444, 130);
+        header1.addMouseListener(header1);
+        header1.addMouseMotionListener(header1);
+        this.add(header1); 
+     
+
+        header2 = new Header_menu(fen);
+        header2.setBounds(444, 0, 580, 58);
+        header2.addMouseListener(header2);
+        header2.addMouseMotionListener(header2);
+        this.add(header2); 
+        //****************************************
 		
 		lb_titreBienvenue = new JLabel("Bienvenue sur Warquiz !");
 		lb_titreBienvenue.setForeground(Color.WHITE);
@@ -105,20 +117,6 @@ public class Jouer extends JPanel implements MouseListener, MouseMotionListener{
 		});
 		add(bt_afficherAllQuiz);
 		
-		//****Inclusion du Header en 2 parties ****
-        header1 = new Header(fen);
-        header1.setBounds(0, 0, 444, 130);
-        header1.addMouseListener(header1);
-        header1.addMouseMotionListener(header1);
-        this.add(header1); 
-     
-
-        header2 = new Header_menu(fen);
-        header2.setBounds(444, 0, 580, 58);
-        header2.addMouseListener(header2);
-        header2.addMouseMotionListener(header2);
-        this.add(header2); 
-        //****************************************
 	}
 	
 	/**
@@ -138,26 +136,5 @@ public class Jouer extends JPanel implements MouseListener, MouseMotionListener{
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		g.drawImage(Images.img_fond[0], 0, 0, this.getWidth(), this.getHeight(), null);
-		//g.drawImage(Images.img_element[0], 0, 0, this.getWidth(), (int)(this.getHeight() / 6.1230), null);		// dessine le header
-		
-		switch (bouton_deco){
-		case "rien" :
-			g.drawImage(Images.img_bouton[4], 960, 1, 46, 46, null);
-			break;				
-		case "CO/DECO_hover" :
-			g.drawImage(Images.img_bouton_hover[4], 960, 1, 46, 46, null);
-			bouton_deco = "rien";
-			break;
-		}
-		
-		switch (bouton_retour)	{
-		case "rien" :
-			g.drawImage(Images.img_bouton[5], 1, 685, 84, 83, null);
-			break;				
-		case "retour_hover" :
-			g.drawImage(Images.img_bouton_hover[5], 1, 685, 84, 83, null);
-			bouton_retour = "rien";
-			break;
-		}
 	}
 }
