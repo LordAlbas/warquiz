@@ -30,11 +30,11 @@ public class Jouer extends JPanel implements MouseListener, MouseMotionListener,
 	private JLabel lb_descrJouer;
 	private JLabel lb_titreListeQuiz;
 	
-	private JButton bt_afficherQuizFacile;
-	private JButton bt_afficherQuizMoyen;
-	private JButton bt_afficherQuizDifficile;
-	private JButton bt_afficherAllQuiz;
-	private JButton bt_jouer;
+	private Bouton bt_afficherQuizFacile;
+	private Bouton bt_afficherQuizMoyen;
+	private Bouton bt_afficherQuizDifficile;
+	private Bouton bt_afficherAllQuiz;
+	private Bouton bt_jouer;
 	
 	public String query_facile;
 	public String query_moyen;
@@ -88,8 +88,8 @@ public class Jouer extends JPanel implements MouseListener, MouseMotionListener,
 		lb_titreListeQuiz.setBounds(150, 150, 300, 50);
 		add(lb_titreListeQuiz);
 		
-		bt_afficherQuizFacile = new JButton("Facile");
-		bt_afficherQuizFacile.setBounds(20, 210, 120, 35);
+		bt_afficherQuizFacile = new Bouton("Facile");
+		bt_afficherQuizFacile.setLocation(20, 210);
 		bt_afficherQuizFacile.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 					
@@ -97,8 +97,8 @@ public class Jouer extends JPanel implements MouseListener, MouseMotionListener,
 		});
 		add(bt_afficherQuizFacile);
 		
-		bt_afficherQuizMoyen = new JButton("Moyen");
-		bt_afficherQuizMoyen.setBounds(150, 210, 120, 35);
+		bt_afficherQuizMoyen = new Bouton("Moyen");
+		bt_afficherQuizMoyen.setLocation(150, 210);
 		bt_afficherQuizMoyen.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -106,8 +106,8 @@ public class Jouer extends JPanel implements MouseListener, MouseMotionListener,
 		});
 		add(bt_afficherQuizMoyen);
 		
-		bt_afficherQuizDifficile = new JButton("Difficile");
-		bt_afficherQuizDifficile.setBounds(280, 210, 120, 35);
+		bt_afficherQuizDifficile = new Bouton("Difficile");
+		bt_afficherQuizDifficile.setLocation(280, 210);
 		bt_afficherQuizDifficile.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -115,8 +115,8 @@ public class Jouer extends JPanel implements MouseListener, MouseMotionListener,
 		});
 		add(bt_afficherQuizDifficile);
 		
-		bt_afficherAllQuiz = new JButton("Tous");
-		bt_afficherAllQuiz.setBounds(410, 210, 120, 35);
+		bt_afficherAllQuiz = new Bouton("Tous");
+		bt_afficherAllQuiz.setLocation(410, 210);
 		bt_afficherAllQuiz.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -124,8 +124,8 @@ public class Jouer extends JPanel implements MouseListener, MouseMotionListener,
 		});
 		add(bt_afficherAllQuiz);
 		
-		bt_jouer = new JButton("Jouer");
-		bt_jouer.setBounds(850, 500, 120, 35);
+		bt_jouer = new Bouton("Jouer");
+		bt_jouer.setLocation(850, 500);
 		bt_jouer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
