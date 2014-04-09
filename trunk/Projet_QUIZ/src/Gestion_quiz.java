@@ -122,6 +122,7 @@ public class Gestion_quiz extends JPanel implements MouseListener, ItemListener 
 			}
 		});
 		add(bt_modifQuiz);
+		
 
 		//****Inclusion du Header en 2 parties ****
         header1 = new Header(fen);
