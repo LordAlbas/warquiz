@@ -10,8 +10,10 @@ public class Quiz {
 	private Fenetre fenetre;
 	private Question[] questQuiz = new Question[20];
 	
+	// donnees de la TABLE SQL
+	private int id_quiz;
 	private int nb_questions;
-	private int id_admin;
+	private String login_admin;
 	private String nomQuiz;
 	private String difficulteQuiz;
 	private String categorieQuiz;
