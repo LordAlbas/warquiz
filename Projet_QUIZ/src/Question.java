@@ -8,20 +8,22 @@ import java.awt.event.MouseListener;
 public class Question implements ActionListener {
 	private Fenetre fenetre;
 	private Admin_ajout_reponses admin_ajout_reponses;
-	private Quiz currentQuiz;
 	
+	// donnees de la TABLE SQL
+	private Quiz currentQuiz; // needed pour l'id_quiz
+	private int id_question;
 	private String txt_question;
 	private Image img_question;
-	private int QuestNum;
 	private int nb_reponses;
 	private int nbr_reponses_juste;
+	
 	private String[] reponses = new String[10];
 	
 	public Question(String nomQuest, int i, Quiz curQuiz, Fenetre fen) {
 		fenetre = fen;
 		currentQuiz = curQuiz;
 		txt_question = nomQuest;
-		QuestNum = i;
+		id_question = i;
 	}
 	
 	public String getQuestTxt() {
@@ -44,7 +46,7 @@ public class Question implements ActionListener {
 	}
 	
 	public void actionPerformed(ActionEvent e) {
-		admin_ajout_reponses = new Admin_ajout_reponses(fenetre, currentQuiz, QuestNum);
+		admin_ajout_reponses = new Admin_ajout_reponses(fenetre, currentQuiz, id_question);
 		//System.out.println("CLICK SUR QUEST num -> "+QuestNum);
 		fenetre.getContentPane().setVisible(false);
 		admin_ajout_reponses.addMouseListener(admin_ajout_reponses);
