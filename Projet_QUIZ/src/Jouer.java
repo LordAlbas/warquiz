@@ -146,6 +146,27 @@ public class Jouer extends JPanel implements MouseListener, MouseMotionListener,
 		list_quizcree.add("quiz qui rox un peu moins");
 		
 		
+		/* #############################
+		 * 		TEST FATOUMA
+		 * #############################
+		 */
+		JButton bt_supprQuiz = new JButton("Test Fatouma");
+		bt_supprQuiz.setBounds(500, 700, 120, 35);
+		bt_supprQuiz.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Jouer_partie jouer_partie = new Jouer_partie(fenetre, new Quiz("Super Quiz", fenetre));
+				fenetre.getContentPane().setVisible(false);
+				jouer_partie.addMouseListener(jouer_partie);
+				fenetre.setContentPane(jouer_partie);
+				fenetre.getContentPane().setVisible(true);
+			}
+		});
+		add(bt_supprQuiz);
+		/* #############################
+		 * 		FIN TEST FATOUMA
+		 * #############################
+		 */
+		
 	}
 	
 	/**
