@@ -41,6 +41,10 @@ public class Gestion_quiz extends JPanel implements MouseListener, ItemListener 
 	
 	private List list_quizcree;
 	
+	/**
+	 * Constructor
+	 * @param fen
+	 */
 	public Gestion_quiz(Fenetre fen) {
 		setLayout(null);
 		fenetre = fen;

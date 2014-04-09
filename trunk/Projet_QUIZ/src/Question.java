@@ -1,3 +1,4 @@
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -8,22 +9,26 @@ public class Question implements ActionListener {
 	private Fenetre fenetre;
 	private Admin_ajout_reponses admin_ajout_reponses;
 	private Quiz currentQuiz;
-	private String QuestTxt;
+	
+	private String txt_question;
+	private Image img_question;
 	private int QuestNum;
+	private int nb_reponses;
+	private int nbr_reponses_juste;
 	private String[] reponses = new String[10];
 	
 	public Question(String nomQuest, int i, Quiz curQuiz, Fenetre fen) {
 		fenetre = fen;
 		currentQuiz = curQuiz;
-		QuestTxt = nomQuest;
+		txt_question = nomQuest;
 		QuestNum = i;
 	}
 	
 	public String getQuestTxt() {
-		return QuestTxt;
+		return txt_question;
 	}
 	public void setQuestTxt(String txt) {
-		QuestTxt = txt;
+		txt_question = txt;
 	}
 	
 	public String getReponse(int i) {

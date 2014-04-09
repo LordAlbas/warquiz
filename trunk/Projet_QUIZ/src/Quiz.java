@@ -10,8 +10,11 @@ public class Quiz {
 	private Fenetre fenetre;
 	private Question[] questQuiz = new Question[20];
 	
+	private int nb_questions;
+	private int id_admin;
 	private String nomQuiz;
 	private String difficulteQuiz;
+	private String categorieQuiz;
 	private int tempsQuiz = 5000;	// ceci est le temps limite du quiz
 	public Timer timerQuiz; // cela est juste l'objet timer qui permet de decompter jusqu'au tempsQuiz.
 	// pour lancer le timer, faire timerQuiz.start(), et il execute le actionPerformed au bout de tempsQuiz milisecond.
