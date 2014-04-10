@@ -84,6 +84,9 @@ public class Creation_quiz extends JPanel implements MouseListener, MouseMotionL
 				// AJOUTE UNE QUESTION AU CLICK
 				String nomQuest = (String)JOptionPane.showInputDialog("Texte de la question :");
 				if ((nomQuest != null) && (nomQuest.length() > 0)) {
+					// ATTENTION il faut securiser les inputs data en regard des requetes SQL qui vont utiliser ces data
+					// ca se fait avec des PREPARED_STATEMENT !!
+					
 					//System.out.println("Entry = "+nomQuest);
 					// Ajout d'une question au tableau de boutons (local) (il se charge lui-meme de l'ajouter a l'objet Quiz)
 					addQuestion(nextNull(tabQuest), tabQuest, nomQuest);
