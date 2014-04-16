@@ -11,6 +11,7 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -18,6 +19,8 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
 
 public class Jouer extends JPanel implements MouseListener, MouseMotionListener, ItemListener{
 
@@ -35,18 +38,9 @@ public class Jouer extends JPanel implements MouseListener, MouseMotionListener,
 	private Bouton bt_afficherQuizDifficile;
 	private Bouton bt_afficherAllQuiz;
 	private JButton bt_jouer;
-	
-	public String query_facile;
-	public String query_moyen;
-	public String query_difficile;
-	public String query_all_quiz;
-	
-	private String db_facile; // le score sorti de la bdd
-	private String db_moyen; // la moyenne
-	private String db_difficile; // le numéro du quiz 
-	private String db_all_quiz; // le nombre de parties
-	
+		
 	private List list_quizcree;
+	private Tableau Tableau_quiz;
 	
 	/**
 	 * Constructeur
