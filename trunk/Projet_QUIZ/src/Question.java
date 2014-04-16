@@ -11,7 +11,7 @@ public class Question implements ActionListener {
 	
 	// donnees de la TABLE SQL
 	private Quiz currentQuiz; // needed pour l'id_quiz
-	private int id_question;
+	private int id_question;  // unique seulement pour un quiz (donc de 0 a 9 pour 10questions)
 	private String txt_question;
 	private Image img_question;
 	private int nb_reponses;

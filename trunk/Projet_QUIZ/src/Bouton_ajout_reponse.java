@@ -24,8 +24,6 @@ public class Bouton_ajout_reponse extends JButton implements MouseListener {
 		if(list_reponses.getItemCount() < 10 && Admin_ajout_reponses.reponse.getText().length() != 0){
 			list_reponses.add(Admin_ajout_reponses.reponse.getText());
 			Admin_ajout_reponses.reponse.setText("");
-		} else {
-			System.out.println("ERREUR LIST PLEINE");
 		}
 	}
 

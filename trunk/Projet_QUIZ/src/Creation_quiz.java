@@ -6,6 +6,7 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -32,11 +33,13 @@ public class Creation_quiz extends JPanel implements MouseListener, MouseMotionL
 	private int val_i;
 	private Header header1;
 	private Header_menu header2;
-	
-	private int current_quest;
-	
-	// objet quiz qui se fait traiter actuelement
+		
+	// nom du quiz qui se fait traiter actuelement
 	private JLabel lb_nomQuiz;
+	
+	// selection de la difficulte du quiz
+	private String[] diff = {"default", "facile", "moyen", "difficile"};
+	private JComboBox cb_difficulte;
 	
 	// pour gestions des questions
 	private JButton[] tabQuest = new JButton[20];
@@ -57,37 +60,51 @@ public class Creation_quiz extends JPanel implements MouseListener, MouseMotionL
 		/*
 		 * JLabel affichage NOM QUIZ
 		 */
+		JLabel lb_titre = new JLabel("Nom du Quiz :");
+		lb_titre.setForeground(Color.WHITE);
+		lb_titre.setFont(new Font("Arial", Font.PLAIN, 22)); 
+		lb_titre.setBounds(565, 125, 400, 30);
+		add(lb_titre);
 		// ICI ON ENVOI LE NOM DU QUIZ (ou nom racourci)
 		lb_nomQuiz = new JLabel(monQuiz.getNom());
 		lb_nomQuiz.setForeground(Color.WHITE);
-		lb_nomQuiz.setFont(new Font("Arial", Font.PLAIN, 22)); 
-		lb_nomQuiz.setBounds(555, 125, 400, 30);
+		lb_nomQuiz.setFont(new Font("Arial", Font.BOLD, 32)); 
+		lb_nomQuiz.setBounds(615, 155, 400, 36);
 		add(lb_nomQuiz);
 		
-		short y = 0;
-		while (y < 20 && quiz.getQuest(y) != null) {
-			tabQuest[y] = new JButton(quiz.getQuest(y).getQuestTxt());
-			tabQuest[y].addActionListener(quiz.getQuest(y));
-			tabQuest[y].setBounds(280, 200+(y*22), 200, 20);
-			add(tabQuest[y]);
-			y++;
-		}
-		repaint();
+		/*
+		 * Selection de la difficulte du Quiz
+		 */
+		JLabel lb_diff = new JLabel("<html>Choix de la difficult&eacute;e du Quiz :</html>");
+		lb_diff.setForeground(Color.WHITE);
+		lb_diff.setFont(new Font("Arial", Font.PLAIN, 22)); 
+		lb_diff.setBounds(676, 240, 400, 30);
+		add(lb_diff);
+		// UTILISATION D'UNE COMBOBOX
+		cb_difficulte = new JComboBox(diff);
+		cb_difficulte.setSelectedItem(monQuiz.getDifficulteQuiz());
+		cb_difficulte.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.out.println(cb_difficulte.getSelectedItem());
+				monQuiz.setDifficulteQuiz(cb_difficulte.getSelectedItem().toString());
+			}
+		});
+		cb_difficulte.setBounds(720, 275, 100, 40);
+		add(cb_difficulte);
 
 		/*
 		 * Bouton d'AJOUT QUESTIONS
 		 */
-		JButton ajout_question = new JButton("Ajouter des questions");
-		ajout_question.setBounds(700, 180, 200, 40);
+		JButton ajout_question = new JButton("Ajouter une question");
+		ajout_question.setBounds(785, 380, 200, 40);
 		ajout_question.addActionListener(new ActionListener() {
+			// AJOUTE UNE QUESTION AU CLICK
 			public void actionPerformed(ActionEvent e) {
-				// AJOUTE UNE QUESTION AU CLICK
 				String nomQuest = (String)JOptionPane.showInputDialog("Texte de la question :");
 				if ((nomQuest != null) && (nomQuest.length() > 0)) {
 					// ATTENTION il faut securiser les inputs data en regard des requetes SQL qui vont utiliser ces data
 					// ca se fait avec des PREPARED_STATEMENT !!
 					
-					//System.out.println("Entry = "+nomQuest);
 					// Ajout d'une question au tableau de boutons (local) (il se charge lui-meme de l'ajouter a l'objet Quiz)
 					addQuestion(nextNull(tabQuest), tabQuest, nomQuest);
 				} else {
@@ -96,6 +113,24 @@ public class Creation_quiz extends JPanel implements MouseListener, MouseMotionL
 			}
 		});
 		add(ajout_question);
+		
+		/*
+		 * Creation et positionnement des boutons de questions deja creees
+		 */
+		JLabel lb_quest = new JLabel("Liste des questions :");
+		lb_quest.setForeground(Color.WHITE);
+		lb_quest.setFont(new Font("Arial", Font.PLAIN, 22)); 
+		lb_quest.setBounds(280, 200, 400, 30);
+		add(lb_quest);
+		short y = 0;
+		while (y < 20 && quiz.getQuest(y) != null) {
+			tabQuest[y] = new JButton(quiz.getQuest(y).getQuestTxt());
+			tabQuest[y].addActionListener(quiz.getQuest(y));
+			tabQuest[y].setBounds(280, 230+(y*22), 200, 20);
+			add(tabQuest[y]);
+			y++;
+		}
+		repaint();
 		
 		
 		//****Inclusion du Header en 2 parties ****
@@ -134,14 +169,24 @@ public class Creation_quiz extends JPanel implements MouseListener, MouseMotionL
 	 * @param tabQ
 	 */
 	public void addQuestion(int i, JButton[] tabQ, String nomQuest) {
+		boolean existAlready = false;
+		//System.out.println("Next NULL = tabQuest["+i+"], ecriture dedans ...");
 		if (i < 20) {
-			//System.out.println("Next NULL = tabQuest["+i+"], ecriture dedans ...");
-			tabQuest[i] = new JButton(nomQuest);
-			Question maQuest = monQuiz.ajoutQuestion(nomQuest);
-			tabQuest[i].addActionListener(maQuest);
-			tabQuest[i].setBounds(280, 200+(i*22), 200, 20);
-			add(tabQuest[i]);
-			repaint();
+			for (byte j=0; j<i; j++) {
+				//System.out.println("["+j+"] {{ "+nomQuest+" }} VS {{ "+tabQuest[j].getText()+" }}");
+				if (tabQuest[j].getText().equals(nomQuest))
+					existAlready = true;
+			}
+			if (!existAlready) {
+				tabQuest[i] = new JButton(nomQuest);
+				Question maQuest = monQuiz.ajoutQuestion(nomQuest);
+				tabQuest[i].addActionListener(maQuest);
+				tabQuest[i].setBounds(280, 230+(i*22), 200, 20);
+				add(tabQuest[i]);
+				repaint();
+			} else {
+				System.out.println("Question deja existante dans la liste.");
+			}
 			
 			// print de debug du tabQuest
 			/*for (byte j = 0; j<20; j++) {

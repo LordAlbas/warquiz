@@ -28,6 +28,7 @@ public class Quiz {
 	public Quiz(String nom, Fenetre fen) {
 		fenetre = fen;
 		nomQuiz = nom;
+		difficulteQuiz = "default";
 		
 		timerQuiz = new Timer(tempsQuiz, new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -35,6 +36,7 @@ public class Quiz {
 			}
 		});
 		timerQuiz.setRepeats(false);
+		// a partir d'ici, le timer est initialiser et pret a partir
 	}
 	
 	/**
@@ -52,6 +54,12 @@ public class Quiz {
 	}
 	public Question getQuest(int i) {
 		return questQuiz[i];
+	}
+	public void setDifficulteQuiz(String diff) {
+		difficulteQuiz = diff;
+	}
+	public String getDifficulteQuiz() {
+		return difficulteQuiz;
 	}
 	
 	/**

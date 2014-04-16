@@ -88,10 +88,11 @@ public class Gestion_quiz extends JPanel implements MouseListener, ItemListener 
 				String nomQuiz = (String)JOptionPane.showInputDialog("Nom du quiz :");
 				
 				if ((nomQuiz != null) && (nomQuiz.length() > 0)) {
-					System.out.println("Entry = "+nomQuiz);
+					//System.out.println("Entry = "+nomQuiz);
+					
 					// On ecrit pas encore dans la liste, ca sera fait avec une requete SQL au chargement de cette page
 					// donc tant que le quiz en creation n'a pas ete valide, il n'apparaitra pas ici.
-					//list_quizcree.add(nonQuiz);
+					//list_quizcree.add(nomQuiz);
 					
 					// creation d'un nouveau quiz
 					monQuiz = new Quiz(nomQuiz, fenetre);
