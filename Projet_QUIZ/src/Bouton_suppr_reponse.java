@@ -15,11 +15,8 @@ public class Bouton_suppr_reponse extends JButton implements MouseListener{
 	
 	@Override
 	public void mouseClicked(MouseEvent arg0) {
-		if(list_reponses.getItemCount() > 0){
-			System.out.println("DEMANDE SUPPRESSION");
+		if(list_reponses.getItemCount() > 0 && list_reponses.getSelectedItem() != null){
 			list_reponses.remove(list_reponses.getSelectedItem());
-		} else {
-			System.out.println("ERREUR SUPPRESSION");
 		}
 	}
 
