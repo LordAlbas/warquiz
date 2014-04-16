@@ -26,7 +26,7 @@ public class Bouton extends JButton implements MouseListener {
 	private String db_name_quiz_diff;
 	private String db_nbquestion_quiz_diff;
 	private String txt;
-	private JTable Tableau;
+	public static Tableau Tableau;
 	private Object[][] data;
 	private String[] columnNames = {"Nom","Nombre de questions"};
 	private ArrayList<String[]> Tab = new ArrayList<String[]>();
@@ -106,7 +106,7 @@ public class Bouton extends JButton implements MouseListener {
 				data2[i][1] = ((String[]) data[i])[1];
 			}
 
-			Tableau = new JTable(data2, columnNames);
+			Tableau = new Tableau(data2, columnNames);
 
 		} catch (ClassNotFoundException ee) {
 			ee.printStackTrace();
