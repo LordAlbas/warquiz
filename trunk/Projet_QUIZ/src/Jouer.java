@@ -34,7 +34,7 @@ public class Jouer extends JPanel implements MouseListener, MouseMotionListener,
 	private Bouton bt_afficherQuizMoyen;
 	private Bouton bt_afficherQuizDifficile;
 	private Bouton bt_afficherAllQuiz;
-	private Bouton bt_jouer;
+	private JButton bt_jouer;
 	
 	public String query_facile;
 	public String query_moyen;
@@ -124,11 +124,15 @@ public class Jouer extends JPanel implements MouseListener, MouseMotionListener,
 		});
 		add(bt_afficherAllQuiz);
 		
-		bt_jouer = new Bouton("Jouer");
-		bt_jouer.setLocation(850, 500);
+		bt_jouer = new JButton("Jouer");
+		bt_jouer.setBounds(850, 500, 120, 35);
 		bt_jouer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				Jouer_Quiz jouer_Quiz = new Jouer_Quiz(fenetre, new Quiz("Super Quiz", fenetre));
+				fenetre.getContentPane().setVisible(false);
+				jouer_Quiz.addMouseListener(jouer_Quiz);
+				fenetre.setContentPane(jouer_Quiz);
+				fenetre.getContentPane().setVisible(true);
 			}
 		});
 		add(bt_jouer);
