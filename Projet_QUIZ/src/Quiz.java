@@ -61,6 +61,12 @@ public class Quiz {
 	public String getDifficulteQuiz() {
 		return difficulteQuiz;
 	}
+	public void setId(int id) {
+		id_quiz = id;
+	}
+	public int getId() {
+		return id_quiz;
+	}
 	
 	/**
 	 * trouve la prochaine case de question vide.
