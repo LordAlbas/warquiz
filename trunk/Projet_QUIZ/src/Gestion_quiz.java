@@ -24,6 +24,7 @@ public class Gestion_quiz extends JPanel implements MouseListener, ItemListener 
 	private Fenetre fenetre;
 	private Creation_quiz creation_quiz;
 	private Quiz monQuiz;
+	private Quiz[] mesQuiz;
 	
 	private String bouton_deco ="rien";
 	private String bouton_retour ="rien";
@@ -48,6 +49,10 @@ public class Gestion_quiz extends JPanel implements MouseListener, ItemListener 
 	public Gestion_quiz(Fenetre fen) {
 		setLayout(null);
 		fenetre = fen;
+		
+		SQL_Requete_Quiz maRequete = new SQL_Requete_Quiz(fenetre);
+		maRequete.recup_Quiz();
+		mesQuiz = maRequete.getMesQuiz();
 		
 		// Titre et sous-titre en haut a droite
 		lb_titreGestion = new JLabel("Gestion des Quiz");
@@ -77,8 +82,11 @@ public class Gestion_quiz extends JPanel implements MouseListener, ItemListener 
 		add(list_quizcree);
 		
 		// il faut remplir la liste avec une requete du style "recuperer tout les quiz creer par cet admin"
-		list_quizcree.add("quiz qui rox");
-		list_quizcree.add("quiz qui rox un peu moins");
+		//list_quizcree.add("quiz qui rox");
+		//list_quizcree.add("quiz qui rox un peu moins");
+		for (short i=0; i<mesQuiz.length; i++) {
+			list_quizcree.add(mesQuiz[i].getNom());
+		}
 		
 		// bouton de creation / modification / suppression des quiz de la liste
 		bt_creerQuiz = new JButton("Creer quiz");
