@@ -10,6 +10,7 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
 import java.awt.Font;
 import java.awt.Color;
@@ -41,6 +42,9 @@ public class Creation_quiz extends JPanel implements MouseListener, MouseMotionL
 	// 205,92,92   => indian red
 	// 50,205,50   => lime green
 	// 250,130,100 => plus ou moins rouge-orange light
+	
+	// variables de positionnement
+	private int marginLeft = 180;
 	
 	// selection de la difficulte du quiz
 	private String[] diff = {"default", "facile", "moyen", "difficile"};
@@ -91,7 +95,7 @@ public class Creation_quiz extends JPanel implements MouseListener, MouseMotionL
 		cb_difficulte.setSelectedItem(monQuiz.getDifficulteQuiz());
 		cb_difficulte.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.out.println(cb_difficulte.getSelectedItem());
+				//System.out.println(cb_difficulte.getSelectedItem());
 				monQuiz.setDifficulteQuiz(cb_difficulte.getSelectedItem().toString());
 			}
 		});
@@ -121,22 +125,34 @@ public class Creation_quiz extends JPanel implements MouseListener, MouseMotionL
 		add(ajout_question);
 		
 		/*
-		 * Creation et positionnement des boutons de questions deja creees
+		 * Creation et positionnement des boutons de questions deja existante a l'arrivee sur cette page
 		 */
 		JLabel lb_quest = new JLabel("Liste des questions :");
 		lb_quest.setForeground(couleurLabel);
-		lb_quest.setFont(new Font("Arial", Font.PLAIN, 22)); 
-		lb_quest.setBounds(280, 190, 400, 30);
+		lb_quest.setFont(new Font("Arial", Font.PLAIN, 22));
+		lb_quest.setHorizontalAlignment(SwingConstants.CENTER);
+		lb_quest.setBounds(marginLeft, 190, 300, 30);
 		add(lb_quest);
 		short y = 0;
-		while (y < 20 && quiz.getQuest(y) != null) {
-			tabQuest[y] = new JButton(quiz.getQuest(y).getQuestTxt());
-			tabQuest[y].addActionListener(quiz.getQuest(y));
-			tabQuest[y].setBounds(230, 230+(y*23), 300, 20);
+		while (y < 20 && monQuiz.getQuest(y) != null) {
+			tabQuest[y] = new JButton(monQuiz.getQuest(y).getQuestTxt());
+			tabQuest[y].addActionListener(monQuiz.getQuest(y));
+			tabQuest[y].setBounds(marginLeft, 230+(y*23), 300, 20);
 			add(tabQuest[y]);
 			addNumQuestion();
 			y++;
 		}
+		
+		/*
+		 * Petit JLabel en pied de page
+		 */
+		JLabel lb_footer = new JLabel("* Maximum : 20 questions.");
+		lb_footer.setForeground(couleurLabel);
+		lb_footer.setFont(new Font("Arial", Font.PLAIN, 14));
+		lb_footer.setHorizontalAlignment(SwingConstants.CENTER);
+		lb_footer.setBounds(marginLeft, 700, 300, 20);
+		add(lb_footer);
+		
 		repaint();
 		
 		
@@ -188,7 +204,7 @@ public class Creation_quiz extends JPanel implements MouseListener, MouseMotionL
 				tabQuest[i] = new JButton(nomQuest);
 				Question maQuest = monQuiz.ajoutQuestion(nomQuest);
 				tabQuest[i].addActionListener(maQuest);
-				tabQuest[i].setBounds(230, 230+(i*23), 300, 20);
+				tabQuest[i].setBounds(marginLeft, 230+(i*23), 300, 20);
 				add(tabQuest[i]);
 				addNumQuestion();
 				repaint();
@@ -201,15 +217,19 @@ public class Creation_quiz extends JPanel implements MouseListener, MouseMotionL
 				System.out.println("\t tabQuest["+j+"] = "+tabQuest[j]);
 			}*/
 		} else {
-			System.out.println("tableau plein j'imagine (i = "+i+")");
+			System.out.println("tableau de questions plein (i = "+i+")");
 		}
 	}
 	
+	/**
+	 * Ajoute un numero de question a gauche du bouton de la question
+	 */
 	public void addNumQuestion() {
 		JLabel lb_numQuest = new JLabel("# "+numQuest);
 		lb_numQuest.setForeground(Color.WHITE);
 		lb_numQuest.setFont(new Font("Arial", Font.PLAIN, 16)); 
-		lb_numQuest.setBounds(190, 230+((numQuest-1)*23), 50, 20);
+		lb_numQuest.setBounds(marginLeft-70, 230+((numQuest-1)*23), 50, 20);
+		lb_numQuest.setHorizontalAlignment(SwingConstants.RIGHT);
 		add(lb_numQuest);
 		numQuest++;
 	}
