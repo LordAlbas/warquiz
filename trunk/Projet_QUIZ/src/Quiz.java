@@ -19,7 +19,7 @@ public class Quiz {
 	private String categorieQuiz;
 	private int tempsQuiz = 5000;	// ceci est le temps limite du quiz
 	public Timer timerQuiz; // cela est juste l'objet timer qui permet de decompter jusqu'au tempsQuiz.
-	// pour lancer le timer, faire timerQuiz.start(), et il execute le actionPerformed au bout de tempsQuiz milisecond.
+	// pour lancer le timer, faire timerQuiz.start(), et il execute le 'actionPerformed' au bout de 'tempsQuiz' milisecond.
 	
 	/**
 	 * Constructor

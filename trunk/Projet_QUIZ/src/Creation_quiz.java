@@ -36,13 +36,19 @@ public class Creation_quiz extends JPanel implements MouseListener, MouseMotionL
 		
 	// nom du quiz qui se fait traiter actuelement
 	private JLabel lb_nomQuiz;
+	private Color couleurLabel = new Color(250,130,100);  // Couleur des label... modif bienvenue!
+	// 65,105,225  => royal blue
+	// 205,92,92   => indian red
+	// 50,205,50   => lime green
+	// 250,130,100 => plus ou moins rouge-orange light
 	
 	// selection de la difficulte du quiz
 	private String[] diff = {"default", "facile", "moyen", "difficile"};
-	private JComboBox cb_difficulte;
+	private JComboBox<String> cb_difficulte;
 	
 	// pour gestions des questions
 	private JButton[] tabQuest = new JButton[20];
+	private int numQuest = 1;
 	
 	/**
 	 * CONSTRUCTOR
@@ -61,7 +67,7 @@ public class Creation_quiz extends JPanel implements MouseListener, MouseMotionL
 		 * JLabel affichage NOM QUIZ
 		 */
 		JLabel lb_titre = new JLabel("Nom du Quiz :");
-		lb_titre.setForeground(Color.WHITE);
+		lb_titre.setForeground(couleurLabel);
 		lb_titre.setFont(new Font("Arial", Font.PLAIN, 22)); 
 		lb_titre.setBounds(565, 125, 400, 30);
 		add(lb_titre);
@@ -76,12 +82,12 @@ public class Creation_quiz extends JPanel implements MouseListener, MouseMotionL
 		 * Selection de la difficulte du Quiz
 		 */
 		JLabel lb_diff = new JLabel("<html>Choix de la difficult&eacute;e du Quiz :</html>");
-		lb_diff.setForeground(Color.WHITE);
+		lb_diff.setForeground(couleurLabel);
 		lb_diff.setFont(new Font("Arial", Font.PLAIN, 22)); 
 		lb_diff.setBounds(676, 240, 400, 30);
 		add(lb_diff);
 		// UTILISATION D'UNE COMBOBOX
-		cb_difficulte = new JComboBox(diff);
+		cb_difficulte = new JComboBox<String>(diff);
 		cb_difficulte.setSelectedItem(monQuiz.getDifficulteQuiz());
 		cb_difficulte.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -96,7 +102,7 @@ public class Creation_quiz extends JPanel implements MouseListener, MouseMotionL
 		 * Bouton d'AJOUT QUESTIONS
 		 */
 		JButton ajout_question = new JButton("Ajouter une question");
-		ajout_question.setBounds(785, 380, 200, 40);
+		ajout_question.setBounds(795, 395, 200, 40);
 		ajout_question.addActionListener(new ActionListener() {
 			// AJOUTE UNE QUESTION AU CLICK
 			public void actionPerformed(ActionEvent e) {
@@ -118,16 +124,17 @@ public class Creation_quiz extends JPanel implements MouseListener, MouseMotionL
 		 * Creation et positionnement des boutons de questions deja creees
 		 */
 		JLabel lb_quest = new JLabel("Liste des questions :");
-		lb_quest.setForeground(Color.WHITE);
+		lb_quest.setForeground(couleurLabel);
 		lb_quest.setFont(new Font("Arial", Font.PLAIN, 22)); 
-		lb_quest.setBounds(280, 200, 400, 30);
+		lb_quest.setBounds(280, 190, 400, 30);
 		add(lb_quest);
 		short y = 0;
 		while (y < 20 && quiz.getQuest(y) != null) {
 			tabQuest[y] = new JButton(quiz.getQuest(y).getQuestTxt());
 			tabQuest[y].addActionListener(quiz.getQuest(y));
-			tabQuest[y].setBounds(280, 230+(y*22), 200, 20);
+			tabQuest[y].setBounds(230, 230+(y*23), 300, 20);
 			add(tabQuest[y]);
+			addNumQuestion();
 			y++;
 		}
 		repaint();
@@ -181,8 +188,9 @@ public class Creation_quiz extends JPanel implements MouseListener, MouseMotionL
 				tabQuest[i] = new JButton(nomQuest);
 				Question maQuest = monQuiz.ajoutQuestion(nomQuest);
 				tabQuest[i].addActionListener(maQuest);
-				tabQuest[i].setBounds(280, 230+(i*22), 200, 20);
+				tabQuest[i].setBounds(230, 230+(i*23), 300, 20);
 				add(tabQuest[i]);
+				addNumQuestion();
 				repaint();
 			} else {
 				System.out.println("Question deja existante dans la liste.");
@@ -195,6 +203,15 @@ public class Creation_quiz extends JPanel implements MouseListener, MouseMotionL
 		} else {
 			System.out.println("tableau plein j'imagine (i = "+i+")");
 		}
+	}
+	
+	public void addNumQuestion() {
+		JLabel lb_numQuest = new JLabel("# "+numQuest);
+		lb_numQuest.setForeground(Color.WHITE);
+		lb_numQuest.setFont(new Font("Arial", Font.PLAIN, 16)); 
+		lb_numQuest.setBounds(190, 230+((numQuest-1)*23), 50, 20);
+		add(lb_numQuest);
+		numQuest++;
 	}
 	
 	public void mouseDragged(MouseEvent arg0) {}
