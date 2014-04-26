@@ -50,6 +50,7 @@ public class Gestion_quiz extends JPanel implements MouseListener, ItemListener 
 		setLayout(null);
 		fenetre = fen;
 		
+		// on recupere tout les quiz qui existe pour les afficher
 		SQL_Requete_Quiz maRequete = new SQL_Requete_Quiz(fenetre);
 		maRequete.recup_Quiz();
 		mesQuiz = maRequete.getMesQuiz();
@@ -81,9 +82,7 @@ public class Gestion_quiz extends JPanel implements MouseListener, ItemListener 
 		list_quizcree.setBackground(new Color(54, 90, 118));
 		add(list_quizcree);
 		
-		// il faut remplir la liste avec une requete du style "recuperer tout les quiz creer par cet admin"
-		//list_quizcree.add("quiz qui rox");
-		//list_quizcree.add("quiz qui rox un peu moins");
+		// remplissage de la liste avec une requete du style "recuperer tout les quiz creer par cet admin"
 		for (short i=0; i<mesQuiz.length; i++) {
 			list_quizcree.add(mesQuiz[i].getNom());
 		}
@@ -122,9 +121,16 @@ public class Gestion_quiz extends JPanel implements MouseListener, ItemListener 
 		bt_supprQuiz.setBounds(370, 395, 120, 35);
 		bt_supprQuiz.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("click sur Modification de quiz");
+				//System.out.println("click sur Modification de quiz");
+				// nouvelle instance de creation_quiz qui recupere l'objet quiz choisi
+				creation_quiz = new Creation_quiz(fenetre, mesQuiz[list_quizcree.getSelectedIndex()]);
+				fenetre.getContentPane().setVisible(false);
+				creation_quiz.addMouseListener(creation_quiz);
+				fenetre.setContentPane(creation_quiz);
+				fenetre.getContentPane().setVisible(true);
 			}
 		});
+		bt_supprQuiz.setEnabled(false);
 		add(bt_supprQuiz);
 		
 		bt_modifQuiz = new JButton("Supprimer quiz");
@@ -134,6 +140,7 @@ public class Gestion_quiz extends JPanel implements MouseListener, ItemListener 
 				System.out.println("click sur Suppression de quiz");
 			}
 		});
+		bt_modifQuiz.setEnabled(false);
 		add(bt_modifQuiz);
 		
 
@@ -162,7 +169,18 @@ public class Gestion_quiz extends JPanel implements MouseListener, ItemListener 
 	public void mouseMoved(MouseEvent e) {}
 	
 	// pour la liste des quiz cree
-	public void itemStateChanged(ItemEvent arg0) {}
+	public void itemStateChanged(ItemEvent arg0) {
+		/*
+		 * grise ou degrise les bouton MODIFIER et SUPPRIMER suivant si on selectionne un quiz ou pas
+		 */
+		if (list_quizcree.getSelectedItem() != null) {
+			bt_modifQuiz.setEnabled(true);
+			bt_supprQuiz.setEnabled(true);
+		} else {
+			bt_modifQuiz.setEnabled(false);
+			bt_supprQuiz.setEnabled(false);
+		}
+	}
 	
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
