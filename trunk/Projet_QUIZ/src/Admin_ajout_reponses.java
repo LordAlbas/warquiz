@@ -21,14 +21,17 @@ public class Admin_ajout_reponses extends JPanel  implements MouseListener, Item
 	
 	private Fenetre fenetre;
 	private Quiz current_quiz;
+	private int idQuest;
 	
 	private JLabel txf_nomQuiz;
 	private JLabel txf_nomQuest;
 	
 	private List list_reponses;
-	static JTextField reponse;
+	private JTextField reponse;
 	
 	private JButton bt_retour;
+	
+	private Color couleurLabel = new Color(250,130,100);
 	
 	Header header1;
 	Header_menu header2;
@@ -44,57 +47,72 @@ public class Admin_ajout_reponses extends JPanel  implements MouseListener, Item
 		// recuperation des attributs
 		fenetre = fen;
 		current_quiz = monQuiz;
+		idQuest = numQuest;
 		
-		// creation du titre qui recupere le nom du Quiz (avec son JLabel qui va bien)
+		/*
+		 * Creation du titre qui recupere le nom du Quiz (avec son JLabel qui va bien)
+		 */
 		JLabel lb_nomQuiz = new JLabel("Nom du Quiz : ");
-		lb_nomQuiz.setForeground(Color.WHITE);
-		lb_nomQuiz.setHorizontalAlignment(SwingConstants.RIGHT);
-		lb_nomQuiz.setBounds(20, 150, 140, 30);
+		lb_nomQuiz.setForeground(couleurLabel);
+		lb_nomQuiz.setFont(new Font("Arial", Font.PLAIN, 22)); 
+		lb_nomQuiz.setBounds(565, 125, 400, 30);
 		add(lb_nomQuiz);
 		txf_nomQuiz = new JLabel(current_quiz.getNom());	// recupere le nom du quiz
 		txf_nomQuiz.setForeground(Color.WHITE);
-		txf_nomQuiz.setFont(new Font("Arial", Font.BOLD, 22));
-		txf_nomQuiz.setBounds(160, 150, 500, 30);
+		txf_nomQuiz.setFont(new Font("Arial", Font.BOLD, 32));
+		txf_nomQuiz.setBounds(615, 155, 400, 36);
 		add(txf_nomQuiz);
 		
-		// creation du sous-titre qui recupere le nom de la question (avec son JLabel qui va bien)
+		/*
+		 * Creation du sous-titre qui recupere le nom de la question (avec son JLabel qui va bien)
+		 */
 		JLabel lb_nomQuest = new JLabel("Nom de la question : ");
 		lb_nomQuest.setForeground(Color.WHITE);
-		lb_nomQuiz.setHorizontalAlignment(SwingConstants.RIGHT);
+		lb_nomQuest.setHorizontalAlignment(SwingConstants.RIGHT);
 		lb_nomQuest.setBounds(20, 180, 140, 30);
 		add(lb_nomQuest);
-		txf_nomQuest = new JLabel(monQuiz.getQuest(numQuest).getQuestTxt());	// recupere le nom de la question
+		txf_nomQuest = new JLabel(monQuiz.getQuest(idQuest).getQuestTxt());	// recupere le nom de la question
 		txf_nomQuest.setForeground(Color.WHITE);
 		txf_nomQuest.setFont(new Font("Arial", Font.BOLD, 16));
 		txf_nomQuest.setBounds(160, 180, 500, 30);
 		add(txf_nomQuest);
 		
-		// creation de la liste de reponses (type List)
+		/*
+		 * Creation de la liste de reponses (type List)
+		 */
 		list_reponses = new List();
 		list_reponses.setBounds(171, 312, 188, 319);
 		list_reponses.addItemListener(this);
 		add(list_reponses);
 		
 		short y = 0;
-		while (y<10 && current_quiz.getQuest(numQuest).getReponse(y) != null) {
-			System.out.println("Rep = "+current_quiz.getQuest(numQuest).getReponse(y));
+		while (y<10 && current_quiz.getQuest(idQuest).getReponse(y) != null) {
+			System.out.println("Rep = "+current_quiz.getQuest(idQuest).getReponse(y));
 			System.out.println("Add in List -> "+y);
-			list_reponses.add(current_quiz.getQuest(numQuest).getReponse(y));
+			list_reponses.add(current_quiz.getQuest(idQuest).getReponse(y));
 			y++;
 		}
-		
-		//list_reponses.add("R�ponse A");
-		
+				
 		reponse = new JTextField();
 		reponse.setBounds(171, 247, 188, 20);
 		reponse.setText("blabla");
 		add(reponse);
 		reponse.setColumns(10);
 		
-		// bouton d'ajout d'une reponse dans la liste
-		Bouton_ajout_reponse bouton_addRep = new Bouton_ajout_reponse("Ajouter", list_reponses);
-		bouton_addRep.setBounds(365, 246, 89, 23);
-		add(bouton_addRep);
+		/*
+		 * Bouton d'ajout d'une reponse dans la liste
+		 */
+		JButton bt_addRep = new JButton("Ajouter");
+		bt_addRep.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(list_reponses.getItemCount() < 10 && reponse.getText().length() != 0){
+					list_reponses.add(reponse.getText());
+					reponse.setText("");
+				}
+			}
+		});
+		bt_addRep.setBounds(365, 246, 89, 23);
+		add(bt_addRep);
 		
 		/* plzzzz fait toi plaiz et netoie tout le code d'ajout et suppression des reponses !!!
 		 * NEXT STEP c'est ca qu'il faut faire ->> gerer tout ce qui est QUIZ/QUESTION/REPONSES dans leurs classes correspondante
@@ -107,13 +125,26 @@ public class Admin_ajout_reponses extends JPanel  implements MouseListener, Item
 		 * ex:	Package CLASSES (les classes de DATA ex: quiz, question, joueur, etc)
 		 * 		Package BTN (toutes les classes de boutons)
 		 * 		Package TRAITEMENT (les classes de traitements comme celle-ci, creation_quiz etc.)
+		 * 		Package SQL (tous les acces a la BDD)
 		 */
 		
-		// bouton de suppression d'une reponse de la liste
-		Bouton_suppr_reponse bouton_suppr = new Bouton_suppr_reponse("Supprimer", list_reponses);
-		bouton_suppr.setBounds(365, 312, 89, 23);
-		add(bouton_suppr);
+		/*
+		 * Bouton de suppression d'une reponse de la liste
+		 */
+		JButton bt_delRep = new JButton("Supprimer");
+		bt_delRep.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(list_reponses.getItemCount() > 0 && list_reponses.getSelectedItem() != null){
+					list_reponses.remove(list_reponses.getSelectedItem());
+				}
+			}
+		});
+		bt_delRep.setBounds(365, 312, 89, 23);
+		add(bt_delRep);
 		
+		/*
+		 * Bouton pour retourner a la page du Quiz
+		 */
 		bt_retour = new JButton("Retour au Quiz");
 		bt_retour.setBounds(700, 700, 130, 40);
 		bt_retour.addActionListener(new ActionListener() {

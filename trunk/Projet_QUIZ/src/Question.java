@@ -24,18 +24,24 @@ public class Question implements ActionListener {
 		currentQuiz = curQuiz;
 		txt_question = nomQuest;
 		id_question = i;
+		nb_reponses = 0;
+		nbr_reponses_juste = 0;
 	}
 	
-	public String getQuestTxt() {
-		return txt_question;
-	}
-	public void setQuestTxt(String txt) {
-		txt_question = txt;
-	}
-	
-	public String getReponse(int i) {
-		return reponses[i];
-	}
+	/**
+	 * Getters / Setters
+	 */
+	// txt_question
+	public String getQuestTxt() { return txt_question; }
+	public void setQuestTxt(String txt) { txt_question = txt; }
+	// nb_reponses
+	public int getNb_reponses() { return nb_reponses; }
+	public void setNb_reponses(int nb) { nb_reponses = nb; }
+	// nbr_reponses_juste
+	public int getNbr_reponses_juste() { return nbr_reponses_juste; }
+	public void setNbr_reponses_juste(int nbj) { nbr_reponses_juste = nbj; }
+	// reponses[]
+	public String getReponse(int i) { return reponses[i]; }
 	
 	public void addReponse(String rep) {
 		int i = 0;

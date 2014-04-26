@@ -4,8 +4,6 @@ import java.awt.event.ActionListener;
 import javax.swing.Timer;
 
 
-
-
 public class Quiz {
 	private Fenetre fenetre;
 	private Question[] questQuiz = new Question[20];
@@ -28,6 +26,7 @@ public class Quiz {
 	public Quiz(String nom, Fenetre fen) {
 		fenetre = fen;
 		nomQuiz = nom;
+		nb_questions = 0;
 		difficulteQuiz = "default";
 		
 		timerQuiz = new Timer(tempsQuiz, new ActionListener() {
@@ -49,9 +48,6 @@ public class Quiz {
 	public String getNom() {
 		return nomQuiz;
 	}
-	public void setQuest(String txt, int i) {
-		questQuiz[i].setQuestTxt(txt);
-	}
 	public Question getQuest(int i) {
 		return questQuiz[i];
 	}
@@ -67,6 +63,12 @@ public class Quiz {
 	public int getId() {
 		return id_quiz;
 	}
+	public void setNb_questions(int nb) {
+		nb_questions = nb;
+	}
+	public int getNb_questions() {
+		return nb_questions;
+	}
 	
 	/**
 	 * trouve la prochaine case de question vide.
@@ -80,9 +82,17 @@ public class Quiz {
 		return i;
 	}
 	
+	/**
+	 * Creation d'un nouvel objet Question (linked to this quiz)
+	 * Called by 'Creation_quiz.java'
+	 * on method 'public void addQuestion()'
+	 * @param nomQuest
+	 * @return
+	 */
 	public Question ajoutQuestion(String nomQuest) {
 		int i = nextNull();
 		questQuiz[i] = new Question(nomQuest, i, this, fenetre);
+		nb_questions++;
 		return questQuiz[i];
 	}
 }

@@ -21,10 +21,11 @@ public class Bouton_ajout_reponse extends JButton implements MouseListener {
 	
 	public void mouseClicked(MouseEvent e) {
 		// TODO Auto-generated method stub
-		if(list_reponses.getItemCount() < 10 && Admin_ajout_reponses.reponse.getText().length() != 0){
-			list_reponses.add(Admin_ajout_reponses.reponse.getText());
-			Admin_ajout_reponses.reponse.setText("");
-		}
+		//if(list_reponses.getItemCount() < 10 && Admin_ajout_reponses.reponse.getText().length() != 0){
+		//	list_reponses.add(Admin_ajout_reponses.reponse.getText());
+		//	Admin_ajout_reponses.reponse.setText("");
+		//}
+		System.out.println("Weshbien");
 	}
 
 	public void mouseEntered(MouseEvent e) {}
