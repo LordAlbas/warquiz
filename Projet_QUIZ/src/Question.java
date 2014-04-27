@@ -43,12 +43,17 @@ public class Question implements ActionListener {
 	// reponses[]
 	public Reponse getReponse(int i) { return reponses[i]; }
 	
-	public void addReponse(String rep) {
+	public Reponse addReponse(String rep) {
 		int i = 0;
 		while(i<10 && reponses[i] != null)
 			i++;
-		if (i<10)
+		if (i<10) {
 			reponses[i] = new Reponse(rep, i, this);
+			nb_reponses++;
+			return reponses[i];
+		} else {
+			return null;
+		}
 	}
 	
 	public void actionPerformed(ActionEvent e) {

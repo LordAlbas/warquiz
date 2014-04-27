@@ -1,7 +1,9 @@
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 
-public class Reponse {
+public class Reponse implements ActionListener {
 	
 	// donnees de la TABLE SQL
 	private Question question;	// needed pour l'id_question
@@ -18,6 +20,7 @@ public class Reponse {
 		question = quest;
 		txt_reponse = nomRep;
 		id_reponse = rangRep;
+		statut_rep = false;
 	}
 	
 	/**
@@ -37,4 +40,9 @@ public class Reponse {
 	public boolean getStatutRep() { return statut_rep; }
 	public void setStatutRep(boolean strep) { statut_rep = strep; }
 	// faire un 'getQuestion()' si besoin mais a priori no need.
+
+	public void actionPerformed(ActionEvent e) {
+		System.out.println("w00t!");
+		statut_rep = (statut_rep) ? false : true;
+	}
 }
