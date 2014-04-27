@@ -40,35 +40,21 @@ public class Quiz {
 	
 	/**
 	 * Getters / Setters
-	 * @param nom
 	 */
-	public void setNom(String nom) {
-		nomQuiz = nom;
-	}
-	public String getNom() {
-		return nomQuiz;
-	}
-	public Question getQuest(int i) {
-		return questQuiz[i];
-	}
-	public void setDifficulteQuiz(String diff) {
-		difficulteQuiz = diff;
-	}
-	public String getDifficulteQuiz() {
-		return difficulteQuiz;
-	}
-	public void setId(int id) {
-		id_quiz = id;
-	}
-	public int getId() {
-		return id_quiz;
-	}
-	public void setNb_questions(int nb) {
-		nb_questions = nb;
-	}
-	public int getNb_questions() {
-		return nb_questions;
-	}
+	// nomQuiz
+	public void setNom(String nom) { nomQuiz = nom; }
+	public String getNom() { return nomQuiz; }
+	// difficulteQuiz
+	public void setDifficulteQuiz(String diff) { difficulteQuiz = diff; }
+	public String getDifficulteQuiz() { return difficulteQuiz; }
+	// id_quiz
+	public void setId(int id) { id_quiz = id; }
+	public int getId() { return id_quiz; }
+	// nb_questions
+	public void setNb_questions(int nb) { nb_questions = nb; }
+	public int getNb_questions() { return nb_questions; }
+	// questQuiz[i]
+	public Question getQuest(int i) { return questQuiz[i]; }
 	
 	/**
 	 * trouve la prochaine case de question vide.

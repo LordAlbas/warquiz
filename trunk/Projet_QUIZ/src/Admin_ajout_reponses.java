@@ -64,7 +64,7 @@ public class Admin_ajout_reponses extends JPanel  implements MouseListener, Item
 		add(txf_nomQuiz);
 		
 		/*
-		 * Creation du sous-titre qui recupere le nom de la question (avec son JLabel qui va bien)
+		 * Creation du sous-titre qui recupere le nom de la Question
 		 */
 		JLabel lb_nomQuest = new JLabel("Nom de la question : ");
 		lb_nomQuest.setForeground(Color.WHITE);
@@ -89,7 +89,7 @@ public class Admin_ajout_reponses extends JPanel  implements MouseListener, Item
 		while (y<10 && current_quiz.getQuest(idQuest).getReponse(y) != null) {
 			System.out.println("Rep = "+current_quiz.getQuest(idQuest).getReponse(y));
 			System.out.println("Add in List -> "+y);
-			list_reponses.add(current_quiz.getQuest(idQuest).getReponse(y));
+			list_reponses.add(current_quiz.getQuest(idQuest).getReponse(y).getTxtReponse());
 			y++;
 		}
 				
@@ -114,24 +114,11 @@ public class Admin_ajout_reponses extends JPanel  implements MouseListener, Item
 		bt_addRep.setBounds(365, 246, 89, 23);
 		add(bt_addRep);
 		
-		/* plzzzz fait toi plaiz et netoie tout le code d'ajout et suppression des reponses !!!
-		 * NEXT STEP c'est ca qu'il faut faire ->> gerer tout ce qui est QUIZ/QUESTION/REPONSES dans leurs classes correspondante
-		 * et absolument PAS dans les classes de traitemets (ex: Admin_ajout_reponses / Bouton_suppr/ajout_reponse etc.)
-		 * GO GO GO !!
-		 */
-		
-		/*
-		 * aussi, NEED repartir les classes dans des packages differents (clarete++)
-		 * ex:	Package CLASSES (les classes de DATA ex: quiz, question, joueur, etc)
-		 * 		Package BTN (toutes les classes de boutons)
-		 * 		Package TRAITEMENT (les classes de traitements comme celle-ci, creation_quiz etc.)
-		 * 		Package SQL (tous les acces a la BDD)
-		 */
-		
 		/*
 		 * Bouton de suppression d'une reponse de la liste
 		 */
 		JButton bt_delRep = new JButton("Supprimer");
+		bt_delRep.setBounds(365, 312, 89, 23);
 		bt_delRep.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(list_reponses.getItemCount() > 0 && list_reponses.getSelectedItem() != null){
@@ -139,7 +126,6 @@ public class Admin_ajout_reponses extends JPanel  implements MouseListener, Item
 				}
 			}
 		});
-		bt_delRep.setBounds(365, 312, 89, 23);
 		add(bt_delRep);
 		
 		/*
@@ -158,6 +144,20 @@ public class Admin_ajout_reponses extends JPanel  implements MouseListener, Item
 			}
 		});
 		add(bt_retour);
+		
+		/* plzzzz fait toi plaiz et netoie tout le code d'ajout et suppression des reponses !!!
+		 * NEXT STEP c'est ca qu'il faut faire ->> gerer tout ce qui est QUIZ/QUESTION/REPONSES dans leurs classes correspondante
+		 * et absolument PAS dans les classes de traitemets (ex: Admin_ajout_reponses / Bouton_suppr/ajout_reponse etc.)
+		 * GO GO GO !!
+		 */
+		
+		/*
+		 * aussi, NEED repartir les classes dans des packages differents (clarete++)
+		 * ex:	Package CLASSES (les classes de DATA ex: quiz, question, joueur, etc)
+		 * 		Package BTN (toutes les classes de boutons)
+		 * 		Package TRAITEMENT (les classes de traitements comme celle-ci, creation_quiz etc.)
+		 * 		Package SQL (tous les acces a la BDD)
+		 */
 		
 		//****Inclusion du Header en 2 parties ****
         header1 = new Header(fen);
