@@ -45,10 +45,10 @@ public class Question implements ActionListener {
 	
 	public void addReponse(String rep) {
 		int i = 0;
-		while(i<10 && reponses[i] != null) {
+		while(i<10 && reponses[i] != null)
 			i++;
-		}
-		reponses[i] = new Reponse(rep, i, this);
+		if (i<10)
+			reponses[i] = new Reponse(rep, i, this);
 	}
 	
 	public void actionPerformed(ActionEvent e) {
