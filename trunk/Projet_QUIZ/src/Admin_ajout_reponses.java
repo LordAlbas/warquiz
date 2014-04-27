@@ -10,6 +10,7 @@ import java.awt.event.MouseListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
@@ -26,8 +27,8 @@ public class Admin_ajout_reponses extends JPanel  implements MouseListener, Item
 	private JLabel txf_nomQuiz;
 	private JLabel txf_nomQuest;
 	
-	private List list_reponses;
-	private JTextField reponse;
+	//private List list_reponses;
+	private JTextField[] reponses = new JTextField[10];
 	
 	private JButton bt_retour;
 	
@@ -64,6 +65,19 @@ public class Admin_ajout_reponses extends JPanel  implements MouseListener, Item
 		add(txf_nomQuiz);
 		
 		/*
+		 * Bouton d'AJOUT REPONSES
+		 */
+		JButton ajout_question = new JButton("<html>Ajouter une r&eacute;ponse</html>");
+		ajout_question.setBounds(795, 395, 200, 40);
+		ajout_question.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				// Ajoute une reponse au moment du click
+				addReponse();
+			}
+		});
+		add(ajout_question);
+		
+		/*
 		 * Creation du sous-titre qui recupere le nom de la Question
 		 */
 		JLabel lb_nomQuest = new JLabel("Nom de la question : ");
@@ -78,61 +92,23 @@ public class Admin_ajout_reponses extends JPanel  implements MouseListener, Item
 		add(txf_nomQuest);
 		
 		/*
-		 * Creation de la liste de reponses (type List)
+		 * Recuperation et Creation des reponses deja existante
 		 */
-		list_reponses = new List();
-		list_reponses.setBounds(171, 312, 188, 319);
-		list_reponses.addItemListener(this);
-		add(list_reponses);
-		
 		short y = 0;
 		while (y<10 && current_quiz.getQuest(idQuest).getReponse(y) != null) {
 			System.out.println("Rep = "+current_quiz.getQuest(idQuest).getReponse(y));
 			System.out.println("Add in List -> "+y);
-			list_reponses.add(current_quiz.getQuest(idQuest).getReponse(y).getTxtReponse());
+			reponses[y] = new JTextField();
+			reponses[y].setBounds(390, 246+(y*30), 130, 23);
+			add(reponses[y]);
 			y++;
 		}
-				
-		reponse = new JTextField();
-		reponse.setBounds(171, 247, 188, 20);
-		reponse.setText("blabla");
-		add(reponse);
-		reponse.setColumns(10);
-		
-		/*
-		 * Bouton d'ajout d'une reponse dans la liste
-		 */
-		JButton bt_addRep = new JButton("Ajouter");
-		bt_addRep.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if(list_reponses.getItemCount() < 10 && reponse.getText().length() != 0){
-					list_reponses.add(reponse.getText());
-					reponse.setText("");
-				}
-			}
-		});
-		bt_addRep.setBounds(365, 246, 89, 23);
-		add(bt_addRep);
-		
-		/*
-		 * Bouton de suppression d'une reponse de la liste
-		 */
-		JButton bt_delRep = new JButton("Supprimer");
-		bt_delRep.setBounds(365, 312, 89, 23);
-		bt_delRep.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				if(list_reponses.getItemCount() > 0 && list_reponses.getSelectedItem() != null){
-					list_reponses.remove(list_reponses.getSelectedItem());
-				}
-			}
-		});
-		add(bt_delRep);
 		
 		/*
 		 * Bouton pour retourner a la page du Quiz
 		 */
 		bt_retour = new JButton("Retour au Quiz");
-		bt_retour.setBounds(700, 700, 130, 40);
+		bt_retour.setBounds(855, 570, 130, 40);
 		bt_retour.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// on retourne sur la fenetre Creation_quiz
@@ -174,6 +150,18 @@ public class Admin_ajout_reponses extends JPanel  implements MouseListener, Item
         this.add(header2); 
         //****************************************
 		
+	}
+	
+	public void addReponse() {
+		byte i = 0;
+		while (i<10 && reponses[i] != null)
+			i++;
+		if (i<10) {
+			reponses[i] = new JTextField();
+			reponses[i].setBounds(100+((i%2)*300), 300+((i/2)*30), 250, 23); // calcul dont je suis fier. (no need 'if' when pro)
+			add(reponses[i]);
+			repaint();
+		}
 	}
 	
 	public void mouseDragged(MouseEvent arg0) {}

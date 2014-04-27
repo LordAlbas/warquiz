@@ -80,7 +80,11 @@ public class Fenetre extends JFrame {
 	 * @param selection
 	 */
 	public void goToConnexionAlerte(String selection) {
-		int rep_deco = JOptionPane.showConfirmDialog(null, "Voulez-vous vraiment vous d�connecter ?");
+		int rep_deco = JOptionPane.showConfirmDialog(null, 
+				"<html>Voulez-vous vraiment vous d&eacute;connecter ?</html>", 
+				"Deconnexion", 
+				JOptionPane.OK_CANCEL_OPTION, 
+				JOptionPane.WARNING_MESSAGE);
 		if(rep_deco == 0){
 			this.getContentPane().setVisible(false);	
 			this.setContentPane(connexion);
@@ -165,7 +169,11 @@ public class Fenetre extends JFrame {
 	 * @param selection
 	 */
 	public void goToQuitter(String selection) {
-		int rep = JOptionPane.showConfirmDialog(null, "Voulez-vous vraiment quitter ?");
+		int rep = JOptionPane.showConfirmDialog(null, 
+				"Voulez-vous vraiment quitter ?", 
+				"Partir ? ... deja ?", 
+				JOptionPane.OK_CANCEL_OPTION, 
+				JOptionPane.WARNING_MESSAGE);
 		if(rep == 0){
 			this.dispose();
 		}

@@ -92,8 +92,10 @@ public class Gestion_quiz extends JPanel implements MouseListener, ItemListener 
 		bt_creerQuiz.setBounds(370, 350, 120, 35);
 		bt_creerQuiz.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String nomQuiz = (String)JOptionPane.showInputDialog("Nom du quiz :");
-				
+				String nomQuiz = (String)JOptionPane.showInputDialog(null, 
+																	"Nom du quiz :", 
+																	"Creation Quiz",
+																	JOptionPane.QUESTION_MESSAGE);
 				if ((nomQuiz != null) && (nomQuiz.length() > 0)) {
 					//System.out.println("Entry = "+nomQuiz);
 					
@@ -138,6 +140,10 @@ public class Gestion_quiz extends JPanel implements MouseListener, ItemListener 
 		bt_modifQuiz.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				System.out.println("click sur Suppression de quiz");
+				/* Exemple d'action sur liste
+				 * if (list_reponses.getItemCount() > 0 && list_reponses.getSelectedItem() != null)
+				 * 	 list_reponses.remove(list_reponses.getSelectedItem());
+				 */
 			}
 		});
 		bt_modifQuiz.setEnabled(false);

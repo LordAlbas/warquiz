@@ -77,8 +77,12 @@ public class Quiz {
 	 */
 	public Question ajoutQuestion(String nomQuest) {
 		int i = nextNull();
-		questQuiz[i] = new Question(nomQuest, i, this, fenetre);
-		nb_questions++;
-		return questQuiz[i];
+		if (i<20) {
+			questQuiz[i] = new Question(nomQuest, i, this, fenetre);
+			nb_questions++;
+			return questQuiz[i];
+		} else {
+			return null;
+		}
 	}
 }

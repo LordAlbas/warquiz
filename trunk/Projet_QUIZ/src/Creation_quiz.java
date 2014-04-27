@@ -111,13 +111,16 @@ public class Creation_quiz extends JPanel implements MouseListener, MouseMotionL
 		ajout_question.addActionListener(new ActionListener() {
 			// AJOUTE UNE QUESTION AU CLICK
 			public void actionPerformed(ActionEvent e) {
-				String nomQuest = (String)JOptionPane.showInputDialog("Texte de la question :");
+				String nomQuest = (String)JOptionPane.showInputDialog(null,
+						"Texte de la question :",
+						"Creation Quiz",
+						JOptionPane.QUESTION_MESSAGE);
 				if ((nomQuest != null) && (nomQuest.length() > 0)) {
 					// ATTENTION il faut securiser les inputs data en regard des requetes SQL qui vont utiliser ces data
 					// ca se fait avec des PREPARED_STATEMENT !!
 					
 					// Ajout d'une question au tableau de boutons (local) (il se charge lui-meme de l'ajouter a l'objet Quiz)
-					addQuestion(nextNull(tabQuest), tabQuest, nomQuest);
+					addQuestion(nextNull(tabQuest), nomQuest);
 				} else {
 					System.out.println("Aucune string retournee");
 				}
@@ -167,6 +170,25 @@ public class Creation_quiz extends JPanel implements MouseListener, MouseMotionL
 		lb_footer.setBounds(marginLeft, 705, 300, 20);
 		add(lb_footer);
 		
+		/*
+		 * Bouton pour Valider le Quiz
+		 */
+		JButton bt_valider = new JButton("Valider le Quiz");
+		bt_valider.setBounds(855, 570, 130, 40);
+		bt_valider.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String error_msg = "Il manque ci et ca pour valider ce quiz !";
+				if (error_msg != "")
+					JOptionPane.showMessageDialog(null, 
+							error_msg, 
+							"Quiz non valide", 
+							JOptionPane.ERROR_MESSAGE);
+				else
+					;// validerQuiz();
+			}
+		});
+		add(bt_valider);
+		
 		repaint();
 		
 		
@@ -203,9 +225,9 @@ public class Creation_quiz extends JPanel implements MouseListener, MouseMotionL
 	 * Ecrit dans la prochaine case vide de tabQuestion un nouveau bouton
 	 * (sauf si le tableau est plein)
 	 * @param i
-	 * @param tabQ
 	 */
-	public void addQuestion(int i, JButton[] tabQ, String nomQuest) {
+	public void addQuestion(int i, String nomQuest) {
+		String err_msg = "";
 		boolean existAlready = false;
 		//System.out.println("Next NULL = tabQuest["+i+"], ecriture dedans ...");
 		if (i < 20) {
@@ -225,7 +247,7 @@ public class Creation_quiz extends JPanel implements MouseListener, MouseMotionL
 				addNbReponses(i);
 				repaint();
 			} else {
-				System.out.println("Question deja existante dans la liste.");
+				err_msg = "<html>Cette question existe d&eacute;j&agrave; dans ce quiz !</html>";
 			}
 			
 			// print de debug du tabQuest
@@ -233,8 +255,13 @@ public class Creation_quiz extends JPanel implements MouseListener, MouseMotionL
 				System.out.println("\t tabQuest["+j+"] = "+tabQuest[j]);
 			}*/
 		} else {
-			System.out.println("tableau de questions plein (i = "+i+")");
+			err_msg = "Le nombre de question maximum est atteint !";
 		}
+		if (err_msg != "")
+			JOptionPane.showMessageDialog(null, 
+					err_msg, 
+					"Erreur dans l'ajout de question", 
+					JOptionPane.ERROR_MESSAGE);
 	}
 	
 	/**
