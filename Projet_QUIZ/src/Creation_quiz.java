@@ -45,6 +45,8 @@ public class Creation_quiz extends JPanel implements MouseListener, MouseMotionL
 	
 	// variables de positionnement
 	private int marginLeft = 180;
+	private int cellSpace = 24;
+	JLabel lb_hint = new JLabel("");
 	
 	// selection de la difficulte du quiz
 	private String[] diff = {"default", "facile", "moyen", "difficile"};
@@ -52,7 +54,6 @@ public class Creation_quiz extends JPanel implements MouseListener, MouseMotionL
 	
 	// pour gestions des questions
 	private JButton[] tabQuest = new JButton[20];
-	private int numQuest = 1;
 	
 	/**
 	 * CONSTRUCTOR
@@ -131,16 +132,29 @@ public class Creation_quiz extends JPanel implements MouseListener, MouseMotionL
 		lb_quest.setForeground(couleurLabel);
 		lb_quest.setFont(new Font("Arial", Font.PLAIN, 22));
 		lb_quest.setHorizontalAlignment(SwingConstants.CENTER);
-		lb_quest.setBounds(marginLeft, 190, 300, 30);
+		lb_quest.setBounds(marginLeft, 180, 300, 30);
 		add(lb_quest);
 		short y = 0;
 		while (y < 20 && monQuiz.getQuest(y) != null) {
 			tabQuest[y] = new JButton(monQuiz.getQuest(y).getQuestTxt());
 			tabQuest[y].addActionListener(monQuiz.getQuest(y));
-			tabQuest[y].setBounds(marginLeft, 230+(y*23), 300, 20);
+			tabQuest[y].setBounds(marginLeft, 220+(y*cellSpace), 300, 20);
 			add(tabQuest[y]);
-			addNumQuestion();
+			addNumQuestion(y);
+			addNbReponses(y);
 			y++;
+		}
+		
+		/*
+		 * Si aucune question pour le moment, mettre un petit message.
+		 */
+		if (tabQuest[0] == null) {
+			lb_hint.setText("<html>&emsp;Ce quiz ne contient pour le moment aucune question.<br/><br/>&emsp;Aidez-vous du bouton sur votre droite pour commencer &agrave; ajouter des questions.</html>");
+			lb_hint.setForeground(Color.WHITE);
+			lb_hint.setFont(new Font("Arial", Font.PLAIN, 16));
+			//lb_hint.setHorizontalAlignment(SwingConstants.CENTER);
+			lb_hint.setBounds(marginLeft, 250, 300, 100);
+			add(lb_hint);
 		}
 		
 		/*
@@ -150,7 +164,7 @@ public class Creation_quiz extends JPanel implements MouseListener, MouseMotionL
 		lb_footer.setForeground(couleurLabel);
 		lb_footer.setFont(new Font("Arial", Font.PLAIN, 14));
 		lb_footer.setHorizontalAlignment(SwingConstants.CENTER);
-		lb_footer.setBounds(marginLeft, 700, 300, 20);
+		lb_footer.setBounds(marginLeft, 705, 300, 20);
 		add(lb_footer);
 		
 		repaint();
@@ -201,12 +215,14 @@ public class Creation_quiz extends JPanel implements MouseListener, MouseMotionL
 					existAlready = true;
 			}
 			if (!existAlready) {
+				lb_hint.setText("");
 				tabQuest[i] = new JButton(nomQuest);
 				Question maQuest = monQuiz.ajoutQuestion(nomQuest);
 				tabQuest[i].addActionListener(maQuest);
-				tabQuest[i].setBounds(marginLeft, 230+(i*23), 300, 20);
+				tabQuest[i].setBounds(marginLeft, 220+(i*cellSpace), 300, 20);
 				add(tabQuest[i]);
-				addNumQuestion();
+				addNumQuestion(i);
+				addNbReponses(i);
 				repaint();
 			} else {
 				System.out.println("Question deja existante dans la liste.");
@@ -224,14 +240,25 @@ public class Creation_quiz extends JPanel implements MouseListener, MouseMotionL
 	/**
 	 * Ajoute un numero de question a gauche du bouton de la question
 	 */
-	public void addNumQuestion() {
-		JLabel lb_numQuest = new JLabel("# "+numQuest);
+	public void addNumQuestion(int i) {
+		JLabel lb_numQuest = new JLabel("# "+(i+1));
 		lb_numQuest.setForeground(Color.WHITE);
 		lb_numQuest.setFont(new Font("Arial", Font.PLAIN, 16)); 
-		lb_numQuest.setBounds(marginLeft-70, 230+((numQuest-1)*23), 50, 20);
+		lb_numQuest.setBounds(marginLeft-70, 220+(i*cellSpace), 50, 20);
 		lb_numQuest.setHorizontalAlignment(SwingConstants.RIGHT);
 		add(lb_numQuest);
-		numQuest++;
+	}
+	
+	/**
+	 * Ajoute les "nb_rep / nb_repJuste" a droite du bouton de la question
+	 */
+	public void addNbReponses(int i) {
+		JLabel lb_nbRep = new JLabel("<html>(<span style='color:green;'>"+monQuiz.getQuest(i).getNbr_reponses_juste()+"</span>/<span style='color:red;'>"+monQuiz.getQuest(i).getNb_reponses()+"</span>)</html>");
+		lb_nbRep.setForeground(Color.WHITE);
+		lb_nbRep.setFont(new Font("Arial", Font.PLAIN, 16)); 
+		lb_nbRep.setBounds(marginLeft+320, 220+(i*cellSpace), 50, 20);
+		//lb_nbRep.setHorizontalAlignment(SwingConstants.RIGHT);
+		add(lb_nbRep);
 	}
 	
 	public void mouseDragged(MouseEvent arg0) {}

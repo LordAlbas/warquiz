@@ -17,7 +17,7 @@ public class Question implements ActionListener {
 	private int nb_reponses;
 	private int nbr_reponses_juste;
 	
-	private String[] reponses = new String[10];
+	private Reponse[] reponses = new Reponse[10];
 	
 	public Question(String nomQuest, int i, Quiz curQuiz, Fenetre fen) {
 		fenetre = fen;
@@ -41,14 +41,14 @@ public class Question implements ActionListener {
 	public int getNbr_reponses_juste() { return nbr_reponses_juste; }
 	public void setNbr_reponses_juste(int nbj) { nbr_reponses_juste = nbj; }
 	// reponses[]
-	public String getReponse(int i) { return reponses[i]; }
+	public Reponse getReponse(int i) { return reponses[i]; }
 	
 	public void addReponse(String rep) {
 		int i = 0;
-		while(i<10 && reponses[i] != "") {
+		while(i<10 && reponses[i] != null) {
 			i++;
 		}
-		reponses[i] = rep;
+		reponses[i] = new Reponse(rep, i, this);
 	}
 	
 	public void actionPerformed(ActionEvent e) {

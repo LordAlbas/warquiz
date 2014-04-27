@@ -5,7 +5,7 @@ public class Reponse {
 	
 	// donnees de la TABLE SQL
 	private Question question;	// needed pour l'id_question
-	private int id_reponse;
+	private int id_reponse;		// unique seulement pour une Question (donc de 0 a 9 pour 10reponses)
 	private String txt_reponse;
 	private Image img_reponse;
 	private boolean statut_rep; // 1=bonne reponse	0=mauvaise reponse
@@ -14,8 +14,10 @@ public class Reponse {
 	 * Constructor
 	 * @param quest
 	 */
-	public Reponse(Question quest) {
+	public Reponse(String nomRep, int rangRep, Question quest) {
 		question = quest;
+		txt_reponse = nomRep;
+		id_reponse = rangRep;
 	}
 	
 	/**
@@ -34,4 +36,5 @@ public class Reponse {
 	// statut_rep
 	public boolean getStatutRep() { return statut_rep; }
 	public void setStatutRep(boolean strep) { statut_rep = strep; }
+	// faire un 'getQuestion()' si besoin mais a priori no need.
 }
