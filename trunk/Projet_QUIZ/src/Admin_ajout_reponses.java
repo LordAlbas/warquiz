@@ -9,9 +9,11 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
@@ -29,11 +31,13 @@ public class Admin_ajout_reponses extends JPanel  implements MouseListener, Item
 	
 	//private List list_reponses;
 	private JTextField[] reponses = new JTextField[10];
+	private JCheckBox[] statusRep = new JCheckBox[10];
 	
 	private JButton bt_retour;
 	
+	private char questChar;
 	private Color couleurLabel = new Color(250,130,100);
-	
+		
 	Header header1;
 	Header_menu header2;
 	
@@ -49,6 +53,7 @@ public class Admin_ajout_reponses extends JPanel  implements MouseListener, Item
 		fenetre = fen;
 		current_quiz = monQuiz;
 		idQuest = numQuest;
+		questChar = 'A';
 		
 		/*
 		 * Creation du titre qui recupere le nom du Quiz (avec son JLabel qui va bien)
@@ -81,14 +86,16 @@ public class Admin_ajout_reponses extends JPanel  implements MouseListener, Item
 		 * Creation du sous-titre qui recupere le nom de la Question
 		 */
 		JLabel lb_nomQuest = new JLabel("Nom de la question : ");
-		lb_nomQuest.setForeground(Color.WHITE);
-		lb_nomQuest.setHorizontalAlignment(SwingConstants.RIGHT);
-		lb_nomQuest.setBounds(20, 180, 140, 30);
+		lb_nomQuest.setForeground(couleurLabel);
+		lb_nomQuest.setFont(new Font("Arial", Font.PLAIN, 22));
+		lb_nomQuest.setHorizontalAlignment(SwingConstants.CENTER);
+		lb_nomQuest.setBounds(80, 190, 300, 30);
 		add(lb_nomQuest);
-		txf_nomQuest = new JLabel(monQuiz.getQuest(idQuest).getQuestTxt());	// recupere le nom de la question
+		txf_nomQuest = new JLabel("<html>"+monQuiz.getQuest(idQuest).getQuestTxt()+"</html>");	// recupere le nom de la question
 		txf_nomQuest.setForeground(Color.WHITE);
-		txf_nomQuest.setFont(new Font("Arial", Font.BOLD, 16));
-		txf_nomQuest.setBounds(160, 180, 500, 30);
+		txf_nomQuest.setFont(new Font("Arial", Font.BOLD, 20));
+		txf_nomQuest.setVerticalAlignment(SwingConstants.NORTH);
+		txf_nomQuest.setBounds(60, 225, 500, 70);
 		add(txf_nomQuest);
 		
 		/*
@@ -96,11 +103,15 @@ public class Admin_ajout_reponses extends JPanel  implements MouseListener, Item
 		 */
 		short y = 0;
 		while (y<10 && current_quiz.getQuest(idQuest).getReponse(y) != null) {
-			System.out.println("Rep = "+current_quiz.getQuest(idQuest).getReponse(y));
-			System.out.println("Add in List -> "+y);
-			reponses[y] = new JTextField();
-			reponses[y].setBounds(390, 246+(y*30), 130, 23);
+			reponses[y] = new JTextField(current_quiz.getQuest(idQuest).getReponse(y).getTxtReponse());
+			reponses[y].setBounds(65+((y%2)*315), 330+((y/2)*70), 265, 23);
 			add(reponses[y]);
+			addNbRep(y);
+			statusRep[y] = new JCheckBox();
+			statusRep[y].setBounds(35+((y%2)*315), 328+((y/2)*70), 200, 25);
+			statusRep[y].setSelected(current_quiz.getQuest(idQuest).getReponse(y).getStatutRep());
+			statusRep[y].addActionListener(current_quiz.getQuest(idQuest).getReponse(y));
+			add(statusRep[y]);
 			y++;
 		}
 		
@@ -111,7 +122,19 @@ public class Admin_ajout_reponses extends JPanel  implements MouseListener, Item
 		bt_retour.setBounds(855, 570, 130, 40);
 		bt_retour.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// on retourne sur la fenetre Creation_quiz
+				// On sauve l'etat actuel
+				short i=0;
+				short y=0;
+				while (i<10 && reponses[i] != null) {
+					current_quiz.getQuest(idQuest).getReponse(i).setTxtReponse(reponses[i].getText());
+					current_quiz.getQuest(idQuest).getReponse(i).setStatutRep(statusRep[i].isSelected());
+					if (statusRep[i].isSelected())
+						y++;
+					i++;
+				}
+				current_quiz.getQuest(idQuest).setNbr_reponses_juste(y);
+				
+				// ..puis on retourne sur la fenetre Creation_quiz
 				Creation_quiz creation_quiz = new Creation_quiz(fenetre, current_quiz);
 				fenetre.getContentPane().setVisible(false);
 				creation_quiz.addMouseListener(creation_quiz);
@@ -157,11 +180,36 @@ public class Admin_ajout_reponses extends JPanel  implements MouseListener, Item
 		while (i<10 && reponses[i] != null)
 			i++;
 		if (i<10) {
-			reponses[i] = new JTextField();
-			reponses[i].setBounds(100+((i%2)*300), 300+((i/2)*30), 250, 23); // calcul dont je suis fier. (no need 'if' when pro)
+			reponses[i] = new JTextField("Write here..");
+			reponses[i].setBounds(65+((i%2)*315), 330+((i/2)*70), 265, 23); // calcul dont je suis fier. (no need 'if')
+			//reponses[i].setFont(new Font("Arial", Font.PLAIN, 16));
 			add(reponses[i]);
+			addNbRep(i);
+			addChkBox(i);
 			repaint();
+		} else {
+			JOptionPane.showMessageDialog(null, 
+						"<html>Nombre limite de r&eacute;ponses atteint !<br/>Maximum : 10 r&eacute;ponses. </html>", 
+						"Erreur dans l'ajout de reponse", 
+						JOptionPane.ERROR_MESSAGE);
 		}
+	}
+	
+	public void addNbRep(int i) {
+		JLabel lb_nbRep = new JLabel("<html>Reponse <b><span style='color:rgb(250,130,100);'>"+(questChar)+"</span>/</b></html>");
+		lb_nbRep.setForeground(Color.WHITE);
+		lb_nbRep.setFont(new Font("Arial", Font.PLAIN, 16)); 
+		lb_nbRep.setBounds(50+((i%2)*315), 300+((i/2)*70), 200, 25);
+		add(lb_nbRep);
+		questChar++;
+	}
+	
+	public void addChkBox(int i) {
+		Reponse rep = current_quiz.getQuest(idQuest).addReponse(reponses[i].getText());
+		statusRep[i] = new JCheckBox();
+		statusRep[i].addActionListener(rep);
+		statusRep[i].setBounds(35+((i%2)*315), 328+((i/2)*70), 200, 25);
+		add(statusRep[i]);
 	}
 	
 	public void mouseDragged(MouseEvent arg0) {}
