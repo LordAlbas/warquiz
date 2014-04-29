@@ -32,7 +32,7 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 	static String selection; 	// defini quel bouton est selectionne
 	public static String dbUsername_admin, dbPassword_admin; // Variables permettant de comparer le champ de login/mdp avec les champs de la bdd de la table ADMIN
 	public static String dbUsername_user, dbPassword_user; // Variables permettant de comparer le champ de login/mdp avec les champs de la bdd de la table UTILISATEUR
-    public static String login_general;
+	public static String login_general;
 	
 	public static boolean login = false;
     public static boolean erreur_log = false;

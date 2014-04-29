@@ -11,11 +11,11 @@ public class Fenetre extends JFrame {
 
 	// Definition des JPanel de l'appli (en private pour le moment)
 	public Statistiques statistiques ;
+	public Connexion connexion;
 	public Accueil accueil;
 	public Credits credits;
 	public Jouer jouer;
 	public Inscription inscription;
-	public Connexion connexion;
 	public Gestion_quiz gestion_quiz;
 
 	/**
