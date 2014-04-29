@@ -8,6 +8,18 @@ public class Tableau extends JTable{
 	 public Object donnees[][];
 	 public String titres[];
  
+	 
+	 public void Tableau(){
+		 this.setSize(323, 275);
+	 }
+	 public String getDonnees(int i){
+		 return (String) donnees[0][i];
+	 }
+	 
+	 public String getTitres(int i){
+		 return titres[i];
+	 }
+	 
 	 public Tableau(Object donnees[][], String titres[]){ 
 	    this.donnees = donnees; 
 	    this.titres = titres; 

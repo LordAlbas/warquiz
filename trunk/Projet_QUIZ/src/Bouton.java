@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
@@ -28,11 +29,19 @@ public class Bouton extends JButton implements MouseListener {
 	private String txt;
 	public static Tableau Tableau;
 	private Object[][] data;
+	public ArrayList<String>tableau_quiz;
+	private int k =0;
+	public static boolean ok =false;
 	private String[] columnNames = {"Nom","Nombre de questions"};
 	private ArrayList<String[]> Tab = new ArrayList<String[]>();
-
+	Statistiques statistiques;
+	
+	
 	public Bouton(String texte) {
-
+		
+		
+		tableau_quiz = new ArrayList<String>();
+		tableau_quiz.add("Test");
 		String[] columnNames = { "Nom du Quiz", "Nombre de questions" }; // création
 																			// des
 																			// titres.
@@ -52,15 +61,18 @@ public class Bouton extends JButton implements MouseListener {
 		switch (txt) {
 		case "Tous":
 			diff = 0;
+			k=0;
 			break;
 		case "Facile":
 			diff = 1;
+			k=0;
 			break;
 		case "Moyen":
 			diff = 2;
 			break;
 		case "Difficile":
 			diff = 3;
+			k=0;
 			break;
 		}
 	}
@@ -83,6 +95,7 @@ public class Bouton extends JButton implements MouseListener {
 			stmt_quiz_diff.executeQuery(query_quiz_diff);
 			ResultSet rs_quiz_diff = stmt_quiz_diff.getResultSet();
 			// int cpt_diff = 500;
+			k=0;
 			while (rs_quiz_diff.next()) {
 				db_name_quiz_diff = rs_quiz_diff.getString("NOM_QUIZ"); // on récupère le nom
 				db_nbquestion_quiz_diff = rs_quiz_diff.getString("NB_QUESTION"); // on récupère le nb de question
@@ -94,10 +107,22 @@ public class Bouton extends JButton implements MouseListener {
 				
 				String[] inTab = { db_name_quiz_diff, db_nbquestion_quiz_diff };
 				Tab.add(inTab);
-
-				System.out.println(quiz_diff);
+				
+				tableau_quiz.add(db_name_quiz_diff);
+				//System.out.println(quiz_diff);
+				
+				
+				//ajout des quiz dans tableau
+				
+				k++;
 			}
-
+			
+			/*
+			for(int v=0;v<tableau_quiz.size();v++){
+				System.out.println(tableau_quiz.get(v));
+			}
+			*/
+			
 			Object[] data = Tab.toArray();
 			Object[][] data2 = new Object[data.length][2];
 
@@ -105,14 +130,22 @@ public class Bouton extends JButton implements MouseListener {
 				data2[i][0] = ((String[]) data[i])[0];
 				data2[i][1] = ((String[]) data[i])[1];
 			}
-
+			
 			Tableau = new Tableau(data2, columnNames);
-
+			statistiques.AffTab(tableau_quiz);
+			ok = true;
+			
+			repaint();
+			//System.out.println(Tableau.getDonnees(0));
 		} catch (ClassNotFoundException ee) {
 			ee.printStackTrace();
 		} catch (SQLException e1) {
 			e1.printStackTrace();
 		}
+	}
+	
+	public String getQuiz(int i){
+		return tableau_quiz.get(i);
 	}
 
 	public void mouseEntered(MouseEvent e) {

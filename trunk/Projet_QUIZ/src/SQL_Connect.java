@@ -89,6 +89,7 @@ public class SQL_Connect extends JPanel{
 	                else{
 	                	Connexion.erreur_log = true;
 	                	
+	                	
 	                }
 	                Connexion.recherche_bdd = true;
 	            	Connexion.erreur_log = false;

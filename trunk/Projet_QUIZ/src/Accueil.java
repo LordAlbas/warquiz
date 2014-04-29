@@ -7,6 +7,8 @@ import java.awt.event.MouseMotionListener;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTable;
+import javax.swing.JScrollBar;
 
 
 public class Accueil extends JPanel implements MouseListener, MouseMotionListener {
@@ -21,6 +23,7 @@ public class Accueil extends JPanel implements MouseListener, MouseMotionListene
 	private Header header1;
 	private Header_menu header2;
 	private JLabel L_info;
+	private JTable table;
 
 	/**
 	 * Constructeur
@@ -30,7 +33,7 @@ public class Accueil extends JPanel implements MouseListener, MouseMotionListene
 		repaint();
 		fenetre = fen; // on recupere la classe mere
         setLayout(null);
-		
+
 		//****Inclusion du Header en 2 parties ****
         header1 = new Header(fen);
         header1.setBounds(0, 0, 444, 130);
@@ -51,8 +54,7 @@ public class Accueil extends JPanel implements MouseListener, MouseMotionListene
 	        L_info.setFont(new Font("Arial", Font.PLAIN, 30));
 	        L_info.setBounds(575, 50, 500, 150);
 			add(L_info);
-
-
+			
 	}
 	
 	/**
@@ -63,6 +65,10 @@ public class Accueil extends JPanel implements MouseListener, MouseMotionListene
 		// On recupere X et Y au click
 		if (e.getX() >= 120 && e.getX() <= 490 && e.getY() >= 260 && e.getY() <= 345) { // JOUER
 			System.out.print("JOUER");
+			
+		
+			
+			
 			selection = "jouer";
 			if(Connexion.connexion_admin){
 				fenetre.goToGerer(selection); // on appel la fonction qui va changer de panel

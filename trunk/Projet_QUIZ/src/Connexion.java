@@ -61,6 +61,8 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 		fenetre = fen;
 		setLayout(null); // on met le layout en absolute pour mettre les JTextbox où on veut
 
+		
+
 		// Création du textBox pseudo et placement + suppression du style
 		textField_pseudo = new JTextField();
 		textField_pseudo.addFocusListener(this); 

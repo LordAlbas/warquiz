@@ -18,10 +18,11 @@ public class Header extends JPanel implements MouseListener, MouseMotionListener
 		setLayout(null);
 		setOpaque(false);
 		fenetre = fen;
+		setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 	}
 
 	public void mouseClicked(MouseEvent e) {
-		setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		
 		fenetre.goToAccueil(selection1);
 		
 		/*
