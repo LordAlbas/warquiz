@@ -8,6 +8,9 @@ import java.sql.Statement;
 public class SQL_Requete_Quiz {
 	private Fenetre fenetre;
 	public String query_quiz; //variable dans lesquelles sont plac�es les requetes
+	public String query_del1;
+	public String query_del2;
+	public String query_del3;
 	public String query_nbQuiz;
 	private Quiz[] mesQuiz;
 	
@@ -78,16 +81,30 @@ public class SQL_Requete_Quiz {
 		try {
 			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 			conn = DriverManager.getConnection("jdbc:sqlserver://193.252.48.189\\SQLEXPRESS:1433;" + "database=BDD_B3I_groupe_5;" + "user=b3i_groupe_5;" + "password=123Soleil");
-			Statement stmt_quiz = (Statement) conn.createStatement();
+			Statement stmt_del1 = (Statement) conn.createStatement();
+			Statement stmt_del2 = (Statement) conn.createStatement();
+			Statement stmt_del3 = (Statement) conn.createStatement();
 			// la requete doit retourner UNIQUEMENT les quiz de l'admin en cours
 			// l'id_admin doit etre disponible quelque part
-			query_quiz = "DELETE FROM QUIZ, REPONSE, QUESTION WHERE QUIZ.ID_QUIZ = REPONSE.ID_QUIZ = QUESTION.ID_QUIZ = " + id_quiz + ";";
-			stmt_quiz.executeQuery(query_quiz);
+			query_del1 = "DELETE FROM QUIZ WHERE QUIZ.ID_QUIZ " + id_quiz + ";";
+			query_del2 = "DELETE FROM REPONSE WHERE REPONSE.ID_QUIZ " + id_quiz + ";";
+			query_del3 = "DELETE FROM QUESTION WHERE QUESTION.ID_QUIZ " + id_quiz + ";";
+			stmt_del1.executeQuery(query_del1);
+			stmt_del2.executeQuery(query_del2);
+			stmt_del3.executeQuery(query_del3);
 	        
-	        ResultSet rs_quiz = stmt_quiz.getResultSet();
+	        ResultSet rs_del1 = stmt_del1.getResultSet();
+	        ResultSet rs_del2 = stmt_del2.getResultSet();
+	        ResultSet rs_del3 = stmt_del3.getResultSet();
 	        mesQuiz = new Quiz[recup_nbQuiz()];
 	        short i = 0;
-	        while(rs_quiz.next()){
+	        while(rs_del1.next()){
+	        	System.out.println("OK");
+	        }
+	        while(rs_del2.next()){
+	        	System.out.println("OK");
+	        }
+	        while(rs_del3.next()){
 	        	System.out.println("OK");
 	        }
 	    } catch (SQLException eeee) {
