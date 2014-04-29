@@ -124,12 +124,21 @@ public class Gestion_quiz extends JPanel implements MouseListener, ItemListener 
 		bt_supprQuiz.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//System.out.println("click sur Modification de quiz");
-				// nouvelle instance de creation_quiz qui recupere l'objet quiz choisi
-				creation_quiz = new Creation_quiz(fenetre, mesQuiz[list_quizcree.getSelectedIndex()]);
-				fenetre.getContentPane().setVisible(false);
-				creation_quiz.addMouseListener(creation_quiz);
-				fenetre.setContentPane(creation_quiz);
-				fenetre.getContentPane().setVisible(true);
+				
+				if (list_quizcree.getItemCount() > 0 && list_quizcree.getSelectedItem() != null) {
+					// On recupere le Quiz choisi en entier
+					SQL_Requete_Quiz maRequete = new SQL_Requete_Quiz(fenetre);
+					monQuiz = maRequete.getMyQuiz(mesQuiz[list_quizcree.getSelectedIndex()].getId());
+					
+					// nouvelle instance de creation_quiz qui recupere l'objet quiz choisi
+					creation_quiz = new Creation_quiz(fenetre, monQuiz);
+					fenetre.getContentPane().setVisible(false);
+					creation_quiz.addMouseListener(creation_quiz);
+					fenetre.setContentPane(creation_quiz);
+					fenetre.getContentPane().setVisible(true);
+				} else {
+					System.out.println("Erreur dans modifier quiz !");
+				}
 			}
 		});
 		bt_supprQuiz.setEnabled(false);
@@ -139,11 +148,17 @@ public class Gestion_quiz extends JPanel implements MouseListener, ItemListener 
 		bt_modifQuiz.setBounds(370, 440, 120, 35);
 		bt_modifQuiz.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				System.out.println("click sur Suppression de quiz");
-				/* Exemple d'action sur liste
-				 * if (list_reponses.getItemCount() > 0 && list_reponses.getSelectedItem() != null)
-				 * 	 list_reponses.remove(list_reponses.getSelectedItem());
-				 */
+				//System.out.println("click sur Suppression de quiz");
+				
+				if (list_quizcree.getItemCount() > 0 && list_quizcree.getSelectedItem() != null) {
+					
+					SQL_Requete_Quiz maRequete = new SQL_Requete_Quiz(fenetre);
+					maRequete.deleteQuiz(mesQuiz[list_quizcree.getSelectedIndex()].getId());
+					
+					list_quizcree.remove(list_quizcree.getSelectedItem());
+				} else {
+					System.out.println("Erreur dans la suppression de quiz !");
+				}
 			}
 		});
 		bt_modifQuiz.setEnabled(false);

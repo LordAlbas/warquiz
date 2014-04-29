@@ -42,7 +42,7 @@ public class Reponse implements ActionListener {
 	// faire un 'getQuestion()' si besoin mais a priori no need.
 
 	public void actionPerformed(ActionEvent e) {
-		System.out.println("w00t!");
+		// On coche (ou decoche) la case, on change alors le statut de la reponse.
 		statut_rep = (statut_rep) ? false : true;
 	}
 }
