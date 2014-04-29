@@ -67,6 +67,16 @@ public class SQL_Requete_Quiz {
 		}		
 	}
 	
+	public Quiz getMyQuiz(int id_quiz) {
+		//"SELECT id_question, id_quiz, txt_quest FROM QUESTION, QUIZ WHERE QUIZ.id_quiz = QUESTION.id_quiz"
+		
+		return null;
+	}
+	
+	public void deleteQuiz(int id_quiz) {
+		
+	}
+	
 	public Quiz[] getMesQuiz(){
 		return mesQuiz;	
 	}
