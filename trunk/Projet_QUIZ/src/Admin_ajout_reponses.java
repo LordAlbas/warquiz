@@ -208,7 +208,8 @@ public class Admin_ajout_reponses extends JPanel  implements MouseListener, Item
 		Reponse rep = current_quiz.getQuest(idQuest).addReponse(reponses[i].getText());
 		statusRep[i] = new JCheckBox();
 		statusRep[i].addActionListener(rep);
-		statusRep[i].setBounds(35+((i%2)*315), 328+((i/2)*70), 200, 25);
+		statusRep[i].setBounds(35+((i%2)*315), 328+((i/2)*70), 25, 25);
+		statusRep[i].setOpaque(false);
 		add(statusRep[i]);
 	}
 	
