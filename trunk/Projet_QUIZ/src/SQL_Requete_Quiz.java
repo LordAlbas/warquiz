@@ -81,7 +81,7 @@ public class SQL_Requete_Quiz {
 			Statement stmt_quiz = (Statement) conn.createStatement();
 			// la requete doit retourner UNIQUEMENT les quiz de l'admin en cours
 			// l'id_admin doit etre disponible quelque part
-			query_quiz = "DELETE FROM QUIZ, REPONSE, QUESTION WHERE ID_QUIZ =" + id_quiz + ";";
+			query_quiz = "DELETE FROM QUIZ, REPONSE, QUESTION WHERE QUIZ.ID_QUIZ = REPONSE.ID_QUIZ = QUESTION.ID_QUIZ = " + id_quiz + ";";
 			stmt_quiz.executeQuery(query_quiz);
 	        
 	        ResultSet rs_quiz = stmt_quiz.getResultSet();
