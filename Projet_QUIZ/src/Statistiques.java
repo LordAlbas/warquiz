@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
@@ -9,9 +10,12 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JTable;
 
 
 public class Statistiques extends JPanel implements MouseListener, MouseMotionListener{
@@ -54,6 +58,9 @@ public class Statistiques extends JPanel implements MouseListener, MouseMotionLi
 	public JLabel nb_quiz_dispo;
 	private JLabel lb_titreStatistiques;
 	private JLabel score_diff; // le score avec difficulté
+	private JList table;
+	private Bouton bouton;
+	private String texte;
 	
 	
 	/**
@@ -105,9 +112,17 @@ public class Statistiques extends JPanel implements MouseListener, MouseMotionLi
 		 //addMouseListener(testBouton4);
 		 add(testBouton4);
 		 
+		 table = new JList();
+		 table.setBounds(260, 336, 323, 269);
+		 add(table);
+		 
+
+		 
+		 //Bouton.Tableau.donnees[0][0];
+		 
 		/********/
 		
-		
+		 
 		
 		int var = 0;
 		
@@ -192,6 +207,39 @@ public class Statistiques extends JPanel implements MouseListener, MouseMotionLi
 		 **/
         //*******
 	}
+	
+	public void AffTab(ArrayList<String> tab){
+	 if (bouton.ok == true){
+		 
+		 table = new JList();
+		 table.setBounds(260, 336, 323, 269);
+		 
+		 for (int i=0; i<bouton.tableau_quiz.size();i++){
+			 texte = bouton.getQuiz(i);
+			 table.add(texte, this);
+			 System.out.println(texte);
+		 }
+		 
+		 add(table);
+		 repaint();
+		 
+		 
+		 
+		 
+		 
+		 /*
+		 table = Bouton.getTableau();
+		 table.setBounds(260, 335, 323, 275);
+		 add(table);
+	 
+		 System.out.println(Bouton.ok);
+	 
+		add(Bouton.getTableau());
+		repaint();
+		*/
+	 }
+	 
+	 }
 	
 	/**
 	 * Récupère le numéro et le score de chaques quiz que le joueur à fait.
