@@ -40,6 +40,9 @@ public class Question implements ActionListener {
 	// nbr_reponses_juste
 	public int getNbr_reponses_juste() { return nbr_reponses_juste; }
 	public void setNbr_reponses_juste(int nbj) { nbr_reponses_juste = nbj; }
+	// img_question
+	public Image getImgQuestion() { return img_question; }
+	public void setImgQuestion(Image img) { img_question = img; }
 	// reponses[]
 	public Reponse getReponse(int i) { return reponses[i]; }
 	

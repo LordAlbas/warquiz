@@ -73,7 +73,43 @@ public class SQL_Requete_Quiz {
 	public Quiz getMyQuiz(int id_quiz) {
 		//"SELECT id_question, id_quiz, txt_quest FROM QUESTION, QUIZ WHERE QUIZ.id_quiz = QUESTION.id_quiz"
 		
-		return null;
+		// champs Quiz
+		String nomQuiz = "";
+		String diffQuiz = "";
+		String catQuiz = "";
+		String logAdminQuiz = "";
+		int idQuiz = 0;
+		int nbQuest = 0;
+		int tmpsQuiz = 0;
+		
+		// champs Quest
+		String nomQuest = "";
+		int nbRep = 0;
+		int nbRepJuste = 0;
+		
+		// champs Rep
+		String nomRep = "";
+		int idRep = 0;
+		boolean statutRep = false;
+		
+		// Quiz
+		Quiz quiz = new Quiz(nomQuiz, fenetre);
+		quiz.setId(idQuiz);
+		quiz.setDifficulteQuiz(diffQuiz);
+		quiz.setNb_questions(nbQuest);
+		quiz.setCategorieQuiz(catQuiz);
+		quiz.setLoginAdmin(logAdminQuiz);
+		quiz.setTempsQuiz(tmpsQuiz);
+		// Question
+		Question quest = quiz.ajoutQuestion(nomQuest);
+		quest.setNb_reponses(nbRep);
+		quest.setNbr_reponses_juste(nbRepJuste);
+		// Reponse
+		Reponse rep = quest.addReponse(nomRep);
+		rep.setIdReponse(idRep);
+		rep.setStatutRep(statutRep);
+		
+		return quiz;
 	}
 	
 	public void deleteQuiz(int id_quiz) {
@@ -86,27 +122,16 @@ public class SQL_Requete_Quiz {
 			Statement stmt_del3 = (Statement) conn.createStatement();
 			// la requete doit retourner UNIQUEMENT les quiz de l'admin en cours
 			// l'id_admin doit etre disponible quelque part
-			query_del1 = "DELETE FROM QUIZ WHERE QUIZ.ID_QUIZ " + id_quiz + ";";
-			query_del2 = "DELETE FROM REPONSE WHERE REPONSE.ID_QUIZ " + id_quiz + ";";
-			query_del3 = "DELETE FROM QUESTION WHERE QUESTION.ID_QUIZ " + id_quiz + ";";
-			stmt_del1.executeQuery(query_del1);
-			stmt_del2.executeQuery(query_del2);
-			stmt_del3.executeQuery(query_del3);
-	        
-	        ResultSet rs_del1 = stmt_del1.getResultSet();
-	        ResultSet rs_del2 = stmt_del2.getResultSet();
-	        ResultSet rs_del3 = stmt_del3.getResultSet();
-	        mesQuiz = new Quiz[recup_nbQuiz()];
-	        short i = 0;
-	        while(rs_del1.next()){
-	        	System.out.println("OK");
-	        }
-	        while(rs_del2.next()){
-	        	System.out.println("OK");
-	        }
-	        while(rs_del3.next()){
-	        	System.out.println("OK");
-	        }
+			query_del1 = "DELETE FROM QUIZ WHERE QUIZ.ID_QUIZ = " + id_quiz + ";";
+			query_del2 = "DELETE FROM REPONSE WHERE REPONSE.ID_QUIZ = " + id_quiz + ";";
+			query_del3 = "DELETE FROM QUESTION WHERE QUESTION.ID_QUIZ = " + id_quiz + ";";
+			
+			//  /!\ executeUpdate != executeQuery /!\
+			// car Update quand aucun retour (modif la bdd)
+			// et Query quand un retour (aucune modif de la bdd)
+			stmt_del1.executeUpdate(query_del1);
+			stmt_del2.executeUpdate(query_del2);
+			stmt_del3.executeUpdate(query_del3);
 	    } catch (SQLException eeee) {
 	    	eeee.printStackTrace();
 	    } catch (ClassNotFoundException eeee) {

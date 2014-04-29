@@ -47,12 +47,21 @@ public class Quiz {
 	// difficulteQuiz
 	public void setDifficulteQuiz(String diff) { difficulteQuiz = diff; }
 	public String getDifficulteQuiz() { return difficulteQuiz; }
+	// login_admin
+	public void setLoginAdmin(String logAdmin) { login_admin = logAdmin; }
+	public String getLoginAdmin() { return login_admin; }
 	// id_quiz
 	public void setId(int id) { id_quiz = id; }
 	public int getId() { return id_quiz; }
+	// categorieQuiz
+	public void setCategorieQuiz(String cat) { categorieQuiz = cat; }
+	public String getCategorieQuiz() { return categorieQuiz; }
 	// nb_questions
 	public void setNb_questions(int nb) { nb_questions = nb; }
 	public int getNb_questions() { return nb_questions; }
+	// tempsQuiz
+	public void setTempsQuiz(int tmps) { tempsQuiz = tmps; }
+	public int getTempsQuiz() { return tempsQuiz; }
 	// questQuiz[i]
 	public Question getQuest(int i) { return questQuiz[i]; }
 	
