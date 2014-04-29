@@ -19,14 +19,11 @@ public class Header_menu extends JPanel implements MouseListener, MouseMotionLis
 	public Header_menu(Fenetre fen){
 		setLayout(null);
 		setOpaque(false);
-		
-		//JLabel textMessage = DefaultComponentFactory.getInstance().createLabel("Bonjour");
 		JLabel textMessage = new JLabel("Bonjour" + " " + Connexion.login_general);
 		textMessage.setBounds(48, 11, 92, 14);
 		add(textMessage);
 		fenetre = fen;
 		repaint();
-
 	}
 	
 	public void mouseDragged(MouseEvent e) {}

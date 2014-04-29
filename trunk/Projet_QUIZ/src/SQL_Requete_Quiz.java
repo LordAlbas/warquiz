@@ -74,7 +74,27 @@ public class SQL_Requete_Quiz {
 	}
 	
 	public void deleteQuiz(int id_quiz) {
-		
+		Connection conn = null;
+		try {
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+			conn = DriverManager.getConnection("jdbc:sqlserver://193.252.48.189\\SQLEXPRESS:1433;" + "database=BDD_B3I_groupe_5;" + "user=b3i_groupe_5;" + "password=123Soleil");
+			Statement stmt_quiz = (Statement) conn.createStatement();
+			// la requete doit retourner UNIQUEMENT les quiz de l'admin en cours
+			// l'id_admin doit etre disponible quelque part
+			query_quiz = "DELETE FROM QUIZ, REPONSE, QUESTION WHERE ID_QUIZ =" + id_quiz + ";";
+			stmt_quiz.executeQuery(query_quiz);
+	        
+	        ResultSet rs_quiz = stmt_quiz.getResultSet();
+	        mesQuiz = new Quiz[recup_nbQuiz()];
+	        short i = 0;
+	        while(rs_quiz.next()){
+	        	System.out.println("OK");
+	        }
+	    } catch (SQLException eeee) {
+	    	eeee.printStackTrace();
+	    } catch (ClassNotFoundException eeee) {
+			eeee.printStackTrace();
+		}	
 	}
 	
 	public Quiz[] getMesQuiz(){
