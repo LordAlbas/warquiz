@@ -1,5 +1,6 @@
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.sql.SQLException;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -11,6 +12,7 @@ public class Fenetre extends JFrame {
 
 	// Definition des JPanel de l'appli (en private pour le moment)
 	public Statistiques statistiques ;
+	public Statistiques_Admin statistiques_admin;
 	public Connexion connexion;
 	public Accueil accueil;
 	public Credits credits;
@@ -113,13 +115,23 @@ public class Fenetre extends JFrame {
 	/**
 	 * Redirige sur les STATISTIQUES
 	 * @param selection
+	 * @throws SQLException 
 	 */
-	public void goToStatistiques(String selection) {
+	public void goToStatistiques(String selection) throws SQLException {
 		statistiques = new Statistiques(this);
 		this.getContentPane().setVisible(false);
 		statistiques.addMouseListener(statistiques);	// 'statistiques' implemente les methodes relatif a l'ecoute de la souris
 		statistiques.addMouseMotionListener(statistiques);
 		this.setContentPane(statistiques);		
+		this.getContentPane().setVisible(true);
+	}
+	
+	public void goToStatistiquesAdmin(String selection) throws SQLException {
+		statistiques_admin = new Statistiques_Admin(this);
+		this.getContentPane().setVisible(false);
+		statistiques_admin.addMouseListener(statistiques_admin);	// 'statistiques' implemente les methodes relatif a l'ecoute de la souris
+		statistiques_admin.addMouseMotionListener(statistiques_admin);
+		this.setContentPane(statistiques_admin);		
 		this.getContentPane().setVisible(true);
 	}
 	

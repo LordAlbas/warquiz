@@ -2,6 +2,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.List;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
@@ -25,48 +26,20 @@ public class Statistiques extends JPanel implements MouseListener, MouseMotionLi
 	public static String selection; 		// defini quel bouton est selectionn�
 	private Header header1;
 	private Header_menu header2;
-	public String query_score;
-	public String query_moyenne;
-	public String query_moyenne_total;
-	public String query_nb_parties;
-	public String query_nb_quiz;
-	public String query_quiz_joue;
-	public String query_nb_participants_quiz;
-	public String query_score_diff;
-	public String query_nb_quiz_dispo;
-	private String db_score; // le score sorti de la bdd
-	private String db_score_diff; // score avec filtre
-	private String db_num_quiz_diff; // num quiz avec filtre
-	private String db_diff;// la difficulté sorti de la bdd
-	private String db_moyenne; // la moyenne
-	private String db_moyenne_total; // la moyenne total
-	private String db_num_quiz; // le numéro du quiz 
-	private String db_nb_parties; // le nombre de parties
-	private String db_nb_quiz; // le nombre de quiz
-	private String db_quiz_joue; //le nombre de quiz joué
-	private String db_nb_participants_quiz; // le nombre de participnt pour un quiz
-	private String db_nb_quiz_dispo; // nb quiz dispo
-	public JLabel score; // le score d'un joueur pour un quiz
-	public JLabel titreA; //  = ADMIN
-	public JLabel titreU; //  = USER
-	public JLabel score_moyen; // le score moyen
-	public JLabel score_moyen_total; // le score moyen total
-	public JLabel nb_parties; // le nombre de parties
-	public JLabel nb_quiz; // le nombre de quiz
-	public JLabel quiz_joue; // le nombre de quiz joué
-	public JLabel nb_participants_quiz; // le nombre de participant par quiz
-	public JLabel nb_quiz_dispo;
-	private JLabel lb_titreStatistiques;
-	private JLabel score_diff; // le score avec difficulté
+	public String query_score,query_moyenne,query_moyenne_total,query_nb_parties,query_nb_quiz,query_quiz_joue,query_nb_participants_quiz,query_score_diff,query_nb_quiz_dispo;
+	private String db_score,db_score_diff,db_num_quiz_diff,db_diff,db_moyenne,db_moyenne_total,db_num_quiz,db_nb_parties,db_nb_quiz,db_quiz_joue,db_nb_participants_quiz,db_nb_quiz_dispo; // le score sorti de la bdd
+	public JLabel score,titreA,titreU,score_moyen,score_moyen_total,nb_parties,nb_quiz,quiz_joue,nb_participants_quiz,nb_quiz_dispo; // le score d'un joueur pour un quiz
+	private JLabel lb_titreStatistiques,score_diff;
 	private JList table;
 	private Bouton bouton;
 	private String texte;
 	
-	
+
 	/**
 	 * Constructeur
+	 * @throws SQLException 
 	 */
-	public Statistiques(Fenetre fen) {
+	public Statistiques(Fenetre fen) throws SQLException {
 		fenetre = fen; // on r�cup�re la classe m�re
 		setLayout(null);
 		repaint();
@@ -77,7 +50,7 @@ public class Statistiques extends JPanel implements MouseListener, MouseMotionLi
         header1.addMouseMotionListener(header1);
         this.add(header1); 
      
-
+        
         header2 = new Header_menu(fen);
         header2.setBounds(444, 0, 580, 58);
         header2.addMouseListener(header2);
@@ -104,7 +77,7 @@ public class Statistiques extends JPanel implements MouseListener, MouseMotionLi
 		 
 		 Bouton testBouton3 = new Bouton("Moyen");
 		 testBouton3.setLocation(422, 300);
-		// addMouseListener(testBouton3);
+		 //addMouseListener(testBouton3);
 		 add(testBouton3);
 		 
 		 Bouton testBouton4 = new Bouton("Difficile");
@@ -113,53 +86,20 @@ public class Statistiques extends JPanel implements MouseListener, MouseMotionLi
 		 add(testBouton4);
 		 
 		 table = new JList();
-		 table.setBounds(260, 336, 323, 269);
-		 add(table);
-		 
-
+         table.setBounds(260, 336, 323, 269);
+         add(table);
 		 
 		 //Bouton.Tableau.donnees[0][0];
 		 
 		/********/
-		
-		 
-		
-		int var = 0;
-		
-        //*******TEST FONCTIONS NOUVELLES
-		
-		if(var == 0){
-			titreA = new JLabel("STATS ADMIN");
-			titreA.setForeground(Color.WHITE);
-			titreA.setFont(new Font("Arial", Font.PLAIN, 30));
-    		titreA.setBounds(72, 120, 200,200);
-			add(titreA);	
-			
-	        try {
-				nbQuiz(); //nombre de quiz
-			} catch (SQLException e) {e.printStackTrace();}
-			
-	        try {
-				scoreMoyenTotal(); //score moyen des quiz
-			} catch (SQLException e) {e.printStackTrace();}
-		}
-		
-		
-		if(var == 1){
 			titreU = new JLabel("STATS USER");
 			titreU.setForeground(Color.WHITE);
 			titreU.setFont(new Font("Arial", Font.PLAIN, 30));
     		titreU.setBounds(72, 120, 200,200); 
 			add(titreU);
-			
-			try {
-				nbQuizJouees();
-			} catch (SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			
-		}
+
+			nbQuizJouees();
+
 
 		
 
@@ -208,7 +148,7 @@ public class Statistiques extends JPanel implements MouseListener, MouseMotionLi
         //*******
 	}
 	
-	public void AffTab(ArrayList<String> tab){
+	/*public void AffTab(ArrayList<String> tab){
 	 if (bouton.ok == true){
 		 
 		 table = new JList();
@@ -226,7 +166,7 @@ public class Statistiques extends JPanel implements MouseListener, MouseMotionLi
 		 
 		 
 		 
-		 
+		 */
 		 /*
 		 table = Bouton.getTableau();
 		 table.setBounds(260, 335, 323, 275);
@@ -237,9 +177,9 @@ public class Statistiques extends JPanel implements MouseListener, MouseMotionLi
 		add(Bouton.getTableau());
 		repaint();
 		*/
-	 }
+	/* }
 	 
-	 }
+	 }*/
 	
 	/**
 	 * Récupère le numéro et le score de chaques quiz que le joueur à fait.

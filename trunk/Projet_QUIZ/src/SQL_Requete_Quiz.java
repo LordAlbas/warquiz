@@ -70,6 +70,203 @@ public class SQL_Requete_Quiz {
 		}		
 	}
 	
+	public void recup_Quiz_facile(){
+		Connection conn = null;
+		try {
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+			conn = DriverManager.getConnection("jdbc:sqlserver://193.252.48.189\\SQLEXPRESS:1433;" + "database=BDD_B3I_groupe_5;" + "user=b3i_groupe_5;" + "password=123Soleil");
+			Statement stmt_quiz = (Statement) conn.createStatement();
+			// la requete doit retourner UNIQUEMENT les quiz de l'admin en cours
+			// l'id_admin doit etre disponible quelque part
+			query_quiz = "SELECT id_quiz, nom_quiz FROM QUIZ WHERE DIFFICULTE_QUIZ = 1";
+			stmt_quiz.executeQuery(query_quiz);
+	        
+	        ResultSet rs_quiz = stmt_quiz.getResultSet();
+	        mesQuiz = new Quiz[recup_nbQuiz()];
+	        short i = 0;
+	            while(rs_quiz.next()){
+	            	String Nom_quiz = rs_quiz.getString("nom_quiz");
+	            	int Id_quiz = rs_quiz.getInt("id_quiz");
+	            	mesQuiz[i] = new Quiz(Nom_quiz, fenetre);
+	            	mesQuiz[i].setId(Id_quiz);
+	            	i++;
+	            }
+	    } catch (SQLException eeee) {
+	    	eeee.printStackTrace();
+	    } catch (ClassNotFoundException eeee) {
+			eeee.printStackTrace();
+		}		
+	}
+	public void recup_Quiz_moyen(){
+		Connection conn = null;
+		try {
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+			conn = DriverManager.getConnection("jdbc:sqlserver://193.252.48.189\\SQLEXPRESS:1433;" + "database=BDD_B3I_groupe_5;" + "user=b3i_groupe_5;" + "password=123Soleil");
+			Statement stmt_quiz = (Statement) conn.createStatement();
+			// la requete doit retourner UNIQUEMENT les quiz de l'admin en cours
+			// l'id_admin doit etre disponible quelque part
+			query_quiz = "SELECT id_quiz, nom_quiz FROM QUIZ WHERE DIFFICULTE_QUIZ = 2";
+			stmt_quiz.executeQuery(query_quiz);
+	        
+	        ResultSet rs_quiz = stmt_quiz.getResultSet();
+	        mesQuiz = new Quiz[recup_nbQuiz()];
+	        short i = 0;
+	            while(rs_quiz.next()){
+	            	String Nom_quiz = rs_quiz.getString("nom_quiz");
+	            	int Id_quiz = rs_quiz.getInt("id_quiz");
+	            	mesQuiz[i] = new Quiz(Nom_quiz, fenetre);
+	            	mesQuiz[i].setId(Id_quiz);
+	            	i++;
+	            }
+	    } catch (SQLException eeee) {
+	    	eeee.printStackTrace();
+	    } catch (ClassNotFoundException eeee) {
+			eeee.printStackTrace();
+		}		
+	}
+	
+	public void recup_Quiz_difficile(){
+		Connection conn = null;
+		try {
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+			conn = DriverManager.getConnection("jdbc:sqlserver://193.252.48.189\\SQLEXPRESS:1433;" + "database=BDD_B3I_groupe_5;" + "user=b3i_groupe_5;" + "password=123Soleil");
+			Statement stmt_quiz = (Statement) conn.createStatement();
+			// la requete doit retourner UNIQUEMENT les quiz de l'admin en cours
+			// l'id_admin doit etre disponible quelque part
+			query_quiz = "SELECT id_quiz, nom_quiz FROM QUIZ WHERE DIFFICULTE_QUIZ = 3";
+			stmt_quiz.executeQuery(query_quiz);
+	        
+	        ResultSet rs_quiz = stmt_quiz.getResultSet();
+	        mesQuiz = new Quiz[recup_nbQuiz()];
+	        short i = 0;
+	            while(rs_quiz.next()){
+	            	String Nom_quiz = rs_quiz.getString("nom_quiz");
+	            	int Id_quiz = rs_quiz.getInt("id_quiz");
+	            	mesQuiz[i] = new Quiz(Nom_quiz, fenetre);
+	            	mesQuiz[i].setId(Id_quiz);
+	            	i++;
+	            }
+	    } catch (SQLException eeee) {
+	    	eeee.printStackTrace();
+	    } catch (ClassNotFoundException eeee) {
+			eeee.printStackTrace();
+		}		
+	}
+	
+	public void recup_QuizStats(){
+		Connection conn = null;
+		try {
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+			conn = DriverManager.getConnection("jdbc:sqlserver://193.252.48.189\\SQLEXPRESS:1433;" + "database=BDD_B3I_groupe_5;" + "user=b3i_groupe_5;" + "password=123Soleil");
+			Statement stmt_quiz = (Statement) conn.createStatement();
+			// la requete doit retourner UNIQUEMENT les quiz de l'admin en cours
+			// l'id_admin doit etre disponible quelque part
+			query_quiz = "SELECT id_quiz, nom_quiz FROM QUIZ WHERE LOGIN_ADMIN =" + Connexion.login_general;
+			stmt_quiz.executeQuery(query_quiz);
+	        
+	        ResultSet rs_quiz = stmt_quiz.getResultSet();
+	        mesQuiz = new Quiz[recup_nbQuiz()];
+	        short i = 0;
+	            while(rs_quiz.next()){
+	            	String Nom_quiz = rs_quiz.getString("nom_quiz");
+	            	int Id_quiz = rs_quiz.getInt("id_quiz");
+	            	mesQuiz[i] = new Quiz(Nom_quiz, fenetre);
+	            	mesQuiz[i].setId(Id_quiz);
+	            	i++;
+	            }
+	    } catch (SQLException eeee) {
+	    	eeee.printStackTrace();
+	    } catch (ClassNotFoundException eeee) {
+			eeee.printStackTrace();
+		}		
+	}
+	
+	
+	public void recup_QuizStats_facile(){
+		Connection conn = null;
+		try {
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+			conn = DriverManager.getConnection("jdbc:sqlserver://193.252.48.189\\SQLEXPRESS:1433;" + "database=BDD_B3I_groupe_5;" + "user=b3i_groupe_5;" + "password=123Soleil");
+			Statement stmt_quiz = (Statement) conn.createStatement();
+			// la requete doit retourner UNIQUEMENT les quiz de l'admin en cours
+			// l'id_admin doit etre disponible quelque part
+			query_quiz = "SELECT id_quiz, nom_quiz FROM QUIZ WHERE DIFFICULTE_QUIZ = 1 AND LOGIN_ADMIN =" + Connexion.login_general;
+			stmt_quiz.executeQuery(query_quiz);
+	        
+	        ResultSet rs_quiz = stmt_quiz.getResultSet();
+	        mesQuiz = new Quiz[recup_nbQuiz()];
+	        short i = 0;
+	            while(rs_quiz.next()){
+	            	String Nom_quiz = rs_quiz.getString("nom_quiz");
+	            	int Id_quiz = rs_quiz.getInt("id_quiz");
+	            	mesQuiz[i] = new Quiz(Nom_quiz, fenetre);
+	            	mesQuiz[i].setId(Id_quiz);
+	            	i++;
+	            }
+	    } catch (SQLException eeee) {
+	    	eeee.printStackTrace();
+	    } catch (ClassNotFoundException eeee) {
+			eeee.printStackTrace();
+		}		
+	}
+	
+	
+	public void recup_QuizStats_moyen(){
+		Connection conn = null;
+		try {
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+			conn = DriverManager.getConnection("jdbc:sqlserver://193.252.48.189\\SQLEXPRESS:1433;" + "database=BDD_B3I_groupe_5;" + "user=b3i_groupe_5;" + "password=123Soleil");
+			Statement stmt_quiz = (Statement) conn.createStatement();
+			// la requete doit retourner UNIQUEMENT les quiz de l'admin en cours
+			// l'id_admin doit etre disponible quelque part
+			query_quiz = "SELECT id_quiz, nom_quiz FROM QUIZ WHERE DIFFICULTE_QUIZ = 2 AND LOGIN_ADMIN =" + Connexion.login_general;;
+			stmt_quiz.executeQuery(query_quiz);
+	        
+	        ResultSet rs_quiz = stmt_quiz.getResultSet();
+	        mesQuiz = new Quiz[recup_nbQuiz()];
+	        short i = 0;
+	            while(rs_quiz.next()){
+	            	String Nom_quiz = rs_quiz.getString("nom_quiz");
+	            	int Id_quiz = rs_quiz.getInt("id_quiz");
+	            	mesQuiz[i] = new Quiz(Nom_quiz, fenetre);
+	            	mesQuiz[i].setId(Id_quiz);
+	            	i++;
+	            }
+	    } catch (SQLException eeee) {
+	    	eeee.printStackTrace();
+	    } catch (ClassNotFoundException eeee) {
+			eeee.printStackTrace();
+		}		
+	}
+	
+	public void recup_QuizStats_difficile(){
+		Connection conn = null;
+		try {
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+			conn = DriverManager.getConnection("jdbc:sqlserver://193.252.48.189\\SQLEXPRESS:1433;" + "database=BDD_B3I_groupe_5;" + "user=b3i_groupe_5;" + "password=123Soleil");
+			Statement stmt_quiz = (Statement) conn.createStatement();
+			// la requete doit retourner UNIQUEMENT les quiz de l'admin en cours
+			// l'id_admin doit etre disponible quelque part
+			query_quiz = "SELECT id_quiz, nom_quiz FROM QUIZ WHERE DIFFICULTE_QUIZ = 3 AND LOGIN_ADMIN =" + Connexion.login_general;
+			stmt_quiz.executeQuery(query_quiz);
+	        
+	        ResultSet rs_quiz = stmt_quiz.getResultSet();
+	        mesQuiz = new Quiz[recup_nbQuiz()];
+	        short i = 0;
+	            while(rs_quiz.next()){
+	            	String Nom_quiz = rs_quiz.getString("nom_quiz");
+	            	int Id_quiz = rs_quiz.getInt("id_quiz");
+	            	mesQuiz[i] = new Quiz(Nom_quiz, fenetre);
+	            	mesQuiz[i].setId(Id_quiz);
+	            	i++;
+	            }
+	    } catch (SQLException eeee) {
+	    	eeee.printStackTrace();
+	    } catch (ClassNotFoundException eeee) {
+			eeee.printStackTrace();
+		}		
+	}
+	
 	public Quiz getMyQuiz(int id_quiz) {
 		//"SELECT id_question, id_quiz, txt_quest FROM QUESTION, QUIZ WHERE QUIZ.id_quiz = QUESTION.id_quiz"
 		

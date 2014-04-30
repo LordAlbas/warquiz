@@ -4,6 +4,7 @@ import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.sql.SQLException;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -65,10 +66,7 @@ public class Accueil extends JPanel implements MouseListener, MouseMotionListene
 		// On recupere X et Y au click
 		if (e.getX() >= 120 && e.getX() <= 490 && e.getY() >= 260 && e.getY() <= 345) { // JOUER
 			System.out.print("JOUER");
-			
-		
-			
-			
+
 			selection = "jouer";
 			if(Connexion.connexion_admin){
 				fenetre.goToGerer(selection); // on appel la fonction qui va changer de panel
@@ -81,8 +79,24 @@ public class Accueil extends JPanel implements MouseListener, MouseMotionListene
 		
 		if (e.getX() >= 120 && e.getX() <= 490 && e.getY() >= 360 && e.getY() <= 445) { // STATS
 			System.out.print("STATS");
+			
 			selection = "statistiques";
-			fenetre.goToStatistiques(selection); // on appel la fonction qui va changer de panel
+			if(Connexion.connexion_admin){
+				try {
+					fenetre.goToStatistiquesAdmin(selection);
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} // on appel la fonction qui va changer de panel
+			}
+			else {
+				try {
+					fenetre.goToStatistiques(selection);
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} // on appel la fonction qui va changer de panel
+			}
 		}
 		
 		if (e.getX() >= 120 && e.getX() <= 490 && e.getY() >= 460 && e.getY() <= 545) { // CREDITS

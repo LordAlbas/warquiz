@@ -38,10 +38,13 @@ public class Jouer extends JPanel implements MouseListener, MouseMotionListener,
 	private Bouton bt_afficherQuizDifficile;
 	private Bouton bt_afficherAllQuiz;
 	private JButton bt_jouer;
-		
-	private List list_quizcree;
+	
 	private Tableau Tableau_quiz;
-	private Quiz[] ListeQuiz;
+	public static List list_quizcree;
+	public static Quiz[] ListeQuiz;
+	public static Quiz[] ListeQuiz_facile;
+	public static Quiz[] ListeQuiz_moyen;
+	public static Quiz[] ListeQuiz_difficile;
 	
 	/**
 	 * Constructeur
@@ -53,6 +56,18 @@ public class Jouer extends JPanel implements MouseListener, MouseMotionListener,
 		SQL_Requete_Quiz maRequete = new SQL_Requete_Quiz(fenetre);
 		maRequete.recup_Quiz();
 		ListeQuiz = maRequete.getMesQuiz();
+		
+		SQL_Requete_Quiz maRequete_facile = new SQL_Requete_Quiz(fenetre);
+		maRequete_facile.recup_Quiz_facile();
+		ListeQuiz_facile = maRequete_facile.getMesQuiz();
+		
+		SQL_Requete_Quiz maRequete_moyen = new SQL_Requete_Quiz(fenetre);
+		maRequete_moyen.recup_Quiz_moyen();
+		ListeQuiz_moyen = maRequete_moyen.getMesQuiz();
+		
+		SQL_Requete_Quiz maRequete_difficile = new SQL_Requete_Quiz(fenetre);
+		maRequete_difficile.recup_Quiz_difficile();
+		ListeQuiz_difficile = maRequete_difficile.getMesQuiz();
 		
 		//****Inclusion du Header en 2 parties ****
         header1 = new Header(fen);
