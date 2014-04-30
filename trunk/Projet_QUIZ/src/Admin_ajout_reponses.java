@@ -102,6 +102,8 @@ public class Admin_ajout_reponses extends JPanel  implements MouseListener, Item
 		 * Recuperation et Creation des reponses deja existante
 		 */
 		short y = 0;
+		// current_quiz.getQuest(idQuest).getReponse(y) est vide ...
+		// => Quiz.Question.Reponses[i]
 		while (y<10 && current_quiz.getQuest(idQuest).getReponse(y) != null) {
 			reponses[y] = new JTextField(current_quiz.getQuest(idQuest).getReponse(y).getTxtReponse());
 			reponses[y].setBounds(65+((y%2)*315), 330+((y/2)*70), 265, 23);

@@ -31,6 +31,8 @@ public class Question implements ActionListener {
 	/**
 	 * Getters / Setters
 	 */
+	// id_question
+	public int getIdQuestion() { return id_question; }
 	// txt_question
 	public String getQuestTxt() { return txt_question; }
 	public void setQuestTxt(String txt) { txt_question = txt; }

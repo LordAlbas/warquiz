@@ -3,6 +3,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Time;
 
 
 public class SQL_Requete_Quiz {
@@ -268,43 +269,110 @@ public class SQL_Requete_Quiz {
 	}
 	
 	public Quiz getMyQuiz(int id_quiz) {
+		Connection conn = null;
+		
 		//"SELECT id_question, id_quiz, txt_quest FROM QUESTION, QUIZ WHERE QUIZ.id_quiz = QUESTION.id_quiz"
 		
+		Quiz quiz = null;
 		// champs Quiz
 		String nomQuiz = "";
-		String diffQuiz = "";
+		int diffQuiz = 0;
 		String catQuiz = "";
 		String logAdminQuiz = "";
-		int idQuiz = 0;
+		int idQuiz = id_quiz;
 		int nbQuest = 0;
-		int tmpsQuiz = 0;
+		Time tmpsQuiz = null;
 		
-		// champs Quest
-		String nomQuest = "";
-		int nbRep = 0;
-		int nbRepJuste = 0;
-		
-		// champs Rep
-		String nomRep = "";
-		int idRep = 0;
-		boolean statutRep = false;
-		
-		// Quiz
-		Quiz quiz = new Quiz(nomQuiz, fenetre);
-		quiz.setId(idQuiz);
-		quiz.setDifficulteQuiz(diffQuiz);
-		quiz.setNb_questions(nbQuest);
-		quiz.setCategorieQuiz(catQuiz);
-		quiz.setLoginAdmin(logAdminQuiz);
-		quiz.setTempsQuiz(tmpsQuiz);
-		// Question
-		Question quest = quiz.ajoutQuestion(nomQuest);
-		quest.setNb_reponses(nbRep);
-		quest.setNbr_reponses_juste(nbRepJuste);
-		// Reponse
-		Reponse rep = quest.addReponse(nomRep);
-		rep.setIdReponse(idRep);
-		rep.setStatutRep(statutRep);
+		// Requete
+		try {
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+			conn = DriverManager.getConnection("jdbc:sqlserver://193.252.48.189\\SQLEXPRESS:1433;" + "database=BDD_B3I_groupe_5;" + "user=b3i_groupe_5;" + "password=123Soleil");
+			Statement stmt_quiz = (Statement) conn.createStatement();
+			Statement stmt_quest = (Statement) conn.createStatement();
+			Statement stmt_rep = (Statement) conn.createStatement();
+			
+			String query_quiz = "SELECT * FROM QUIZ WHERE ID_QUIZ = "+id_quiz;
+			String query_quest = "SELECT * FROM QUESTION WHERE ID_QUIZ = "+id_quiz;
+			String query_rep = "SELECT * FROM REPONSE WHERE ID_QUIZ = "+id_quiz;
+			
+			stmt_quiz.executeQuery(query_quiz);
+	        ResultSet rs_quiz = stmt_quiz.getResultSet();
+	        stmt_quest.executeQuery(query_quest);
+	        ResultSet rs_quest = stmt_quest.getResultSet();
+	        stmt_rep.executeQuery(query_rep);
+	        ResultSet rs_rep = stmt_rep.getResultSet();
+	        
+	        if (rs_quiz.next()) {
+	            nomQuiz = rs_quiz.getString("nom_quiz");
+	            diffQuiz = rs_quiz.getInt("difficulte_quiz");
+	            catQuiz = rs_quiz.getString("categorie_quiz");
+	            logAdminQuiz = rs_quiz.getString("login_admin");
+	            nbQuest = rs_quiz.getInt("nb_question");
+	            // bug pour le temps_quiz "The column name temps_quiz is not valid."
+	            //tmpsQuiz = rs_quiz.getTime("temps_quiz");
+	            
+	            String diff;
+	    		switch (diffQuiz) {
+	    		case 0:
+	    			diff="facile";
+	    			break;
+	    		case 1:
+	    			diff="moyen";
+	    			break;
+	    		case 2:
+	    			diff="difficile";
+	    			break;
+	    		default:
+	    			diff="empty";
+	    		}
+	            
+	            // Quiz
+	    		quiz = new Quiz(nomQuiz, fenetre);
+	    		quiz.setId(idQuiz);
+	    		quiz.setDifficulteQuiz(diff);
+	    		quiz.setNb_questions(nbQuest);
+	    		quiz.setCategorieQuiz(catQuiz);
+	    		quiz.setLoginAdmin(logAdminQuiz);
+	    		//quiz.setTempsQuiz(tmpsQuiz);
+	            
+	            while(rs_quest.next()) {
+	            	// champs Quest
+	        		String nomQuest = rs_quest.getString("text_quest");
+	        		int nbRep = rs_quest.getInt("nb_rep_total");
+	        		int nbRepJuste = rs_quest.getInt("nb_rep_juste");
+	        		
+	        		// Question
+	        		Question quest = quiz.ajoutQuestion(nomQuest);
+	        		quest.setNb_reponses(nbRep);
+	        		quest.setNbr_reponses_juste(nbRepJuste);
+	        		
+	            	while (rs_rep.next()) {
+	            		if (rs_rep.getInt("id_question") == quest.getIdQuestion()) {
+	            			int y = 0;
+	            			if (y < 9) {
+	            				// champs Rep
+	            				String nomRep = rs_rep.getString("text_rep");
+	            				boolean statutRep = rs_rep.getBoolean("statut_rep");
+	            				
+	            				// Reponse
+	            				Reponse rep = quest.addReponse(nomRep);
+	            				rep.setStatutRep(statutRep);
+	            			} else {
+	            				System.out.println("Trop de reponse (reponse numero "+y+")");
+	            			}
+	            			y++;
+	            		}
+	            	}
+	            }
+	            
+	        } else {
+	        	System.out.println("Erreur dans le chargement d'un quiz (num."+id_quiz+")");
+	        }
+	    } catch (SQLException eeee) {
+	    	eeee.printStackTrace();
+	    } catch (ClassNotFoundException eeee) {
+			eeee.printStackTrace();
+		}
 		
 		return quiz;
 	}
