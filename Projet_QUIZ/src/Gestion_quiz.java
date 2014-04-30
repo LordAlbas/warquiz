@@ -126,7 +126,7 @@ public class Gestion_quiz extends JPanel implements MouseListener, ItemListener 
 				//System.out.println("click sur Modification de quiz");
 				
 				if (list_quizcree.getItemCount() > 0 && list_quizcree.getSelectedItem() != null) {
-					// On recupere le Quiz choisi en entier
+					// On recupere le Quiz choisi en entier (avec Questions et Reponses comprises)
 					SQL_Requete_Quiz maRequete = new SQL_Requete_Quiz(fenetre);
 					monQuiz = maRequete.getMyQuiz(mesQuiz[list_quizcree.getSelectedIndex()].getId());
 					
