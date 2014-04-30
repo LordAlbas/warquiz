@@ -41,6 +41,7 @@ public class Jouer extends JPanel implements MouseListener, MouseMotionListener,
 		
 	private List list_quizcree;
 	private Tableau Tableau_quiz;
+	private Quiz[] ListeQuiz;
 	
 	/**
 	 * Constructeur
@@ -48,6 +49,10 @@ public class Jouer extends JPanel implements MouseListener, MouseMotionListener,
 	public Jouer(Fenetre fen) {
 		setLayout(null);
 		fenetre = fen;  // on r�cup�re la classe m�re
+		
+		SQL_Requete_Quiz maRequete = new SQL_Requete_Quiz(fenetre);
+		maRequete.recup_Quiz();
+		ListeQuiz = maRequete.getMesQuiz();
 		
 		//****Inclusion du Header en 2 parties ****
         header1 = new Header(fen);
@@ -122,7 +127,7 @@ public class Jouer extends JPanel implements MouseListener, MouseMotionListener,
 		bt_jouer.setBounds(850, 500, 120, 35);
 		bt_jouer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Jouer_Quiz jouer_Quiz = new Jouer_Quiz(fenetre, new Quiz("Super Quiz", fenetre));
+				Jouer_partie jouer_Quiz = new Jouer_partie(fenetre, new Quiz("Super Quiz", fenetre));
 				fenetre.getContentPane().setVisible(false);
 				jouer_Quiz.addMouseListener(jouer_Quiz);
 				fenetre.setContentPane(jouer_Quiz);
@@ -139,31 +144,14 @@ public class Jouer extends JPanel implements MouseListener, MouseMotionListener,
 		list_quizcree.setBackground(Color.WHITE);
 		add(list_quizcree);
 		
+		// remplissage de la liste avec une requete du style "recuperer tout les quiz creer par cet admin"
+		for (short i=0; i<ListeQuiz.length; i++) {
+			list_quizcree.add(ListeQuiz[i].getNom());
+		}
+		
 		// il faut remplir la liste avec une requete du style "recuperer tout les quiz creer par cet admin"
-		list_quizcree.add("quiz qui rox");
-		list_quizcree.add("quiz qui rox un peu moins");
-		
-		
-		/* #############################
-		 * 		TEST FATOUMA
-		 * #############################
-		 */
-		JButton bt_supprQuiz = new JButton("Test Fatouma");
-		bt_supprQuiz.setBounds(500, 700, 120, 35);
-		bt_supprQuiz.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				Jouer_partie jouer_partie = new Jouer_partie(fenetre, new Quiz("Super Quiz", fenetre));
-				fenetre.getContentPane().setVisible(false);
-				jouer_partie.addMouseListener(jouer_partie);
-				fenetre.setContentPane(jouer_partie);
-				fenetre.getContentPane().setVisible(true);
-			}
-		});
-		add(bt_supprQuiz);
-		/* #############################
-		 * 		FIN TEST FATOUMA
-		 * #############################
-		 */
+		//list_quizcree.add("quiz qui rox");
+		//list_quizcree.add("quiz qui rox un peu moins");
 		
 	}
 	
