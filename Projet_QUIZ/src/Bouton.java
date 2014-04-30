@@ -20,7 +20,7 @@ import javax.swing.JTable;
 
 public class Bouton extends JButton implements MouseListener {
 
-	public int diff;
+	public static int diff;
 	private String db_quiz_diff;
 	private String query_quiz_diff;
 	private String quiz_diff;
@@ -79,7 +79,33 @@ public class Bouton extends JButton implements MouseListener {
 
 	public void mouseClicked(MouseEvent e) {
 
-		try {
+		if(diff == 0){
+			Jouer.list_quizcree.clear();
+			for (short i=0; i<Jouer.ListeQuiz.length; i++) {
+				Jouer.list_quizcree.add(Jouer.ListeQuiz[i].getNom());
+			}
+		}
+		if(diff == 1){
+			Jouer.list_quizcree.clear();
+			for (short i=0; i<Jouer.ListeQuiz_facile.length; i++) {
+				Jouer.list_quizcree.add(Jouer.ListeQuiz_facile[i].getNom());
+			}
+		}
+		if(diff == 2){
+			Jouer.list_quizcree.clear();
+			for (short i=0; i<Jouer.ListeQuiz_moyen.length; i++) {
+				Jouer.list_quizcree.add(Jouer.ListeQuiz_moyen[i].getNom());
+			}
+		}
+		if(diff == 3){
+			Jouer.list_quizcree.clear();
+			for (short i=0; i<Jouer.ListeQuiz_difficile.length; i++) {
+				Jouer.list_quizcree.add(Jouer.ListeQuiz_difficile[i].getNom());
+			}
+		}
+		
+		
+		/*try {
 			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 			Connection conn = DriverManager
 					.getConnection("jdbc:sqlserver://193.252.48.189\\SQLEXPRESS:1433;"
@@ -117,13 +143,13 @@ public class Bouton extends JButton implements MouseListener {
 				k++;
 			}
 			
-			/*
-			for(int v=0;v<tableau_quiz.size();v++){
+			
+			/*for(int v=0;v<tableau_quiz.size();v++){
 				System.out.println(tableau_quiz.get(v));
 			}
 			*/
 			
-			Object[] data = Tab.toArray();
+			/*Object[] data = Tab.toArray();
 			Object[][] data2 = new Object[data.length][2];
 
 			for (int i = 0; i < data.length; i++) {
@@ -141,7 +167,7 @@ public class Bouton extends JButton implements MouseListener {
 			ee.printStackTrace();
 		} catch (SQLException e1) {
 			e1.printStackTrace();
-		}
+		}*/
 	}
 	
 	public String getQuiz(int i){
