@@ -60,10 +60,8 @@ public class SQL_Requete_Quiz {
 	            while(rs_quiz.next()){
 	            	String Nom_quiz = rs_quiz.getString("nom_quiz");
 	            	int Id_quiz = rs_quiz.getInt("id_quiz");
-	            	int nb_question = rs_quiz.getInt("nb_question");
 	            	mesQuiz[i] = new Quiz(Nom_quiz, fenetre);
 	            	mesQuiz[i].setId(Id_quiz);
-	            	mesQuiz[i].setNb_questions(nb_question);
 	            	i++;
 	            }
 	    } catch (SQLException eeee) {
@@ -90,10 +88,8 @@ public class SQL_Requete_Quiz {
 	            while(rs_quiz.next()){
 	            	String Nom_quiz = rs_quiz.getString("nom_quiz");
 	            	int Id_quiz = rs_quiz.getInt("id_quiz");
-	            	int nb_question = rs_quiz.getInt("nb_question");
 	            	mesQuiz[i] = new Quiz(Nom_quiz, fenetre);
 	            	mesQuiz[i].setId(Id_quiz);
-	            	mesQuiz[i].setNb_questions(nb_question);
 	            	i++;
 	            }
 	    } catch (SQLException eeee) {
@@ -119,10 +115,8 @@ public class SQL_Requete_Quiz {
 	            while(rs_quiz.next()){
 	            	String Nom_quiz = rs_quiz.getString("nom_quiz");
 	            	int Id_quiz = rs_quiz.getInt("id_quiz");
-	            	int nb_question = rs_quiz.getInt("nb_question");
 	            	mesQuiz[i] = new Quiz(Nom_quiz, fenetre);
 	            	mesQuiz[i].setId(Id_quiz);
-	            	mesQuiz[i].setNb_questions(nb_question);
 	            	i++;
 	            }
 	    } catch (SQLException eeee) {
@@ -149,10 +143,9 @@ public class SQL_Requete_Quiz {
 	            while(rs_quiz.next()){
 	            	String Nom_quiz = rs_quiz.getString("nom_quiz");
 	            	int Id_quiz = rs_quiz.getInt("id_quiz");
-	            	int nb_question = rs_quiz.getInt("nb_question");
 	            	mesQuiz[i] = new Quiz(Nom_quiz, fenetre);
 	            	mesQuiz[i].setId(Id_quiz);
-	            	mesQuiz[i].setNb_questions(nb_question);
+	            	i++;
 	            	i++;
 	            }
 	    } catch (SQLException eeee) {

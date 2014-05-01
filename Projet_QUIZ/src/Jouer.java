@@ -126,7 +126,7 @@ public class Jouer extends JPanel implements MouseListener, MouseMotionListener,
 		bt_jouer.setBounds(850, 500, 120, 35);
 		bt_jouer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Jouer_partie jouer_Quiz = new Jouer_partie(fenetre, new Quiz("Super Quiz", fenetre));
+				Jouer_partie jouer_Quiz = new Jouer_partie(fenetre, ListeQuiz[list_quizcree.getSelectedIndex()]);
 				fenetre.getContentPane().setVisible(false);
 				jouer_Quiz.addMouseListener(jouer_Quiz);
 				fenetre.setContentPane(jouer_Quiz);

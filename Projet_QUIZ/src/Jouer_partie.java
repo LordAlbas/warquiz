@@ -1,3 +1,4 @@
+import java.awt.Button;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -8,9 +9,6 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.util.TimerTask;
 
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.Timer;
 import javax.swing.*;
 
 public class Jouer_partie extends JPanel implements MouseListener, MouseMotionListener {
@@ -30,16 +28,27 @@ public class Jouer_partie extends JPanel implements MouseListener, MouseMotionLi
 	private Chronometre chrono;
 	private int tempsInitial;
 	private int tempsRestant;
+	private SQL_Requete_Quiz sqlRQ;
+	private Quiz monQuiz;
+	Button boutonMenu;
+	
 	public Jouer_partie(Fenetre fen, Quiz quiz) {
 		fenetre = fen;
 		current_quiz = quiz;
+		sqlRQ = new SQL_Requete_Quiz(fen);
 		setLayout(null);
 		
-		lb_titrePartie = new JLabel("Partie : "+quiz);
+		monQuiz = sqlRQ.getMyQuiz(current_quiz.getId()); // mon quiz
+		menuQuetions(monQuiz.getNb_questions());
+		
+		
+		lb_titrePartie = new JLabel(monQuiz.getNom());
 		lb_titrePartie.setForeground(Color.WHITE);
 		lb_titrePartie.setFont(new Font("Arial", Font.PLAIN, 42));
 		lb_titrePartie.setBounds(575, 105, 400, 50);
 		add(lb_titrePartie);
+		
+		
 		
 		//****Inclusion du Header en 2 parties ****
         header1 = new Header(fen);
@@ -72,8 +81,29 @@ public class Jouer_partie extends JPanel implements MouseListener, MouseMotionLi
         timer = createTimer();
         timer.start();
         
-        
+
 	}
+	
+	public void question(int bouton){
+		System.out.println("le bouton "+bouton+" est select");
+		
+	}
+	
+	public void menuQuetions(int num){
+		
+		
+		for(int i=0;i<monQuiz.getNb_questions();i++){
+			
+			boutonMenu = new Button(""+(i+1));
+			boutonMenu.addMouseListener(this);
+			boutonMenu.setBackground(Color.BLUE);
+			boutonMenu.setForeground(Color.WHITE);
+			boutonMenu.setBounds(480+27*i, 60, 20, 20);
+			add(boutonMenu);
+		}
+	}
+	
+	
 	
 	private Timer createTimer (){
 	    ActionListener action = new ActionListener (){
@@ -114,7 +144,9 @@ public class Jouer_partie extends JPanel implements MouseListener, MouseMotionLi
 	
 	@Override
 	public void mouseMoved(MouseEvent e) {}
-	public void mouseClicked(MouseEvent e) {}
+	public void mouseClicked(MouseEvent e) {
+		
+	}
 	public void mousePressed(MouseEvent e) {}
 	public void mouseReleased(MouseEvent e) {}
 	public void mouseEntered(MouseEvent e) {}
