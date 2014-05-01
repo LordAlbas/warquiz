@@ -153,6 +153,7 @@ public class SQL_Requete_Quiz {
 	            	mesQuiz[i] = new Quiz(Nom_quiz, fenetre);
 	            	mesQuiz[i].setId(Id_quiz);
 	            	mesQuiz[i].setNb_questions(nb_question);
+	            	i++;
 	            }
 	    } catch (SQLException eeee) {
 	    	eeee.printStackTrace();

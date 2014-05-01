@@ -2,6 +2,8 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.sql.Connection;
@@ -18,9 +20,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 
-public class Bouton extends JButton implements MouseListener {
+public class Bouton extends JButton implements MouseListener,ActionListener {
 
-	public static int diff;
+	private int diff;
 	private String db_quiz_diff;
 	private String query_quiz_diff;
 	private String quiz_diff;
@@ -40,14 +42,15 @@ public class Bouton extends JButton implements MouseListener {
 	public Bouton(String texte) {
 		
 		
-		tableau_quiz = new ArrayList<String>();
-		tableau_quiz.add("Test");
-		String[] columnNames = { "Nom du Quiz", "Nombre de questions" }; // création
+		//tableau_quiz = new ArrayList<String>();
+		//tableau_quiz.add("Test");
+		//String[] columnNames = { "Nom du Quiz", "Nombre de questions" }; // création
 																			// des
 																			// titres.
 		// Object[][] data = {{"Quiz 1", "32"}};
 		// Tableau = new JTable(data, columnNames);
 		txt = texte;
+		System.out.println(txt);
 		setLayout(null);
 		addMouseListener(this);
 		setText(texte);
@@ -75,36 +78,10 @@ public class Bouton extends JButton implements MouseListener {
 			k=0;
 			break;
 		}
+		System.out.println(diff);
 	}
 
 	public void mouseClicked(MouseEvent e) {
-
-		if(diff == 0){
-			Jouer.list_quizcree.clear();
-			for (short i=0; i<Jouer.ListeQuiz.length; i++) {
-				Jouer.list_quizcree.add(Jouer.ListeQuiz[i].getNom());
-			}
-		}
-		if(diff == 1){
-			Jouer.list_quizcree.clear();
-			for (short i=0; i<Jouer.ListeQuiz_facile.length; i++) {
-				Jouer.list_quizcree.add(Jouer.ListeQuiz_facile[i].getNom());
-			}
-		}
-		if(diff == 2){
-			Jouer.list_quizcree.clear();
-			for (short i=0; i<Jouer.ListeQuiz_moyen.length; i++) {
-				Jouer.list_quizcree.add(Jouer.ListeQuiz_moyen[i].getNom());
-			}
-		}
-		if(diff == 3){
-			Jouer.list_quizcree.clear();
-			for (short i=0; i<Jouer.ListeQuiz_difficile.length; i++) {
-				Jouer.list_quizcree.add(Jouer.ListeQuiz_difficile[i].getNom());
-			}
-		}
-		
-		
 		/*try {
 			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 			Connection conn = DriverManager
@@ -192,5 +169,34 @@ public class Bouton extends JButton implements MouseListener {
 		super.paintComponents(g);
 		// g.drawImage(Images.img_bouton[8], 0, 0,getWidth(),getHeight(), null);
 
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		System.out.println(diff);
+		if(diff == 0){
+			Jouer.list_quizcree.removeAll();
+			for (short i=0; i<Jouer.ListeQuiz.length; i++) {
+				Jouer.list_quizcree.add(Jouer.ListeQuiz[i].getNom());
+			}
+		}
+		if(diff == 1){
+			Jouer.list_quizcree.removeAll();
+			for (short i=0; i<Jouer.ListeQuiz_facile.length; i++) {
+				Jouer.list_quizcree.add(Jouer.ListeQuiz_facile[i].getNom());
+			}
+		}
+		if(diff == 2){
+			Jouer.list_quizcree.removeAll();
+			for (short i=0; i<Jouer.ListeQuiz_moyen.length; i++) {
+				Jouer.list_quizcree.add(Jouer.ListeQuiz_moyen[i].getNom());
+			}
+		}
+		if(diff == 3){
+			Jouer.list_quizcree.removeAll();
+			for (short i=0; i<Jouer.ListeQuiz_difficile.length; i++) {
+				Jouer.list_quizcree.add(Jouer.ListeQuiz_difficile[i].getNom());
+			}
+		}
 	}
 }
