@@ -321,13 +321,13 @@ public class SQL_Requete_Quiz {
 	            
 	            String diff;
 	    		switch (diffQuiz) {
-	    		case 0:
+	    		case 1:
 	    			diff="facile";
 	    			break;
-	    		case 1:
+	    		case 2:
 	    			diff="moyen";
 	    			break;
-	    		case 2:
+	    		case 3:
 	    			diff="difficile";
 	    			break;
 	    		default:
@@ -354,8 +354,11 @@ public class SQL_Requete_Quiz {
 	        		quest.setNb_reponses(nbRep);
 	        		quest.setNbr_reponses_juste(nbRepJuste);
 	        		
+	        		int id_quest_BDD = rs_quest.getInt("id_question");
+	        		
 	            	while (rs_rep.next()) {
-	            		if (rs_rep.getInt("id_question") == quest.getIdQuestion()) {
+	            		if (rs_rep.getInt("id_question") == id_quest_BDD) { // /!\ ERREUR MAIS QUASI BON !!
+	            															// l'erreur n'est plus la mais dans les nombres de repJuste/reponses
 	            			int y = 0;
 	            			if (y < 9) {
 	            				// champs Rep
