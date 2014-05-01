@@ -20,7 +20,7 @@ import javax.swing.JTable;
 
 public class Bouton_Stats extends JButton implements MouseListener {
 
-	public static int diff;
+	private int diff;
 	private String txt;
 	
 	
@@ -53,26 +53,26 @@ public class Bouton_Stats extends JButton implements MouseListener {
 	}
 
 	public void mouseClicked(MouseEvent e) {
-		if(Bouton.diff == 0){
-			Statistiques_Admin.list_quiz_stats.clear();
+		if(diff == 0){
+			Statistiques_Admin.list_quiz_stats.removeAll();
 			for (short i=0; i<Statistiques_Admin.ListeQuizStats.length; i++) {
 				Statistiques_Admin.list_quiz_stats.add(Statistiques_Admin.ListeQuizStats[i].getNom());
 			}
 		}
-		if(Bouton.diff == 1){
-			Statistiques_Admin.list_quiz_stats.clear();
+		if(diff == 1){
+			Statistiques_Admin.list_quiz_stats.removeAll();
 			for (short i=0; i<Statistiques_Admin.ListeQuizStats_facile.length; i++) {
 				Statistiques_Admin.list_quiz_stats.add(Statistiques_Admin.ListeQuizStats_facile[i].getNom());
 			}
 		}
-		if(Bouton.diff == 2){
-			Statistiques_Admin.list_quiz_stats.clear();
+		if(diff == 2){
+			Statistiques_Admin.list_quiz_stats.removeAll();
 			for (short i=0; i<Statistiques_Admin.ListeQuizStats_moyen.length; i++) {
 				Statistiques_Admin.list_quiz_stats.add(Statistiques_Admin.ListeQuizStats_moyen[i].getNom());
 			}
 		}
-		if(Bouton.diff == 3){
-			Statistiques_Admin.list_quiz_stats.clear();
+		if(diff == 3){
+			Statistiques_Admin.list_quiz_stats.removeAll();
 			for (short i=0; i<Statistiques_Admin.ListeQuizStats_difficile.length; i++) {
 				Statistiques_Admin.list_quiz_stats.add(Statistiques_Admin.ListeQuizStats_difficile[i].getNom());
 			}

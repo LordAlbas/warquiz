@@ -88,7 +88,7 @@ public class Statistiques_Admin extends JPanel implements MouseListener, MouseMo
         this.add(header2); 
         //****************************************
         
-		lb_titreStatistiques = new JLabel("Statistiques");
+		lb_titreStatistiques = new JLabel("Statistiques Admin");
 		lb_titreStatistiques.setForeground(Color.WHITE);
 		lb_titreStatistiques.setFont(new Font("Arial", Font.PLAIN, 42));
 		lb_titreStatistiques.setBounds(575, 105, 400, 50);
@@ -289,7 +289,7 @@ public class Statistiques_Admin extends JPanel implements MouseListener, MouseMo
 	        while(rs_moyenne_total.next()){
 	        	db_moyenne_total = rs_moyenne_total.getString("score_moyen_total"); // on récupère la moyenne
 	        	score_moyen_total = new JLabel("Le score moyen aux quiz est de : " + db_moyenne_total);
-	    		score_moyen_total.setBounds(148, 140, 250, 250);
+	    		score_moyen_total.setBounds(148, 250, 250, 50);
 	    		score_moyen_total.setForeground(Color.WHITE); 
 	    		score_moyen_total.setOpaque(false);
 	    		add(score_moyen_total);
@@ -411,7 +411,7 @@ public class Statistiques_Admin extends JPanel implements MouseListener, MouseMo
 	        while(rs_nb_quiz_dispo.next()){
 	        	db_nb_quiz_dispo = rs_nb_quiz_dispo.getString("nb_quiz_dispo"); 
 	        	nb_quiz_dispo = new JLabel("Nombre de quiz disponibles : "+db_nb_quiz_dispo);
-	        	nb_quiz_dispo.setBounds(148, 140, 250,220);
+	        	nb_quiz_dispo.setBounds(148, 250, 250,20);
 	    		nb_quiz_dispo.setForeground(Color.WHITE); 
 	    		nb_quiz_dispo.setOpaque(false);
 	    		add(nb_quiz_dispo);
