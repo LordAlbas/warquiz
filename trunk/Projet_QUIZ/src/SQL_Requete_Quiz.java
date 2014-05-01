@@ -51,7 +51,7 @@ public class SQL_Requete_Quiz {
 			Statement stmt_quiz = (Statement) conn.createStatement();
 			// la requete doit retourner UNIQUEMENT les quiz de l'admin en cours
 			// l'id_admin doit etre disponible quelque part
-			query_quiz = "SELECT id_quiz, nom_quiz FROM QUIZ";
+			query_quiz = "SELECT id_quiz, nom_quiz, nb_question FROM QUIZ";
 			stmt_quiz.executeQuery(query_quiz);
 	        
 	        ResultSet rs_quiz = stmt_quiz.getResultSet();
@@ -79,7 +79,7 @@ public class SQL_Requete_Quiz {
 			Statement stmt_quiz = (Statement) conn.createStatement();
 			// la requete doit retourner UNIQUEMENT les quiz de l'admin en cours
 			// l'id_admin doit etre disponible quelque part
-			query_quiz = "SELECT id_quiz, nom_quiz FROM QUIZ WHERE DIFFICULTE_QUIZ = 1";
+			query_quiz = "SELECT id_quiz, nom_quiz, nb_question FROM QUIZ WHERE DIFFICULTE_QUIZ = 1";
 			stmt_quiz.executeQuery(query_quiz);
 	        
 	        ResultSet rs_quiz = stmt_quiz.getResultSet();
@@ -106,7 +106,7 @@ public class SQL_Requete_Quiz {
 			Statement stmt_quiz = (Statement) conn.createStatement();
 			// la requete doit retourner UNIQUEMENT les quiz de l'admin en cours
 			// l'id_admin doit etre disponible quelque part
-			query_quiz = "SELECT id_quiz, nom_quiz FROM QUIZ WHERE DIFFICULTE_QUIZ = 2";
+			query_quiz = "SELECT id_quiz, nom_quiz, nb_question FROM QUIZ WHERE DIFFICULTE_QUIZ = 2";
 			stmt_quiz.executeQuery(query_quiz);
 	        
 	        ResultSet rs_quiz = stmt_quiz.getResultSet();
@@ -134,7 +134,7 @@ public class SQL_Requete_Quiz {
 			Statement stmt_quiz = (Statement) conn.createStatement();
 			// la requete doit retourner UNIQUEMENT les quiz de l'admin en cours
 			// l'id_admin doit etre disponible quelque part
-			query_quiz = "SELECT id_quiz, nom_quiz FROM QUIZ WHERE DIFFICULTE_QUIZ = 3";
+			query_quiz = "SELECT id_quiz, nom_quiz, nb_question FROM QUIZ WHERE DIFFICULTE_QUIZ = 3";
 			stmt_quiz.executeQuery(query_quiz);
 	        
 	        ResultSet rs_quiz = stmt_quiz.getResultSet();
