@@ -311,6 +311,7 @@ public class SQL_Requete_Quiz {
 	            nbQuest = rs_quiz.getInt("nb_question");
 	            // bug pour le temps_quiz "The column name temps_quiz is not valid."
 	            //tmpsQuiz = rs_quiz.getTime("temps_quiz");
+	            // normal la colonne est divisée en 3 (heure_quiz, minute_quiz et seconde_quiz)
 	            
 	            String diff;
 	    		switch (diffQuiz) {
