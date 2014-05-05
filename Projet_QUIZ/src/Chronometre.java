@@ -60,7 +60,7 @@ public class Chronometre {
 	        	sec = chrono%60;
 	        	min = (chrono/60)%60;
 	        	hrs = (chrono/3600)%60;
-	        	System.out.println("Timer : "+hrs+"h "+min+"min "+sec+"sec");
+	        	//System.out.println("Timer : "+hrs+"h "+min+"min "+sec+"sec");
 	        	finTimer(chrono);
 	        	tpsRestant = hrs+" h "+min+" min "+sec+" sec";
 	        }

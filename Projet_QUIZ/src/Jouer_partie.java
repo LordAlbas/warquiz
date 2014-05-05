@@ -31,6 +31,11 @@ public class Jouer_partie extends JPanel implements MouseListener, MouseMotionLi
 	private SQL_Requete_Quiz sqlRQ;
 	private Quiz monQuiz;
 	Button boutonMenu;
+	Bouton_selection_question boutonQuestion;
+	private int cpt =0;
+	
+	private JLabel reponse;
+	private JLabel question;
 	
 	public Jouer_partie(Fenetre fen, Quiz quiz) {
 		fenetre = fen;
@@ -39,10 +44,10 @@ public class Jouer_partie extends JPanel implements MouseListener, MouseMotionLi
 		setLayout(null);
 		
 		monQuiz = sqlRQ.getMyQuiz(current_quiz.getId()); // mon quiz
-		menuQuetions(monQuiz.getNb_questions());
+		menuQuetions(/*monQuiz.getNb_questions()*/1);
 		
 		
-		lb_titrePartie = new JLabel(monQuiz.getNom());
+		lb_titrePartie = new JLabel(monQuiz.getNom()+" "+monQuiz.getNb_questions());
 		lb_titrePartie.setForeground(Color.WHITE);
 		lb_titrePartie.setFont(new Font("Arial", Font.PLAIN, 42));
 		lb_titrePartie.setBounds(575, 105, 400, 50);
@@ -65,7 +70,7 @@ public class Jouer_partie extends JPanel implements MouseListener, MouseMotionLi
         this.add(header2); 
         //****************************************
         
-        
+        //Chronometre durée partie
         chrono = new Chronometre (0, 1, 12);
         
         
@@ -78,21 +83,41 @@ public class Jouer_partie extends JPanel implements MouseListener, MouseMotionLi
         Chronometre.setBackground(Color.GREEN);
         Chronometre.setBounds(850, 732, 174, 36);
         add(Chronometre);
-        timer = createTimer();
-        timer.start();
+        //timer = createTimer();
+        //timer.start();
         
-
+        question = new JLabel(monQuiz.getQuest(0).getQuestTxt());
+        question.setBounds(10, 250, 1000, 36);
+        question.setFont(new Font("Arial", Font.PLAIN, 20));
+        question.setForeground(Color.WHITE);
+        add(question);
+        
 	}
 	
-	public void question(int bouton){
-		System.out.println("le bouton "+bouton+" est select");
-		
+	public void setQuestion(String txt){
+		question.setText(txt);
+		question.repaint();
 	}
 	
-	public void menuQuetions(int num){
-		
-		
-		for(int i=0;i<monQuiz.getNb_questions();i++){
+	public void setReponse(int nbRep, String txt){
+		//for(int a=0;a<nbRep;a++){
+			reponse = new JLabel(txt);
+			add(reponse);
+			reponse.setBounds(20, 300+20*cpt, 1000, 36);
+			reponse.setFont(new Font("Arial", Font.PLAIN, 15));
+			reponse.setForeground(Color.WHITE);
+			reponse.repaint();
+			cpt++;
+		//}
+	}
+	
+	public void menuQuetions(int num){		
+		for(int i=0;i<num;i++){
+			
+			boutonQuestion = new Bouton_selection_question(i, monQuiz, this);
+			boutonQuestion.addMouseListener(boutonQuestion);
+			boutonQuestion.setBounds(480+27*i, 90, 20, 20);
+			add(boutonQuestion);
 			
 			boutonMenu = new Button(""+(i+1));
 			boutonMenu.addMouseListener(this);
