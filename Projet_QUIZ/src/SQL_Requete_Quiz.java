@@ -309,7 +309,8 @@ public class SQL_Requete_Quiz {
 	            catQuiz = rs_quiz.getString("categorie_quiz");
 	            logAdminQuiz = rs_quiz.getString("login_admin");
 	            // nbQuest doit rester a zero ici car il est incremente quand on ajoute des question juste en dessous.
-	            //nbQuest = rs_quiz.getInt("nb_question");
+	            nbQuest = rs_quiz.getInt("nb_question"); // mais je l'utilise pour autre chose
+	            
 	            // bug pour le temps_quiz "The column name temps_quiz is not valid."
 	            //tmpsQuiz = rs_quiz.getTime("temps_quiz");
 	            // normal la colonne est divis�e en 3 (heure_quiz, minute_quiz et seconde_quiz)
@@ -333,12 +334,17 @@ public class SQL_Requete_Quiz {
 	    		quiz = new Quiz(nomQuiz, fenetre);
 	    		quiz.setId(idQuiz);
 	    		quiz.setDifficulteQuiz(diff);
-	    		// dans le constructeur quiz, nbQuest automatiquement a zero et s'incremente tout seul, pas de modif du champ ici.
-	    		//quiz.setNb_questions(nbQuest);
 	    		quiz.setCategorieQuiz(catQuiz);
 	    		quiz.setLoginAdmin(logAdminQuiz);
 	    		//quiz.setTempsQuiz(tmpsQuiz);
-	            
+	    		
+	            // dans le constructeur quiz, nbQuest automatiquement a zero et s'incremente tout seul, pas de modif du champ ici.
+	    		//quiz.setNb_questions(nbQuest);
+	    		
+	    		// me sert pour boucler les reponses apres avoir boucler toutes les questions
+	    		int[] idQuest = new int[nbQuest];
+	    		short x = 0;
+	    		
 	            while(rs_quest.next()) {
 	            	// champs Quest
 	        		String nomQuest = rs_quest.getString("text_quest");
@@ -346,29 +352,27 @@ public class SQL_Requete_Quiz {
 	        		//int nbRep = rs_quest.getInt("nb_rep_total");
 	        		int nbRepJuste = rs_quest.getInt("nb_rep_juste");
 	        		
+	        		// me sert pour boucler les reponses apres avoir boucler toutes les questions
+	        		idQuest[x] = rs_quest.getInt("id_question");
+	        		x++;
+	        		
 	        		// Question
 	        		Question quest = quiz.ajoutQuestion(nomQuest);
 	        		//quest.setNb_reponses(nbRep);
+	        		System.out.println(nbRepJuste+" Vs. "+quest.getNbr_reponses_juste());
 	        		quest.setNbr_reponses_juste(nbRepJuste);
-	        		
-	        		int id_quest_BDD = rs_quest.getInt("id_question");
-	        		
-	            	while (rs_rep.next()) {
-	            		if (rs_rep.getInt("id_question") == id_quest_BDD) { // /!\ ERREUR MAIS QUASI BON !!
-	            															// l'erreur n'est plus la mais dans les nombres de repJuste/reponses
-	            			int y = 0;
-	            			if (y < 9) {
-	            				// champs Rep
-	            				String nomRep = rs_rep.getString("text_rep");
-	            				boolean statutRep = rs_rep.getBoolean("statut_rep");
-	            				
-	            				// Reponse
-	            				Reponse rep = quest.addReponse(nomRep);
-	            				rep.setStatutRep(statutRep);
-	            			} else {
-	            				System.out.println("Trop de reponse (reponse numero "+y+")");
-	            			}
-	            			y++;
+	            }
+	            
+	            while (rs_rep.next()) {
+	            	for (short z=0; z<idQuest.length;z++) {
+	            		if (idQuest[z] == rs_rep.getInt("id_question")) {
+	            			// champs Rep
+            				String nomRep = rs_rep.getString("text_rep");
+            				boolean statutRep = rs_rep.getBoolean("statut_rep");
+            				
+            				// Reponse
+            				Reponse rep = quiz.getQuest(z).addReponse(nomRep);
+            				rep.setStatutRep(statutRep);
 	            		}
 	            	}
 	            }
