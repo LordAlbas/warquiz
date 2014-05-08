@@ -37,6 +37,7 @@ public class Jouer extends JPanel implements MouseListener, MouseMotionListener,
 	private Bouton bt_afficherQuizMoyen;
 	private Bouton bt_afficherQuizDifficile;
 	private Bouton bt_afficherAllQuiz;
+	private Bouton bt_afficherQuizRien;
 	private JButton bt_jouer;
 	
 	private Tableau Tableau_quiz;
@@ -102,6 +103,9 @@ public class Jouer extends JPanel implements MouseListener, MouseMotionListener,
 		lb_titreListeQuiz.setBounds(150, 150, 300, 50);
 		add(lb_titreListeQuiz);
 		
+		
+		
+		
 		bt_afficherQuizFacile = new Bouton("Facile");
 		bt_afficherQuizFacile.setLocation(20, 210);
 		bt_afficherQuizFacile.addActionListener(bt_afficherQuizFacile);
@@ -142,7 +146,6 @@ public class Jouer extends JPanel implements MouseListener, MouseMotionListener,
 		list_quizcree.addItemListener(this);
 		list_quizcree.setBackground(Color.WHITE);
 		add(list_quizcree);
-		
 		// remplissage de la liste avec une requete du style "recuperer tout les quiz creer par cet admin"
 		for (short i=0; i<ListeQuiz.length; i++) {
 			list_quizcree.add(ListeQuiz[i].getNom());
