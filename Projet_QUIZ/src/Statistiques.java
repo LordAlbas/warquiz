@@ -3,6 +3,10 @@ import java.awt.Component;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.List;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
@@ -19,7 +23,7 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 
 
-public class Statistiques extends JPanel implements MouseListener, MouseMotionListener{
+public class Statistiques extends JPanel implements MouseListener, MouseMotionListener, ItemListener{
 	
 	private Fenetre fenetre;
 	
@@ -30,9 +34,13 @@ public class Statistiques extends JPanel implements MouseListener, MouseMotionLi
 	private String db_score,db_score_diff,db_num_quiz_diff,db_diff,db_moyenne,db_moyenne_total,db_num_quiz,db_nb_parties,db_nb_quiz,db_quiz_joue,db_nb_participants_quiz,db_nb_quiz_dispo; // le score sorti de la bdd
 	public JLabel score,titreA,titreU,score_moyen,score_moyen_total,nb_parties,nb_quiz,quiz_joue,nb_participants_quiz,nb_quiz_dispo; // le score d'un joueur pour un quiz
 	private JLabel lb_titreStatistiques,score_diff;
-	private JList table;
 	private Bouton bouton;
 	private String texte;
+	public static List list_quiz_stats_user;
+	public static Quiz[] ListeQuizStats_user;
+	public static Quiz[] ListeQuizStats_facile_user;
+	public static Quiz[] ListeQuizStats_moyen_user;
+	public static Quiz[] ListeQuizStats_difficile_user;
 	
 
 	/**
@@ -50,6 +58,21 @@ public class Statistiques extends JPanel implements MouseListener, MouseMotionLi
         header1.addMouseMotionListener(header1);
         this.add(header1); 
      
+        SQL_Requete_Quiz maRequete_stats = new SQL_Requete_Quiz(fenetre);
+        maRequete_stats.recup_Quiz();
+        ListeQuizStats_user = maRequete_stats.getMesQuiz();
+		
+		SQL_Requete_Quiz maRequete_stats_facile = new SQL_Requete_Quiz(fenetre);
+		maRequete_stats_facile.recup_Quiz_facile();
+		ListeQuizStats_facile_user = maRequete_stats_facile.getMesQuiz();
+		
+		SQL_Requete_Quiz maRequete_stats_moyen = new SQL_Requete_Quiz(fenetre);
+		maRequete_stats_moyen.recup_Quiz_moyen();
+		ListeQuizStats_moyen_user = maRequete_stats_moyen.getMesQuiz();
+		
+		SQL_Requete_Quiz maRequete_stats_difficile = new SQL_Requete_Quiz(fenetre);
+		maRequete_stats_difficile.recup_Quiz_difficile();
+		ListeQuizStats_difficile_user = maRequete_stats_difficile.getMesQuiz();
         
         header2 = new Header_menu(fen);
         header2.setBounds(444, 0, 580, 58);
@@ -64,32 +87,47 @@ public class Statistiques extends JPanel implements MouseListener, MouseMotionLi
 		lb_titreStatistiques.setBounds(575, 105, 400, 50);
 		add(lb_titreStatistiques);
         
-		/*******/
-		 Bouton testBouton = new Bouton("Tous");
-		 testBouton.setLocation(260, 300);
-		 //addMouseListener(testBouton);
-		 add(testBouton);
+		 Bouton filtre_tous = new Bouton("Tous");
+		 filtre_tous.setLocation(260, 300);
+		 filtre_tous.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					
+				}
+		 });
+		 add(filtre_tous);
 		 
-		 Bouton testBouton2 = new Bouton("Facile");
-		 testBouton2.setLocation(341, 300);
-		 //addMouseListener(testBouton2);
-		 add(testBouton2);
+		 Bouton filtre_facile = new Bouton("Facile");
+		 filtre_facile.setLocation(341, 300);
+		 filtre_facile.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					
+				}
+		 });
+		 add(filtre_facile);
 		 
-		 Bouton testBouton3 = new Bouton("Moyen");
-		 testBouton3.setLocation(422, 300);
-		 //addMouseListener(testBouton3);
-		 add(testBouton3);
+		 Bouton filtre_moyen = new Bouton("Moyen");
+		 filtre_moyen.setLocation(422, 300);
+		 filtre_moyen.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					
+				}
+		 });
+		 add(filtre_moyen);
 		 
-		 Bouton testBouton4 = new Bouton("Difficile");
-		 testBouton4.setLocation(503, 300);
-		 //addMouseListener(testBouton4);
-		 add(testBouton4);
+		 Bouton filtre_difficile = new Bouton("Difficile");
+		 filtre_difficile.setLocation(503, 300);
+		 filtre_difficile.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					
+				}
+		 });
+		 add(filtre_difficile);
 		 
-		 table = new JList();
-         table.setBounds(260, 336, 323, 269);
-         add(table);
-		 
-		 //Bouton.Tableau.donnees[0][0];
+		 list_quiz_stats_user = new List();
+		 list_quiz_stats_user.setBounds(260, 336, 323, 269);
+		 list_quiz_stats_user.addItemListener(this);
+		 list_quiz_stats_user.setBackground(Color.WHITE);
+		 add(list_quiz_stats_user);
 		 
 		/********/
 			titreU = new JLabel("STATS USER");
@@ -145,41 +183,8 @@ public class Statistiques extends JPanel implements MouseListener, MouseMotionLi
 		}
         
 		 **/
-        //*******
 	}
-	
-	/*public void AffTab(ArrayList<String> tab){
-	 if (bouton.ok == true){
-		 
-		 table = new JList();
-		 table.setBounds(260, 336, 323, 269);
-		 
-		 for (int i=0; i<bouton.tableau_quiz.size();i++){
-			 texte = bouton.getQuiz(i);
-			 table.add(texte, this);
-			 System.out.println(texte);
-		 }
-		 
-		 add(table);
-		 repaint();
-		 
-		 
-		 
-		 
-		 */
-		 /*
-		 table = Bouton.getTableau();
-		 table.setBounds(260, 335, 323, 275);
-		 add(table);
-	 
-		 System.out.println(Bouton.ok);
-	 
-		add(Bouton.getTableau());
-		repaint();
-		*/
-	/* }
-	 
-	 }*/
+
 	
 	/**
 	 * Récupère le numéro et le score de chaques quiz que le joueur à fait.
@@ -429,5 +434,12 @@ public class Statistiques extends JPanel implements MouseListener, MouseMotionLi
 		// le fond et les elements sont en fonction de la taille de la fenetre, donc pas de soucis de redimensionnement de la fenetre
 		g.drawImage(Images.img_fond[0], 0, 0, this.getWidth(), this.getHeight(), null);						// dessine le fond d'ecran
 		g.drawImage(Images.img_element[1], 140, 113, 8, 655, null); // barre bleu
+	}
+
+
+	@Override
+	public void itemStateChanged(ItemEvent arg0) {
+		// TODO Auto-generated method stub
+		
 	}
 }
