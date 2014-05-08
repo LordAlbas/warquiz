@@ -100,7 +100,7 @@ public class Jouer_partie extends JPanel implements MouseListener, MouseMotionLi
 	}
 	
 	public void setReponse(int nbRep, String txt){
-		//for(int a=0;a<nbRep;a++){
+		
 			reponse = new JLabel(txt);
 			add(reponse);
 			reponse.setBounds(20, 300+20*cpt, 1000, 36);
@@ -108,8 +108,17 @@ public class Jouer_partie extends JPanel implements MouseListener, MouseMotionLi
 			reponse.setForeground(Color.WHITE);
 			reponse.repaint();
 			cpt++;
-		//}
+		
 	}
+	
+	public void setCpt(int nb){
+		cpt = nb;
+	}
+	
+	/*public void clearLabel (){
+		
+		reponse.removeAll();
+	}*/
 	
 	public void menuQuetions(int num){		
 		for(int i=0;i<num;i++){

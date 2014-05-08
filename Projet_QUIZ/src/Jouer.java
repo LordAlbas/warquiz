@@ -97,37 +97,52 @@ public class Jouer extends JPanel implements MouseListener, MouseMotionListener,
 		lb_descrJouer.setBounds(655, 175, 320, 50);
 		add(lb_descrJouer);
 		
-		lb_titreListeQuiz = new JLabel("Liste des quiz existants");
+		lb_titreListeQuiz = new JLabel("Vous pouvez jouer à ces quiz !");
 		lb_titreListeQuiz.setForeground(Color.WHITE);
 		lb_titreListeQuiz.setFont(new Font("Arial", Font.PLAIN, 25));
-		lb_titreListeQuiz.setBounds(150, 150, 300, 50);
+		lb_titreListeQuiz.setBounds(60, 221, 355, 50);
 		add(lb_titreListeQuiz);
 		
 		
-		
+		bt_afficherAllQuiz = new Bouton("Tous");
+		bt_afficherAllQuiz.setSize(122, 36);
+		bt_afficherAllQuiz.setLocation(60, 282);
+		bt_afficherAllQuiz.addActionListener(bt_afficherAllQuiz);
+		add(bt_afficherAllQuiz);		
 		
 		bt_afficherQuizFacile = new Bouton("Facile");
-		bt_afficherQuizFacile.setLocation(20, 210);
+		bt_afficherQuizFacile.setSize(122, 36);
+		bt_afficherQuizFacile.setLocation(183, 282);
 		bt_afficherQuizFacile.addActionListener(bt_afficherQuizFacile);
 		add(bt_afficherQuizFacile);
 		
 		bt_afficherQuizMoyen = new Bouton("Moyen");
-		bt_afficherQuizMoyen.setLocation(150, 210);
+		bt_afficherQuizMoyen.setSize(122, 36);
+		bt_afficherQuizMoyen.setLocation(306, 282);
 		bt_afficherQuizMoyen.addActionListener(bt_afficherQuizMoyen);
 		add(bt_afficherQuizMoyen);
 		
 		bt_afficherQuizDifficile = new Bouton("Difficile");
-		bt_afficherQuizDifficile.setLocation(280, 210);
+		bt_afficherQuizDifficile.setSize(122, 36);
+		bt_afficherQuizDifficile.setLocation(429, 282);
 		bt_afficherQuizDifficile.addActionListener(bt_afficherQuizDifficile);
 		add(bt_afficherQuizDifficile);
 		
-		bt_afficherAllQuiz = new Bouton("Tous");
-		bt_afficherAllQuiz.setLocation(410, 210);
-		bt_afficherAllQuiz.addActionListener(bt_afficherAllQuiz);
-		add(bt_afficherAllQuiz);
+		JLabel info = new JLabel("Selectionnez un quiz parmis la liste ci-dessus pour jouer !");
+		info.setFont(new Font("Arial", Font.PLAIN, 12));
+		info.setForeground(Color.RED);
+		info.setBounds(145, 660, 327, 14);
+		add(info);
 		
 		bt_jouer = new JButton("Jouer");
-		bt_jouer.setBounds(850, 500, 120, 35);
+		
+		bt_jouer.setEnabled(false);
+		bt_jouer.setForeground(Color.WHITE);
+		bt_jouer.setFont(new Font("Arial", Font.PLAIN, 20));
+		bt_jouer.setBackground(new Color(7, 92, 120));
+		bt_jouer.setBorder(null);
+		
+		bt_jouer.setBounds(850, 500, 122, 36);
 		bt_jouer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Jouer_partie jouer_Quiz = new Jouer_partie(fenetre, ListeQuiz[list_quizcree.getSelectedIndex()]);
@@ -139,17 +154,23 @@ public class Jouer extends JPanel implements MouseListener, MouseMotionListener,
 		});
 		add(bt_jouer);
 		
+
 				
 		// liste des quiz creer par cet admin
 		list_quizcree = new List();
-		list_quizcree.setBounds(100, 300, 500, 319);
+		list_quizcree.setBounds(60, 318, 491, 319);
 		list_quizcree.addItemListener(this);
 		list_quizcree.setBackground(Color.WHITE);
 		add(list_quizcree);
+		
+
+		
 		// remplissage de la liste avec une requete du style "recuperer tout les quiz creer par cet admin"
 		for (short i=0; i<ListeQuiz.length; i++) {
 			list_quizcree.add(ListeQuiz[i].getNom());
 		}
+		
+
 		
 		// il faut remplir la liste avec une requete du style "recuperer tout les quiz creer par cet admin"
 		//list_quizcree.add("quiz qui rox");
@@ -179,6 +200,9 @@ public class Jouer extends JPanel implements MouseListener, MouseMotionListener,
 	@Override
 	public void itemStateChanged(ItemEvent arg0) {
 		// TODO Auto-generated method stub
-		
+		if (list_quizcree.getItemCount() > 0 && list_quizcree.getSelectedItem() != null) {
+			bt_jouer.setEnabled(true);
+			bt_jouer.setBackground(new Color(7, 192, 30));
+		}else{bt_jouer.setEnabled(false);}
 	}
 }

@@ -24,35 +24,42 @@ public class Bouton_selection_question extends JButton implements MouseListener{
 		aff_num_question = num_question+1;
 		System.out.println(quiz.getQuest(num_question).getQuestTxt());
 		question = quiz.getQuest(num_question).getQuestTxt();
-	
+		reponse = new Reponse[quiz.getQuest(num_question).getNb_reponses()];
 		
 		setText(""+aff_num_question);
 		setBorder(null);
 		setBackground(Color.BLUE);
 		setForeground(Color.WHITE);
+		
+		
+		System.out.println("NOMBRE DE REPONSE : "+quiz.getQuest(num_question).getNb_reponses());
+		for(int l=0; l<quiz.getQuest(num_question).getNb_reponses();l++){
+			reponse[l] = quiz.getQuest(num_question).getReponse(l);
+		}
+		
 	}
 
 	public void AffQuestion(){
 		partie_en_cours.setQuestion(question);
 		partie_en_cours.repaint();
 	}
-	/*
+	
 	public void AffReponses(int i){
-		partie_en_cours.setReponse(quiz.getQuest(num_question).getNb_reponses(), reponse[i]);
+		partie_en_cours.setReponse(quiz.getQuest(num_question).getNb_reponses(), reponse[i].getTxtReponse());
 		partie_en_cours.repaint();
 	}
-*/
+
 	public void mouseClicked(MouseEvent arg0) {
-		
+		partie_en_cours.setCpt(0);
+		//partie_en_cours.clearLabel();
 		System.out.println("Clic sur :"+aff_num_question+" : "+question);
 		setBackground(Color.GRAY);
 		
-		/*
 		AffQuestion();
-		for(int m=0;m<nbR;m++){
+		for(int m=0;m<quiz.getQuest(num_question).getNb_reponses();m++){
 			AffReponses(m);
 		}
-		*/
+		
 	}
 	
 	
