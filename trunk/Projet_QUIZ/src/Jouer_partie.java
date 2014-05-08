@@ -44,7 +44,7 @@ public class Jouer_partie extends JPanel implements MouseListener, MouseMotionLi
 		setLayout(null);
 		
 		monQuiz = sqlRQ.getMyQuiz(current_quiz.getId()); // mon quiz
-		menuQuetions(/*monQuiz.getNb_questions()*/1);
+		menuQuetions(monQuiz.getNb_questions());
 		
 		
 		lb_titrePartie = new JLabel(monQuiz.getNom()+" "+monQuiz.getNb_questions());
@@ -74,7 +74,7 @@ public class Jouer_partie extends JPanel implements MouseListener, MouseMotionLi
         chrono = new Chronometre (0, 1, 12);
         
         
-        System.out.println(chrono.getTpsRestant());
+        //System.out.println(chrono.getTpsRestant());
         Chronometre = new JLabel(chrono.getTpsRestant());
         Chronometre.setForeground(Color.BLACK);
         Chronometre.setOpaque(true);
