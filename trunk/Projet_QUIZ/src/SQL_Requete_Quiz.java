@@ -308,10 +308,11 @@ public class SQL_Requete_Quiz {
 	            diffQuiz = rs_quiz.getInt("difficulte_quiz");
 	            catQuiz = rs_quiz.getString("categorie_quiz");
 	            logAdminQuiz = rs_quiz.getString("login_admin");
-	            nbQuest = rs_quiz.getInt("nb_question");
+	            // nbQuest doit rester a zero ici car il est incremente quand on ajoute des question juste en dessous.
+	            //nbQuest = rs_quiz.getInt("nb_question");
 	            // bug pour le temps_quiz "The column name temps_quiz is not valid."
 	            //tmpsQuiz = rs_quiz.getTime("temps_quiz");
-	            // normal la colonne est divisée en 3 (heure_quiz, minute_quiz et seconde_quiz)
+	            // normal la colonne est divisï¿½e en 3 (heure_quiz, minute_quiz et seconde_quiz)
 	            
 	            String diff;
 	    		switch (diffQuiz) {
@@ -332,7 +333,8 @@ public class SQL_Requete_Quiz {
 	    		quiz = new Quiz(nomQuiz, fenetre);
 	    		quiz.setId(idQuiz);
 	    		quiz.setDifficulteQuiz(diff);
-	    		quiz.setNb_questions(nbQuest);
+	    		// dans le constructeur quiz, nbQuest automatiquement a zero et s'incremente tout seul, pas de modif du champ ici.
+	    		//quiz.setNb_questions(nbQuest);
 	    		quiz.setCategorieQuiz(catQuiz);
 	    		quiz.setLoginAdmin(logAdminQuiz);
 	    		//quiz.setTempsQuiz(tmpsQuiz);
@@ -340,12 +342,13 @@ public class SQL_Requete_Quiz {
 	            while(rs_quest.next()) {
 	            	// champs Quest
 	        		String nomQuest = rs_quest.getString("text_quest");
-	        		int nbRep = rs_quest.getInt("nb_rep_total");
+	        		// pareil que pour les nbQuest, pas besoin de modifier le champs de la classe Question ici.
+	        		//int nbRep = rs_quest.getInt("nb_rep_total");
 	        		int nbRepJuste = rs_quest.getInt("nb_rep_juste");
 	        		
 	        		// Question
 	        		Question quest = quiz.ajoutQuestion(nomQuest);
-	        		quest.setNb_reponses(nbRep);
+	        		//quest.setNb_reponses(nbRep);
 	        		quest.setNbr_reponses_juste(nbRepJuste);
 	        		
 	        		int id_quest_BDD = rs_quest.getInt("id_question");
