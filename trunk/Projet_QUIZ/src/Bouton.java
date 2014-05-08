@@ -34,21 +34,10 @@ public class Bouton extends JButton implements MouseListener,ActionListener {
 	public ArrayList<String>tableau_quiz;
 	private int k =0;
 	public static boolean ok =false;
-	private String[] columnNames = {"Nom","Nombre de questions"};
-	private ArrayList<String[]> Tab = new ArrayList<String[]>();
 	Statistiques statistiques;
 	
 	
 	public Bouton(String texte) {
-		
-		
-		//tableau_quiz = new ArrayList<String>();
-		//tableau_quiz.add("Test");
-		//String[] columnNames = { "Nom du Quiz", "Nombre de questions" }; // création
-																			// des
-																			// titres.
-		// Object[][] data = {{"Quiz 1", "32"}};
-		// Tableau = new JTable(data, columnNames);
 		txt = texte;
 		System.out.println(txt);
 		setLayout(null);
@@ -82,69 +71,45 @@ public class Bouton extends JButton implements MouseListener,ActionListener {
 	}
 
 	public void mouseClicked(MouseEvent e) {
-		/*try {
-			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-			Connection conn = DriverManager
-					.getConnection("jdbc:sqlserver://193.252.48.189\\SQLEXPRESS:1433;"
-							+ "database=BDD_B3I_groupe_5;"
-							+ "user=b3i_groupe_5;" + "password=123Soleil");
-			Statement stmt_quiz_diff = (Statement) conn.createStatement();
-			if (diff == 0) {
-				query_quiz_diff = "SELECT NOM_QUIZ, NB_QUESTION FROM QUIZ";
-			} else {
-				query_quiz_diff = "SELECT NOM_QUIZ, NB_QUESTION FROM QUIZ WHERE DIFFICULTE_QUIZ = "
-						+ diff;
-			}
-			stmt_quiz_diff.executeQuery(query_quiz_diff);
-			ResultSet rs_quiz_diff = stmt_quiz_diff.getResultSet();
-			// int cpt_diff = 500;
-			k=0;
-			while (rs_quiz_diff.next()) {
-				db_name_quiz_diff = rs_quiz_diff.getString("NOM_QUIZ"); // on récupère le nom
-				db_nbquestion_quiz_diff = rs_quiz_diff.getString("NB_QUESTION"); // on récupère le nb de question
-				// db_diff = rs_score_diff.getString("DIFFICULTE_QUIZ");
-				// on récupère la difficulte
-				quiz_diff = db_name_quiz_diff + " : " + db_nbquestion_quiz_diff + " questions";
-				
-				
-				
-				String[] inTab = { db_name_quiz_diff, db_nbquestion_quiz_diff };
-				Tab.add(inTab);
-				
-				tableau_quiz.add(db_name_quiz_diff);
-				//System.out.println(quiz_diff);
-				
-				
-				//ajout des quiz dans tableau
-				
-				k++;
-			}
-			
-			
-			/*for(int v=0;v<tableau_quiz.size();v++){
-				System.out.println(tableau_quiz.get(v));
-			}
-			*/
-			
-			/*Object[] data = Tab.toArray();
-			Object[][] data2 = new Object[data.length][2];
 
-			for (int i = 0; i < data.length; i++) {
-				data2[i][0] = ((String[]) data[i])[0];
-				data2[i][1] = ((String[]) data[i])[1];
-			}
-			
-			Tableau = new Tableau(data2, columnNames);
-			statistiques.AffTab(tableau_quiz);
-			ok = true;
-			
-			repaint();
-			//System.out.println(Tableau.getDonnees(0));
-		} catch (ClassNotFoundException ee) {
-			ee.printStackTrace();
-		} catch (SQLException e1) {
-			e1.printStackTrace();
-		}*/
+		
+		//Statistiques.list_quiz_stats.removeAll();
+		
+		switch (txt){
+			case "Tous":
+				
+				for (int i=0; i<Statistiques_Admin.ListeQuizStats.length; i++) {
+					Statistiques_Admin.list_quiz_stats.add(Statistiques_Admin.ListeQuizStats[i].getNom());
+				}
+				break;
+			case "Facile":
+				//Statistiques_Admin.list_quiz_stats.removeAll();
+				System.out.println("taille FACILE = "+Statistiques_Admin.ListeQuizStats_facile.length);
+				for (int j=0; j<Statistiques_Admin.ListeQuizStats_facile.length; j++) {
+					
+					System.out.println("Nom = "+Statistiques_Admin.ListeQuizStats_facile[j].getNom());
+					Statistiques_Admin.list_quiz_stats.add(Statistiques_Admin.ListeQuizStats_facile[j].getNom());
+					
+				}
+				break;
+			case "Moyen":
+				//Statistiques_Admin.list_quiz_stats.removeAll();
+				System.out.println("taille MOYEN = "+Statistiques_Admin.ListeQuizStats_moyen.length);
+				for (int k=0; k<Statistiques_Admin.ListeQuizStats_moyen.length; k++) {
+					Statistiques_Admin.list_quiz_stats.add(Statistiques_Admin.ListeQuizStats_moyen[k].getNom());
+				}
+				break;
+			case "Difficile":
+				//Statistiques_Admin.list_quiz_stats.removeAll();
+				System.out.println("taille DIFFICILE = "+Statistiques_Admin.ListeQuizStats_difficile.length);
+				for (int l=0; l<Statistiques_Admin.ListeQuizStats_difficile.length; l++) {
+
+					System.out.println("l = "+l);
+					System.out.println(Statistiques_Admin.ListeQuizStats_difficile[l].getNom());
+					Statistiques_Admin.list_quiz_stats.add(Statistiques_Admin.ListeQuizStats_difficile[l].getNom());
+				}
+				break;		
+		}
 	}
 	
 	public String getQuiz(int i){

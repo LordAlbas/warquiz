@@ -146,6 +146,7 @@ public class Statistiques_Admin extends JPanel implements MouseListener, MouseMo
 		list_quiz_stats.addItemListener(this);
 		list_quiz_stats.setBackground(Color.WHITE);
 		add(list_quiz_stats);
+		
 		/**
         try {
 			Score();
