@@ -149,15 +149,21 @@ public class Gestion_quiz extends JPanel implements MouseListener, ItemListener 
 		bt_modifQuiz.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//System.out.println("click sur Suppression de quiz");
-				
-				if (list_quizcree.getItemCount() > 0 && list_quizcree.getSelectedItem() != null) {
-					
-					SQL_Requete_Quiz maRequete = new SQL_Requete_Quiz(fenetre);
-					maRequete.deleteQuiz(mesQuiz[list_quizcree.getSelectedIndex()].getId());
-					
-					list_quizcree.remove(list_quizcree.getSelectedItem());
-				} else {
-					System.out.println("Erreur dans la suppression de quiz !");
+				int rep = JOptionPane.showConfirmDialog(null, 
+						"Voulez-vous vraiment quitter ?", 
+						"Partir ? ... deja ?", 
+						JOptionPane.OK_CANCEL_OPTION, 
+						JOptionPane.WARNING_MESSAGE);
+				if (rep == 0) {
+					if (list_quizcree.getItemCount() > 0 && list_quizcree.getSelectedItem() != null) {
+						
+						SQL_Requete_Quiz maRequete = new SQL_Requete_Quiz(fenetre);
+						maRequete.deleteQuiz(mesQuiz[list_quizcree.getSelectedIndex()].getId());
+						
+						list_quizcree.remove(list_quizcree.getSelectedItem());
+					} else {
+						System.out.println("Erreur dans la suppression de quiz !");
+					}
 				}
 			}
 		});

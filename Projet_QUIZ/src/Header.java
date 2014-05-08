@@ -9,21 +9,29 @@ import javax.swing.JPanel;
 
 public class Header extends JPanel implements MouseListener, MouseMotionListener{
 	
-	String bouton_deco ="rien";				// defini l'image survol� bouton deco
+	String bouton_deco ="rien";				// defini l'image survol��� bouton deco
 	String bouton_option ="rien";
 	private Fenetre fenetre;
-	static String selection1; 
+	static String selection1;
+	private String warning;
 
 	public Header(Fenetre fen){
 		setLayout(null);
 		setOpaque(false);
 		fenetre = fen;
+		warning = "";
 		setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 	}
 
 	public void mouseClicked(MouseEvent e) {
 		
 		fenetre.goToAccueil(selection1);
+		
+		if (warning != "") {
+			// j'ai un message
+		} else {
+			// j'ai pas de message
+		}
 		
 		/*
 		if(e.getX() >= 959 && e.getX() <= 1022 && e.getY() >= 1 && e.getY() <= 47){ // CO/DECO
@@ -55,7 +63,9 @@ public class Header extends JPanel implements MouseListener, MouseMotionListener
 		}else{bouton_deco = "rien";}
 		repaint();
 	}
-
+	
+	public void setWarning(String msg) { warning = msg; }
+	public String getWarning() { return warning; }
 
     @Override
     protected void paintComponent(Graphics g){

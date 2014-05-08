@@ -345,20 +345,24 @@ public class SQL_Requete_Quiz {
 	    		short x = 0;
 	    		
 	            while(rs_quest.next()) {
-	            	// champs Quest
-	        		String nomQuest = rs_quest.getString("text_quest");
-	        		// pareil que pour les nbQuest, pas besoin de modifier le champs de la classe Question ici.
-	        		//int nbRep = rs_quest.getInt("nb_rep_total");
-	        		int nbRepJuste = rs_quest.getInt("nb_rep_juste");
-	        		
-	        		// me sert pour boucler les reponses apres avoir boucler toutes les questions
-	        		idQuest[x] = rs_quest.getInt("id_question");
-	        		x++;
-	        		
-	        		// Question
-	        		Question quest = quiz.ajoutQuestion(nomQuest);
-	        		//quest.setNb_reponses(nbRep);
-	        		quest.setNbr_reponses_juste(nbRepJuste);
+	            	if (x>9) {
+	            		System.out.println("Trop de questions ...!!");
+	            	} else {
+	            		// champs Quest
+	            		String nomQuest = rs_quest.getString("text_quest");
+	            		// pareil que pour les nbQuest, pas besoin de modifier le champs de la classe Question ici.
+	            		//int nbRep = rs_quest.getInt("nb_rep_total");
+	            		int nbRepJuste = rs_quest.getInt("nb_rep_juste");
+	            		
+	            		// me sert pour boucler les reponses apres avoir boucler toutes les questions
+	            		idQuest[x] = rs_quest.getInt("id_question");
+	            		x++;
+	            		
+	            		// Question
+	            		Question quest = quiz.ajoutQuestion(nomQuest);
+	            		//quest.setNb_reponses(nbRep);
+	            		quest.setNbr_reponses_juste(nbRepJuste);
+	            	}
 	            }
 	            
 	            while (rs_rep.next()) {
