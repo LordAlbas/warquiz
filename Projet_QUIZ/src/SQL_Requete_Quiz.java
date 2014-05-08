@@ -358,7 +358,6 @@ public class SQL_Requete_Quiz {
 	        		// Question
 	        		Question quest = quiz.ajoutQuestion(nomQuest);
 	        		//quest.setNb_reponses(nbRep);
-	        		System.out.println(nbRepJuste+" Vs. "+quest.getNbr_reponses_juste());
 	        		quest.setNbr_reponses_juste(nbRepJuste);
 	            }
 	            
