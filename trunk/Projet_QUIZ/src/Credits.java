@@ -21,6 +21,7 @@ public class Credits extends JPanel implements MouseListener, MouseMotionListene
 	private JLabel credit2;
 	private JLabel credit3;
 	private JLabel credit4;
+	private JLabel credit5;
 
 	/**
 	 * Constructor
@@ -66,6 +67,12 @@ public class Credits extends JPanel implements MouseListener, MouseMotionListene
         credit4.setFont(new Font("Arial", Font.PLAIN, 30));
         credit4.setBounds(130, 550, 500, 50);
 		add(credit4);
+		
+		credit5 = new JLabel("HASSAN HAMAD Fatouma");
+		credit5.setForeground(Color.WHITE);
+		credit5.setFont(new Font("Arial", Font.PLAIN, 30));
+		credit5.setBounds(130, 600, 500, 50);
+		add(credit5);
 		
 		lb_titreCredits = new JLabel("Crédits");
 		lb_titreCredits.setForeground(Color.WHITE);
