@@ -86,103 +86,60 @@ public class Statistiques extends JPanel implements MouseListener, MouseMotionLi
 		lb_titreStatistiques.setFont(new Font("Arial", Font.PLAIN, 42));
 		lb_titreStatistiques.setBounds(575, 105, 400, 50);
 		add(lb_titreStatistiques);
-        
-		 Bouton filtre_tous = new Bouton("Tous");
-		 filtre_tous.setLocation(260, 300);
-		 filtre_tous.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					
-				}
-		 });
-		 add(filtre_tous);
-		 
-		 Bouton filtre_facile = new Bouton("Facile");
-		 filtre_facile.setLocation(341, 300);
-		 filtre_facile.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					
-				}
-		 });
-		 add(filtre_facile);
-		 
-		 Bouton filtre_moyen = new Bouton("Moyen");
-		 filtre_moyen.setLocation(422, 300);
-		 filtre_moyen.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					
-				}
-		 });
-		 add(filtre_moyen);
-		 
-		 Bouton filtre_difficile = new Bouton("Difficile");
-		 filtre_difficile.setLocation(503, 300);
-		 filtre_difficile.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					
-				}
-		 });
-		 add(filtre_difficile);
-		 
-		 list_quiz_stats_user = new List();
-		 list_quiz_stats_user.setBounds(260, 336, 323, 269);
-		 list_quiz_stats_user.addItemListener(this);
-		 list_quiz_stats_user.setBackground(Color.WHITE);
-		 add(list_quiz_stats_user);
-		 
-		/********/
-			titreU = new JLabel("STATS USER");
-			titreU.setForeground(Color.WHITE);
-			titreU.setFont(new Font("Arial", Font.PLAIN, 30));
-    		titreU.setBounds(72, 120, 200,200); 
-			add(titreU);
-
-			nbQuizJouees();
-
-
+        		Bouton filtre_tous = new Bouton("Tous");
+		filtre_tous.setLocation(148, 300);
+		filtre_tous.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
+		add(filtre_tous);
 		
+		Bouton filtre_facile = new Bouton("Facile");
+		filtre_facile.setLocation(264, 300);
+		filtre_facile.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
+		add(filtre_facile);
+		
+		Bouton filtre_moyen = new Bouton("Moyen");
+		filtre_moyen.setLocation(380, 300);
+		filtre_moyen.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
+		add(filtre_moyen);
+		
+		Bouton filtre_difficile = new Bouton("Difficile");
+		filtre_difficile.setLocation(496, 300);
+		filtre_difficile.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+					
+			}
+		});
+		add(filtre_difficile);
+		 
+		list_quiz_stats_user = new List();
+		list_quiz_stats_user.setBounds(148, 336, 463, 200);
+		list_quiz_stats_user.addItemListener(this);
+		list_quiz_stats_user.setBackground(Color.WHITE);
+		add(list_quiz_stats_user);
 
-		/**
-        try {
-			Score();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		titreU = new JLabel("Statistiques Utilisateur");
+		titreU.setForeground(Color.WHITE);
+		titreU.setFont(new Font("Arial", Font.PLAIN, 30));
+    	titreU.setBounds(172, 120, 450,200); 
+		add(titreU);
+
+		nbQuizJouees();
+		scoreMoyen();
+		for (short i=0; i<ListeQuizStats_user.length; i++) {
+			list_quiz_stats_user.add(ListeQuizStats_user[i].getNom());
 		}
-        
-        try {
-			scoreMoyen();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-        
-        try {
-			nbPartiesJouees();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-        try {
-			nbQuizJouees();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-        
-        try {
-			nbParticiants(11);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-        try {
-			ScoreDifficulte(3);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-        
-		 **/
+
 	}
 
 	
@@ -259,8 +216,9 @@ public class Statistiques extends JPanel implements MouseListener, MouseMotionLi
 	        while(rs_moyenne.next()){
 	        	db_moyenne = rs_moyenne.getString("score_moyen"); // on récupère la moyenne
 	        	score_moyen = new JLabel("Votre score moyen est de : " + db_moyenne);
-	    		score_moyen.setBounds(48, 180, 600,600);
+	    		score_moyen.setBounds(188, 180, 450, 180);
 	    		score_moyen.setForeground(Color.WHITE); 
+	    		score_moyen.setFont(new Font("Arial", Font.PLAIN, 17));
 	    		add(score_moyen);
 	        }
 		} catch(ClassNotFoundException e){
@@ -284,8 +242,9 @@ public class Statistiques extends JPanel implements MouseListener, MouseMotionLi
 	        while(rs_moyenne_total.next()){
 	        	db_moyenne_total = rs_moyenne_total.getString("score_moyen_total"); // on récupère la moyenne
 	        	score_moyen_total = new JLabel("Le score moyen aux quiz est de : " + db_moyenne_total);
-	    		score_moyen_total.setBounds(148, 140, 250, 250);
+	    		score_moyen_total.setBounds(188, 180, 450, 180);
 	    		score_moyen_total.setForeground(Color.WHITE); 
+	    		score_moyen_total.setFont(new Font("Arial", Font.PLAIN, 17));
 	    		add(score_moyen_total);
 	        }
 		} catch(ClassNotFoundException e){
@@ -345,8 +304,9 @@ public class Statistiques extends JPanel implements MouseListener, MouseMotionLi
 	        while(rs_nb_quiz.next()){
 	        	db_nb_quiz = rs_nb_quiz.getString("nb_quiz"); // on récupère la moyenne
 	        	nb_quiz = new JLabel("Nombre de quiz joué(s) : " + db_quiz_joue + " / " + db_nb_quiz);
-	        	nb_quiz.setBounds(148, 140, 250,220);
+	        	nb_quiz.setBounds(188, 140, 450,220);
 	    		nb_quiz.setForeground(Color.WHITE); 
+	    		nb_quiz.setFont(new Font("Arial", Font.PLAIN, 17));
 	    		add(nb_quiz);
 	        }
 		} catch(ClassNotFoundException e){
@@ -405,8 +365,9 @@ public class Statistiques extends JPanel implements MouseListener, MouseMotionLi
 	        while(rs_nb_quiz_dispo.next()){
 	        	db_nb_quiz_dispo = rs_nb_quiz_dispo.getString("nb_quiz_dispo"); 
 	        	nb_quiz_dispo = new JLabel("Nombre de quiz disponibles : "+db_nb_quiz_dispo);
-	        	nb_quiz_dispo.setBounds(148, 140, 250,220);
+	        	nb_quiz_dispo.setBounds(188, 140, 450,220);
 	    		nb_quiz_dispo.setForeground(Color.WHITE); 
+	    		nb_quiz_dispo.setFont(new Font("Arial", Font.PLAIN, 17));
 	    		add(nb_quiz_dispo);
 	        }
 		} catch(ClassNotFoundException e){
