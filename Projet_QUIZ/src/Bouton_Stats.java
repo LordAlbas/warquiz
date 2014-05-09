@@ -32,7 +32,7 @@ public class Bouton_Stats extends JButton implements MouseListener {
 		setForeground(Color.WHITE);
 		setFont(new Font("Arial", Font.PLAIN, 20));
 		setBackground(new Color(7, 92, 158));
-		setSize(80, 36);
+		setSize(115, 36);
 		setBorder(null);
 		setFocusPainted(false);
 		
@@ -55,29 +55,26 @@ public class Bouton_Stats extends JButton implements MouseListener {
 	
 	
 	public void mouseClicked(MouseEvent e) {
-		
-		
 		Statistiques_Admin.list_quiz_stats.removeAll();
-		
 		switch (txt){
 			case "Tous":
-				for (int i=0; i<Statistiques_Admin.ListeQuizStats.length-1; i++) {
+				for (int i=0; i<Statistiques_Admin.ListeQuizStats.length; i++) {
 					Statistiques_Admin.list_quiz_stats.add(Statistiques_Admin.ListeQuizStats[i].getNom());
 				}
 				break;
 			case "Facile":
-				for (int j=0; j<Statistiques_Admin.ListeQuizStats_facile.length-1; j++) {
+				for (int j=0; j<Statistiques_Admin.ListeQuizStats_facile.length; j++) {
 					Statistiques_Admin.list_quiz_stats.add(Statistiques_Admin.ListeQuizStats_facile[j].getNom());
 				}
 				break;
 			case "Moyen":
 
-				for (int k=0; k<Statistiques_Admin.ListeQuizStats_moyen.length-1; k++) {
+				for (int k=0; k<Statistiques_Admin.ListeQuizStats_moyen.length; k++) {
 					Statistiques_Admin.list_quiz_stats.add(Statistiques_Admin.ListeQuizStats_moyen[k].getNom());
 				}
 				break;
 			case "Difficile":
-				for (int l=0; l<Statistiques_Admin.ListeQuizStats_difficile.length-1; l++) {
+				for (int l=0; l<Statistiques_Admin.ListeQuizStats_difficile.length; l++) {
 					Statistiques_Admin.list_quiz_stats.add(Statistiques_Admin.ListeQuizStats_difficile[l].getNom());
 				}
 				break;		

@@ -39,14 +39,13 @@ public class Bouton extends JButton implements MouseListener,ActionListener {
 	
 	public Bouton(String texte) {
 		txt = texte;
-		System.out.println(txt);
 		setLayout(null);
 		addMouseListener(this);
 		setText(texte);
 		setForeground(Color.WHITE);
 		setFont(new Font("Arial", Font.PLAIN, 20));
 		setBackground(new Color(7, 92, 158));
-		setSize(80, 36);
+		setSize(115, 36);
 		setBorder(null);
 		setFocusPainted(false);
 
@@ -67,46 +66,30 @@ public class Bouton extends JButton implements MouseListener,ActionListener {
 			k=0;
 			break;
 		}
-		System.out.println(diff);
 	}
 
 	public void mouseClicked(MouseEvent e) {
-
-		
-		//Statistiques.list_quiz_stats.removeAll();
-		
+		Statistiques.list_quiz_stats_user.removeAll();
 		switch (txt){
 			case "Tous":
-				
-				for (int i=0; i<Statistiques_Admin.ListeQuizStats.length; i++) {
-					Statistiques_Admin.list_quiz_stats.add(Statistiques_Admin.ListeQuizStats[i].getNom());
+				for (int i=0; i<Statistiques.ListeQuizStats_user.length; i++) {
+					Statistiques.list_quiz_stats_user.add(Statistiques.ListeQuizStats_user[i].getNom());
 				}
 				break;
 			case "Facile":
-				//Statistiques_Admin.list_quiz_stats.removeAll();
-				System.out.println("taille FACILE = "+Statistiques_Admin.ListeQuizStats_facile.length);
-				for (int j=0; j<Statistiques_Admin.ListeQuizStats_facile.length; j++) {
-					
-					System.out.println("Nom = "+Statistiques_Admin.ListeQuizStats_facile[j].getNom());
-					Statistiques_Admin.list_quiz_stats.add(Statistiques_Admin.ListeQuizStats_facile[j].getNom());
+				for (int j=0; j<Statistiques.ListeQuizStats_facile_user.length; j++) {
+					Statistiques.list_quiz_stats_user.add(Statistiques.ListeQuizStats_facile_user[j].getNom());
 					
 				}
 				break;
 			case "Moyen":
-				//Statistiques_Admin.list_quiz_stats.removeAll();
-				System.out.println("taille MOYEN = "+Statistiques_Admin.ListeQuizStats_moyen.length);
-				for (int k=0; k<Statistiques_Admin.ListeQuizStats_moyen.length; k++) {
-					Statistiques_Admin.list_quiz_stats.add(Statistiques_Admin.ListeQuizStats_moyen[k].getNom());
+				for (int k=0; k<Statistiques.ListeQuizStats_moyen_user.length; k++) {
+					Statistiques.list_quiz_stats_user.add(Statistiques.ListeQuizStats_moyen_user[k].getNom());
 				}
 				break;
 			case "Difficile":
-				//Statistiques_Admin.list_quiz_stats.removeAll();
-				System.out.println("taille DIFFICILE = "+Statistiques_Admin.ListeQuizStats_difficile.length);
-				for (int l=0; l<Statistiques_Admin.ListeQuizStats_difficile.length; l++) {
-
-					System.out.println("l = "+l);
-					System.out.println(Statistiques_Admin.ListeQuizStats_difficile[l].getNom());
-					Statistiques_Admin.list_quiz_stats.add(Statistiques_Admin.ListeQuizStats_difficile[l].getNom());
+				for (int l=0; l<Statistiques.ListeQuizStats_difficile_user.length; l++) {
+					Statistiques.list_quiz_stats_user.add(Statistiques.ListeQuizStats_difficile_user[l].getNom());
 				}
 				break;		
 		}

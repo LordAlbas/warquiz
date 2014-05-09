@@ -97,7 +97,7 @@ public class Statistiques_Admin extends JPanel implements MouseListener, MouseMo
         
 		/*******/
 		bt_afficherQuizFacile = new Bouton_Stats("Facile");
-		bt_afficherQuizFacile.setLocation(341, 300);
+		bt_afficherQuizFacile.setLocation(264, 300);
 		bt_afficherQuizFacile.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 					
@@ -106,7 +106,7 @@ public class Statistiques_Admin extends JPanel implements MouseListener, MouseMo
 		add(bt_afficherQuizFacile);
 		
 		bt_afficherQuizMoyen = new Bouton_Stats("Moyen");
-		bt_afficherQuizMoyen.setLocation(422, 300);
+		bt_afficherQuizMoyen.setLocation(380, 300);
 		bt_afficherQuizMoyen.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -115,7 +115,7 @@ public class Statistiques_Admin extends JPanel implements MouseListener, MouseMo
 		add(bt_afficherQuizMoyen);
 		
 		bt_afficherQuizDifficile = new Bouton_Stats("Difficile");
-		bt_afficherQuizDifficile.setLocation(503, 300);
+		bt_afficherQuizDifficile.setLocation(496, 300);
 		bt_afficherQuizDifficile.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -124,7 +124,7 @@ public class Statistiques_Admin extends JPanel implements MouseListener, MouseMo
 		add(bt_afficherQuizDifficile);
 		
 		bt_afficherAllQuiz = new Bouton_Stats("Tous");
-		bt_afficherAllQuiz.setLocation(260, 300);
+		bt_afficherAllQuiz.setLocation(148, 300);
 		bt_afficherAllQuiz.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
@@ -132,64 +132,24 @@ public class Statistiques_Admin extends JPanel implements MouseListener, MouseMo
 		});
 		add(bt_afficherAllQuiz);
 
-		titreA = new JLabel("STATS ADMIN");
+		titreA = new JLabel("Statistiques Administrateur");
 		titreA.setForeground(Color.WHITE);
 		titreA.setFont(new Font("Arial", Font.PLAIN, 30));
-    	titreA.setBounds(72, 120, 200,200);
+    	titreA.setBounds(172, 120, 450,200);
     	titreA.setOpaque(false);
 		add(titreA);	
 		nbQuiz(); //nombre de quiz
 		scoreMoyenTotal(); //score moyen des quiz
 		
 		list_quiz_stats = new List();
-		list_quiz_stats.setBounds(260, 336, 323, 269);
+		list_quiz_stats.setBounds(148, 336, 463, 200);
 		list_quiz_stats.addItemListener(this);
 		list_quiz_stats.setBackground(Color.WHITE);
 		add(list_quiz_stats);
 		
-		/**
-        try {
-			Score();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		for (short i=0; i<ListeQuizStats.length; i++) {
+			list_quiz_stats.add(ListeQuizStats[i].getNom());
 		}
-        
-        try {
-			scoreMoyen();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-        
-        try {
-			nbPartiesJouees();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-        try {
-			nbQuizJouees();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-        
-        try {
-			nbParticiants(11);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-        try {
-			ScoreDifficulte(3);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-        
-		 **/
-        //*******
 	}
 
 	/**
@@ -206,10 +166,10 @@ public class Statistiques_Admin extends JPanel implements MouseListener, MouseMo
 	        ResultSet rs_score = stmt_score.getResultSet();
 	        int cpt = 200;
 	        while(rs_score.next()){
-	        	db_score = rs_score.getString("SCORE_USR_QUIZ"); // on rÃ©cupÃ¨re le score
-	        	db_num_quiz = rs_score.getString("ID_QUIZ"); // on rÃ©cupÃ¨re le num quiz
+	        	db_score = rs_score.getString("SCORE_USR_QUIZ"); // on récupère le score
+	        	db_num_quiz = rs_score.getString("ID_QUIZ"); // on récupère le num quiz
 	        	
-	        	score = new JLabel("Votre score pour le quiz nÂ°" + db_num_quiz + " est de : " + db_score);
+	        	score = new JLabel("Votre score pour le quiz n°" + db_num_quiz + " est de : " + db_score);
 	    		score.setBounds(48, cpt, 600,600);
 	    		score.setForeground(Color.WHITE); 
 	    		add(score);
@@ -221,7 +181,7 @@ public class Statistiques_Admin extends JPanel implements MouseListener, MouseMo
 	}
 	
 	/**
-	 * RÃ©cupÃ¨re le numÃ©ro et le score des quiz 1:FACILE 2:MOYEN ou 3:DIFFICILE que le joueur Ã  fait.
+	 * Récupère le numéro et le score des quiz 1:FACILE 2:MOYEN ou 3:DIFFICILE que le joueur à fait.
 	 * @throws SQLException
 	 */
 	public void ScoreDifficulte(int diff) throws SQLException{
@@ -234,11 +194,11 @@ public class Statistiques_Admin extends JPanel implements MouseListener, MouseMo
 	        ResultSet rs_score_diff = stmt_score_diff.getResultSet();
 	        int cpt_diff = 500;
 	        while(rs_score_diff.next()){
-	        	db_score_diff = rs_score_diff.getString("SCORE_USR_QUIZ"); // on rÃ©cupÃ¨re le score
-	        	db_num_quiz_diff = rs_score_diff.getString("ID_QUIZ"); // on rÃ©cupÃ¨re le num quiz
-	        	//db_diff = rs_score_diff.getString("DIFFICULTE_QUIZ"); // on rÃ©cupÃ¨re la difficulte
+	        	db_score_diff = rs_score_diff.getString("SCORE_USR_QUIZ"); // on récupère le score
+	        	db_num_quiz_diff = rs_score_diff.getString("ID_QUIZ"); // on récupère le num quiz
+	        	//db_diff = rs_score_diff.getString("DIFFICULTE_QUIZ"); // on récupère la difficulte
 	        	
-	        	score_diff = new JLabel("[SELECT DIFF] Votre score pour le quiz nÂ°" + db_num_quiz_diff + " est de : " + db_score_diff);
+	        	score_diff = new JLabel("[SELECT DIFF] Votre score pour le quiz n°" + db_num_quiz_diff + " est de : " + db_score_diff);
 	    		score_diff.setBounds(48, cpt_diff, 600,600);
 	    		score_diff.setForeground(Color.WHITE); 
 	    		add(score_diff);
@@ -263,10 +223,11 @@ public class Statistiques_Admin extends JPanel implements MouseListener, MouseMo
 	        ResultSet rs_moyenne = stmt_moyenne.getResultSet();
 	        
 	        while(rs_moyenne.next()){
-	        	db_moyenne = rs_moyenne.getString("score_moyen"); // on rÃ©cupÃ¨re la moyenne
+	        	db_moyenne = rs_moyenne.getString("score_moyen"); // on récupère la moyenne
 	        	score_moyen = new JLabel("Votre score moyen est de : " + db_moyenne);
-	    		score_moyen.setBounds(48, 180, 600,600);
-	    		score_moyen.setForeground(Color.WHITE);
+	    		score_moyen.setBounds(188, 180, 450, 180);
+	    		score_moyen.setForeground(Color.WHITE); 
+	    		score_moyen.setFont(new Font("Arial", Font.PLAIN, 17));
 	    		add(score_moyen);
 	        }
 		} catch(ClassNotFoundException e){
@@ -288,11 +249,11 @@ public class Statistiques_Admin extends JPanel implements MouseListener, MouseMo
 	        ResultSet rs_moyenne_total = stmt_moyenne_total.getResultSet();
 	        
 	        while(rs_moyenne_total.next()){
-	        	db_moyenne_total = rs_moyenne_total.getString("score_moyen_total"); // on rÃ©cupÃ¨re la moyenne
+	        	db_moyenne_total = rs_moyenne_total.getString("score_moyen_total"); // on récupère la moyenne
 	        	score_moyen_total = new JLabel("Le score moyen aux quiz est de : " + db_moyenne_total);
-	    		score_moyen_total.setBounds(148, 250, 250, 50);
+	    		score_moyen_total.setBounds(188, 220, 450, 60);
 	    		score_moyen_total.setForeground(Color.WHITE); 
-	    		score_moyen_total.setOpaque(false);
+	    		score_moyen_total.setFont(new Font("Arial", Font.PLAIN, 17));
 	    		add(score_moyen_total);
 	        }
 		} catch(ClassNotFoundException e){
@@ -301,7 +262,7 @@ public class Statistiques_Admin extends JPanel implements MouseListener, MouseMo
 	}
 	
 	/**
-	 * Calcule le nombre de parties jouÃ©es par l'utilisateur.
+	 * Calcule le nombre de parties jouées par l'utilisateur.
 	 * @throws SQLException
 	 */
 	public void nbPartiesJouees() throws SQLException{
@@ -314,8 +275,8 @@ public class Statistiques_Admin extends JPanel implements MouseListener, MouseMo
 	        ResultSet rs_nb_parties = stmt_nb_parties.getResultSet();
 	        
 	        while(rs_nb_parties.next()){
-	        	db_nb_parties = rs_nb_parties.getString("nb_parties"); // on rÃ©cupÃ¨re la moyenne
-	        	nb_parties = new JLabel("Vous avez jouÃ© un total de " + db_nb_parties + " parties.");
+	        	db_nb_parties = rs_nb_parties.getString("nb_parties"); // on récupère la moyenne
+	        	nb_parties = new JLabel("Vous avez joué un total de " + db_nb_parties + " parties.");
 	    		nb_parties.setBounds(48, 160, 600,600);
 	    		nb_parties.setForeground(Color.WHITE); 
 	    		add(nb_parties);
@@ -327,7 +288,7 @@ public class Statistiques_Admin extends JPanel implements MouseListener, MouseMo
 	}
 	
 	/**
-	 * Calcule le nombre de quiz jouÃ© parmis le nombre max.
+	 * Calcule le nombre de quiz joué parmis le nombre max.
 	 * @throws SQLException 
 	 */
 	public void nbQuizJouees() throws SQLException{
@@ -346,14 +307,15 @@ public class Statistiques_Admin extends JPanel implements MouseListener, MouseMo
 	        ResultSet rs_quiz_joue = stmt_quiz_joue.getResultSet();
 	        
 	        while(rs_quiz_joue.next()){
-	        	db_quiz_joue = rs_quiz_joue.getString("NB_QUIZ_JOUE"); // on rÃ©cupÃ¨re la moyenne
+	        	db_quiz_joue = rs_quiz_joue.getString("NB_QUIZ_JOUE"); // on récupère la moyenne
 	        	
 	        }
 	        while(rs_nb_quiz.next()){
-	        	db_nb_quiz = rs_nb_quiz.getString("nb_quiz"); // on rÃ©cupÃ¨re la moyenne
-	        	nb_quiz = new JLabel("Nombre de quiz jouÃ©(s) : " + db_quiz_joue + " / " + db_nb_quiz);
-	        	nb_quiz.setBounds(148, 140, 250,220);
+	        	db_nb_quiz = rs_nb_quiz.getString("nb_quiz"); // on récupère la moyenne
+	        	nb_quiz = new JLabel("Nombre de quiz joué(s) : " + db_quiz_joue + " / " + db_nb_quiz);
+	        	nb_quiz.setBounds(188, 140, 450,220);
 	    		nb_quiz.setForeground(Color.WHITE); 
+	    		nb_quiz.setFont(new Font("Arial", Font.PLAIN, 17));
 	    		add(nb_quiz);
 	        }
 		} catch(ClassNotFoundException e){
@@ -364,7 +326,7 @@ public class Statistiques_Admin extends JPanel implements MouseListener, MouseMo
 	public void meilleurScore(){} 
 	
 	/**
-	 * Le nombre de personnes qui on paticipÃ© Ã  un quiz donnÃ©
+	 * Le nombre de personnes qui on paticipé à un quiz donné
 	 * @param num_quiz
 	 * @throws SQLException
 	 */
@@ -381,7 +343,7 @@ public class Statistiques_Admin extends JPanel implements MouseListener, MouseMo
 
 	        
 	        while(rs_nb_participants_quiz.next()){
-	        	db_nb_participants_quiz = rs_nb_participants_quiz.getString("nb_participants_quiz"); // on rÃ©cupÃ¨re le nombre
+	        	db_nb_participants_quiz = rs_nb_participants_quiz.getString("nb_participants_quiz"); // on récupère le nombre
 	        	
 	        	
 	        	nb_participants_quiz = new JLabel("Nombre de participant pour le quiz "+num_quiz+" : "+db_nb_participants_quiz);
@@ -412,9 +374,9 @@ public class Statistiques_Admin extends JPanel implements MouseListener, MouseMo
 	        while(rs_nb_quiz_dispo.next()){
 	        	db_nb_quiz_dispo = rs_nb_quiz_dispo.getString("nb_quiz_dispo"); 
 	        	nb_quiz_dispo = new JLabel("Nombre de quiz disponibles : "+db_nb_quiz_dispo);
-	        	nb_quiz_dispo.setBounds(148, 250, 250,20);
+	        	nb_quiz_dispo.setBounds(188, 210, 450, 125);
 	    		nb_quiz_dispo.setForeground(Color.WHITE); 
-	    		nb_quiz_dispo.setOpaque(false);
+	    		nb_quiz_dispo.setFont(new Font("Arial", Font.PLAIN, 17));
 	    		add(nb_quiz_dispo);
 	        }
 		} catch(ClassNotFoundException e){

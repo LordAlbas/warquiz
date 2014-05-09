@@ -162,7 +162,7 @@ public class SQL_Requete_Quiz {
 			Statement stmt_quiz = (Statement) conn.createStatement();
 			// la requete doit retourner UNIQUEMENT les quiz de l'admin en cours
 			// l'id_admin doit etre disponible quelque part
-			query_quiz = "SELECT id_quiz, nom_quiz FROM QUIZ WHERE LOGIN_ADMIN =" + Connexion.login_general;
+			query_quiz = "SELECT id_quiz, nom_quiz FROM QUIZ WHERE LOGIN_ADMIN =" + Connexion.dbUsername_admin;
 			stmt_quiz.executeQuery(query_quiz);
 	        
 	        ResultSet rs_quiz = stmt_quiz.getResultSet();
@@ -191,7 +191,7 @@ public class SQL_Requete_Quiz {
 			Statement stmt_quiz = (Statement) conn.createStatement();
 			// la requete doit retourner UNIQUEMENT les quiz de l'admin en cours
 			// l'id_admin doit etre disponible quelque part
-			query_quiz = "SELECT id_quiz, nom_quiz FROM QUIZ WHERE DIFFICULTE_QUIZ = 1 AND LOGIN_ADMIN =" + Connexion.login_general;
+			query_quiz = "SELECT id_quiz, nom_quiz FROM QUIZ WHERE DIFFICULTE_QUIZ = 1 AND LOGIN_ADMIN =" + Connexion.dbUsername_admin;
 			stmt_quiz.executeQuery(query_quiz);
 	        
 	        ResultSet rs_quiz = stmt_quiz.getResultSet();
@@ -220,7 +220,7 @@ public class SQL_Requete_Quiz {
 			Statement stmt_quiz = (Statement) conn.createStatement();
 			// la requete doit retourner UNIQUEMENT les quiz de l'admin en cours
 			// l'id_admin doit etre disponible quelque part
-			query_quiz = "SELECT id_quiz, nom_quiz FROM QUIZ WHERE DIFFICULTE_QUIZ = 2 AND LOGIN_ADMIN =" + Connexion.login_general;;
+			query_quiz = "SELECT id_quiz, nom_quiz FROM QUIZ WHERE DIFFICULTE_QUIZ = 2 AND LOGIN_ADMIN =" + Connexion.dbUsername_admin;;
 			stmt_quiz.executeQuery(query_quiz);
 	        
 	        ResultSet rs_quiz = stmt_quiz.getResultSet();
@@ -248,7 +248,7 @@ public class SQL_Requete_Quiz {
 			Statement stmt_quiz = (Statement) conn.createStatement();
 			// la requete doit retourner UNIQUEMENT les quiz de l'admin en cours
 			// l'id_admin doit etre disponible quelque part
-			query_quiz = "SELECT id_quiz, nom_quiz FROM QUIZ WHERE DIFFICULTE_QUIZ = 3 AND LOGIN_ADMIN =" + Connexion.login_general;
+			query_quiz = "SELECT id_quiz, nom_quiz FROM QUIZ WHERE DIFFICULTE_QUIZ = 3 AND LOGIN_ADMIN =" + Connexion.dbUsername_admin;
 			stmt_quiz.executeQuery(query_quiz);
 	        
 	        ResultSet rs_quiz = stmt_quiz.getResultSet();
