@@ -21,6 +21,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 
 public class Jouer extends JPanel implements MouseListener, MouseMotionListener, ItemListener{
 
@@ -163,11 +164,13 @@ public class Jouer extends JPanel implements MouseListener, MouseMotionListener,
 		list_quizcree.setBackground(Color.WHITE);
 		add(list_quizcree);
 		
-
 		
+
 		// remplissage de la liste avec une requete du style "recuperer tout les quiz creer par cet admin"
 		for (short i=0; i<ListeQuiz.length; i++) {
-			list_quizcree.add(ListeQuiz[i].getNom());
+			
+		
+			list_quizcree.add(ListeQuiz[i].getNom()+" - [ "+ListeQuiz[i].getNb_questions()+" question(s) ] - Temps : " + ListeQuiz[i].getTempsQuiz());
 		}
 		
 

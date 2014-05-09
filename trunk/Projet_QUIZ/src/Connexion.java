@@ -92,6 +92,10 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
         add(panel);  	
 	}
 
+	public String getLoginGeneral(){
+		return login_general;
+	}
+	
 	 private Image load(final String url) {
 	       try {
 	           final Toolkit tk = Toolkit.getDefaultToolkit();
@@ -242,7 +246,12 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 		
 		g.drawImage(Images.img_fond[0], 0, 0, this.getWidth(), this.getHeight(), null);
 		g.drawImage(Images.img_element[0], 0, 0, this.getWidth(), (int)(this.getHeight() / 6.1230), null);		// dessine le header	
-		g.drawImage(Images.img_bouton[4], 960, 1, 46, 46, null);
+		
+		g.drawImage(Images.img_bouton[6], 901, 0, 46, 46, null);
+		g.drawImage(Images.img_bouton[4], 967, 0, 46, 46, null);
+		//g.drawImage(Images.img_bouton[4], 523, 0, 46, 46, null);
+		
+		
 		/*
 		 * On boucle sur tous les boutons (de [0] a [3]).
 		 * Chaque bouton obtient une position X (hauteur) en fonction de son numero (i).

@@ -14,12 +14,17 @@ public class Chronometre {
 	private long chrono;
 	private long chronoInitial;
 	private String tpsRestant;
+	private Quiz monQuiz;
+	private Fenetre fenetre;
+	private Jouer_partie partie_en_cours;
 	
-	
-	public Chronometre(long _hrs, long _min, long _sec){
+	public Chronometre(Fenetre fen, Jouer_partie partie, Quiz quiz, long _hrs, long _min, long _sec){
 		sec = _sec;
 		min = _min;
 		hrs = _hrs;
+		monQuiz = quiz;
+		fenetre = fen;
+		partie_en_cours = partie;
 		tpsRestant = hrs+" h "+min+" min "+sec+" sec";
 		chronoInitial = hrs*3600 + min*60 + sec; 
 		chrono = hrs*3600 + min*60 + sec;
@@ -82,7 +87,8 @@ public class Chronometre {
 					JOptionPane.WARNING_MESSAGE);
 			if(rep_deco == 0){
 				System.out.println("Redirige correction");
-			}
+				fenetre.goToCorrection(monQuiz);
+			}else {fenetre.goToAccueil("");}
 		}
 	}
 	

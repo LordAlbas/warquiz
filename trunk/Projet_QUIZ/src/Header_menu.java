@@ -1,3 +1,5 @@
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -15,12 +17,18 @@ public class Header_menu extends JPanel implements MouseListener, MouseMotionLis
 	private Fenetre fenetre;
 	static String selection1; 
 	public JLabel textMessage;
+	private Connexion conn;
 	
 	public Header_menu(Fenetre fen){
 		setLayout(null);
 		setOpaque(false);
-		JLabel textMessage = new JLabel("Bonjour" + " " + Connexion.login_general);
-		textMessage.setBounds(48, 11, 92, 14);
+		JLabel textMessage = new JLabel("Bienvenue" + " " );
+		
+		textMessage.setForeground(Color.WHITE);
+		textMessage.setFont(new Font("Arial", Font.PLAIN, 18));
+		
+		
+		textMessage.setBounds(55, 15, 200, 18);
 		add(textMessage);
 		fenetre = fen;
 		repaint();

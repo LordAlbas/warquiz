@@ -33,6 +33,7 @@ public class Jouer_partie extends JPanel implements MouseListener, MouseMotionLi
 	Button boutonMenu;
 	Bouton_selection_question boutonQuestion;
 	private int cpt =0;
+	private JLabel TxtVite;
 	
 	private JLabel reponse;
 	private JLabel question;
@@ -70,8 +71,8 @@ public class Jouer_partie extends JPanel implements MouseListener, MouseMotionLi
         this.add(header2); 
         //****************************************
         
-        //Chronometre durée partie
-        chrono = new Chronometre (0, 1, 12);
+        //Chronometre durée partie    
+        chrono = new Chronometre (fen, this, monQuiz, 0, 0, 10);
         
         
         //System.out.println(chrono.getTpsRestant());
@@ -83,8 +84,8 @@ public class Jouer_partie extends JPanel implements MouseListener, MouseMotionLi
         Chronometre.setBackground(Color.GREEN);
         Chronometre.setBounds(850, 732, 174, 36);
         add(Chronometre);
-        //timer = createTimer();
-        //timer.start();
+        timer = createTimer();
+        timer.start();
         
         question = new JLabel(monQuiz.getQuest(0).getQuestTxt());
         question.setBounds(10, 250, 1000, 36);
@@ -92,6 +93,13 @@ public class Jouer_partie extends JPanel implements MouseListener, MouseMotionLi
         question.setForeground(Color.WHITE);
         add(question);
         
+        TxtVite = new JLabel("<html>Pensez à<br/>valider !</html>");
+        TxtVite.setHorizontalAlignment(SwingConstants.CENTER); 
+        TxtVite.setFont(new Font("Arial", Font.PLAIN, 35));
+        TxtVite.setForeground(Color.RED);
+        TxtVite.setBounds(835, 663, 200, 70);
+        add(TxtVite);
+        TxtVite.setVisible(false);
 	}
 	
 	public void setQuestion(String txt){
@@ -125,15 +133,15 @@ public class Jouer_partie extends JPanel implements MouseListener, MouseMotionLi
 			
 			boutonQuestion = new Bouton_selection_question(i, monQuiz, this);
 			boutonQuestion.addMouseListener(boutonQuestion);
-			boutonQuestion.setBounds(480+27*i, 90, 20, 20);
+			boutonQuestion.setBounds(480+27*i, 60, 20, 20);
 			add(boutonQuestion);
-			
+			/*
 			boutonMenu = new Button(""+(i+1));
 			boutonMenu.addMouseListener(this);
 			boutonMenu.setBackground(Color.BLUE);
 			boutonMenu.setForeground(Color.WHITE);
 			boutonMenu.setBounds(480+27*i, 60, 20, 20);
-			add(boutonMenu);
+			add(boutonMenu);*/
 		}
 	}
 	
@@ -162,6 +170,8 @@ public class Jouer_partie extends JPanel implements MouseListener, MouseMotionLi
 	        	else {
 	        		Chronometre.setForeground(Color.WHITE);
 	        		Chronometre.setBackground(Color.RED);
+	        		TxtVite.setVisible(true);
+	        		TxtVite.repaint();
 	        	}
 	        	
 
@@ -190,7 +200,6 @@ public class Jouer_partie extends JPanel implements MouseListener, MouseMotionLi
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		g.drawImage(Images.img_fond[0], 0, 0, this.getWidth(), this.getHeight(), null);
-		//g.drawImage(Images.img_element[0], 0, 0, this.getWidth(), (int)(this.getHeight() / 6.1230), null);		// dessine le header	
 		g.drawImage(Images.img_bouton[4], 960, 1, 46, 46, null);
 		
 	}

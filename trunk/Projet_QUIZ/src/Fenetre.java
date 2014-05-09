@@ -19,7 +19,8 @@ public class Fenetre extends JFrame {
 	public Jouer jouer;
 	public Inscription inscription;
 	public Gestion_quiz gestion_quiz;
-
+	public Correction correction;
+	public Quiz partie;
 	/**
 	 * Constructeur
 	 */
@@ -191,6 +192,16 @@ public class Fenetre extends JFrame {
 		if(rep == 0){
 			this.dispose();
 		}
+	}
+	
+	public void goToCorrection(Quiz partie){
+		// TODO Auto-generated method stub
+		correction = new Correction(partie, this);
+		correction.addMouseListener(correction);
+		this.getContentPane().setVisible(false);
+		correction.addMouseListener(correction);
+		this.setContentPane(correction);
+		this.getContentPane().setVisible(true);
 	}
 	
 	/**

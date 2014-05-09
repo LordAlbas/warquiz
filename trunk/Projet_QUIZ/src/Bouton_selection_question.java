@@ -13,7 +13,6 @@ public class Bouton_selection_question extends JButton implements MouseListener{
 	private int aff_num_question;
 	private String question;
 	private Reponse[] reponse;
-
 	
 	public Bouton_selection_question(int _num_question, Quiz _quiz, Jouer_partie _partie){
 		
@@ -35,8 +34,7 @@ public class Bouton_selection_question extends JButton implements MouseListener{
 		System.out.println("NOMBRE DE REPONSE : "+quiz.getQuest(num_question).getNb_reponses());
 		for(int l=0; l<quiz.getQuest(num_question).getNb_reponses();l++){
 			reponse[l] = quiz.getQuest(num_question).getReponse(l);
-		}
-		
+		}	
 	}
 
 	public void AffQuestion(){
