@@ -33,7 +33,7 @@ public class Statistiques extends JPanel implements MouseListener, MouseMotionLi
 	public String query_score,query_moyenne,query_moyenne_total,query_nb_parties,query_nb_quiz,query_quiz_joue,query_nb_participants_quiz,query_score_diff,query_nb_quiz_dispo;
 	private String db_score,db_score_diff,db_num_quiz_diff,db_diff,db_moyenne,db_moyenne_total,db_num_quiz,db_nb_parties,db_nb_quiz,db_quiz_joue,db_nb_participants_quiz,db_nb_quiz_dispo; // le score sorti de la bdd
 	public JLabel score,titreA,titreU,score_moyen,score_moyen_total,nb_parties,nb_quiz,quiz_joue,nb_participants_quiz,nb_quiz_dispo; // le score d'un joueur pour un quiz
-	private JLabel lb_titreStatistiques,score_diff;
+	private JLabel lb_titreStatistiques,score_diff,lb_nom_quiz,lb_score_quiz,lb_temps_quiz;
 	private Bouton bouton;
 	private String texte;
 	public static List list_quiz_stats_user;
@@ -86,7 +86,8 @@ public class Statistiques extends JPanel implements MouseListener, MouseMotionLi
 		lb_titreStatistiques.setFont(new Font("Arial", Font.PLAIN, 42));
 		lb_titreStatistiques.setBounds(575, 105, 400, 50);
 		add(lb_titreStatistiques);
-        		Bouton filtre_tous = new Bouton("Tous");
+        
+		Bouton filtre_tous = new Bouton("Tous");
 		filtre_tous.setLocation(148, 300);
 		filtre_tous.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -136,10 +137,29 @@ public class Statistiques extends JPanel implements MouseListener, MouseMotionLi
 
 		nbQuizJouees();
 		scoreMoyen();
-		for (short i=0; i<ListeQuizStats_user.length; i++) {
+		short i;
+		for (i=0; i<ListeQuizStats_user.length; i++) {
 			list_quiz_stats_user.add(ListeQuizStats_user[i].getNom());
 		}
-
+		
+		lb_nom_quiz = new JLabel("Nom du quiz :");
+		lb_nom_quiz.setForeground(Color.WHITE);
+		lb_nom_quiz.setFont(new Font("Arial", Font.PLAIN, 17));
+		lb_nom_quiz.setBounds(180, 600, 400, 50);
+		add(lb_nom_quiz);
+		
+		lb_score_quiz = new JLabel("Score du quiz :");
+		lb_score_quiz.setForeground(Color.ORANGE);
+		lb_score_quiz.setFont(new Font("Arial", Font.PLAIN, 17));
+		lb_score_quiz.setBounds(180, 620, 400, 50);
+		add(lb_score_quiz);
+		
+		lb_temps_quiz = new JLabel("Temps du quiz :");
+		lb_temps_quiz.setForeground(Color.GREEN);
+		lb_temps_quiz.setFont(new Font("Arial", Font.PLAIN, 17));
+		lb_temps_quiz.setBounds(180, 640, 400, 50);
+		add(lb_temps_quiz);
+		
 	}
 
 	
@@ -400,7 +420,11 @@ public class Statistiques extends JPanel implements MouseListener, MouseMotionLi
 
 	@Override
 	public void itemStateChanged(ItemEvent arg0) {
-		// TODO Auto-generated method stub
-		
+		if (list_quiz_stats_user.getItemCount() > 0 && list_quiz_stats_user.getSelectedItem() != null) {
+			String item = new String();
+			item = list_quiz_stats_user.getSelectedItem();
+			lb_nom_quiz.setText("Nom du quiz : " + item);
+		}else{System.out.println("marche pas");
+		}
 	}
 }
