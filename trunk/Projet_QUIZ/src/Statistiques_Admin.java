@@ -33,7 +33,7 @@ public class Statistiques_Admin extends JPanel implements MouseListener, MouseMo
 	public String query_score,query_moyenne,query_moyenne_total,query_nb_parties,query_nb_quiz,query_quiz_joue,query_nb_participants_quiz,query_score_diff,query_nb_quiz_dispo;
 	private String db_score,db_score_diff,db_num_quiz_diff,db_diff,db_moyenne,db_moyenne_total,db_num_quiz,db_nb_parties,db_nb_quiz,db_quiz_joue,db_nb_participants_quiz,db_nb_quiz_dispo; // le score sorti de la bdd
 	public JLabel score,titreA,titreU,score_moyen,score_moyen_total,nb_parties,nb_quiz,quiz_joue,nb_participants_quiz,nb_quiz_dispo; // le score d'un joueur pour un quiz
-	private JLabel lb_titreStatistiques,score_diff;
+	private JLabel lb_titreStatistiques,score_diff,lb_nom_quiz,lb_score_quiz,lb_temps_quiz;
 	private JList table;
 	private Bouton bouton;
 	private String texte;
@@ -150,6 +150,26 @@ public class Statistiques_Admin extends JPanel implements MouseListener, MouseMo
 		for (short i=0; i<ListeQuizStats.length; i++) {
 			list_quiz_stats.add(ListeQuizStats[i].getNom());
 		}
+		
+		lb_nom_quiz = new JLabel("Nom du quiz :");
+		lb_nom_quiz.setForeground(Color.WHITE);
+		lb_nom_quiz.setFont(new Font("Arial", Font.PLAIN, 17));
+		lb_nom_quiz.setBounds(180, 600, 400, 50);
+		add(lb_nom_quiz);
+		
+		lb_score_quiz = new JLabel("Score du quiz :");
+		lb_score_quiz.setForeground(Color.ORANGE);
+		lb_score_quiz.setFont(new Font("Arial", Font.PLAIN, 17));
+		lb_score_quiz.setBounds(180, 620, 400, 50);
+		add(lb_score_quiz);
+		
+		lb_temps_quiz = new JLabel("Temps du quiz :");
+		lb_temps_quiz.setForeground(Color.GREEN);
+		lb_temps_quiz.setFont(new Font("Arial", Font.PLAIN, 17));
+		lb_temps_quiz.setBounds(180, 640, 400, 50);
+		add(lb_temps_quiz);
+		
+		
 	}
 
 	/**
@@ -408,7 +428,11 @@ public class Statistiques_Admin extends JPanel implements MouseListener, MouseMo
 
 	@Override
 	public void itemStateChanged(ItemEvent arg0) {
-		// TODO Auto-generated method stub
-		
+		if (list_quiz_stats.getItemCount() > 0 && list_quiz_stats.getSelectedItem() != null) {
+			String item = new String();
+			item = list_quiz_stats.getSelectedItem();
+			lb_nom_quiz.setText("Nom du quiz : " + item);
+		}else{System.out.println("marche pas");
+		}
 	}
 }
