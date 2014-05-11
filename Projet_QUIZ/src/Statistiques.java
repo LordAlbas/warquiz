@@ -33,7 +33,7 @@ public class Statistiques extends JPanel implements MouseListener, MouseMotionLi
 	public String query_score,query_moyenne,query_moyenne_total,query_nb_parties,query_nb_quiz,query_quiz_joue,query_nb_participants_quiz,query_score_diff,query_nb_quiz_dispo;
 	private String db_score,db_score_diff,db_num_quiz_diff,db_diff,db_moyenne,db_moyenne_total,db_num_quiz,db_nb_parties,db_nb_quiz,db_quiz_joue,db_nb_participants_quiz,db_nb_quiz_dispo; // le score sorti de la bdd
 	public JLabel score,titreA,titreU,score_moyen,score_moyen_total,nb_parties,nb_quiz,quiz_joue,nb_participants_quiz,nb_quiz_dispo; // le score d'un joueur pour un quiz
-	private JLabel lb_titreStatistiques,score_diff,lb_nom_quiz,lb_score_quiz,lb_temps_quiz;
+	private JLabel lb_titreStatistiques,score_diff,lb_nom_quiz,lb_score_quiz,lb_temps_quiz,lb_nb_quest_quiz;
 	private Bouton bouton;
 	private String texte;
 	public static List list_quiz_stats_user;
@@ -41,6 +41,7 @@ public class Statistiques extends JPanel implements MouseListener, MouseMotionLi
 	public static Quiz[] ListeQuizStats_facile_user;
 	public static Quiz[] ListeQuizStats_moyen_user;
 	public static Quiz[] ListeQuizStats_difficile_user;
+	public static short i;
 	
 
 	/**
@@ -137,7 +138,7 @@ public class Statistiques extends JPanel implements MouseListener, MouseMotionLi
 
 		nbQuizJouees();
 		scoreMoyen();
-		short i;
+		
 		for (i=0; i<ListeQuizStats_user.length; i++) {
 			list_quiz_stats_user.add(ListeQuizStats_user[i].getNom());
 		}
@@ -159,6 +160,12 @@ public class Statistiques extends JPanel implements MouseListener, MouseMotionLi
 		lb_temps_quiz.setFont(new Font("Arial", Font.PLAIN, 17));
 		lb_temps_quiz.setBounds(180, 640, 400, 50);
 		add(lb_temps_quiz);
+		
+		lb_nb_quest_quiz = new JLabel("Nombre de questions du quiz : ");
+		lb_nb_quest_quiz.setForeground(Color.WHITE);
+		lb_nb_quest_quiz.setFont(new Font("Arial", Font.PLAIN, 17));
+		lb_nb_quest_quiz.setBounds(650, 350, 400, 50);
+		add(lb_nb_quest_quiz);
 		
 	}
 
@@ -421,9 +428,18 @@ public class Statistiques extends JPanel implements MouseListener, MouseMotionLi
 	@Override
 	public void itemStateChanged(ItemEvent arg0) {
 		if (list_quiz_stats_user.getItemCount() > 0 && list_quiz_stats_user.getSelectedItem() != null) {
-			String item = new String();
-			item = list_quiz_stats_user.getSelectedItem();
-			lb_nom_quiz.setText("Nom du quiz : " + item);
+			String item_nom = new String();
+			String item_quest = new String();
+			String item_score = new String();
+			String item_temps = new String();
+			item_nom = list_quiz_stats_user.getSelectedItem();
+			item_quest = list_quiz_stats_user.getSelectedItem();
+			item_score = list_quiz_stats_user.getSelectedItem();
+			item_temps = list_quiz_stats_user.getSelectedItem();
+			lb_nom_quiz.setText("Nom du quiz : " + item_nom);
+			lb_nb_quest_quiz.setText("Nombre de questions du quiz : " + item_quest);
+			lb_score_quiz.setText("Score du quiz : " + item_score);
+			lb_temps_quiz.setText("Temps du quiz : " + item_temps);
 		}else{System.out.println("marche pas");
 		}
 	}
