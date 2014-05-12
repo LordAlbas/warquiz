@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
@@ -8,6 +9,7 @@ import java.awt.event.ItemListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
@@ -32,6 +34,8 @@ public class Admin_ajout_reponses extends JPanel  implements MouseListener, Item
 	//private List list_reponses;
 	private JTextField[] reponses = new JTextField[10];
 	private JCheckBox[] statusRep = new JCheckBox[10];
+	private JLabel[] bt_suppr = new JLabel[10];
+	private JLabel[] lb_nbRep = new JLabel[10];
 	
 	private JButton bt_retour;
 	
@@ -114,6 +118,7 @@ public class Admin_ajout_reponses extends JPanel  implements MouseListener, Item
 			statusRep[y].setOpaque(false);
 			statusRep[y].setSelected(current_quiz.getQuest(idQuest).getReponse(y).getStatutRep());
 			statusRep[y].addActionListener(current_quiz.getQuest(idQuest).getReponse(y));
+			addSuppr(y);
 			add(statusRep[y]);
 			y++;
 		}
@@ -183,6 +188,7 @@ public class Admin_ajout_reponses extends JPanel  implements MouseListener, Item
 			add(reponses[i]);
 			addNbRep(i);
 			addChkBox(i);
+			addSuppr(i);
 			repaint();
 		} else {
 			JOptionPane.showMessageDialog(null, 
@@ -192,15 +198,23 @@ public class Admin_ajout_reponses extends JPanel  implements MouseListener, Item
 		}
 	}
 	
+	/**
+	 * Ajoute un label qui numerote les question de A a J.
+	 * @param i
+	 */
 	public void addNbRep(int i) {
-		JLabel lb_nbRep = new JLabel("<html>Reponse <b><span style='color:rgb(250,130,100);'>"+(questChar)+"</span>/</b></html>");
-		lb_nbRep.setForeground(Color.WHITE);
-		lb_nbRep.setFont(new Font("Arial", Font.PLAIN, 16)); 
-		lb_nbRep.setBounds(50+((i%2)*315), 300+((i/2)*70), 200, 25);
-		add(lb_nbRep);
+		lb_nbRep[i] = new JLabel("<html>Reponse <b><span style='color:rgb(250,130,100);'>"+(questChar)+"</span>/</b></html>");
+		lb_nbRep[i].setForeground(Color.WHITE);
+		lb_nbRep[i].setFont(new Font("Arial", Font.PLAIN, 16)); 
+		lb_nbRep[i].setBounds(50+((i%2)*315), 300+((i/2)*70), 200, 25);
+		add(lb_nbRep[i]);
 		questChar++;
 	}
 	
+	/**
+	 * Ajoute une checkbox a coter de la reponses pour definir si elle est juste ou non.
+	 * @param i
+	 */
 	public void addChkBox(int i) {
 		Reponse rep = current_quiz.getQuest(idQuest).addReponse(reponses[i].getText());
 		statusRep[i] = new JCheckBox();
@@ -208,6 +222,49 @@ public class Admin_ajout_reponses extends JPanel  implements MouseListener, Item
 		statusRep[i].setBounds(35+((i%2)*315), 328+((i/2)*70), 25, 25);
 		statusRep[i].setOpaque(false);
 		add(statusRep[i]);
+	}
+	
+	/**
+	 * Dessine les croix de suppression des reponses.
+	 * @param i
+	 */
+	public void addSuppr(int i) {
+		bt_suppr[i] = new JLabel(""+i);
+		ImageIcon btSuppr = new ImageIcon(Images.img_bouton[9]);
+		bt_suppr[i].setIcon(btSuppr);
+		bt_suppr[i].setBounds(300+((i%2)*315), 333+((i/2)*70), 20, 20);
+		bt_suppr[i].addMouseListener(new MouseListener() {
+			public void mouseClicked(MouseEvent e) {
+				JLabel yo = (JLabel) e.getSource();
+				int id_rep = Integer.parseInt(yo.getText());
+				current_quiz.getQuest(idQuest).delReponse(id_rep);
+				while (reponses[id_rep+1] != null && id_rep<reponses.length-1) {
+					reponses[id_rep].setText(reponses[id_rep+1].getText());
+					statusRep[id_rep].setSelected(statusRep[id_rep+1].isSelected());
+					id_rep++;
+				}
+				rmRepStatNum(id_rep);
+				reponses[id_rep] = null;
+				statusRep[id_rep] = null;
+				bt_suppr[id_rep] = null;
+				lb_nbRep[id_rep] = null;
+				questChar--;
+			}
+			public void mousePressed(MouseEvent e) {}
+			public void mouseReleased(MouseEvent e) {}
+			public void mouseEntered(MouseEvent e) {}
+			public void mouseExited(MouseEvent e) {}
+		});
+		add(bt_suppr[i]);
+	}
+	
+	public void rmRepStatNum(int id) {
+		this.remove(reponses[id]);
+		this.remove(statusRep[id]);
+		this.remove(bt_suppr[id]);
+		this.remove(lb_nbRep[id]);
+		this.repaint();
+		//this.revalidate();
 	}
 	
 	public void mouseDragged(MouseEvent arg0) {}
@@ -230,11 +287,5 @@ public class Admin_ajout_reponses extends JPanel  implements MouseListener, Item
 		g.drawImage(Images.img_fond[0], 0, 0, this.getWidth(), this.getHeight(), null);
 		//g.drawImage(Images.img_element[0], 0, 0, this.getWidth(), (int)(this.getHeight() / 6.1230), null);		// dessine le header	
 		g.drawImage(Images.img_bouton[4], 960, 1, 46, 46, null);
-		for (byte i=0; i<statusRep.length;i++) {
-			if (statusRep[i] != null)
-				// Dessine les croix de suppression des reponses
-				g.drawImage(Images.img_bouton[9], 300+((i%2)*315), 330+((i/2)*70), 20, 20, null);
-		}
-		
 	}
 }
