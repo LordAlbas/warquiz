@@ -59,6 +59,19 @@ public class Question implements ActionListener {
 		}
 	}
 	
+	/**
+	 * Supprime une reponse et decale toutes les suivantes.
+	 * @param i
+	 */
+	public void delReponse(int i) {
+		while (reponses[i+1] != null && i<reponses.length-1) {
+			reponses[i] = reponses[i+1];
+			i++;
+		}
+		reponses[i] = null;
+		nb_reponses--;
+	}
+	
 	public void actionPerformed(ActionEvent e) {
 		admin_ajout_reponses = new Admin_ajout_reponses(fenetre, currentQuiz, id_question);
 		//System.out.println("CLICK SUR QUEST num -> "+QuestNum);
