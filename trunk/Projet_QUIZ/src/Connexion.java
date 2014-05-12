@@ -153,10 +153,10 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 						                	status = "ADMIN";
 						                }
 						                else{
-						                	erreur_log = true;
+						                	erreur_log = true; repaint();
 						                }
 						                
-						            	erreur_log = false;
+						            	
 						            }
 						       
 						            repaint(); 
@@ -173,10 +173,11 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 						                	status = "USER";
 						                }
 						                else{
-						                	erreur_log = true;
+						                	erreur_log = true;repaint();
 						                }
 						                recherche_bdd = true;
-						            	erreur_log = false;
+						            	
+						            	repaint();
 						            }
 					            
 					            recherche_bdd=false;
@@ -195,12 +196,12 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 						}
 					}else{
 						textField_pseudo.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.RED));
-						bad_pseudo=1;
+						bad_pseudo=1;erreur_log = true;repaint();
 						tentative++;
 						repaint();
 						if(textField_mdp.getText().length() == 0){
 							textField_mdp.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.RED));
-							bad_mdp=1;
+							bad_mdp=1;erreur_log = true;repaint();
 							repaint();
 						}
 					}
@@ -250,11 +251,11 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 						                	status = "ADMIN";
 						                }
 						                else{
-						                	erreur_log = true;
+						                	erreur_log = true;repaint();
 						                	
 						                }
 						                recherche_bdd = true;
-						            	erreur_log = false;
+						            	
 						            }
 						       
 						            repaint(); 
@@ -271,12 +272,12 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 						                	status = "USER";
 						                }
 						                else{
-						                	erreur_log = true;
+						                	erreur_log = true;repaint();
 						                	
 						                	
 						                }
 						                recherche_bdd = true;
-						            	erreur_log = false;
+						            	
 						            }
 					            
 					            recherche_bdd=false;
@@ -295,12 +296,12 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 						}
 					}else{
 						textField_mdp.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.RED));
-						bad_mdp=1;
+						bad_mdp=1;erreur_log = true;repaint();
 						tentative++;
 						repaint();
 						if(textField_pseudo.getText().length() == 0){
 							textField_pseudo.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.RED));
-							bad_pseudo=1;
+							bad_pseudo=1;erreur_log = true;repaint();
 							repaint();
 						}
 					}
@@ -370,7 +371,7 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 				                	
 				                }
 				                recherche_bdd = true;
-				            	erreur_log = false;
+				            	
 				            }
 				       
 				            repaint(); 
@@ -392,7 +393,7 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 				                	
 				                }
 				                recherche_bdd = true;
-				            	erreur_log = false;
+				            	
 				            }
 			            
 			            recherche_bdd=false;
@@ -412,12 +413,12 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 			}else{
 				System.out.println(" ENTER PSEUDO ERROR ");
 				textField_mdp.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.RED));
-				bad_mdp=1;
+				bad_mdp=1;erreur_log = true;repaint();
 				tentative++;
 				repaint();
 				if(textField_pseudo.getText().length() == 0){
 					textField_pseudo.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.RED));
-					bad_pseudo=1;
+					bad_pseudo=1;erreur_log = true;repaint();
 					repaint();
 				}
 			}
