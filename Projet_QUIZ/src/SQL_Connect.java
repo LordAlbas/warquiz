@@ -25,16 +25,23 @@ public class SQL_Connect extends JPanel{
 	  
 	public static void tryConnect() {
 		Connection conn = null;
-		try{
+		
+		try {
 			Connexion.recherche_bdd=true;
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             conn = DriverManager.getConnection("jdbc:sqlserver://193.252.48.189\\SQLEXPRESS:1433;" + "database=BDD_B3I_groupe_5;" + "user=b3i_groupe_5;" + "password=123Soleil");
+            System.out.println("Connecté");
             Connexion.recherche_bdd=false;
-		} catch (Exception e) {
+		} 
+		catch (Exception e) {
             System.out.println(e.getMessage());
+            System.out.println("erreur connexion");
             Connexion.erreur_bdd=true;
-            Connexion.recherche_bdd=false;  
+            Connexion.recherche_bdd=false;
+           
+            
 		}
+		
 	}
 	public static void testAdminUser() { //Méthode de connexion pour vérifier si tu es admin ou user
 		Connection conn = null;

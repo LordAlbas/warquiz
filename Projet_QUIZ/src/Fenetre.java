@@ -47,10 +47,12 @@ public class Fenetre extends JFrame {
 		
 		setLayout(new GridLayout(1, 1));		// Layout grid (tableau)  1 colonne 1 ligne
 		this.setContentPane(connexion);			// ajout du JPanel au JFrame (gridLayout)
-
+		
 		connexion.setOpaque(false);
 		setVisible(true);
+		SQL_Connect.tryConnect();
 		repaint();
+		
 		
 		
 	}
@@ -167,7 +169,6 @@ public class Fenetre extends JFrame {
 	 * Redirige sur JOUER
 	 * @param selection
 	 */
-	
 	public void goToJouer(String selection) {
 		// TODO Auto-generated method stub
 		jouer = new Jouer(this);
