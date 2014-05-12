@@ -85,6 +85,10 @@ public class Gestion_quiz extends JPanel implements MouseListener, ItemListener 
 		// remplissage de la liste avec une requete du style "recuperer tout les quiz creer par cet admin"
 		for (short i=0; i<mesQuiz.length; i++) {
 			list_quizcree.add(mesQuiz[i].getNom());
+			/*
+			 * Ce serait bien de pouvoir afficher en blanc MES QUIZ et en gris LES AUTRES QUIZ
+			 * et que lorsqu'on selectionne un quiz gris, on ne puisse pas modifier/supprimer (bouton disabled).
+			 */
 		}
 		
 		// bouton de creation / modification / suppression des quiz de la liste
@@ -198,7 +202,8 @@ public class Gestion_quiz extends JPanel implements MouseListener, ItemListener 
 	// pour la liste des quiz cree
 	public void itemStateChanged(ItemEvent arg0) {
 		/*
-		 * grise ou degrise les bouton MODIFIER et SUPPRIMER suivant si on selectionne un quiz ou pas
+		 * grise ou degrise les bouton MODIFIER et SUPPRIMER suivant si on selectionne un quiz ou pas.
+		 * Il faut faire attention a l'id_admin du quiz, ne pas degriser un quiz qui ne nous appartient pas.
 		 */
 		if (list_quizcree.getSelectedItem() != null) {
 			bt_modifQuiz.setEnabled(true);

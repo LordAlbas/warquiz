@@ -106,7 +106,7 @@ public class Admin_ajout_reponses extends JPanel  implements MouseListener, Item
 		// => Quiz.Question.Reponses[i]
 		while (y<10 && current_quiz.getQuest(idQuest).getReponse(y) != null) {
 			reponses[y] = new JTextField(current_quiz.getQuest(idQuest).getReponse(y).getTxtReponse());
-			reponses[y].setBounds(65+((y%2)*315), 330+((y/2)*70), 265, 23);
+			reponses[y].setBounds(65+((y%2)*315), 330+((y/2)*70), 230, 23);
 			add(reponses[y]);
 			addNbRep(y);
 			statusRep[y] = new JCheckBox();
@@ -147,12 +147,6 @@ public class Admin_ajout_reponses extends JPanel  implements MouseListener, Item
 		});
 		add(bt_retour);
 		
-		/* plzzzz fait toi plaiz et netoie tout le code d'ajout et suppression des reponses !!!
-		 * NEXT STEP c'est ca qu'il faut faire ->> gerer tout ce qui est QUIZ/QUESTION/REPONSES dans leurs classes correspondante
-		 * et absolument PAS dans les classes de traitemets (ex: Admin_ajout_reponses / Bouton_suppr/ajout_reponse etc.)
-		 * GO GO GO !!
-		 */
-		
 		/*
 		 * aussi, NEED repartir les classes dans des packages differents (clarete++)
 		 * ex:	Package CLASSES (les classes de DATA ex: quiz, question, joueur, etc)
@@ -184,7 +178,7 @@ public class Admin_ajout_reponses extends JPanel  implements MouseListener, Item
 			i++;
 		if (i<10) {
 			reponses[i] = new JTextField("Write here..");
-			reponses[i].setBounds(65+((i%2)*315), 330+((i/2)*70), 265, 23); // calcul dont je suis fier. (no need 'if')
+			reponses[i].setBounds(65+((i%2)*315), 330+((i/2)*70), 230, 23); // calcul dont je suis fier. (no need 'if')
 			//reponses[i].setFont(new Font("Arial", Font.PLAIN, 16));
 			add(reponses[i]);
 			addNbRep(i);
@@ -236,6 +230,11 @@ public class Admin_ajout_reponses extends JPanel  implements MouseListener, Item
 		g.drawImage(Images.img_fond[0], 0, 0, this.getWidth(), this.getHeight(), null);
 		//g.drawImage(Images.img_element[0], 0, 0, this.getWidth(), (int)(this.getHeight() / 6.1230), null);		// dessine le header	
 		g.drawImage(Images.img_bouton[4], 960, 1, 46, 46, null);
+		for (byte i=0; i<statusRep.length;i++) {
+			if (statusRep[i] != null)
+				// Dessine les croix de suppression des reponses
+				g.drawImage(Images.img_bouton[9], 300+((i%2)*315), 330+((i/2)*70), 20, 20, null);
+		}
 		
 	}
 }

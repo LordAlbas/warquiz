@@ -69,6 +69,7 @@ public class Images {
 			img_bouton[6] = ImageIO.read(new File("images/bouton_option.png"));
 			img_bouton[7] = ImageIO.read(new File("images/accueil_bouton_gerer.png"));
 			img_bouton[8] = ImageIO.read(new File("images/bouton_filtre.png"));
+			img_bouton[9] = ImageIO.read(new File("images/delete_icon.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
