@@ -162,7 +162,7 @@ public class SQL_Requete_Quiz {
 			Statement stmt_quiz = (Statement) conn.createStatement();
 			// la requete doit retourner UNIQUEMENT les quiz de l'admin en cours
 			// l'id_admin doit etre disponible quelque part
-			query_quiz = "SELECT id_quiz, nom_quiz FROM QUIZ WHERE LOGIN_ADMIN =" + Connexion.dbUsername_admin;
+			query_quiz = "SELECT id_quiz, nom_quiz FROM QUIZ WHERE LOGIN_ADMIN =" + Connexion.dbUsername_admin;;
 			stmt_quiz.executeQuery(query_quiz);
 	        
 	        ResultSet rs_quiz = stmt_quiz.getResultSet();
@@ -191,7 +191,7 @@ public class SQL_Requete_Quiz {
 			Statement stmt_quiz = (Statement) conn.createStatement();
 			// la requete doit retourner UNIQUEMENT les quiz de l'admin en cours
 			// l'id_admin doit etre disponible quelque part
-			query_quiz = "SELECT id_quiz, nom_quiz FROM QUIZ WHERE DIFFICULTE_QUIZ = 1 AND LOGIN_ADMIN =" + Connexion.dbUsername_admin;
+			query_quiz = "SELECT id_quiz, nom_quiz FROM QUIZ WHERE DIFFICULTE_QUIZ = 1 AND LOGIN_ADMIN =" + Connexion.dbUsername_admin;;
 			stmt_quiz.executeQuery(query_quiz);
 	        
 	        ResultSet rs_quiz = stmt_quiz.getResultSet();
@@ -427,3 +427,20 @@ public class SQL_Requete_Quiz {
 	}
 
 }
+
+/*Mise a jour du nom du quiz : "UPDATE QUIZ SET NOM_QUIZ =" +nouveau_nom;
+ *Mise a jour de la difficulté du quiz: "UPDATE QUIZ SET DIFFICULTE_QUIZ =" +nouvelle_diff;
+ *Mise a jour des heures du quiz : "UPDATE QUIZ SET HEURE_QUIZ =" +nouvelle_heure;
+ *Mise a jour des minutes du quiz : "UPDATE QUIZ SET MINUTE_QUIZ =" +nouvelle_minute;
+ *Mise a jour des secondes du quiz : "UPDATE QUIZ SET SECONDE_QUIZ =" +nouvelle_seconde;
+ *Ajout d'un nouveau quiz : INSERT INTO QUIZ VALUES("+login_admin+", "+nom_quiz, minute_quiz+", "+seconde_quiz+", "+heure_quiz+", COUNT("+nb_questions+"));
+ *Ajout d'une question : INSERT INTO QUESTION VALUES("+id_quiz+", "+nb_rep_total+", "+nb_rep_juste+", "+text_quest+");
+ *Mise a jour du texte de la question : UPDATE QUESTION SET TEXT_QUEST =" +nouveau_texte;
+ *Mise a jour du nombre de réponses total : UPDATE QUESTION SET NB_REP_TOTAL =" + nouveau_nombre;
+ *Mise a jour du nombre de réponses juste :  UPDATE QUESTION SET NB_REP_JUSTE =" + nouveau_nombre;
+ *Suppression d'une question : DELETE FROM QUESTION WHERE TEXT_QUEST ="+text_quest+"AND ID_QUIZ="+id_quiz;
+ *Ajout d'une réponse : INSERT INTO REPONSE VALUES("+id_question+","+text_rep+","+statut_rep+","+id_quiz+");
+ *Mise a jour du texte de la réponse : UPDATE REPONSE SET TEXT_REP =" +nouveau_texte;
+ *Mise a jour du statut de la reponse : UPDATE REPONSE SET STATUT_REP ="+nouveau_statut;
+ *Suppression d'une réponse : DELETE FROM REPONSE WHERE ID_QUESTION ="+id_question;
+ **/

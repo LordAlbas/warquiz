@@ -116,13 +116,12 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 		textField_pseudo.addKeyListener(new java.awt.event.KeyAdapter(){
 			public void keyPressed(java.awt.event.KeyEvent evt){
 				if(evt.getKeyCode() == evt.VK_ENTER ){
-					if(textField_pseudo.getText().length() != 0){	// Si le PSEUDO est entré						
+					if(textField_pseudo.getText().length() != 0){	// Si le PSEUDO est entré		
 						if(textField_mdp.getText().length() == 0){	// MDP est pas entré
 							textField_mdp.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.RED));
 							bad_mdp=1;
 							tentative++;
 							repaint();
-							
 						}
 						else if(textField_mdp.getText().length() != 0){ // Sinon si le MDP est entré
 							//Méthode permettant de se connecter selon si on est admin ou user
@@ -145,7 +144,6 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 						            while(rs_admin.next()){
 						            	dbUsername_admin = rs_admin.getString("login_admin");
 						            	dbPassword_admin = rs_admin.getString("mdp_admin");
-						            	
 						                if(dbUsername_admin.equals(textField_pseudo.getText()) && dbPassword_admin.equals(textField_mdp.getText())){
 						                	login = true;
 						                	connexion_admin = true;
@@ -156,9 +154,8 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 						                }
 						                else{
 						                	erreur_log = true;
-						                	
 						                }
-						                recherche_bdd = true;
+						                
 						            	erreur_log = false;
 						            }
 						       
@@ -177,8 +174,6 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 						                }
 						                else{
 						                	erreur_log = true;
-						                	
-						                	
 						                }
 						                recherche_bdd = true;
 						            	erreur_log = false;
