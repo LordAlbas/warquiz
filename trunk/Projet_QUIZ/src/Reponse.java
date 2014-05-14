@@ -29,6 +29,7 @@ public class Reponse implements ActionListener {
 	 */
 	// id_reponse
 	public int getIdReponse() { return id_reponse; }
+	public void setIdReponse(int id) { id_reponse = id; }
 	// txt_reponse
 	public String getTxtReponse() { return txt_reponse; }
 	public void setTxtReponse(String txt) { txt_reponse = txt; }

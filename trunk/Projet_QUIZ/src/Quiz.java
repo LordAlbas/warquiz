@@ -94,4 +94,16 @@ public class Quiz {
 			return null;
 		}
 	}
+	
+	public void delQuestion(int id) {
+		if (id < 19) {
+			while (id<questQuiz.length-1 && questQuiz[id+1] != null) {
+				questQuiz[id] = questQuiz[id+1];
+				questQuiz[id].setIdQuestion(questQuiz[id].getIdQuestion()-1);
+				id++;
+			}
+		}
+		questQuiz[id] = null;
+		nb_questions--;
+	}
 }
