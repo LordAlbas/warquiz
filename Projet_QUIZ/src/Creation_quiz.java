@@ -345,9 +345,11 @@ public class Creation_quiz extends JPanel implements MouseListener, MouseMotionL
 	private void decaleTout(int id_quest) {
 		//setLayout(null);
 		//tabQuest[id_quest].removeAll();
-		remove(tabQuest[id_quest]);
-		remove(lb_numQuest[id_quest]);
-		remove(lb_nbRep[id_quest]);
+		
+		//remove(tabQuest[id_quest]);
+		//remove(lb_numQuest[id_quest]);
+		//remove(lb_nbRep[id_quest]);
+		
 		//invalidate();
 		
 		tabQuest[id_quest] = tabQuest[id_quest+1];			// decale les boutons
@@ -355,9 +357,15 @@ public class Creation_quiz extends JPanel implements MouseListener, MouseMotionL
 		lb_nbRep[id_quest] = lb_nbRep[id_quest+1];			// decale le compte des rep juste et rep
 		
 		//tabQuest[id_quest].setBounds(marginLeft, 220+((id_quest-1)*cellSpace), 300, 20);
-		add(tabQuest[id_quest]);
-		add(lb_numQuest[id_quest]);
-		add(lb_nbRep[id_quest]);
+		
+		//add(tabQuest[id_quest]);
+		//add(lb_numQuest[id_quest]);
+		//add(lb_nbRep[id_quest]);
+		
+		tabQuest[id_quest].revalidate();
+		lb_numQuest[id_quest].revalidate();
+		lb_nbRep[id_quest].revalidate();
+		
 		repaint();
 		revalidate();
 	}
