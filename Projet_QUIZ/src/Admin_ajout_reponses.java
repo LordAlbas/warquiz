@@ -238,10 +238,12 @@ public class Admin_ajout_reponses extends JPanel  implements MouseListener, Item
 				JLabel yo = (JLabel) e.getSource();
 				int id_rep = Integer.parseInt(yo.getText());
 				current_quiz.getQuest(idQuest).delReponse(id_rep);
-				while (reponses[id_rep+1] != null && id_rep<reponses.length-1) {
-					reponses[id_rep].setText(reponses[id_rep+1].getText());
-					statusRep[id_rep].setSelected(statusRep[id_rep+1].isSelected());
-					id_rep++;
+				if (id_rep < 9) {
+					while (id_rep<reponses.length-1 && reponses[id_rep+1] != null) {
+						reponses[id_rep].setText(reponses[id_rep+1].getText());
+						statusRep[id_rep].setSelected(statusRep[id_rep+1].isSelected());
+						id_rep++;
+					}
 				}
 				rmRepStatNum(id_rep);
 				reponses[id_rep] = null;

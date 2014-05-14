@@ -31,6 +31,7 @@ public class Question implements ActionListener {
 	 */
 	// id_question
 	public int getIdQuestion() { return id_question; }
+	public void setIdQuestion(int id) { id_question = id; }
 	// txt_question
 	public String getQuestTxt() { return txt_question; }
 	public void setQuestTxt(String txt) { txt_question = txt; }
@@ -64,9 +65,12 @@ public class Question implements ActionListener {
 	 * @param i
 	 */
 	public void delReponse(int i) {
-		while (reponses[i+1] != null && i<reponses.length-1) {
-			reponses[i] = reponses[i+1];
-			i++;
+		if (i < 9) {
+			while (i<reponses.length-1 && reponses[i+1] != null) {
+				reponses[i] = reponses[i+1];
+				reponses[i].setIdReponse(reponses[i].getIdReponse() - 1);
+				i++;
+			}
 		}
 		reponses[i] = null;
 		nb_reponses--;

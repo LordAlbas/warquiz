@@ -5,6 +5,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -44,7 +45,7 @@ public class Creation_quiz extends JPanel implements MouseListener, MouseMotionL
 	// 250,130,100 => plus ou moins rouge-orange light
 	
 	// variables de positionnement
-	private int marginLeft = 180;
+	private int marginLeft = 160;
 	private int cellSpace = 24;
 	JLabel lb_hint = new JLabel("");
 	
@@ -54,6 +55,10 @@ public class Creation_quiz extends JPanel implements MouseListener, MouseMotionL
 	
 	// pour gestions des questions
 	private JButton[] tabQuest = new JButton[20];
+	
+	private JLabel[] lb_numQuest = new JLabel[20];
+	private JLabel[] bt_suppr = new JLabel[20];
+	private JLabel[] lb_nbRep = new JLabel[20];
 	
 	/**
 	 * CONSTRUCTOR
@@ -145,6 +150,7 @@ public class Creation_quiz extends JPanel implements MouseListener, MouseMotionL
 			add(tabQuest[y]);
 			addNumQuestion(y);
 			addNbReponses(y);
+			addSuppr(y);
 			y++;
 		}
 		
@@ -245,6 +251,7 @@ public class Creation_quiz extends JPanel implements MouseListener, MouseMotionL
 				add(tabQuest[i]);
 				addNumQuestion(i);
 				addNbReponses(i);
+				addSuppr(i);
 				repaint();
 			} else {
 				err_msg = "<html>Cette question existe d&eacute;j&agrave; dans ce quiz !</html>";
@@ -268,24 +275,85 @@ public class Creation_quiz extends JPanel implements MouseListener, MouseMotionL
 	 * Ajoute un numero de question a gauche du bouton de la question
 	 */
 	public void addNumQuestion(int i) {
-		JLabel lb_numQuest = new JLabel("# "+(i+1));
-		lb_numQuest.setForeground(Color.WHITE);
-		lb_numQuest.setFont(new Font("Arial", Font.PLAIN, 16)); 
-		lb_numQuest.setBounds(marginLeft-70, 220+(i*cellSpace), 50, 20);
-		lb_numQuest.setHorizontalAlignment(SwingConstants.RIGHT);
-		add(lb_numQuest);
+		lb_numQuest[i] = new JLabel("# "+(i+1));
+		lb_numQuest[i].setForeground(Color.WHITE);
+		lb_numQuest[i].setFont(new Font("Arial", Font.PLAIN, 16)); 
+		lb_numQuest[i].setBounds(marginLeft-70, 220+(i*cellSpace), 50, 20);
+		lb_numQuest[i].setHorizontalAlignment(SwingConstants.RIGHT);
+		add(lb_numQuest[i]);
 	}
 	
 	/**
 	 * Ajoute les "nb_rep / nb_repJuste" a droite du bouton de la question
 	 */
 	public void addNbReponses(int i) {
-		JLabel lb_nbRep = new JLabel("<html>(<span style='color:green;'>"+monQuiz.getQuest(i).getNbr_reponses_juste()+"</span>/<span style='color:red;'>"+monQuiz.getQuest(i).getNb_reponses()+"</span>)</html>");
-		lb_nbRep.setForeground(Color.WHITE);
-		lb_nbRep.setFont(new Font("Arial", Font.PLAIN, 16)); 
-		lb_nbRep.setBounds(marginLeft+320, 220+(i*cellSpace), 50, 20);
+		lb_nbRep[i] = new JLabel("<html>(<span style='color:green;'>"+monQuiz.getQuest(i).getNbr_reponses_juste()+"</span>/<span style='color:red;'>"+monQuiz.getQuest(i).getNb_reponses()+"</span>)</html>");
+		lb_nbRep[i].setForeground(Color.WHITE);
+		lb_nbRep[i].setFont(new Font("Arial", Font.PLAIN, 16)); 
+		lb_nbRep[i].setBounds(marginLeft+320, 220+(i*cellSpace), 50, 20);
 		//lb_nbRep.setHorizontalAlignment(SwingConstants.RIGHT);
-		add(lb_nbRep);
+		add(lb_nbRep[i]);
+	}
+	
+	/**
+	 * Dessine les croix de suppression des questions.
+	 * @param i
+	 */
+	public void addSuppr(int i) {
+		bt_suppr[i] = new JLabel(""+i);
+		ImageIcon btSuppr = new ImageIcon(Images.img_bouton[9]);
+		bt_suppr[i].setIcon(btSuppr);
+		bt_suppr[i].setBounds(marginLeft+370, 220+(i*cellSpace), 20, 20);
+		bt_suppr[i].addMouseListener(new MouseListener() {
+			public void mouseClicked(MouseEvent e) {
+				JLabel yo = (JLabel) e.getSource();
+				int id_quest = Integer.parseInt(yo.getText());
+				monQuiz.delQuestion(id_quest);
+				if (id_quest < 19) {
+					while (id_quest<tabQuest.length-1 && tabQuest[id_quest+1] != null) {
+						decaleTout(id_quest);
+						id_quest++;
+					}
+				}
+				rmQuestNbrepNum(id_quest);
+				tabQuest[id_quest] = null;
+				lb_numQuest[id_quest] = null;
+				lb_nbRep[id_quest] = null;
+				bt_suppr[id_quest] = null;
+			}
+			public void mousePressed(MouseEvent e) {}
+			public void mouseReleased(MouseEvent e) {}
+			public void mouseEntered(MouseEvent e) {}
+			public void mouseExited(MouseEvent e) {}
+		});
+		add(bt_suppr[i]);
+	}
+	
+	public void rmQuestNbrepNum(int id) {
+		this.remove(tabQuest[id]);
+		this.remove(lb_numQuest[id]);
+		this.remove(lb_nbRep[id]);
+		this.remove(bt_suppr[id]);
+		this.repaint();
+	}
+	
+	/**
+	 * Methode private : Called uniquement dans le while de addSuppr().
+	 * @param id_quest
+	 */
+	// ca marche paaaasssss ='(
+	private void decaleTout(int id_quest) {
+		remove(tabQuest[id_quest]);
+		remove(lb_numQuest[id_quest]);
+		remove(lb_nbRep[id_quest]);
+		tabQuest[id_quest] = tabQuest[id_quest+1];			// decale les boutons
+		lb_numQuest[id_quest] = lb_numQuest[id_quest+1];	// decale le numero de question
+		lb_nbRep[id_quest] = lb_nbRep[id_quest+1];			// decale le compte des rep juste et rep
+		//tabQuest[id_quest].setBounds(marginLeft, 220+((id_quest-1)*cellSpace), 300, 20);
+		add(tabQuest[id_quest]);
+		add(lb_numQuest[id_quest]);
+		add(lb_nbRep[id_quest]);
+		repaint();
 	}
 	
 	public void mouseDragged(MouseEvent arg0) {}
