@@ -309,9 +309,16 @@ public class Creation_quiz extends JPanel implements MouseListener, MouseMotionL
 				JLabel yo = (JLabel) e.getSource();
 				int id_quest = Integer.parseInt(yo.getText());
 				monQuiz.delQuestion(id_quest);
+				
+				/*
+				 * /!\ need del les rep de la quest /!\
+				 * (ou alors la suppression de la question suffit a perdre les references aux reponses et donc les supprimes auto..)
+				 */
+				
+				decaleTout(id_quest);
 				if (id_quest < 19) {
 					while (id_quest<tabQuest.length-1 && tabQuest[id_quest+1] != null) {
-						decaleTout(id_quest);
+						//decaleTout(id_quest);
 						id_quest++;
 					}
 				}
@@ -343,31 +350,39 @@ public class Creation_quiz extends JPanel implements MouseListener, MouseMotionL
 	 */
 	// ca marche paaaasssss ='(
 	private void decaleTout(int id_quest) {
-		//setLayout(null);
-		//tabQuest[id_quest].removeAll();
+		remove(tabQuest[id_quest]);
+		remove(lb_numQuest[id_quest]);
+		remove(lb_nbRep[id_quest]);
 		
-		//remove(tabQuest[id_quest]);
-		//remove(lb_numQuest[id_quest]);
-		//remove(lb_nbRep[id_quest]);
+		// ATTENTION !! tabQuest[i] n'est pas une COPY mais une REF de tabQuest[i+1] (changer l'un change l'autre)
 		
-		//invalidate();
+		/*
+		 * J'ai bien peur qu'il faille au choix : 
+		 * 1) implementer la methode "public object clone()" (implements Cloneable)
+		 * 2) faire un constructeur copiant (avec la class en type d'argument) :
+		 * 			public Creation(Creation old) { new.attribut = old.attribut; }
+		 * 3) faire une methode copiante :
+		 * 			public Creation copiage() { return new Creation(this.getAttribut) };
+		 * HF++
+		 */
 		
-		tabQuest[id_quest] = tabQuest[id_quest+1];			// decale les boutons
-		lb_numQuest[id_quest] = lb_numQuest[id_quest+1];	// decale le numero de question
-		lb_nbRep[id_quest] = lb_nbRep[id_quest+1];			// decale le compte des rep juste et rep
+		//tabQuest[id_quest] = tabQuest[id_quest+1];			// decale les boutons
+		//lb_numQuest[id_quest] = lb_numQuest[id_quest+1];	// decale le numero de question
+		//lb_nbRep[id_quest] = lb_nbRep[id_quest+1];			// decale le compte des rep juste et rep
 		
-		//tabQuest[id_quest].setBounds(marginLeft, 220+((id_quest-1)*cellSpace), 300, 20);
+		// le but est de recuperer le meme object et de modifier uniquement le positionnement (une case plus haut).
+		tabQuest[id_quest].setBounds(marginLeft, 220+(id_quest*cellSpace+7), 300, 20);
 		
-		//add(tabQuest[id_quest]);
-		//add(lb_numQuest[id_quest]);
-		//add(lb_nbRep[id_quest]);
+		add(tabQuest[id_quest]);
+		add(lb_numQuest[id_quest]);
+		add(lb_nbRep[id_quest]);
 		
-		tabQuest[id_quest].revalidate();
-		lb_numQuest[id_quest].revalidate();
-		lb_nbRep[id_quest].revalidate();
+		//tabQuest[id_quest].revalidate();
+		//lb_numQuest[id_quest].revalidate();
+		//lb_nbRep[id_quest].revalidate();
 		
-		repaint();
-		revalidate();
+		//revalidate();
+		fenetre.repaint();
 	}
 	
 	public void mouseDragged(MouseEvent arg0) {}
