@@ -3,6 +3,7 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.*;
 
+import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -22,6 +23,9 @@ public class Credits extends JPanel implements MouseListener, MouseMotionListene
 	private JLabel credit3;
 	private JLabel credit4;
 	private JLabel credit5;
+	private JLabel credit6;
+	private JLabel credit7;
+	private JLabel credit8;
 
 	/**
 	 * Constructor
@@ -44,34 +48,52 @@ public class Credits extends JPanel implements MouseListener, MouseMotionListene
         this.add(header2); 
         //****************************************
         
-        credit1 = new JLabel("Réalisé par :");
+        credit1 = new JLabel("Chef de Projet & développeur :");
         credit1.setForeground(Color.WHITE);
         credit1.setFont(new Font("Arial", Font.PLAIN, 30));
-        credit1.setBounds(60, 350, 500, 50);
+        credit1.setBounds(60, 250, 500, 50);
 		add(credit1);
 		
         credit2 = new JLabel("CHARRUE Mérovée");
         credit2.setForeground(Color.WHITE);
-        credit2.setFont(new Font("Arial", Font.PLAIN, 30));
-        credit2.setBounds(130, 450, 500, 50);
+        credit2.setFont(new Font("Arial", Font.PLAIN, 25));
+        credit2.setBounds(130, 290, 500, 50);
 		add(credit2);
+		
+		credit6 = new JLabel("Développeur & Admin BDD :");
+		credit6.setForeground(Color.WHITE);
+		credit6.setFont(new Font("Arial", Font.PLAIN, 30));
+		credit6.setBounds(60, 350, 500, 50);
+		add(credit6);
 		
         credit3 = new JLabel("CURTET Quentin");
         credit3.setForeground(Color.WHITE);
-        credit3.setFont(new Font("Arial", Font.PLAIN, 30));
-        credit3.setBounds(130, 500, 500, 50);
+        credit3.setFont(new Font("Arial", Font.PLAIN, 25));
+        credit3.setBounds(130, 390, 500, 50);
 		add(credit3);
+		
+		credit7 = new JLabel("Développeur & Lead Designer");
+		credit7.setForeground(Color.WHITE);
+		credit7.setFont(new Font("Arial", Font.PLAIN, 30));
+		credit7.setBounds(60, 450, 500, 50);
+		add(credit7);
 		
         credit4 = new JLabel("SINARDET Mickaël");
         credit4.setForeground(Color.WHITE);
-        credit4.setFont(new Font("Arial", Font.PLAIN, 30));
-        credit4.setBounds(130, 550, 500, 50);
+        credit4.setFont(new Font("Arial", Font.PLAIN, 25));
+        credit4.setBounds(130, 490, 500, 50);
 		add(credit4);
+		
+		credit8 = new JLabel("Rédaction quiz :");
+		credit8.setForeground(Color.WHITE);
+		credit8.setFont(new Font("Arial", Font.PLAIN, 30));
+		credit8.setBounds(60, 550, 500, 50);
+		add(credit8);
 		
 		credit5 = new JLabel("HASSAN HAMAD Fatouma");
 		credit5.setForeground(Color.WHITE);
-		credit5.setFont(new Font("Arial", Font.PLAIN, 30));
-		credit5.setBounds(130, 600, 500, 50);
+		credit5.setFont(new Font("Arial", Font.PLAIN, 25));
+		credit5.setBounds(130, 590, 500, 50);
 		add(credit5);
 		
 		lb_titreCredits = new JLabel("Crédits");
