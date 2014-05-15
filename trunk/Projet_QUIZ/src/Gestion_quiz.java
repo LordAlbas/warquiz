@@ -72,14 +72,15 @@ public class Gestion_quiz extends JPanel implements MouseListener, ItemListener 
 		lb_titreListe = new JLabel("Liste de vos quiz");
 		lb_titreListe.setForeground(Color.WHITE);
 		lb_titreListe.setFont(new Font("Arial", Font.PLAIN, 18));
-		lb_titreListe.setBounds(155, 275, 300, 20);
+		lb_titreListe.setBounds(85, 276, 300, 20);
 		add(lb_titreListe);
 		
 		// liste des quiz creer par cet admin
 		list_quizcree = new List();
-		list_quizcree.setBounds(150, 300, 188, 319);
+		list_quizcree.setBounds(85, 299, 444, 382);
 		list_quizcree.addItemListener(this);
 		list_quizcree.setBackground(new Color(54, 90, 118));
+		list_quizcree.setForeground(Color.WHITE);
 		add(list_quizcree);
 		
 		// remplissage de la liste avec une requete du style "recuperer tout les quiz creer par cet admin"
@@ -93,7 +94,10 @@ public class Gestion_quiz extends JPanel implements MouseListener, ItemListener 
 		
 		// bouton de creation / modification / suppression des quiz de la liste
 		bt_creerQuiz = new JButton("Creer quiz");
-		bt_creerQuiz.setBounds(370, 350, 120, 35);
+		bt_creerQuiz.setBounds(855, 379, 120, 35);
+		bt_creerQuiz.setBackground(new Color(7, 92, 158));
+		bt_creerQuiz.setForeground(Color.WHITE);
+		bt_creerQuiz.setBorder(null);
 		bt_creerQuiz.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				String nomQuiz = (String)JOptionPane.showInputDialog(null, 
@@ -124,7 +128,10 @@ public class Gestion_quiz extends JPanel implements MouseListener, ItemListener 
 		add(bt_creerQuiz);
 		
 		bt_supprQuiz = new JButton("Modifier quiz");
-		bt_supprQuiz.setBounds(370, 395, 120, 35);
+		bt_supprQuiz.setBounds(855, 425, 120, 35);
+		bt_supprQuiz.setBackground(new Color(7, 92, 120));
+		bt_supprQuiz.setForeground(Color.WHITE);
+		bt_supprQuiz.setBorder(null);
 		bt_supprQuiz.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//System.out.println("click sur Modification de quiz");
@@ -149,7 +156,10 @@ public class Gestion_quiz extends JPanel implements MouseListener, ItemListener 
 		add(bt_supprQuiz);
 		
 		bt_modifQuiz = new JButton("Supprimer quiz");
-		bt_modifQuiz.setBounds(370, 440, 120, 35);
+		bt_modifQuiz.setBounds(855, 471, 120, 35);
+		bt_modifQuiz.setBackground(new Color(7, 92, 120));
+		bt_modifQuiz.setForeground(Color.WHITE);
+		bt_modifQuiz.setBorder(null);
 		bt_modifQuiz.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//System.out.println("click sur Suppression de quiz");
@@ -190,6 +200,14 @@ public class Gestion_quiz extends JPanel implements MouseListener, ItemListener 
         header2.addMouseListener(header2);
         header2.addMouseMotionListener(header2);
         this.add(header2); 
+        
+
+        
+		JLabel info = new JLabel("Selectionnez un quiz parmis la liste ci-dessus pour le modifier/supprimer");
+		info.setFont(new Font("Arial", Font.PLAIN, 12));
+		info.setForeground(Color.RED);
+		info.setBounds(105, 695, 405, 14);
+		add(info);
         //****************************************
 	}
 
@@ -209,7 +227,9 @@ public class Gestion_quiz extends JPanel implements MouseListener, ItemListener 
 		 */
 		if (list_quizcree.getSelectedItem() != null) {
 			bt_modifQuiz.setEnabled(true);
+			bt_modifQuiz.setBackground(Color.RED);
 			bt_supprQuiz.setEnabled(true);
+			bt_supprQuiz.setBackground(new Color(255,153,51));
 		} else {
 			bt_modifQuiz.setEnabled(false);
 			bt_supprQuiz.setEnabled(false);
@@ -231,15 +251,5 @@ public class Gestion_quiz extends JPanel implements MouseListener, ItemListener 
 			break;
 		}
 		
-		switch (bouton_retour)	{
-		case "rien" :
-			g.drawImage(Images.img_bouton[5], 1, 685, 84, 83, null);
-			break;				
-		case "retour_hover" :
-			g.drawImage(Images.img_bouton_hover[5], 1, 685, 84, 83, null);
-			bouton_retour = "rien";
-			break;
-		}
 	}
-
 }

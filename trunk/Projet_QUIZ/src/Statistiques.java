@@ -128,6 +128,8 @@ public class Statistiques extends JPanel implements MouseListener, MouseMotionLi
 		list_quiz_stats_user.setBounds(148, 336, 463, 200);
 		list_quiz_stats_user.addItemListener(this);
 		list_quiz_stats_user.setBackground(Color.WHITE);
+		list_quiz_stats_user.setBackground(new Color(54, 90, 118));
+		list_quiz_stats_user.setForeground(Color.WHITE);
 		add(list_quiz_stats_user);
 
 		titreU = new JLabel("Statistiques Utilisateur");

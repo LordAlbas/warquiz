@@ -15,6 +15,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -22,6 +23,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.border.BevelBorder;
 
 public class Jouer extends JPanel implements MouseListener, MouseMotionListener, ItemListener{
 
@@ -158,10 +160,15 @@ public class Jouer extends JPanel implements MouseListener, MouseMotionListener,
 
 				
 		// liste des quiz creer par cet admin
+		
+
 		list_quizcree = new List();
 		list_quizcree.setBounds(60, 318, 491, 319);
 		list_quizcree.addItemListener(this);
-		list_quizcree.setBackground(Color.WHITE);
+		list_quizcree.setBackground(new Color(54, 90, 118));
+		list_quizcree.setForeground(Color.WHITE);
+		
+
 		add(list_quizcree);
 		
 		
