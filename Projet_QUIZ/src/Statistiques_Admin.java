@@ -21,6 +21,7 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JTable;
+import javax.swing.SwingConstants;
 
 
 public class Statistiques_Admin extends JPanel implements MouseListener, MouseMotionListener, ItemListener{
@@ -144,7 +145,8 @@ public class Statistiques_Admin extends JPanel implements MouseListener, MouseMo
 		list_quiz_stats = new List();
 		list_quiz_stats.setBounds(148, 336, 463, 200);
 		list_quiz_stats.addItemListener(this);
-		list_quiz_stats.setBackground(Color.WHITE);
+		list_quiz_stats.setBackground(new Color(54, 90, 118));
+		list_quiz_stats.setForeground(Color.WHITE);
 		add(list_quiz_stats);
 		
 		for (short i=0; i<ListeQuizStats.length; i++) {
@@ -169,10 +171,10 @@ public class Statistiques_Admin extends JPanel implements MouseListener, MouseMo
 		lb_temps_quiz.setBounds(180, 640, 400, 50);
 		add(lb_temps_quiz);
 		
-		lb_nb_quest_quiz = new JLabel("Nombre de questions du quiz : ");
+		lb_nb_quest_quiz = new JLabel("Nombre de questions : ");
 		lb_nb_quest_quiz.setForeground(Color.WHITE);
 		lb_nb_quest_quiz.setFont(new Font("Arial", Font.PLAIN, 17));
-		lb_nb_quest_quiz.setBounds(650, 350, 400, 50);
+		lb_nb_quest_quiz.setBounds(759, 348, 233, 106);
 		add(lb_nb_quest_quiz);
 		
 		
@@ -444,7 +446,7 @@ public class Statistiques_Admin extends JPanel implements MouseListener, MouseMo
 			item_score = list_quiz_stats.getSelectedItem();
 			item_temps = list_quiz_stats.getSelectedItem();
 			lb_nom_quiz.setText("Nom du quiz : " + item_nom);
-			lb_nb_quest_quiz.setText("Nombre de questions du quiz : " + item_quest);
+			lb_nb_quest_quiz.setText("Nombre de questions : " + item_quest);
 			lb_score_quiz.setText("Score du quiz : " + item_score);
 			lb_temps_quiz.setText("Temps du quiz : " + item_temps);
 		}else{System.out.println("marche pas");
