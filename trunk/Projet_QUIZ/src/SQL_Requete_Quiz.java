@@ -443,4 +443,5 @@ public class SQL_Requete_Quiz {
  *Mise a jour du texte de la réponse : UPDATE REPONSE SET TEXT_REP =" +nouveau_texte;
  *Mise a jour du statut de la reponse : UPDATE REPONSE SET STATUT_REP ="+nouveau_statut;
  *Suppression d'une réponse : DELETE FROM REPONSE WHERE ID_QUESTION ="+id_question;
+ *Ajout d'un quiz lors de la validation : "INSERT INTO JOUER VALUES("+login_usr+","+id_quiz+","+score_usr_quiz+","+heure_quiz+","+minute_quiz+","+seconde_quiz+")";
  **/
