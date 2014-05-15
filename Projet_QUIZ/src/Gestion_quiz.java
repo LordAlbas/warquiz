@@ -154,8 +154,10 @@ public class Gestion_quiz extends JPanel implements MouseListener, ItemListener 
 			public void actionPerformed(ActionEvent e) {
 				//System.out.println("click sur Suppression de quiz");
 				int rep = JOptionPane.showConfirmDialog(null, 
-						"Voulez-vous vraiment quitter ?", 
-						"Partir ? ... deja ?", 
+						"<html><b>Attention :</b><br/>"
+						+ "Vous etes sur le point de supprimer un Quiz.<br/>"
+						+ "Souhaitez-vous continuer ?</html>", 
+						"Suppression Quiz", 
 						JOptionPane.OK_CANCEL_OPTION, 
 						JOptionPane.WARNING_MESSAGE);
 				if (rep == 0) {

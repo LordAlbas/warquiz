@@ -158,12 +158,7 @@ public class Creation_quiz extends JPanel implements MouseListener, MouseMotionL
 		 * Si aucune question pour le moment, mettre un petit message.
 		 */
 		if (tabQuest[0] == null) {
-			lb_hint.setText("<html>&emsp;Ce quiz ne contient pour le moment aucune question.<br/><br/>&emsp;Aidez-vous du bouton sur votre droite pour commencer &agrave; ajouter des questions.</html>");
-			lb_hint.setForeground(Color.WHITE);
-			lb_hint.setFont(new Font("Arial", Font.PLAIN, 16));
-			//lb_hint.setHorizontalAlignment(SwingConstants.CENTER);
-			lb_hint.setBounds(marginLeft, 250, 300, 100);
-			add(lb_hint);
+			setHintMsg();
 		}
 		
 		/*
@@ -183,14 +178,7 @@ public class Creation_quiz extends JPanel implements MouseListener, MouseMotionL
 		bt_valider.setBounds(855, 570, 130, 40);
 		bt_valider.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String error_msg = "Il manque ci et ca pour valider ce quiz !";
-				if (error_msg != "")
-					JOptionPane.showMessageDialog(null, 
-							error_msg, 
-							"Quiz non valide", 
-							JOptionPane.ERROR_MESSAGE);
-				else
-					;// validerQuiz();
+				validateQuiz();
 			}
 		});
 		add(bt_valider);
@@ -212,6 +200,15 @@ public class Creation_quiz extends JPanel implements MouseListener, MouseMotionL
         header2.addMouseMotionListener(header2);
         this.add(header2); 
         //****************************************
+	}
+	
+	public void setHintMsg() {
+		lb_hint.setText("<html>&emsp;Ce quiz ne contient pour le moment aucune question.<br/><br/>&emsp;Aidez-vous du bouton sur votre droite pour commencer &agrave; ajouter des questions.</html>");
+		lb_hint.setForeground(Color.WHITE);
+		lb_hint.setFont(new Font("Arial", Font.PLAIN, 16));
+		//lb_hint.setHorizontalAlignment(SwingConstants.CENTER);
+		lb_hint.setBounds(marginLeft, 250, 300, 100);
+		add(lb_hint);
 	}
 	
 	/**
@@ -322,6 +319,8 @@ public class Creation_quiz extends JPanel implements MouseListener, MouseMotionL
 				}
 				// ..et on supprime la derniere ligne.
 				rmQuestNbrepNum(id_quest);
+				if (monQuiz.getNb_questions() <= 0)
+					setHintMsg();
 			}
 			public void mousePressed(MouseEvent e) {}
 			public void mouseReleased(MouseEvent e) {}
@@ -331,7 +330,11 @@ public class Creation_quiz extends JPanel implements MouseListener, MouseMotionL
 		add(bt_suppr[i]);
 	}
 	
-	public void rmQuestNbrepNum(int id) {
+	/**
+	 * Private : Called uniquement dans le MouseListener de "addSuppr()".
+	 * @param id
+	 */
+	private void rmQuestNbrepNum(int id) {
 		this.remove(tabQuest[id]);
 		this.remove(lb_numQuest[id]);
 		this.remove(lb_nbRep[id]);
@@ -344,7 +347,7 @@ public class Creation_quiz extends JPanel implements MouseListener, MouseMotionL
 	}
 	
 	/**
-	 * Methode private : Called uniquement dans le while de addSuppr().
+	 * Private : Called uniquement dans le while du MouseListener de "addSuppr()".
 	 * @param id_quest
 	 */
 	private void decaleTout(int id_quest) {
@@ -363,6 +366,49 @@ public class Creation_quiz extends JPanel implements MouseListener, MouseMotionL
 		
 		//revalidate();
 		fenetre.repaint();
+	}
+	
+	/**
+	 * Verifie l'etat du quiz en preparation de validation.
+	 * Renvoi une string non-vide si quelque chose ne va pas.
+	 * @return
+	 */
+	public String testValidationQuiz() {
+		boolean nbRepJusteNull = false;
+		boolean nbRepNull = false;
+		String msg = "";
+		if (monQuiz.getNb_questions() <= 0)
+			msg = "- Le quiz ne contient aucune question pour le moment !\n";
+		if (cb_difficulte.getSelectedItem().toString() == "default")
+			msg += "- La difficulté du quiz n'a pas été définie !\n";
+		for (byte i=0; i<monQuiz.getNb_questions(); i++) {
+			if (monQuiz.getQuest(i).getNbr_reponses_juste() <= 0)
+				nbRepJusteNull = true;
+			if (monQuiz.getQuest(i).getNb_reponses() <= 0)
+				nbRepNull = true;
+		}
+		if (nbRepNull)
+			msg += "- Le quiz contient des questions sans réponses !\n";
+		if (nbRepJusteNull)
+			msg += "- Le quiz comporte des questions sans bonnes réponses !\n";
+		return msg;
+	}
+	
+	/**
+	 * Validation du QUIZ
+	 * Called from click sur le bouton valider
+	 */
+	public void validateQuiz() {
+		String error_msg = testValidationQuiz();
+		if (error_msg != "")					// Si la validation renvoi une string non-vide c'est que quelque chose ne va pas.
+			JOptionPane.showMessageDialog(null, 
+					error_msg, 
+					"Quiz non valide", 
+					JOptionPane.ERROR_MESSAGE);
+		else {
+			SQL_Requete_Quiz reqQuiz = new SQL_Requete_Quiz(fenetre);
+			reqQuiz.setModifQuiz(monQuiz);		// Envoi le quiz en validation c'est a dire dans la BDD !
+		}
 	}
 	
 	public void mouseDragged(MouseEvent arg0) {}
