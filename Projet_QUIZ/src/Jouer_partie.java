@@ -34,9 +34,9 @@ public class Jouer_partie extends JPanel implements MouseListener, MouseMotionLi
 	Bouton_selection_question boutonQuestion;
 	private int cpt =0;
 	private JLabel TxtVite;
-	
 	private JLabel reponse;
 	private JLabel question;
+
 	
 	public Jouer_partie(Fenetre fen, Quiz quiz) {
 		fenetre = fen;
@@ -71,8 +71,24 @@ public class Jouer_partie extends JPanel implements MouseListener, MouseMotionLi
         this.add(header2); 
         //****************************************
         
+        JButton bt_valider_rep = new JButton("Valider la réponse");
+        bt_valider_rep.setBounds(840, 570, 170, 40);
+        bt_valider_rep.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String error_msg = "Veuillez choisir une réponse !";
+				if (error_msg != "")
+					JOptionPane.showMessageDialog(null, 
+							error_msg, 
+							"Veuillez choisir une réponse", 
+							JOptionPane.ERROR_MESSAGE);
+				else
+					;// validereponse(); et mise dans le tableau de la reponse
+			}
+		});
+		add(bt_valider_rep);
+        
         //Chronometre durée partie    
-        chrono = new Chronometre (fen, this, monQuiz, 0, 0, 10);
+        chrono = new Chronometre (fen, this, monQuiz, SQL_Requete_Quiz.getHeures(monQuiz.getId()), SQL_Requete_Quiz.getMin(monQuiz.getId()), SQL_Requete_Quiz.getSec(monQuiz.getId()));
         
         
         //System.out.println(chrono.getTpsRestant());

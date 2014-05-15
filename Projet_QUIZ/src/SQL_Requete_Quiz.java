@@ -12,8 +12,12 @@ public class SQL_Requete_Quiz {
 	public String query_del1;
 	public String query_del2;
 	public String query_del3;
+	public static String query_heure;
+	public static String query_minute;
+	public static String query_seconde;
 	public String query_nbQuiz;
 	private Quiz[] mesQuiz;
+	public String query_idquiz;
 	
 	public SQL_Requete_Quiz(Fenetre fen) {
 		fenetre = fen;
@@ -41,6 +45,7 @@ public class SQL_Requete_Quiz {
 		}
 		return Nb_quiz;
 	}
+	
 	
 	
 	public void recup_Quiz(){
@@ -425,6 +430,69 @@ public class SQL_Requete_Quiz {
 	public Quiz[] getMesQuiz(){
 		return mesQuiz;	
 	}
+	
+	public static long getHeures(int id_quiz){
+		Connection conn = null;
+		int heure_quiz = 1;
+		try {
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+			conn = DriverManager.getConnection("jdbc:sqlserver://193.252.48.189\\SQLEXPRESS:1433;" + "database=BDD_B3I_groupe_5;" + "user=b3i_groupe_5;" + "password=123Soleil");
+			Statement stmt_heure = (Statement) conn.createStatement();
+			query_heure = "SELECT HEURE_QUIZ FROM QUIZ WHERE ID_QUIZ="+id_quiz;
+			stmt_heure.executeQuery(query_heure);
+			ResultSet rs_heure = stmt_heure.getResultSet();
+			while(rs_heure.next()){
+				heure_quiz = rs_heure.getInt("HEURE_QUIZ");
+			}
+	    } catch (SQLException eeee) {
+	    	eeee.printStackTrace();
+	    } catch (ClassNotFoundException eeee) {
+			eeee.printStackTrace();
+		}
+		return heure_quiz;	
+	}
+
+	public static long getMin(int id_quiz) {
+		Connection conn = null;
+		int minute_quiz = 1;
+		try {
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+			conn = DriverManager.getConnection("jdbc:sqlserver://193.252.48.189\\SQLEXPRESS:1433;" + "database=BDD_B3I_groupe_5;" + "user=b3i_groupe_5;" + "password=123Soleil");
+			Statement stmt_minute = (Statement) conn.createStatement();
+			query_minute = "SELECT MINUTE_QUIZ FROM QUIZ WHERE ID_QUIZ="+id_quiz;
+			stmt_minute.executeQuery(query_minute);
+			ResultSet rs_minute = stmt_minute.getResultSet();
+			while(rs_minute.next()){
+				minute_quiz = rs_minute.getInt("MINUTE_QUIZ");
+			}
+	    } catch (SQLException eeee) {
+	    	eeee.printStackTrace();
+	    } catch (ClassNotFoundException eeee) {
+			eeee.printStackTrace();
+		}
+		return minute_quiz;
+	}
+
+	public static long getSec(int id_quiz) {
+		Connection conn = null;
+		int seconde_quiz = 1;
+		try {
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+			conn = DriverManager.getConnection("jdbc:sqlserver://193.252.48.189\\SQLEXPRESS:1433;" + "database=BDD_B3I_groupe_5;" + "user=b3i_groupe_5;" + "password=123Soleil");
+			Statement stmt_seconde = (Statement) conn.createStatement();
+			query_seconde = "SELECT SECONDE_QUIZ FROM QUIZ WHERE ID_QUIZ="+id_quiz;
+			stmt_seconde.executeQuery(query_seconde);
+			ResultSet rs_seconde = stmt_seconde.getResultSet();
+			while(rs_seconde.next()){
+				seconde_quiz = rs_seconde.getInt("SECONDE_QUIZ");
+			}
+	    } catch (SQLException eeee) {
+	    	eeee.printStackTrace();
+	    } catch (ClassNotFoundException eeee) {
+			eeee.printStackTrace();
+		}
+		return seconde_quiz;
+	}
 
 }
 
@@ -444,4 +512,7 @@ public class SQL_Requete_Quiz {
  *Mise a jour du statut de la reponse : UPDATE REPONSE SET STATUT_REP ="+nouveau_statut;
  *Suppression d'une réponse : DELETE FROM REPONSE WHERE ID_QUESTION ="+id_question;
  *Ajout d'un quiz lors de la validation : "INSERT INTO JOUER VALUES("+login_usr+","+id_quiz+","+score_usr_quiz+","+heure_quiz+","+minute_quiz+","+seconde_quiz+")";
+ *Récuperation des heures du quiz : "SELECT HEURE_QUIZ FROM QUIZ WHERE ID_QUIZ="+id_quiz;
+ *Récuperation des minutes du quiz : "SELECT MINUTE_QUIZ FROM QUIZ WHERE ID_QUIZ="+id_quiz;
+ *Récuperation des secondes du quiz : "SELECT SECONDE_QUIZ FROM QUIZ WHERE ID_QUIZ="+id_quiz;
  **/
