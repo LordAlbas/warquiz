@@ -23,6 +23,11 @@ public class SQL_Requete_Quiz {
 		fenetre = fen;
 	}
 	
+	/**
+	 * Renvoi le nombre de quiz total dans la BDD.
+	 * Used from recup_QuizXXX() pour initialiser la taille du tableau de quiz "mesQuiz[]" (attribut de classe).
+	 * @return
+	 */
 	public int recup_nbQuiz(){
 		Connection conn = null;
 		int Nb_quiz = 0;
@@ -46,8 +51,9 @@ public class SQL_Requete_Quiz {
 		return Nb_quiz;
 	}
 	
-	
-	
+	/**
+	 * Ecrit dans l'attribut "mesQuiz[]" un tableau de Quiz contenant uniquement quiz.NOM et quiz.ID
+	 */
 	public void recup_Quiz(){
 		Connection conn = null;
 		try {
@@ -76,6 +82,10 @@ public class SQL_Requete_Quiz {
 		}		
 	}
 	
+	/**
+	 * Ecrit dans l'attribut "mesQuiz[]" un tableau de Quiz contenant uniquement quiz.NOM et quiz.ID
+	 * Recupere uniquement les quiz de difficulte _FACILE_ (diff=1).
+	 */
 	public void recup_Quiz_facile(){
 		Connection conn = null;
 		try {
@@ -103,6 +113,11 @@ public class SQL_Requete_Quiz {
 			eeee.printStackTrace();
 		}		
 	}
+	
+	/**
+	 * Ecrit dans l'attribut "mesQuiz[]" un tableau de Quiz contenant uniquement quiz.NOM et quiz.ID
+	 * Recupere uniquement les quiz de difficulte _MOYEN_ (diff=2).
+	 */
 	public void recup_Quiz_moyen(){
 		Connection conn = null;
 		try {
@@ -131,6 +146,10 @@ public class SQL_Requete_Quiz {
 		}		
 	}
 	
+	/**
+	 * Ecrit dans l'attribut "mesQuiz[]" un tableau de Quiz contenant uniquement quiz.NOM et quiz.ID
+	 * Recupere uniquement les quiz de difficulte _DIFFICILE_ (diff=3).
+	 */
 	public void recup_Quiz_difficile(){
 		Connection conn = null;
 		try {
@@ -273,6 +292,12 @@ public class SQL_Requete_Quiz {
 		}		
 	}
 	
+	/**
+	 * Retourne un objet quiz COMPLET a partir de l'ID_QUIZ.
+	 * L'objet retournee comporte deja les questions et reponses liees.
+	 * @param id_quiz
+	 * @return
+	 */
 	public Quiz getMyQuiz(int id_quiz) {
 		Connection conn = null;
 		
@@ -350,7 +375,7 @@ public class SQL_Requete_Quiz {
 	    		short x = 0;
 	    		
 	            while(rs_quest.next()) {
-	            	if (x>9) {
+	            	if (x>19) {
 	            		System.out.println("Trop de questions ...!!");
 	            	} else {
 	            		if (x>=idQuest.length) {
@@ -400,6 +425,10 @@ public class SQL_Requete_Quiz {
 		return quiz;
 	}
 	
+	/**
+	 * Supprime de la BDD le quiz correspondant a ID_QUIZ.
+	 * @param id_quiz
+	 */
 	public void deleteQuiz(int id_quiz) {
 		Connection conn = null;
 		try {
@@ -427,6 +456,10 @@ public class SQL_Requete_Quiz {
 		}	
 	}
 	
+	/**
+	 * Getter de l'attribut tableau de quiz "Quiz[] mesQuiz".
+	 * @return
+	 */
 	public Quiz[] getMesQuiz(){
 		return mesQuiz;	
 	}
@@ -493,26 +526,49 @@ public class SQL_Requete_Quiz {
 		}
 		return seconde_quiz;
 	}
+	
+	/**
+	 * 
+	 * @param currentQuiz
+	 */
+	public void setModifQuiz(Quiz currentQuiz) {
+		int id = currentQuiz.getId();
+		System.out.println("Validation du quiz num -> "+id);
+		
+		/*
+		 * /!\ un quiz qui vient d'etre creer n'as pas d'ID_QUIZ valide (id=0) /!\
+		 * Il faut faire la diff entre un quiz cree et un quiz modifie.
+		 * Je pense qu'il faut faire :
+		 * 		id_newQuiz = (select id le plus grand de la bdd) + 1
+		 * Il faut voir si l'incrementation du id_quiz en bdd ne fait pas de feinte..
+		 * 
+		 *  Les questions ont des ID_QUEST de 0 a 19
+		 *  et les reponses ont des ID_REP de 0 a 9.
+		 *  Il faut voir qu'en BDD ces id la ne soit pas les seule a etre PrimaryKey
+		 *  mais bien en complement du ID_QUIZ.
+		 */
+	}
 
 }
 
-/*Mise a jour du nom du quiz : "UPDATE QUIZ SET NOM_QUIZ =" +nouveau_nom;
- *Mise a jour de la difficulté du quiz: "UPDATE QUIZ SET DIFFICULTE_QUIZ =" +nouvelle_diff;
- *Mise a jour des heures du quiz : "UPDATE QUIZ SET HEURE_QUIZ =" +nouvelle_heure;
- *Mise a jour des minutes du quiz : "UPDATE QUIZ SET MINUTE_QUIZ =" +nouvelle_minute;
- *Mise a jour des secondes du quiz : "UPDATE QUIZ SET SECONDE_QUIZ =" +nouvelle_seconde;
- *Ajout d'un nouveau quiz : INSERT INTO QUIZ VALUES("+login_admin+", "+nom_quiz, minute_quiz+", "+seconde_quiz+", "+heure_quiz+", COUNT("+nb_questions+"));
- *Ajout d'une question : INSERT INTO QUESTION VALUES("+id_quiz+", "+nb_rep_total+", "+nb_rep_juste+", "+text_quest+");
- *Mise a jour du texte de la question : UPDATE QUESTION SET TEXT_QUEST =" +nouveau_texte;
- *Mise a jour du nombre de réponses total : UPDATE QUESTION SET NB_REP_TOTAL =" + nouveau_nombre;
- *Mise a jour du nombre de réponses juste :  UPDATE QUESTION SET NB_REP_JUSTE =" + nouveau_nombre;
- *Suppression d'une question : DELETE FROM QUESTION WHERE TEXT_QUEST ="+text_quest+"AND ID_QUIZ="+id_quiz;
- *Ajout d'une réponse : INSERT INTO REPONSE VALUES("+id_question+","+text_rep+","+statut_rep+","+id_quiz+");
- *Mise a jour du texte de la réponse : UPDATE REPONSE SET TEXT_REP =" +nouveau_texte;
- *Mise a jour du statut de la reponse : UPDATE REPONSE SET STATUT_REP ="+nouveau_statut;
- *Suppression d'une réponse : DELETE FROM REPONSE WHERE ID_QUESTION ="+id_question;
- *Ajout d'un quiz lors de la validation : "INSERT INTO JOUER VALUES("+login_usr+","+id_quiz+","+score_usr_quiz+","+heure_quiz+","+minute_quiz+","+seconde_quiz+")";
- *Récuperation des heures du quiz : "SELECT HEURE_QUIZ FROM QUIZ WHERE ID_QUIZ="+id_quiz;
- *Récuperation des minutes du quiz : "SELECT MINUTE_QUIZ FROM QUIZ WHERE ID_QUIZ="+id_quiz;
- *Récuperation des secondes du quiz : "SELECT SECONDE_QUIZ FROM QUIZ WHERE ID_QUIZ="+id_quiz;
- **/
+/*
+ *				   Mise a jour du nom du quiz :	"UPDATE QUIZ SET NOM_QUIZ =" +nouveau_nom;
+ *		 Mise a jour de la difficulte du quiz :	"UPDATE QUIZ SET DIFFICULTE_QUIZ =" +nouvelle_diff;
+ *			   Mise a jour des heures du quiz :	"UPDATE QUIZ SET HEURE_QUIZ =" +nouvelle_heure;
+ *			  Mise a jour des minutes du quiz :	"UPDATE QUIZ SET MINUTE_QUIZ =" +nouvelle_minute;
+ *			 Mise a jour des secondes du quiz :	"UPDATE QUIZ SET SECONDE_QUIZ =" +nouvelle_seconde;
+ *					  Ajout d'un nouveau quiz :	"INSERT INTO QUIZ VALUES("+login_admin+", "+nom_quiz+", "+minute_quiz+", "+seconde_quiz+", "+heure_quiz+", COUNT("+nb_questions+"));";
+ *						 Ajout d'une question :	"INSERT INTO QUESTION VALUES("+id_quiz+", "+nb_rep_total+", "+nb_rep_juste+", "+text_quest+");";
+ *		  Mise a jour du texte de la question :	"UPDATE QUESTION SET TEXT_QUEST =" +nouveau_texte;
+ *	  Mise a jour du nombre de reponses total :	"UPDATE QUESTION SET NB_REP_TOTAL =" + nouveau_nombre;
+ *	  Mise a jour du nombre de reponses juste :	"UPDATE QUESTION SET NB_REP_JUSTE =" + nouveau_nombre;
+ *				   Suppression d'une question :	"DELETE FROM QUESTION WHERE TEXT_QUEST ="+text_quest+" AND ID_QUIZ="+id_quiz;
+ *						  Ajout d'une reponse :	"INSERT INTO REPONSE VALUES("+id_question+", "+text_rep+", "+statut_rep+", "+id_quiz+");";
+ *		   Mise a jour du texte de la reponse :	"UPDATE REPONSE SET TEXT_REP =" +nouveau_texte;
+ *		  Mise a jour du statut de la reponse :	"UPDATE REPONSE SET STATUT_REP ="+nouveau_statut;
+ *					Suppression d'une reponse :	"DELETE FROM REPONSE WHERE ID_QUESTION ="+id_question;
+ *		Ajout d'un quiz lors de la validation :	"INSERT INTO JOUER VALUES("+login_usr+", "+id_quiz+", "+score_usr_quiz+", "+heure_quiz+", "+minute_quiz+", "+seconde_quiz+");";
+ *			  Recuperation des heures du quiz :	"SELECT HEURE_QUIZ FROM QUIZ WHERE ID_QUIZ="+id_quiz;
+ *			 Recuperation des minutes du quiz :	"SELECT MINUTE_QUIZ FROM QUIZ WHERE ID_QUIZ="+id_quiz;
+ *			Recuperation des secondes du quiz :	"SELECT SECONDE_QUIZ FROM QUIZ WHERE ID_QUIZ="+id_quiz;
+ */
