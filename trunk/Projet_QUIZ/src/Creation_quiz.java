@@ -315,18 +315,13 @@ public class Creation_quiz extends JPanel implements MouseListener, MouseMotionL
 				 * (ou alors la suppression de la question suffit a perdre les references aux reponses et donc les supprimes auto..)
 				 */
 				
-				decaleTout(id_quest);
-				if (id_quest < 19) {
-					while (id_quest<tabQuest.length-1 && tabQuest[id_quest+1] != null) {
-						//decaleTout(id_quest);
-						id_quest++;
-					}
+				// On decale toute les lignes suivantes..
+				while (id_quest<tabQuest.length-1 && tabQuest[id_quest+1] != null) {
+					decaleTout(id_quest);
+					id_quest++;
 				}
+				// ..et on supprime la derniere ligne.
 				rmQuestNbrepNum(id_quest);
-				tabQuest[id_quest] = null;
-				lb_numQuest[id_quest] = null;
-				lb_nbRep[id_quest] = null;
-				bt_suppr[id_quest] = null;
 			}
 			public void mousePressed(MouseEvent e) {}
 			public void mouseReleased(MouseEvent e) {}
@@ -341,6 +336,10 @@ public class Creation_quiz extends JPanel implements MouseListener, MouseMotionL
 		this.remove(lb_numQuest[id]);
 		this.remove(lb_nbRep[id]);
 		this.remove(bt_suppr[id]);
+		tabQuest[id] = null;
+		lb_numQuest[id] = null;
+		lb_nbRep[id] = null;
+		bt_suppr[id] = null;
 		this.repaint();
 	}
 	
@@ -348,38 +347,19 @@ public class Creation_quiz extends JPanel implements MouseListener, MouseMotionL
 	 * Methode private : Called uniquement dans le while de addSuppr().
 	 * @param id_quest
 	 */
-	// ca marche paaaasssss ='(
 	private void decaleTout(int id_quest) {
 		remove(tabQuest[id_quest]);
-		remove(lb_numQuest[id_quest]);
 		remove(lb_nbRep[id_quest]);
 		
-		// ATTENTION !! tabQuest[i] n'est pas une COPY mais une REF de tabQuest[i+1] (changer l'un change l'autre)
-		
-		/*
-		 * J'ai bien peur qu'il faille au choix : 
-		 * 1) implementer la methode "public object clone()" (implements Cloneable)
-		 * 2) faire un constructeur copiant (avec la class en type d'argument) :
-		 * 			public Creation(Creation old) { new.attribut = old.attribut; }
-		 * 3) faire une methode copiante :
-		 * 			public Creation copiage() { return new Creation(this.getAttribut) };
-		 * HF++
-		 */
-		
-		//tabQuest[id_quest] = tabQuest[id_quest+1];			// decale les boutons
-		//lb_numQuest[id_quest] = lb_numQuest[id_quest+1];	// decale le numero de question
-		//lb_nbRep[id_quest] = lb_nbRep[id_quest+1];			// decale le compte des rep juste et rep
-		
-		// le but est de recuperer le meme object et de modifier uniquement le positionnement (une case plus haut).
-		tabQuest[id_quest].setBounds(marginLeft, 220+(id_quest*cellSpace+7), 300, 20);
+		tabQuest[id_quest].setText(tabQuest[id_quest+1].getText());			// Decale le texte du bouton
+		for (ActionListener al : tabQuest[id_quest].getActionListeners()) {
+			tabQuest[id_quest].removeActionListener(al);					// Enleve les ancien ActionListener (en theorie, un seul)
+		}
+		tabQuest[id_quest].addActionListener(monQuiz.getQuest(id_quest));	// Rajoute le nouveau ActionListener
+		lb_nbRep[id_quest].setText(lb_nbRep[id_quest+1].getText());			// Decale le compte des rep_juste et rep_total
 		
 		add(tabQuest[id_quest]);
-		add(lb_numQuest[id_quest]);
 		add(lb_nbRep[id_quest]);
-		
-		//tabQuest[id_quest].revalidate();
-		//lb_numQuest[id_quest].revalidate();
-		//lb_nbRep[id_quest].revalidate();
 		
 		//revalidate();
 		fenetre.repaint();
