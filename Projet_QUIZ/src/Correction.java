@@ -24,6 +24,13 @@ public class Correction extends JPanel implements MouseListener{
 	private JButton terminer;
 	private Fenetre fenetre;
 	private JLabel titreQuiz;
+	private JLabel bon;
+	private JLabel mauvais;
+	private JLabel rouge;
+	private JLabel vert;
+	private JLabel[] affTabLabel;
+	public JPanel sousPanel;
+
 	
 	public Correction (Quiz quiz, Fenetre fen){
 		setLayout(null);
@@ -46,10 +53,10 @@ public class Correction extends JPanel implements MouseListener{
         this.add(header2); 
         //****************************************
         
-        titreQuiz = new JLabel("Correction du quiz : "+monQuiz.getNom());
+        titreQuiz = new JLabel("<html>Correction du quiz : <br/>"+monQuiz.getNom()+"</html>");
         titreQuiz.setForeground(Color.WHITE);
         titreQuiz.setFont(new Font("Arial", Font.PLAIN, 30));
-        titreQuiz.setBounds(30, 120, 400, 50);
+        titreQuiz.setBounds(30, 120, 535, 100);
         add(titreQuiz);
         
 		lb_titreCorrection = new JLabel("Correction");
@@ -71,6 +78,51 @@ public class Correction extends JPanel implements MouseListener{
 			}
 		});
 		add(terminer);
+		
+		question = new JLabel("Selectionnez une question pour voir les réponses.");
+		question.setBounds(30, 307, 753, 29);
+		question.setForeground(Color.WHITE);
+		question.setFont(new Font("Arial", Font.PLAIN, 20));
+		add(question);
+
+		sousPanel = new JPanel();
+		sousPanel.setBounds(30, 347, 734, 368);
+		sousPanel.setLayout(null);
+		sousPanel.setOpaque(false);
+		add(sousPanel);
+		
+		
+		bon = new JLabel("La ou les bonne(s) réponse(s) sont écrites en ");
+		bon.setBounds(30, 261, 300, 24);
+		add(bon);
+		bon.setForeground(Color.WHITE);
+		bon.setFont(new Font("Arial", Font.PLAIN, 15));
+
+		vert = new JLabel("VERT");
+		vert.setBounds(352, 226, 52, 24);
+		vert.setForeground(Color.GREEN);
+		vert.setFont(new Font("Arial", Font.PLAIN, 15));
+		add(vert);	
+		
+		mauvais = new JLabel("La ou les mauvaise(s) réponse(s) sont écrites en ");
+		mauvais.setBounds(30, 226, 323, 24);
+		add(mauvais);
+		mauvais.setForeground(Color.WHITE);
+		mauvais.setFont(new Font("Arial", Font.PLAIN, 15));
+
+		rouge = new JLabel("ROUGE");
+		rouge.setBounds(332, 255, 72, 36);
+		rouge.setForeground(Color.RED);
+		rouge.setFont(new Font("Arial", Font.PLAIN, 15));
+		add(rouge);			
+		
+		
+		reponse = new JLabel("");
+		/*reponse.setBounds(30, 300, 450, 50);
+		reponse.setForeground(Color.WHITE);
+		reponse.setFont(new Font("Arial", Font.PLAIN, 20));
+		add(reponse);
+		*/
 	}
 	
 
@@ -88,23 +140,50 @@ public class Correction extends JPanel implements MouseListener{
 		question.repaint();
 	}
 	
+	/*
+	 * création des tableaux de label de réponses
+	 */
+	public JLabel[] createTab(int i){
+		JLabel[] TabLabel = new JLabel[monQuiz.getQuest(i).getNb_reponses()];
+		 
+		for(int v=0;v<monQuiz.getQuest(i).getNb_reponses();v++){
+			if(monQuiz.getQuest(i).getReponse(v).getStatutRep() == false){
+				TabLabel[v] = new JLabel(monQuiz.getQuest(i).getReponse(v).getTxtReponse());
+				TabLabel[v].setForeground(Color.RED);
+			}
+			else{
+				TabLabel[v] = new JLabel(monQuiz.getQuest(i).getReponse(v).getTxtReponse());
+				TabLabel[v].setForeground(Color.GREEN);
+			}
+			
+		}
+		return TabLabel;
+	}
+	
+	/*
+	 * affichage des labels de réponses
+	 */
+	public void affLabel(JLabel[]tab, int num){
+		for(int i=0;i<monQuiz.getQuest(num).getNb_reponses();i++){
+			tab[i].setBounds(30, 30*i, 450, 50);
+			//tab[i].setForeground(Color.WHITE);
+			tab[i].setFont(new Font("Arial", Font.PLAIN, 20));
+			sousPanel.add(tab[i]);
+		}	
+		
+	}
+	
+	
 	public void setReponse(int nbRep, String txt){
-		
-			reponse = new JLabel(txt);
-			add(reponse);
-			reponse.setBounds(20, 300+20*cpt, 1000, 36);
-			reponse.setFont(new Font("Arial", Font.PLAIN, 15));
-			reponse.setForeground(Color.WHITE);
-			reponse.repaint();
-			cpt++;
-		
+		reponse.setText(txt);
+		reponse.repaint();
 	}
 	
 	public void setCpt(int nb){
 		cpt = nb;
 	}
 	public void mouseClicked(MouseEvent arg0) {
-		setBackground(Color.GRAY);
+		
 	}
 	public void mouseEntered(MouseEvent arg0) {}
 	public void mouseExited(MouseEvent arg0) {}
@@ -118,5 +197,4 @@ public class Correction extends JPanel implements MouseListener{
 		g.drawImage(Images.img_bouton[4], 960, 1, 46, 46, null);
 		
 	}
-
 }
