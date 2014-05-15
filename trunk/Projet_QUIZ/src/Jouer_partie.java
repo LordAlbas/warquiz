@@ -124,7 +124,8 @@ public class Jouer_partie extends JPanel implements MouseListener, MouseMotionLi
 	}
 	
 	public void setReponse(int nbRep, String txt){
-		
+			
+			
 			reponse = new JLabel(txt);
 			add(reponse);
 			reponse.setBounds(20, 300+20*cpt, 1000, 36);

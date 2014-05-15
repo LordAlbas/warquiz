@@ -3,6 +3,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 import javax.swing.JButton;
+import javax.swing.JLabel;
 
 
 public class Bouton_selection_question extends JButton implements MouseListener{
@@ -13,6 +14,7 @@ public class Bouton_selection_question extends JButton implements MouseListener{
 	private int aff_num_question;
 	private String question;
 	private Reponse[] reponse;
+
 	
 	public Bouton_selection_question(int _num_question, Quiz _quiz, Jouer_partie _partie){
 		
@@ -29,6 +31,8 @@ public class Bouton_selection_question extends JButton implements MouseListener{
 		setBorder(null);
 		setBackground(Color.BLUE);
 		setForeground(Color.WHITE);
+		
+		
 		
 		
 		System.out.println("NOMBRE DE REPONSE : "+quiz.getQuest(num_question).getNb_reponses());
@@ -49,6 +53,7 @@ public class Bouton_selection_question extends JButton implements MouseListener{
 
 	public void mouseClicked(MouseEvent arg0) {
 		partie_en_cours.setCpt(0);
+		
 		//partie_en_cours.clearLabel();
 		System.out.println("Clic sur :"+aff_num_question+" : "+question);
 		setBackground(Color.GRAY);
