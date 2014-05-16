@@ -608,12 +608,12 @@ public class SQL_Requete_Quiz {
 				
 				// Insert QUIZ
 				Statement stmt_addQuiz = (Statement) connAdd.createStatement();
-				String query_insertQuiz = "INSERT INTO QUIZ VALUES('"+Connexion.dbUsername_admin+"', "+currentQuiz.getDifficulteQuizInt()+", '"+currentQuiz.getNom()+"', 3, 33, 0, "+currentQuiz.getNb_questions()+");";
+				String query_insertQuiz = "INSERT INTO QUIZ (LOGIN_ADMIN, DIFFICULTE_QUIZ, NOM_QUIZ, MINUTE_QUIZ, SECONDE_QUIZ, HEURE_QUIZ, NB_QUESTION) VALUES('"+Connexion.login_general+"', "+currentQuiz.getDifficulteQuizInt()+", '"+currentQuiz.getNom()+"', 3, 33, 0, "+currentQuiz.getNb_questions()+");";
 				stmt_addQuiz.executeUpdate(query_insertQuiz);
 				
 				// Recuperation de l'ID_QUIZ qui vient d'etre inserer (id auto incremente dans SQL_Server).
 				Statement stmt_getIdQuiz = (Statement) conn.createStatement();
-				String query_getIdQuiz = "SELECT ID_QUIZ FROM QUIZ WHERE NOM_QUIZ="+currentQuiz.getNom();
+				String query_getIdQuiz = "SELECT ID_QUIZ FROM QUIZ WHERE NOM_QUIZ='"+currentQuiz.getNom()+"';";
 				stmt_getIdQuiz.executeQuery(query_getIdQuiz);
 				ResultSet rs_getIdQuiz = stmt_getIdQuiz.getResultSet();
 				if (rs_getIdQuiz.next()) {
@@ -625,12 +625,12 @@ public class SQL_Requete_Quiz {
 					
 					// Insert QUESTION
 					Statement stmt_addQuest = (Statement) connAdd.createStatement();
-					String query_insertQuest = "INSERT INTO QUESTION VALUES("+newIdQuiz+", "+currentQuiz.getQuest(i).getNb_reponses()+", "+currentQuiz.getQuest(i).getNbr_reponses_juste()+", '"+currentQuiz.getQuest(i).getQuestTxt()+"');";
+					String query_insertQuest = "INSERT INTO QUESTION (ID_QUIZ, NB_REP_TOTAL, NB_REP_JUSTE, TEXT_QUEST) VALUES("+newIdQuiz+", "+currentQuiz.getQuest(i).getNb_reponses()+", "+currentQuiz.getQuest(i).getNbr_reponses_juste()+", '"+currentQuiz.getQuest(i).getQuestTxt()+"');";
 					stmt_addQuest.executeUpdate(query_insertQuest);
 					
 					// Recuperation de l'ID_REPONSE qui vient d'etre inserer (id auto incremente dans SQL_Server).
 					Statement stmt_getIdQuest = (Statement) conn.createStatement();
-					String query_getIdQuest = "SELECT ID_QUESTION FROM QUESTION WHERE ID_QUIZ="+newIdQuiz+" AND TEXT_QUEST="+currentQuiz.getQuest(i).getQuestTxt();
+					String query_getIdQuest = "SELECT ID_QUESTION FROM QUESTION WHERE ID_QUIZ="+newIdQuiz+" AND TEXT_QUEST='"+currentQuiz.getQuest(i).getQuestTxt()+"';";
 					stmt_getIdQuest.executeQuery(query_getIdQuest);
 					ResultSet rs_getIdQuest = stmt_getIdQuest.getResultSet();
 					if (rs_getIdQuest.next()) {
@@ -640,7 +640,7 @@ public class SQL_Requete_Quiz {
 					for (byte j=0; j<currentQuiz.getQuest(i).getNb_reponses(); j++) {
 						// Insert REPONSE
 						Statement stmt_addRep = (Statement) connAdd.createStatement();
-						String query_insertRep = "INSERT INTO REPONSE VALUES("+newIdQuest+", '"+currentQuiz.getQuest(i).getReponse(j).getTxtReponse()+"', "+currentQuiz.getQuest(i).getReponse(j).getStatutRep()+", "+newIdQuiz+");";
+						String query_insertRep = "INSERT INTO REPONSE (ID_QUESTION, TEXT_REP, STATUT_REP, ID_QUIZ) VALUES("+newIdQuest+", '"+currentQuiz.getQuest(i).getReponse(j).getTxtReponse()+"', "+currentQuiz.getQuest(i).getReponse(j).getStatutRepInt()+", "+newIdQuiz+");";
 						stmt_addRep.executeUpdate(query_insertRep);
 					}
 				}
