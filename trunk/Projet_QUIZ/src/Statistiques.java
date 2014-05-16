@@ -429,14 +429,15 @@ public class Statistiques extends JPanel implements MouseListener, MouseMotionLi
 	@Override
 	public void itemStateChanged(ItemEvent arg0) {
 		if (list_quiz_stats_user.getItemCount() > 0 && list_quiz_stats_user.getSelectedItem() != null) {
-			String item_nom = new String();
-			int item_quest = list_quiz_stats_user.getSelectedIndex();
-			String item_score = new String();
-			int item_temps = list_quiz_stats_user.getSelectedIndex();
+			int init = list_quiz_stats_user.getSelectedIndex();
+			String item_nom = "";
+			int item_quest = 0;
+			String item_score = "";
+			String item_temps = "";
 			item_nom = list_quiz_stats_user.getSelectedItem();
-			item_quest = ListeQuizStats_user[item_quest].getNb_questions();
+			item_quest = ListeQuizStats_user[init].getNb_questions();
 			item_score = list_quiz_stats_user.getSelectedItem();
-			item_temps = ListeQuizStats_user[item_temps].getHeureQuiz();
+			item_temps = ListeQuizStats_user[init].getHeureQuiz() +"h "+  ListeQuizStats_user[init].getMinuteQuiz()+"m "+ ListeQuizStats_user[init].getSecondeQuiz() + "s";
 			lb_nom_quiz.setText("Nom du quiz : " + item_nom);
 			lb_nb_quest_quiz.setText("Nombre de questions du quiz : " + item_quest);
 			lb_score_quiz.setText("Score du quiz : " + item_score);
