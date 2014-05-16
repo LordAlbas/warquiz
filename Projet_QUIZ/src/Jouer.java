@@ -168,7 +168,7 @@ public class Jouer extends JPanel implements MouseListener, MouseMotionListener,
 		
 		// remplissage de la liste avec une requete du style "recuperer tout les quiz creer par cet admin"
 		for (short i=0; i<ListeQuiz.length; i++) {
-			list_quizcree.add(ListeQuiz[i].getNom()+" - [ "+ListeQuiz[i].getNb_questions()+" question(s) ] - Temps : " + ListeQuiz[i].getTempsQuiz());
+			list_quizcree.add(ListeQuiz[i].getNom()+" - [ "+ListeQuiz[i].getNb_questions()+" question(s) ] - Temps : " + ListeQuiz[i].getHeureQuiz() + "h "+ ListeQuiz[i].getMinuteQuiz() + "m " + ListeQuiz[i].getSecondeQuiz() +"s ");
 		}
 		
 		// il faut remplir la liste avec une requete du style "recuperer tout les quiz creer par cet admin"

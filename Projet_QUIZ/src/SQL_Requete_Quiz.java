@@ -319,7 +319,9 @@ public class SQL_Requete_Quiz {
 		String logAdminQuiz = "";
 		int idQuiz = id_quiz;
 		int nbQuest = 0;
-		Time tmpsQuiz = null;
+		int heureQuiz = 0;
+		int minuteQuiz = 0;
+		int secondeQuiz = 0;
 		
 		// Requete
 		try {
@@ -347,10 +349,9 @@ public class SQL_Requete_Quiz {
 	            logAdminQuiz = rs_quiz.getString("login_admin");
 	            // nbQuest doit rester a zero ici car il est incremente quand on ajoute des question juste en dessous.
 	            nbQuest = rs_quiz.getInt("nb_question"); // mais je l'utilise pour autre chose
-	            
-	            // bug pour le temps_quiz "The column name temps_quiz is not valid."
-	            //tmpsQuiz = rs_quiz.getTime("temps_quiz");
-	            // normal la colonne est divis�e en 3 (heure_quiz, minute_quiz et seconde_quiz)
+	            heureQuiz = rs_quiz.getInt("heure_quiz");
+	            minuteQuiz = rs_quiz.getInt("minute_quiz");
+	            secondeQuiz = rs_quiz.getInt("seconde_quiz");
 	            
 	            String diff;
 	    		switch (diffQuiz) {
@@ -373,7 +374,9 @@ public class SQL_Requete_Quiz {
 	    		quiz.setDifficulteQuiz(diff);
 	    		quiz.setCategorieQuiz(catQuiz);
 	    		quiz.setLoginAdmin(logAdminQuiz);
-	    		//quiz.setTempsQuiz(tmpsQuiz);
+	    		quiz.setHeureQuiz(heureQuiz);
+	    		quiz.setMinuteQuiz(minuteQuiz);
+	    		quiz.setSecondeQuiz(secondeQuiz);
 	    		
 	            // dans le constructeur quiz, nbQuest automatiquement a zero et s'incremente tout seul, pas de modif du champ ici.
 	    		//quiz.setNb_questions(nbQuest);

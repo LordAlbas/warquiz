@@ -139,7 +139,6 @@ public class Statistiques extends JPanel implements MouseListener, MouseMotionLi
 		add(titreU);
 
 		nbQuizJouees();
-		scoreMoyen();
 		
 		for (i=0; i<ListeQuizStats_user.length; i++) {
 			list_quiz_stats_user.add(ListeQuizStats_user[i].getNom());
@@ -166,7 +165,7 @@ public class Statistiques extends JPanel implements MouseListener, MouseMotionLi
 		lb_nb_quest_quiz = new JLabel("Nombre de questions du quiz : ");
 		lb_nb_quest_quiz.setForeground(Color.WHITE);
 		lb_nb_quest_quiz.setFont(new Font("Arial", Font.PLAIN, 17));
-		lb_nb_quest_quiz.setBounds(650, 350, 400, 50);
+		lb_nb_quest_quiz.setBounds(180, 660, 400, 50);
 		add(lb_nb_quest_quiz);
 		
 	}
@@ -181,7 +180,7 @@ public class Statistiques extends JPanel implements MouseListener, MouseMotionLi
 			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 	        Connection conn = DriverManager.getConnection("jdbc:sqlserver://193.252.48.189\\SQLEXPRESS:1433;" + "database=BDD_B3I_groupe_5;" + "user=b3i_groupe_5;" + "password=123Soleil");
 	        Statement stmt_score = (Statement) conn.createStatement();
-	        query_score = "SELECT DISTINCT * FROM JOUER WHERE LOGIN_USR = 'ClaraMorgane'";	       
+	        query_score = "SELECT AVG(SCORE_USR_QUIZ) AS score_moyen FROM JOUER WHERE LOGIN_USR ="+Connexion.dbUsername_user;	       
 	        stmt_score.executeQuery(query_score);	
 	        ResultSet rs_score = stmt_score.getResultSet();
 	        int cpt = 200;
@@ -264,7 +263,7 @@ public class Statistiques extends JPanel implements MouseListener, MouseMotionLi
 			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 	        Connection conn = DriverManager.getConnection("jdbc:sqlserver://193.252.48.189\\SQLEXPRESS:1433;" + "database=BDD_B3I_groupe_5;" + "user=b3i_groupe_5;" + "password=123Soleil");
 	        Statement stmt_moyenne_total = (Statement) conn.createStatement();
-	        query_moyenne_total = "SELECT AVG(SCORE_USR_QUIZ) AS score_moyen_total FROM JOUER WHERE LOGIN_USR = 'ClaraMorgane'";	       
+	        query_moyenne_total = "SELECT AVG(SCORE_USR_QUIZ) AS score_moyen_total FROM JOUER WHERE LOGIN_USR = '"+ Connexion.login_general + "';";	       
 	        stmt_moyenne_total.executeQuery(query_moyenne_total);	
 	        ResultSet rs_moyenne_total = stmt_moyenne_total.getResultSet();
 	        
@@ -290,7 +289,7 @@ public class Statistiques extends JPanel implements MouseListener, MouseMotionLi
 			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 	        Connection conn = DriverManager.getConnection("jdbc:sqlserver://193.252.48.189\\SQLEXPRESS:1433;" + "database=BDD_B3I_groupe_5;" + "user=b3i_groupe_5;" + "password=123Soleil");
 	        Statement stmt_nb_parties = (Statement) conn.createStatement();
-	        query_nb_parties = "SELECT NB_PARTIE_JOUE AS nb_parties FROM UTILISATEUR WHERE LOGIN_USR = 'ClaraMorgane'";	       
+	        query_nb_parties = "SELECT NB_PARTIE_JOUE AS nb_parties FROM UTILISATEUR WHERE LOGIN_USR = '"+ Connexion.login_general + "';";	       
 	        stmt_nb_parties.executeQuery(query_nb_parties);	
 	        ResultSet rs_nb_parties = stmt_nb_parties.getResultSet();
 	        
@@ -322,7 +321,7 @@ public class Statistiques extends JPanel implements MouseListener, MouseMotionLi
 	        ResultSet rs_nb_quiz = stmt_nb_quiz.getResultSet();
 	        
 	        Statement stmt_quiz_joue = (Statement) conn.createStatement();
-	        query_quiz_joue = "SELECT NB_QUIZ_JOUE FROM UTILISATEUR WHERE LOGIN_USR = 'ClaraMorgane'";	       
+	        query_quiz_joue = "SELECT NB_QUIZ_JOUE FROM UTILISATEUR WHERE LOGIN_USR = '"+ Connexion.login_general + "';";	       
 	        stmt_quiz_joue.executeQuery(query_quiz_joue);	
 	        ResultSet rs_quiz_joue = stmt_quiz_joue.getResultSet();
 	        
@@ -431,13 +430,13 @@ public class Statistiques extends JPanel implements MouseListener, MouseMotionLi
 	public void itemStateChanged(ItemEvent arg0) {
 		if (list_quiz_stats_user.getItemCount() > 0 && list_quiz_stats_user.getSelectedItem() != null) {
 			String item_nom = new String();
-			String item_quest = new String();
+			int item_quest = list_quiz_stats_user.getSelectedIndex();
 			String item_score = new String();
-			String item_temps = new String();
+			int item_temps = list_quiz_stats_user.getSelectedIndex();
 			item_nom = list_quiz_stats_user.getSelectedItem();
-			item_quest = list_quiz_stats_user.getSelectedItem();
+			item_quest = ListeQuizStats_user[item_quest].getNb_questions();
 			item_score = list_quiz_stats_user.getSelectedItem();
-			item_temps = list_quiz_stats_user.getSelectedItem();
+			item_temps = ListeQuizStats_user[item_temps].getHeureQuiz();
 			lb_nom_quiz.setText("Nom du quiz : " + item_nom);
 			lb_nb_quest_quiz.setText("Nombre de questions du quiz : " + item_quest);
 			lb_score_quiz.setText("Score du quiz : " + item_score);
