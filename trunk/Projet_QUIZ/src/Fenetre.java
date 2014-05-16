@@ -30,18 +30,15 @@ public class Fenetre extends JFrame {
 		setResizable(false);
 		setLocationRelativeTo(null);			// la fenetre apparait au milieu de l'ecran
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		Images.initImage();		
+		Images.initImage();
 		
 		// initialisation des JPanel
-					
 		
-		 // creation du JPanel statistiques
-		       	// creation du JPanel credits
+		// creation du JPanel statistiques
+		// creation du JPanel credits
 		connexion = new Connexion(this);			// creation du JPanel conexion
 		
-		
 		// ajout des mouseListener
-		
 		connexion.addMouseListener(connexion);		// 'connexion' implemente les methodes relatif a l'ecoute de la souris
 		connexion.addMouseMotionListener(connexion);
 		
@@ -52,12 +49,7 @@ public class Fenetre extends JFrame {
 		setVisible(true);
 		SQL_Connect.tryConnect();
 		repaint();
-		
-		
-		
 	}
-	
-	
 	
 	/**
 	 * Redirige sur INSCRIPTION

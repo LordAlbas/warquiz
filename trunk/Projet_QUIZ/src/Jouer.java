@@ -132,8 +132,8 @@ public class Jouer extends JPanel implements MouseListener, MouseMotionListener,
 		add(bt_afficherQuizDifficile);
 		
 		JLabel info = new JLabel("Selectionnez un quiz parmis la liste ci-dessus pour jouer !");
-		info.setFont(new Font("Arial", Font.PLAIN, 12));
-		info.setForeground(Color.RED);
+		info.setFont(new Font("Arial", Font.PLAIN, 20));
+		info.setForeground(Images.couleurLabel);
 		info.setBounds(145, 660, 327, 14);
 		add(info);
 		
@@ -157,28 +157,19 @@ public class Jouer extends JPanel implements MouseListener, MouseMotionListener,
 		});
 		add(bt_jouer);
 		
-
-				
 		// liste des quiz creer par cet admin
-		
-
 		list_quizcree = new List();
 		list_quizcree.setBounds(60, 318, 491, 319);
 		list_quizcree.addItemListener(this);
 		list_quizcree.setBackground(new Color(54, 90, 118));
 		list_quizcree.setForeground(Color.WHITE);
 		
-
 		add(list_quizcree);
 		
-		
-
 		// remplissage de la liste avec une requete du style "recuperer tout les quiz creer par cet admin"
 		for (short i=0; i<ListeQuiz.length; i++) {
 			list_quizcree.add(ListeQuiz[i].getNom()+" - [ "+ListeQuiz[i].getNb_questions()+" question(s) ] - Temps : " + ListeQuiz[i].getTempsQuiz());
 		}
-		
-
 		
 		// il faut remplir la liste avec une requete du style "recuperer tout les quiz creer par cet admin"
 		//list_quizcree.add("quiz qui rox");

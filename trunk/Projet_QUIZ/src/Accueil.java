@@ -123,14 +123,14 @@ public class Accueil extends JPanel implements MouseListener, MouseMotionListene
 		if (e.getX() >= 120 && e.getX() <= 490 && e.getY() >= 260 && e.getY() <= 345) { // JOUER
 			image_select = "JOUER_hover";
 			val_i = 0;
-			L_info.setText("<html>Certains pensent que le génie <br>est héréditaire, les autres ont <br>des enfants...</html>");
+			L_info.setText("<html>Certains pensent que le génie <br>est héréditaire, d'autres ont <br>des enfants...</html>");
 			L_info.repaint();
 		}
 		
 		else if (e.getX() >= 120 && e.getX() <= 490 && e.getY() >= 360 && e.getY() <= 445) { // STATS
 			image_select = "STATS_hover";
 			val_i = 1;
-			L_info.setText("7² que je retiens 2... + pi... 42 ?");
+			L_info.setText("7² dont je retiens 2... + pi... 42 ?");
 			L_info.repaint();
 		}
 		
