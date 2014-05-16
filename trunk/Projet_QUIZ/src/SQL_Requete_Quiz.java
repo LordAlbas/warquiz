@@ -461,7 +461,7 @@ public class SQL_Requete_Quiz {
 	    	eeee.printStackTrace();
 	    } catch (ClassNotFoundException eeee) {
 			eeee.printStackTrace();
-		}	
+		}
 	}
 	
 	/**
@@ -540,8 +540,9 @@ public class SQL_Requete_Quiz {
 	 * @param currentQuiz
 	 */
 	public void setModifQuiz(Quiz currentQuiz) {
-		int id = currentQuiz.getId();
-		System.out.println("Validation du quiz num -> "+id);
+		int id = 0;
+		boolean exist = false;
+		System.out.println("Validation du quiz num -> "+currentQuiz.getId());
 		
 		/*
 		 * /!\ un quiz qui vient d'etre creer n'as pas d'ID_QUIZ valide (id=0) /!\
@@ -555,6 +556,93 @@ public class SQL_Requete_Quiz {
 		 *  Il faut voir qu'en BDD ces id la ne soit pas les seule a etre PrimaryKey
 		 *  mais bien en complement du ID_QUIZ.
 		 */
+		
+		Connection conn = null;
+		try {
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+			conn = DriverManager.getConnection("jdbc:sqlserver://193.252.48.189\\SQLEXPRESS:1433;" + "database=BDD_B3I_groupe_5;" + "user=b3i_groupe_5;" + "password=123Soleil");
+			Statement stmt_recupIdQuiz = (Statement) conn.createStatement();
+			String query_recupIdQuiz = "SELECT id_quiz FROM QUIZ";
+			stmt_recupIdQuiz.executeQuery(query_recupIdQuiz);
+			ResultSet rs_idQuiz = stmt_recupIdQuiz.getResultSet();
+			while (rs_idQuiz.next()) {
+				exist = false;
+				if (rs_idQuiz.getInt("id_quiz") == currentQuiz.getId()) {
+					id = rs_idQuiz.getInt("id_quiz");
+					exist = true;
+				}
+			}
+			//  /!\ executeUpdate != executeQuery /!\
+			// car Update quand aucun retour (modif la bdd)
+			// et Query quand un retour (aucune modif de la bdd)
+	    } catch (SQLException eeee) {
+	    	eeee.printStackTrace();
+	    } catch (ClassNotFoundException eeee) {
+			eeee.printStackTrace();
+		}
+		
+		if (exist) {
+			/*
+			 * Code pour MODIFIER un quiz
+			 */
+			System.out.println("Quiz deja existant (=modif) --> "+id);
+		} else {
+			/*
+			 * Code pour AJOUTER un quiz
+			 */
+			System.out.println("Quiz tout nouveau ! (=creation) --> "+currentQuiz.getId());
+			int newIdQuiz = 99;
+			Connection connAdd = null;
+			try {
+				Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+				connAdd = DriverManager.getConnection("jdbc:sqlserver://193.252.48.189\\SQLEXPRESS:1433;" + "database=BDD_B3I_groupe_5;" + "user=b3i_groupe_5;" + "password=123Soleil");
+				
+				// Insert QUIZ
+				Statement stmt_addQuiz = (Statement) connAdd.createStatement();
+				String query_insertQuiz = "INSERT INTO QUIZ VALUES('"+Connexion.dbUsername_admin+"', "+currentQuiz.getDifficulteQuizInt()+", '"+currentQuiz.getNom()+"', 3, 33, 0, "+currentQuiz.getNb_questions()+");";
+				stmt_addQuiz.executeUpdate(query_insertQuiz);
+				
+				// Recuperation de l'ID_QUIZ qui vient d'etre inserer (id auto incremente dans SQL_Server).
+				Statement stmt_getIdQuiz = (Statement) conn.createStatement();
+				String query_getIdQuiz = "SELECT ID_QUIZ FROM QUIZ WHERE NOM_QUIZ="+currentQuiz.getNom();
+				stmt_getIdQuiz.executeQuery(query_getIdQuiz);
+				ResultSet rs_getIdQuiz = stmt_getIdQuiz.getResultSet();
+				if (rs_getIdQuiz.next()) {
+					newIdQuiz = rs_getIdQuiz.getInt("id_quiz");
+				}
+				
+				for (byte i=0; i<currentQuiz.getNb_questions(); i++) {
+					int newIdQuest = 999;
+					
+					// Insert QUESTION
+					Statement stmt_addQuest = (Statement) connAdd.createStatement();
+					String query_insertQuest = "INSERT INTO QUESTION VALUES("+newIdQuiz+", "+currentQuiz.getQuest(i).getNb_reponses()+", "+currentQuiz.getQuest(i).getNbr_reponses_juste()+", '"+currentQuiz.getQuest(i).getQuestTxt()+"');";
+					stmt_addQuest.executeUpdate(query_insertQuest);
+					
+					// Recuperation de l'ID_REPONSE qui vient d'etre inserer (id auto incremente dans SQL_Server).
+					Statement stmt_getIdQuest = (Statement) conn.createStatement();
+					String query_getIdQuest = "SELECT ID_QUESTION FROM QUESTION WHERE ID_QUIZ="+newIdQuiz+" AND TEXT_QUEST="+currentQuiz.getQuest(i).getQuestTxt();
+					stmt_getIdQuest.executeQuery(query_getIdQuest);
+					ResultSet rs_getIdQuest = stmt_getIdQuest.getResultSet();
+					if (rs_getIdQuest.next()) {
+						newIdQuest = rs_getIdQuest.getInt("ID_QUESTION");
+					}
+					
+					for (byte j=0; j<currentQuiz.getQuest(i).getNb_reponses(); j++) {
+						// Insert REPONSE
+						Statement stmt_addRep = (Statement) connAdd.createStatement();
+						String query_insertRep = "INSERT INTO REPONSE VALUES("+newIdQuest+", '"+currentQuiz.getQuest(i).getReponse(j).getTxtReponse()+"', "+currentQuiz.getQuest(i).getReponse(j).getStatutRep()+", "+newIdQuiz+");";
+						stmt_addRep.executeUpdate(query_insertRep);
+					}
+				}
+				
+		    } catch (SQLException eeee) {
+		    	eeee.printStackTrace();
+		    } catch (ClassNotFoundException eeee) {
+				eeee.printStackTrace();
+			}
+			
+		}
 	}
 
 }
