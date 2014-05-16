@@ -1,6 +1,8 @@
+import java.awt.Color;
 import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
+
 import javax.imageio.ImageIO;
 
 /**
@@ -23,6 +25,8 @@ public class Images {
 	public static int hauteur_bouton = 85;		// defini la taille en hauteur des boutons du menu
 	public static int largeur_bouton = 366;		// defini la taille en largeur
 	public static int ecart_bouton = 15;			// defini l'ecart entre les boutons
+	
+	public static Color couleurLabel = new Color(250,130,100);  // Couleur des label... modif bienvenue!
 	
 	/**
 	 * Initialise les banques d'images a partir des fichier .png

@@ -92,6 +92,12 @@ public class Gestion_quiz extends JPanel implements MouseListener, ItemListener 
 			 */
 		}
 		
+		JLabel info = new JLabel("Selectionnez un quiz parmis la liste ci-dessus pour le modifier/supprimer");
+		info.setFont(new Font("Arial", Font.PLAIN, 12));
+		info.setForeground(Images.couleurLabel);
+		info.setBounds(105, 695, 405, 14);
+		add(info);
+		
 		// bouton de creation / modification / suppression des quiz de la liste
 		bt_creerQuiz = new JButton("Creer quiz");
 		bt_creerQuiz.setBounds(855, 379, 120, 35);
@@ -200,14 +206,6 @@ public class Gestion_quiz extends JPanel implements MouseListener, ItemListener 
         header2.addMouseListener(header2);
         header2.addMouseMotionListener(header2);
         this.add(header2); 
-        
-
-        
-		JLabel info = new JLabel("Selectionnez un quiz parmis la liste ci-dessus pour le modifier/supprimer");
-		info.setFont(new Font("Arial", Font.PLAIN, 12));
-		info.setForeground(Color.RED);
-		info.setBounds(105, 695, 405, 14);
-		add(info);
         //****************************************
 	}
 

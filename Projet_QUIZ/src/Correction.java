@@ -26,8 +26,6 @@ public class Correction extends JPanel implements MouseListener{
 	private JLabel titreQuiz;
 	private JLabel bon;
 	private JLabel mauvais;
-	private JLabel rouge;
-	private JLabel vert;
 	private JLabel[] affTabLabel;
 	public JPanel sousPanel;
 
@@ -79,7 +77,7 @@ public class Correction extends JPanel implements MouseListener{
 		});
 		add(terminer);
 		
-		question = new JLabel("Selectionnez une question pour voir les réponses.");
+		question = new JLabel("<html>Selectionnez une question pour voir les r&eacute;ponses.</html>");
 		question.setBounds(30, 307, 753, 29);
 		question.setForeground(Color.WHITE);
 		question.setFont(new Font("Arial", Font.PLAIN, 20));
@@ -92,30 +90,19 @@ public class Correction extends JPanel implements MouseListener{
 		add(sousPanel);
 		
 		
-		bon = new JLabel("La ou les bonne(s) réponse(s) sont écrites en ");
-		bon.setBounds(30, 261, 300, 24);
-		add(bon);
+		bon = new JLabel("<html>La ou les bonne(s) r&eacute;ponse(s) sont &eacute;crites en "
+				+ "<span style='color:green;'>VERT</span></html>");
 		bon.setForeground(Color.WHITE);
 		bon.setFont(new Font("Arial", Font.PLAIN, 15));
-
-		vert = new JLabel("VERT");
-		vert.setBounds(352, 226, 52, 24);
-		vert.setForeground(Color.GREEN);
-		vert.setFont(new Font("Arial", Font.PLAIN, 15));
-		add(vert);	
+		bon.setBounds(30, 261, 380, 25);
+		add(bon);	
 		
-		mauvais = new JLabel("La ou les mauvaise(s) réponse(s) sont écrites en ");
-		mauvais.setBounds(30, 226, 323, 24);
-		add(mauvais);
+		mauvais = new JLabel("<html>La ou les mauvaise(s) r&eacute;ponse(s) sont &eacute;crites en "
+				+ "<span style='color:red;'>ROUGE</span></html>");
 		mauvais.setForeground(Color.WHITE);
 		mauvais.setFont(new Font("Arial", Font.PLAIN, 15));
-
-		rouge = new JLabel("ROUGE");
-		rouge.setBounds(332, 255, 72, 36);
-		rouge.setForeground(Color.RED);
-		rouge.setFont(new Font("Arial", Font.PLAIN, 15));
-		add(rouge);			
-		
+		mauvais.setBounds(30, 226, 380, 25);
+		add(mauvais);		
 		
 		reponse = new JLabel("");
 		/*reponse.setBounds(30, 300, 450, 50);
@@ -141,7 +128,7 @@ public class Correction extends JPanel implements MouseListener{
 	}
 	
 	/*
-	 * création des tableaux de label de réponses
+	 * crï¿½ation des tableaux de label de rï¿½ponses
 	 */
 	public JLabel[] createTab(int i){
 		JLabel[] TabLabel = new JLabel[monQuiz.getQuest(i).getNb_reponses()];
@@ -161,7 +148,7 @@ public class Correction extends JPanel implements MouseListener{
 	}
 	
 	/*
-	 * affichage des labels de réponses
+	 * affichage des labels de rï¿½ponses
 	 */
 	public void affLabel(JLabel[]tab, int num){
 		for(int i=0;i<monQuiz.getQuest(num).getNb_reponses();i++){

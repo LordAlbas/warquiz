@@ -40,7 +40,6 @@ public class Admin_ajout_reponses extends JPanel  implements MouseListener, Item
 	private JButton bt_retour;
 	
 	private char questChar;
-	private Color couleurLabel = new Color(250,130,100);
 		
 	Header header1;
 	Header_menu header2;
@@ -63,7 +62,7 @@ public class Admin_ajout_reponses extends JPanel  implements MouseListener, Item
 		 * Creation du titre qui recupere le nom du Quiz (avec son JLabel qui va bien)
 		 */
 		JLabel lb_nomQuiz = new JLabel("Nom du Quiz : ");
-		lb_nomQuiz.setForeground(couleurLabel);
+		lb_nomQuiz.setForeground(Images.couleurLabel);
 		lb_nomQuiz.setFont(new Font("Arial", Font.PLAIN, 22)); 
 		lb_nomQuiz.setBounds(565, 125, 400, 30);
 		add(lb_nomQuiz);
@@ -90,7 +89,7 @@ public class Admin_ajout_reponses extends JPanel  implements MouseListener, Item
 		 * Creation du sous-titre qui recupere le nom de la Question
 		 */
 		JLabel lb_nomQuest = new JLabel("Nom de la question : ");
-		lb_nomQuest.setForeground(couleurLabel);
+		lb_nomQuest.setForeground(Images.couleurLabel);
 		lb_nomQuest.setFont(new Font("Arial", Font.PLAIN, 22));
 		lb_nomQuest.setHorizontalAlignment(SwingConstants.CENTER);
 		lb_nomQuest.setBounds(80, 190, 300, 30);

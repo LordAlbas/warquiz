@@ -71,15 +71,15 @@ public class Jouer_partie extends JPanel implements MouseListener, MouseMotionLi
         this.add(header2); 
         //****************************************
         
-        JButton bt_valider_rep = new JButton("Valider la réponse");
+        JButton bt_valider_rep = new JButton("<html>Valider la rÃ©ponse</html>");
         bt_valider_rep.setBounds(840, 570, 170, 40);
         bt_valider_rep.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String error_msg = "Veuillez choisir une réponse !";
+				String error_msg = "<html>Veuillez choisir une r&eacute;ponse !</html>";
 				if (error_msg != "")
 					JOptionPane.showMessageDialog(null, 
 							error_msg, 
-							"Veuillez choisir une réponse", 
+							"<html>Pas de r&eacute;ponse</html>", 
 							JOptionPane.ERROR_MESSAGE);
 				else
 					;// validereponse(); et mise dans le tableau de la reponse
@@ -87,7 +87,7 @@ public class Jouer_partie extends JPanel implements MouseListener, MouseMotionLi
 		});
 		add(bt_valider_rep);
         
-        //Chronometre durée partie    
+        //Chronometre durï¿½e partie    
         chrono = new Chronometre (fen, this, monQuiz, SQL_Requete_Quiz.getHeures(monQuiz.getId()), SQL_Requete_Quiz.getMin(monQuiz.getId()), SQL_Requete_Quiz.getSec(monQuiz.getId()));
         
         
@@ -109,11 +109,11 @@ public class Jouer_partie extends JPanel implements MouseListener, MouseMotionLi
         question.setForeground(Color.WHITE);
         add(question);
         
-        TxtVite = new JLabel("<html>Pensez à<br/>valider !</html>");
+        TxtVite = new JLabel("<html>Pensez &agrave;<br/>valider !</html>");
         TxtVite.setHorizontalAlignment(SwingConstants.CENTER); 
         TxtVite.setFont(new Font("Arial", Font.PLAIN, 35));
         TxtVite.setForeground(Color.RED);
-        TxtVite.setBounds(835, 663, 200, 70);
+        TxtVite.setBounds(835, 658, 200, 70);
         add(TxtVite);
         TxtVite.setVisible(false);
 	}
@@ -166,10 +166,9 @@ public class Jouer_partie extends JPanel implements MouseListener, MouseMotionLi
 	
 	private Timer createTimer (){
 	    ActionListener action = new ActionListener (){
-	        // Méthode appelée à chaque tic du timer
+	        // Mï¿½thode appelï¿½e ï¿½ chaque tic du timer
 	        public void actionPerformed (ActionEvent event){
 	        	Chronometre.setText(chrono.getTpsRestant());
-	        	
 	        	
 	        	tempsInitial = (int)chrono.getChronoInital();
 	        	tempsRestant = (int)chrono.getChrono();
@@ -191,15 +190,12 @@ public class Jouer_partie extends JPanel implements MouseListener, MouseMotionLi
 	        		TxtVite.repaint();
 	        	}
 	        	
-
-	        	
-	        	
 	        	Chronometre.repaint();
 	        }
 	      };
 	      
-	    // Création d'un timer qui génère un tic
-	    // chaque 1000 millième de seconde soit une seconde ! hé ouais maggle !
+	    // Crï¿½ation d'un timer qui gï¿½nï¿½re un tic
+	    // chaque 1000 milliï¿½me de seconde soit une seconde ! hï¿½ ouais maggle !
 	    return new Timer (1000, action);
 	}
 	

@@ -59,7 +59,7 @@ public class Chronometre {
 	
 	private Timer createTimer (){
 	    ActionListener action = new ActionListener (){
-	        // Méthode appelée à chaque tic du timer
+	        // Mï¿½thode appelï¿½e ï¿½ chaque tic du timer
 	        public void actionPerformed (ActionEvent event){
 	        	chrono -= 1;
 	        	sec = chrono%60;
@@ -71,8 +71,8 @@ public class Chronometre {
 	        }
 	      };
 	      
-	    // Création d'un timer qui génère un tic
-	    // chaque 1000 millième de seconde soit une seconde ! hé ouais maggle !
+	    // Crï¿½ation d'un timer qui gï¿½nï¿½re un tic
+	    // chaque 1000 milliï¿½me de seconde soit une seconde ! hï¿½ ouais maggle !
 	    return new Timer (1000, action);
 	}
 	
@@ -81,8 +81,8 @@ public class Chronometre {
 			tpsRestant = "0 h 0 min 0 sec";
 			timer.stop();
 			int rep_deco = JOptionPane.showConfirmDialog(null, 
-					"<html>Le temps est écoulé, voulez vous voir <br/>la correction avant de quitter ?</html>", 
-					"Temps écoulé !", 
+					"<html>Le temps est &eacute;coul&eacute;, voulez vous voir <br/>la correction avant de quitter ?</html>", 
+					"Temps Ã©coulÃ© !", 
 					JOptionPane.OK_CANCEL_OPTION, 
 					JOptionPane.WARNING_MESSAGE);
 			if(rep_deco == 0){

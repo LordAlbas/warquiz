@@ -38,7 +38,6 @@ public class Creation_quiz extends JPanel implements MouseListener, MouseMotionL
 		
 	// nom du quiz qui se fait traiter actuelement
 	private JLabel lb_nomQuiz;
-	private Color couleurLabel = new Color(250,130,100);  // Couleur des label... modif bienvenue!
 	// 65,105,225  => royal blue
 	// 205,92,92   => indian red
 	// 50,205,50   => lime green
@@ -77,7 +76,7 @@ public class Creation_quiz extends JPanel implements MouseListener, MouseMotionL
 		 * JLabel affichage NOM QUIZ
 		 */
 		JLabel lb_titre = new JLabel("Nom du Quiz :");
-		lb_titre.setForeground(couleurLabel);
+		lb_titre.setForeground(Images.couleurLabel);
 		lb_titre.setFont(new Font("Arial", Font.PLAIN, 22)); 
 		lb_titre.setBounds(565, 125, 400, 30);
 		add(lb_titre);
@@ -92,7 +91,7 @@ public class Creation_quiz extends JPanel implements MouseListener, MouseMotionL
 		 * Selection de la difficulte du Quiz
 		 */
 		JLabel lb_diff = new JLabel("<html>Choix de la difficult&eacute;e du Quiz :</html>");
-		lb_diff.setForeground(couleurLabel);
+		lb_diff.setForeground(Images.couleurLabel);
 		lb_diff.setFont(new Font("Arial", Font.PLAIN, 22)); 
 		lb_diff.setBounds(676, 240, 400, 30);
 		add(lb_diff);
@@ -141,7 +140,7 @@ public class Creation_quiz extends JPanel implements MouseListener, MouseMotionL
 		 * Creation et positionnement des boutons de questions deja existante a l'arrivee sur cette page
 		 */
 		JLabel lb_quest = new JLabel("Liste des questions :");
-		lb_quest.setForeground(couleurLabel);
+		lb_quest.setForeground(Images.couleurLabel);
 		lb_quest.setFont(new Font("Arial", Font.PLAIN, 22));
 		lb_quest.setHorizontalAlignment(SwingConstants.CENTER);
 		lb_quest.setBounds(marginLeft, 180, 300, 30);
@@ -173,14 +172,14 @@ public class Creation_quiz extends JPanel implements MouseListener, MouseMotionL
 		 * Petit JLabel en pied de page
 		 */
 		JLabel lb_footer = new JLabel("* Maximum : 20 questions.");
-		lb_footer.setForeground(couleurLabel);
+		lb_footer.setForeground(Images.couleurLabel);
 		lb_footer.setFont(new Font("Arial", Font.PLAIN, 14));
 		lb_footer.setHorizontalAlignment(SwingConstants.CENTER);
 		lb_footer.setBounds(marginLeft, 705, 300, 20);
 		add(lb_footer);
 		
-		JLabel lb_footer2 = new JLabel("Cliquez sur une question pour ajouter des réponses.");
-		lb_footer2.setForeground(couleurLabel);
+		JLabel lb_footer2 = new JLabel("<html>Cliquez sur une question pour ajouter des r&eacute;ponses.</html>");
+		lb_footer2.setForeground(Images.couleurLabel);
 		lb_footer2.setFont(new Font("Arial", Font.PLAIN, 14));
 		lb_footer2.setHorizontalAlignment(SwingConstants.CENTER);
 		lb_footer2.setBounds(marginLeft, 720, 350, 20);
@@ -264,6 +263,10 @@ public class Creation_quiz extends JPanel implements MouseListener, MouseMotionL
 				tabQuest[i] = new JButton(nomQuest);
 				Question maQuest = monQuiz.ajoutQuestion(nomQuest);
 				tabQuest[i].addActionListener(maQuest);
+				tabQuest[i].setFont(new Font("Arial", Font.PLAIN, 15));
+				tabQuest[i].setBackground(new Color(7, 92, 120));
+				tabQuest[i].setBorder(null);
+				tabQuest[i].setForeground(Color.WHITE);
 				tabQuest[i].setBounds(marginLeft, 220+(i*cellSpace), 300, 20);
 				add(tabQuest[i]);
 				addNumQuestion(i);
@@ -379,6 +382,10 @@ public class Creation_quiz extends JPanel implements MouseListener, MouseMotionL
 			tabQuest[id_quest].removeActionListener(al);					// Enleve les ancien ActionListener (en theorie, un seul)
 		}
 		tabQuest[id_quest].addActionListener(monQuiz.getQuest(id_quest));	// Rajoute le nouveau ActionListener
+		tabQuest[id_quest].setFont(new Font("Arial", Font.PLAIN, 15));
+		tabQuest[id_quest].setBackground(new Color(7, 92, 120));
+		tabQuest[id_quest].setBorder(null);
+		tabQuest[id_quest].setForeground(Color.WHITE);
 		lb_nbRep[id_quest].setText(lb_nbRep[id_quest+1].getText());			// Decale le compte des rep_juste et rep_total
 		
 		add(tabQuest[id_quest]);
