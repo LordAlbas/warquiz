@@ -79,7 +79,7 @@ public class Jouer_partie extends JPanel implements MouseListener, MouseMotionLi
 				if (error_msg != "")
 					JOptionPane.showMessageDialog(null, 
 							error_msg, 
-							"<html>Pas de r&eacute;ponse</html>", 
+							"Pas de réponse", 
 							JOptionPane.ERROR_MESSAGE);
 				else
 					;// validereponse(); et mise dans le tableau de la reponse
@@ -113,7 +113,7 @@ public class Jouer_partie extends JPanel implements MouseListener, MouseMotionLi
         TxtVite.setHorizontalAlignment(SwingConstants.CENTER); 
         TxtVite.setFont(new Font("Arial", Font.PLAIN, 35));
         TxtVite.setForeground(Color.RED);
-        TxtVite.setBounds(835, 658, 200, 70);
+        TxtVite.setBounds(835, 653, 200, 70);
         add(TxtVite);
         TxtVite.setVisible(false);
 	}
@@ -165,15 +165,15 @@ public class Jouer_partie extends JPanel implements MouseListener, MouseMotionLi
 	
 	
 	private Timer createTimer (){
-	    ActionListener action = new ActionListener (){
+	    ActionListener action = new ActionListener() {
 	        // M�thode appel�e � chaque tic du timer
 	        public void actionPerformed (ActionEvent event){
 	        	Chronometre.setText(chrono.getTpsRestant());
 	        	
 	        	tempsInitial = (int)chrono.getChronoInital();
 	        	tempsRestant = (int)chrono.getChrono();
-	        	int case1 = tempsInitial-(tempsInitial/3);
-	        	int case2 = tempsInitial/3;
+	        	int case1 = tempsInitial/2;
+	        	int case2 = tempsInitial-(3*(tempsInitial/4));
 	        	
 	        	if(tempsRestant > case1){
 	        		Chronometre.setForeground(Color.BLACK);

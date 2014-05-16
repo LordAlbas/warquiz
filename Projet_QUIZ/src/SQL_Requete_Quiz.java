@@ -71,8 +71,10 @@ public class SQL_Requete_Quiz {
 	            while(rs_quiz.next()){
 	            	String Nom_quiz = rs_quiz.getString("nom_quiz");
 	            	int Id_quiz = rs_quiz.getInt("id_quiz");
+	            	int Nb_rep = rs_quiz.getInt("nb_question");
 	            	mesQuiz[i] = new Quiz(Nom_quiz, fenetre);
 	            	mesQuiz[i].setId(Id_quiz);
+	            	mesQuiz[i].setNb_questions(Nb_rep);
 	            	i++;
 	            }
 	    } catch (SQLException eeee) {
@@ -103,8 +105,10 @@ public class SQL_Requete_Quiz {
 	            while(rs_quiz.next()){
 	            	String Nom_quiz = rs_quiz.getString("nom_quiz");
 	            	int Id_quiz = rs_quiz.getInt("id_quiz");
+	            	int Nb_rep = rs_quiz.getInt("nb_question");
 	            	mesQuiz[i] = new Quiz(Nom_quiz, fenetre);
 	            	mesQuiz[i].setId(Id_quiz);
+	            	mesQuiz[i].setNb_questions(Nb_rep);
 	            	i++;
 	            }
 	    } catch (SQLException eeee) {
@@ -135,8 +139,10 @@ public class SQL_Requete_Quiz {
 	            while(rs_quiz.next()){
 	            	String Nom_quiz = rs_quiz.getString("nom_quiz");
 	            	int Id_quiz = rs_quiz.getInt("id_quiz");
+	            	int Nb_rep = rs_quiz.getInt("nb_question");
 	            	mesQuiz[i] = new Quiz(Nom_quiz, fenetre);
 	            	mesQuiz[i].setId(Id_quiz);
+	            	mesQuiz[i].setNb_questions(Nb_rep);
 	            	i++;
 	            }
 	    } catch (SQLException eeee) {
@@ -167,15 +173,17 @@ public class SQL_Requete_Quiz {
 	            while(rs_quiz.next()){
 	            	String Nom_quiz = rs_quiz.getString("nom_quiz");
 	            	int Id_quiz = rs_quiz.getInt("id_quiz");
+	            	int Nb_rep = rs_quiz.getInt("nb_question");
 	            	mesQuiz[i] = new Quiz(Nom_quiz, fenetre);
 	            	mesQuiz[i].setId(Id_quiz);
+	            	mesQuiz[i].setNb_questions(Nb_rep);
 	            	i++;
 	            }
 	    } catch (SQLException eeee) {
 	    	eeee.printStackTrace();
 	    } catch (ClassNotFoundException eeee) {
 			eeee.printStackTrace();
-		}		
+		}
 	}
 	
 	public void recup_QuizStats(){
