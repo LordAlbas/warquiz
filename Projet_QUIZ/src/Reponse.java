@@ -39,6 +39,8 @@ public class Reponse implements ActionListener {
 	// statut_rep
 	public boolean getStatutRep() { return statut_rep; }
 	public void setStatutRep(boolean strep) { statut_rep = strep; }
+	// statut_rep Int
+	public int getStatutRepInt() { return (statut_rep ? 1 : 0);}
 	// faire un 'getQuestion()' si besoin mais a priori no need.
 
 	public void actionPerformed(ActionEvent e) {
