@@ -95,14 +95,14 @@ public class Correction extends JPanel implements MouseListener{
 		bon.setForeground(Color.WHITE);
 		bon.setFont(new Font("Arial", Font.PLAIN, 15));
 		bon.setBounds(30, 261, 380, 25);
-		add(bon);	
+		add(bon);
 		
 		mauvais = new JLabel("<html>La ou les mauvaise(s) r&eacute;ponse(s) sont &eacute;crites en "
 				+ "<span style='color:red;'>ROUGE</span></html>");
 		mauvais.setForeground(Color.WHITE);
 		mauvais.setFont(new Font("Arial", Font.PLAIN, 15));
 		mauvais.setBounds(30, 226, 380, 25);
-		add(mauvais);		
+		add(mauvais);
 		
 		reponse = new JLabel("");
 		/*reponse.setBounds(30, 300, 450, 50);
