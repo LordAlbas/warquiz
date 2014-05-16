@@ -32,7 +32,7 @@ public class Statistiques extends JPanel implements MouseListener, MouseMotionLi
 	private Header_menu header2;
 	public String query_score,query_moyenne,query_moyenne_total,query_nb_parties,query_nb_quiz,query_quiz_joue,query_nb_participants_quiz,query_score_diff,query_nb_quiz_dispo;
 	private String db_score,db_score_diff,db_num_quiz_diff,db_diff,db_moyenne,db_moyenne_total,db_num_quiz,db_nb_parties,db_nb_quiz,db_quiz_joue,db_nb_participants_quiz,db_nb_quiz_dispo; // le score sorti de la bdd
-	public JLabel score,titreA,titreU,score_moyen,score_moyen_total,nb_parties,nb_quiz,quiz_joue,nb_participants_quiz,nb_quiz_dispo; // le score d'un joueur pour un quiz
+	public JLabel score,titreA,titreU,score_moyen_total,nb_parties,nb_quiz,quiz_joue,nb_participants_quiz,nb_quiz_dispo; // le score d'un joueur pour un quiz
 	private JLabel lb_titreStatistiques,score_diff,lb_nom_quiz,lb_score_quiz,lb_temps_quiz,lb_nb_quest_quiz;
 	private Bouton bouton;
 	private String texte;
@@ -175,11 +175,12 @@ public class Statistiques extends JPanel implements MouseListener, MouseMotionLi
 	 * Récupère le numéro et le score de chaques quiz que le joueur à fait.
 	 * @throws SQLException
 	 */
-	public void Score() throws SQLException{
+	public void Score(){
 		try{
 			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 	        Connection conn = DriverManager.getConnection("jdbc:sqlserver://193.252.48.189\\SQLEXPRESS:1433;" + "database=BDD_B3I_groupe_5;" + "user=b3i_groupe_5;" + "password=123Soleil");
-	        Statement stmt_score = (Statement) conn.createStatement();
+	        Statement stmt_score;
+	        stmt_score = (Statement) conn.createStatement();
 	        query_score = "SELECT AVG(SCORE_USR_QUIZ) AS score_moyen FROM JOUER WHERE LOGIN_USR ="+Connexion.dbUsername_user;	       
 	        stmt_score.executeQuery(query_score);	
 	        ResultSet rs_score = stmt_score.getResultSet();
@@ -197,13 +198,17 @@ public class Statistiques extends JPanel implements MouseListener, MouseMotionLi
 		} catch(ClassNotFoundException e){
 			e.printStackTrace();
 		}
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	/**
 	 * Récupère le numéro et le score des quiz 1:FACILE 2:MOYEN ou 3:DIFFICILE que le joueur à fait.
 	 * @throws SQLException
 	 */
-	public void ScoreDifficulte(int diff) throws SQLException{
+	public void ScoreDifficulte(int diff){
 		try{
 			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 	        Connection conn = DriverManager.getConnection("jdbc:sqlserver://193.252.48.189\\SQLEXPRESS:1433;" + "database=BDD_B3I_groupe_5;" + "user=b3i_groupe_5;" + "password=123Soleil");
@@ -226,39 +231,44 @@ public class Statistiques extends JPanel implements MouseListener, MouseMotionLi
 		} catch(ClassNotFoundException e){
 			e.printStackTrace();
 		}
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	/**
 	 * Calcule et affiche le score moyen du joueur
 	 * @throws SQLException 
 	 */
-	public void scoreMoyen() throws SQLException{
+	public int scoreMoyen(){
+		int score_moyen = 0;
 		try{
 			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 	        Connection conn = DriverManager.getConnection("jdbc:sqlserver://193.252.48.189\\SQLEXPRESS:1433;" + "database=BDD_B3I_groupe_5;" + "user=b3i_groupe_5;" + "password=123Soleil");
 	        Statement stmt_moyenne = (Statement) conn.createStatement();
-	        query_moyenne = "SELECT AVG(SCORE_USR_QUIZ) AS score_moyen FROM JOUER";	       
+	        query_moyenne = "SELECT AVG(SCORE_USR_QUIZ) AS score_moyen FROM JOUER WHERE ID_QUIZ = "+ ListeQuizStats_user[list_quiz_stats_user.getSelectedIndex()].getId();      
 	        stmt_moyenne.executeQuery(query_moyenne);	
 	        ResultSet rs_moyenne = stmt_moyenne.getResultSet();
 	        
-	        while(rs_moyenne.next()){
-	        	db_moyenne = rs_moyenne.getString("score_moyen"); // on récupère la moyenne
-	        	score_moyen = new JLabel("Votre score moyen est de : " + db_moyenne);
-	    		score_moyen.setBounds(188, 180, 450, 180);
-	    		score_moyen.setForeground(Color.WHITE); 
-	    		score_moyen.setFont(new Font("Arial", Font.PLAIN, 17));
-	    		add(score_moyen);
+	        if(rs_moyenne.next()){
+	        	score_moyen = rs_moyenne.getInt("score_moyen"); // on récupère la moyenne
 	        }
 		} catch(ClassNotFoundException e){
 			e.printStackTrace();
-		}		
+		}
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return score_moyen;
 	}
 	
 	/**
 	 * Calcule et affiche la moyenne des scores des quiz
 	 * @throws SQLException 
 	 */
-	public void scoreMoyenTotal() throws SQLException{
+	public void scoreMoyenTotal(){
 		try{
 			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 	        Connection conn = DriverManager.getConnection("jdbc:sqlserver://193.252.48.189\\SQLEXPRESS:1433;" + "database=BDD_B3I_groupe_5;" + "user=b3i_groupe_5;" + "password=123Soleil");
@@ -277,14 +287,18 @@ public class Statistiques extends JPanel implements MouseListener, MouseMotionLi
 	        }
 		} catch(ClassNotFoundException e){
 			e.printStackTrace();
-		}		
+		}	
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	/**
 	 * Calcule le nombre de parties jouées par l'utilisateur.
 	 * @throws SQLException
 	 */
-	public void nbPartiesJouees() throws SQLException{
+	public void nbPartiesJouees(){
 		try{
 			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 	        Connection conn = DriverManager.getConnection("jdbc:sqlserver://193.252.48.189\\SQLEXPRESS:1433;" + "database=BDD_B3I_groupe_5;" + "user=b3i_groupe_5;" + "password=123Soleil");
@@ -302,7 +316,11 @@ public class Statistiques extends JPanel implements MouseListener, MouseMotionLi
 	        }
 		} catch(ClassNotFoundException e){
 			e.printStackTrace();
-		}			
+		}
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 	}
 	
@@ -310,7 +328,7 @@ public class Statistiques extends JPanel implements MouseListener, MouseMotionLi
 	 * Calcule le nombre de quiz joué parmis le nombre max.
 	 * @throws SQLException 
 	 */
-	public void nbQuizJouees() throws SQLException{
+	public void nbQuizJouees(){
 		try{
 			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 	        Connection conn = DriverManager.getConnection("jdbc:sqlserver://193.252.48.189\\SQLEXPRESS:1433;" + "database=BDD_B3I_groupe_5;" + "user=b3i_groupe_5;" + "password=123Soleil");
@@ -339,7 +357,11 @@ public class Statistiques extends JPanel implements MouseListener, MouseMotionLi
 	        }
 		} catch(ClassNotFoundException e){
 			e.printStackTrace();
-		}			
+		}	
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public void meilleurScore(){} 
@@ -349,7 +371,7 @@ public class Statistiques extends JPanel implements MouseListener, MouseMotionLi
 	 * @param num_quiz
 	 * @throws SQLException
 	 */
-	public void nbParticiants(int num_quiz) throws SQLException{
+	public void nbParticiants(int num_quiz){
 		try{
 			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 	        Connection conn = DriverManager.getConnection("jdbc:sqlserver://193.252.48.189\\SQLEXPRESS:1433;" + "database=BDD_B3I_groupe_5;" + "user=b3i_groupe_5;" + "password=123Soleil");
@@ -374,13 +396,17 @@ public class Statistiques extends JPanel implements MouseListener, MouseMotionLi
 		} catch(ClassNotFoundException e){
 			e.printStackTrace();
 		}
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	/**
 	 * Calcule le nombre de quiz.
 	 * @throws SQLException 
 	 */
-	public void nbQuiz() throws SQLException{
+	public void nbQuiz(){
 		try{
 			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 	        Connection conn = DriverManager.getConnection("jdbc:sqlserver://193.252.48.189\\SQLEXPRESS:1433;" + "database=BDD_B3I_groupe_5;" + "user=b3i_groupe_5;" + "password=123Soleil");
@@ -400,7 +426,11 @@ public class Statistiques extends JPanel implements MouseListener, MouseMotionLi
 	        }
 		} catch(ClassNotFoundException e){
 			e.printStackTrace();
-		}			
+		}	
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}	
 	
 	/**
@@ -432,11 +462,11 @@ public class Statistiques extends JPanel implements MouseListener, MouseMotionLi
 			int init = list_quiz_stats_user.getSelectedIndex();
 			String item_nom = "";
 			int item_quest = 0;
-			String item_score = "";
+			int item_score = 0;
 			String item_temps = "";
 			item_nom = list_quiz_stats_user.getSelectedItem();
 			item_quest = ListeQuizStats_user[init].getNb_questions();
-			item_score = list_quiz_stats_user.getSelectedItem();
+			item_score = scoreMoyen();
 			item_temps = ListeQuizStats_user[init].getHeureQuiz() +"h "+  ListeQuizStats_user[init].getMinuteQuiz()+"m "+ ListeQuizStats_user[init].getSecondeQuiz() + "s";
 			lb_nom_quiz.setText("Nom du quiz : " + item_nom);
 			lb_nb_quest_quiz.setText("Nombre de questions du quiz : " + item_quest);

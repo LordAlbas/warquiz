@@ -50,7 +50,7 @@ public class Jouer_partie extends JPanel implements MouseListener, MouseMotionLi
 		
 		lb_titrePartie = new JLabel(monQuiz.getNom()+" "+monQuiz.getNb_questions());
 		lb_titrePartie.setForeground(Color.WHITE);
-		lb_titrePartie.setFont(new Font("Arial", Font.PLAIN, 42));
+		lb_titrePartie.setFont(new Font("Arial", Font.PLAIN, 35));
 		lb_titrePartie.setBounds(575, 105, 400, 50);
 		add(lb_titrePartie);
 		
