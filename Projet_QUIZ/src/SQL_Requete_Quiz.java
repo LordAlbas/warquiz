@@ -62,7 +62,7 @@ public class SQL_Requete_Quiz {
 			Statement stmt_quiz = (Statement) conn.createStatement();
 			// la requete doit retourner UNIQUEMENT les quiz de l'admin en cours
 			// l'id_admin doit etre disponible quelque part
-			query_quiz = "SELECT id_quiz, nom_quiz, minute_quiz, seconde_quiz, heure_quiz, nb_question FROM QUIZ";
+			query_quiz = "SELECT id_quiz, login_admin, nom_quiz, minute_quiz, seconde_quiz, heure_quiz, nb_question FROM QUIZ";
 			stmt_quiz.executeQuery(query_quiz);
 	        
 	        ResultSet rs_quiz = stmt_quiz.getResultSet();
@@ -71,12 +71,14 @@ public class SQL_Requete_Quiz {
 	            while(rs_quiz.next()){
 	            	String Nom_quiz = rs_quiz.getString("nom_quiz");
 	            	int Id_quiz = rs_quiz.getInt("id_quiz");
+	            	String Login_admin = rs_quiz.getString("login_admin");
 	            	int Nb_quest = rs_quiz.getInt("nb_question");
 	            	int Heure_quiz = rs_quiz.getInt("heure_quiz");
 	            	int Minute_quiz = rs_quiz.getInt("minute_quiz");
 	            	int Seconde_quiz = rs_quiz.getInt("seconde_quiz");
 	            	mesQuiz[i] = new Quiz(Nom_quiz, fenetre);
 	            	mesQuiz[i].setId(Id_quiz);
+	            	mesQuiz[i].setLoginAdmin(Login_admin);
 	            	mesQuiz[i].setNb_questions(Nb_quest);
 	            	mesQuiz[i].setHeureQuiz(Heure_quiz);
 	            	mesQuiz[i].setMinuteQuiz(Minute_quiz);

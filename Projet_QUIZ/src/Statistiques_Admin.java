@@ -174,7 +174,7 @@ public class Statistiques_Admin extends JPanel implements MouseListener, MouseMo
 		lb_nb_quest_quiz = new JLabel("Nombre de questions : ");
 		lb_nb_quest_quiz.setForeground(Color.WHITE);
 		lb_nb_quest_quiz.setFont(new Font("Arial", Font.PLAIN, 17));
-		lb_nb_quest_quiz.setBounds(759, 348, 233, 106);
+		lb_nb_quest_quiz.setBounds(180, 660, 400, 50);
 		add(lb_nb_quest_quiz);
 		
 		
@@ -437,16 +437,17 @@ public class Statistiques_Admin extends JPanel implements MouseListener, MouseMo
 	@Override
 	public void itemStateChanged(ItemEvent arg0) {
 		if (list_quiz_stats.getItemCount() > 0 && list_quiz_stats.getSelectedItem() != null) {
-			String item_nom = new String();
-			String item_quest = new String();
-			String item_score = new String();
-			String item_temps = new String();
+			int init = list_quiz_stats.getSelectedIndex();
+			String item_nom = "";
+			int item_quest = 0;
+			String item_score = "";
+			String item_temps = "";
 			item_nom = list_quiz_stats.getSelectedItem();
-			item_quest = list_quiz_stats.getSelectedItem();
+			item_quest = ListeQuizStats[init].getNb_questions();
 			item_score = list_quiz_stats.getSelectedItem();
-			item_temps = list_quiz_stats.getSelectedItem();
+			item_temps = ListeQuizStats[init].getHeureQuiz() +"h "+  ListeQuizStats[init].getMinuteQuiz()+"m "+ ListeQuizStats[init].getSecondeQuiz() + "s";
 			lb_nom_quiz.setText("Nom du quiz : " + item_nom);
-			lb_nb_quest_quiz.setText("Nombre de questions : " + item_quest);
+			lb_nb_quest_quiz.setText("Nombre de questions du quiz : " + item_quest);
 			lb_score_quiz.setText("Score du quiz : " + item_score);
 			lb_temps_quiz.setText("Temps du quiz : " + item_temps);
 		}else{System.out.println("marche pas");
