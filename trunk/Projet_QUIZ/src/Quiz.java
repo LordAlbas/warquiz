@@ -47,6 +47,19 @@ public class Quiz {
 	// difficulteQuiz
 	public void setDifficulteQuiz(String diff) { difficulteQuiz = diff; }
 	public String getDifficulteQuiz() { return difficulteQuiz; }
+	// difficulteQuizInt
+	public int getDifficulteQuizInt() {
+		switch (difficulteQuiz) {
+		case "facile":
+			return 1;
+		case "moyen":
+			return 2;
+		case "difficile":
+			return 3;
+		default:
+			return 0;
+		}
+	}
 	// login_admin
 	public void setLoginAdmin(String logAdmin) { login_admin = logAdmin; }
 	public String getLoginAdmin() { return login_admin; }
