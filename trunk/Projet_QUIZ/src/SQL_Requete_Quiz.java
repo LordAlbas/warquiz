@@ -565,7 +565,7 @@ public class SQL_Requete_Quiz {
  *			   Mise a jour des heures du quiz :	"UPDATE QUIZ SET HEURE_QUIZ =" +nouvelle_heure;
  *			  Mise a jour des minutes du quiz :	"UPDATE QUIZ SET MINUTE_QUIZ =" +nouvelle_minute;
  *			 Mise a jour des secondes du quiz :	"UPDATE QUIZ SET SECONDE_QUIZ =" +nouvelle_seconde;
- *					  Ajout d'un nouveau quiz :	"INSERT INTO QUIZ VALUES("+login_admin+", "+nom_quiz+", "+minute_quiz+", "+seconde_quiz+", "+heure_quiz+", COUNT("+nb_questions+"));";
+ *					  Ajout d'un nouveau quiz :	"INSERT INTO QUIZ VALUES("+login_admin+", "+nom_quiz+", "+minute_quiz+", "+seconde_quiz+", "+heure_quiz+", "+nb_questions+");";
  *						 Ajout d'une question :	"INSERT INTO QUESTION VALUES("+id_quiz+", "+nb_rep_total+", "+nb_rep_juste+", "+text_quest+");";
  *		  Mise a jour du texte de la question :	"UPDATE QUESTION SET TEXT_QUEST =" +nouveau_texte;
  *	  Mise a jour du nombre de reponses total :	"UPDATE QUESTION SET NB_REP_TOTAL =" + nouveau_nombre;
