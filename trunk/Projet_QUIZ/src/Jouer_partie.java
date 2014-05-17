@@ -66,7 +66,7 @@ public class Jouer_partie extends JPanel implements MouseListener, MouseMotionLi
         
         header1.setWarning(false);
 
-        header2 = new Header_menu(fen);
+        header2 = new Header_menu(fen, this);
         header2.setBounds(444, 0, 580, 58);
         header2.addMouseListener(header2);
         header2.addMouseMotionListener(header2);

@@ -42,7 +42,7 @@ public class Accueil extends JPanel implements MouseListener, MouseMotionListene
         header1.addMouseMotionListener(header1);
         this.add(header1); 
 
-        header2 = new Header_menu(fen);
+        header2 = new Header_menu(fen,this);
         header2.setBounds(444, 0, 580, 58);
         header2.addMouseListener(header2);
         header2.addMouseMotionListener(header2);
@@ -161,7 +161,7 @@ public class Accueil extends JPanel implements MouseListener, MouseMotionListene
 		//super.paintComponents(g);
 		
 		// le fond et les elements sont en fonction de la taille de la fenetre, donc pas de soucis de redimensionnement de la fenetre
-		g.drawImage(Images.img_fond[0], 0, 0, this.getWidth(), this.getHeight(), null);							// dessine le fond d'ecran
+		g.drawImage(Images.img_fond[Theme.getTheme()], 0, 0, this.getWidth(), this.getHeight(), null);							// dessine le fond d'ecran
 		//g.drawImage(Images.img_element[0], 0, 0, this.getWidth(), (int)(this.getHeight() / 6.1230), null);	// dessine le header
 		
 		/*
