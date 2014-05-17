@@ -25,13 +25,9 @@ public class Bouton_selection_question_correction extends JButton implements Mou
 		setBorder(null);
 		setBackground(Color.BLUE);
 		setForeground(Color.WHITE);
-		
-		//maCorr.createTab(num_question);
-		
-		
+
 		TabLabel = maCorr.createTab(num_question);
-		
-		
+			
 		questionTxt = monQuiz.getQuest(num_question).getQuestTxt();
 		reponse = new Reponse[monQuiz.getQuest(num_question).getNb_reponses()];
 		for(int i=0;i<monQuiz.getQuest(num_question).getNb_reponses();i++){
@@ -47,12 +43,6 @@ public class Bouton_selection_question_correction extends JButton implements Mou
 		maCorr.setQuestion(questionTxt);
 		maCorr.repaint();
 	}
-	/*
-	public void AffReponses(int i){
-		//maCorr.setReponse(monQuiz.getQuest(num_question).getNb_reponses(), reponse[i].getTxtReponse());
-		//maCorr.repaint();
-	}
-	*/
 
 
 	
