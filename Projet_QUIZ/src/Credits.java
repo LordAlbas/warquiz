@@ -120,7 +120,7 @@ public class Credits extends JPanel implements MouseListener, MouseMotionListene
 	 */
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		g.drawImage(Images.img_fond[0], 0, 0, this.getWidth(), this.getHeight(), null);						// dessine le fond d'ecran	
+		g.drawImage(Images.img_fond[Theme.getTheme()], 0, 0, this.getWidth(), this.getHeight(), null);						// dessine le fond d'ecran	
 	}
 
 	@Override

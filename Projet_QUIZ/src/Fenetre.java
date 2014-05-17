@@ -122,6 +122,7 @@ public class Fenetre extends JFrame {
 		this.getContentPane().setVisible(false);
 		this.setContentPane(back);
 		this.getContentPane().setVisible(true);
+		repaint();
 	}	
 	
 	/**

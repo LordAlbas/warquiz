@@ -21,6 +21,8 @@ public class Option extends JPanel implements MouseListener{
 	private Fenetre fenetre;
 	private JRadioButton t1;
 	private JRadioButton t2;
+	private Boolean check1;
+	private Boolean check2;
 	
 	public  Option(Fenetre fen, JPanel jp){
 		setLayout(null);
@@ -60,7 +62,18 @@ public class Option extends JPanel implements MouseListener{
 		add(retour);
 		
 		
-		t1 = new JRadioButton("  Selectionner ce thème");
+		if(Theme.getTheme() == 0){
+			check1 = true;
+			check2 = false;
+		}
+		
+		if(Theme.getTheme() == 3){
+			check1 = false;
+			check2 = true;
+		}
+		
+		
+		t1 = new JRadioButton("  Selectionner ce thème", check1);
 		t1.setOpaque(false);
 		t1.setForeground(Color.WHITE);
 		t1.setBorder(null);
@@ -68,9 +81,18 @@ public class Option extends JPanel implements MouseListener{
 		t1.setFont(new Font("Arial", Font.PLAIN, 20));
 		t1.setBounds(400, 300, 250, 23);
 		add(t1);
+		t1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Theme.setTheme(0);
+				t2.setSelected(false);
+				repaint();
+			}
+		});
 		
 		
-		t2 = new JRadioButton("Selectionner ce thème");
+
+		
+		t2 = new JRadioButton("Selectionner ce thème", check2);
 		t2.setOpaque(false);
 		t2.setForeground(Color.WHITE);
 		t2.setBorder(null);
@@ -78,6 +100,14 @@ public class Option extends JPanel implements MouseListener{
 		t2.setFont(new Font("Arial", Font.PLAIN, 20));
 		t2.setBounds(400, 600, 250, 23);
 		add(t2);
+		t2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Theme.setTheme(3);
+				t1.setSelected(false);
+				repaint();
+			}
+		});
+		
 		
 		
 	}

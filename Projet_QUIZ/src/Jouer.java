@@ -193,7 +193,7 @@ public class Jouer extends JPanel implements MouseListener, MouseMotionListener,
 	 */
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		g.drawImage(Images.img_fond[0], 0, 0, this.getWidth(), this.getHeight(), null);
+		g.drawImage(Images.img_fond[Theme.getTheme()], 0, 0, this.getWidth(), this.getHeight(), null);
 	}
 
 	@Override
