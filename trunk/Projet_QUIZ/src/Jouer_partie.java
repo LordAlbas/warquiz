@@ -98,7 +98,7 @@ public class Jouer_partie extends JPanel implements MouseListener, MouseMotionLi
          * Plus simple pour changer de contenu dynamiquement (sousPanel.removeAll() je crois).
          */
         sousPanel = new JPanel();
-		sousPanel.setBounds(30, 300, 734, 368);
+		sousPanel.setBounds(30, 300, 734, 390);
 		sousPanel.setLayout(null);
 		sousPanel.setOpaque(false);
 		add(sousPanel);        
