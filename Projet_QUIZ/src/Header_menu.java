@@ -19,13 +19,14 @@ public class Header_menu extends JPanel implements MouseListener, MouseMotionLis
 	static String selection1; 
 	public JLabel textMessage;
 	private Connexion conn;
+	private JPanel panel;
 
 	
-	public Header_menu(Fenetre fen){
+	public Header_menu(Fenetre fen, JPanel jp){
 		setLayout(null);
 		setOpaque(false);
 		JLabel textMessage = new JLabel("Bienvenue" + " " );
-		
+		panel = jp;
 		textMessage.setForeground(Color.WHITE);
 		textMessage.setFont(new Font("Arial", Font.PLAIN, 18));
 		
@@ -51,14 +52,16 @@ public class Header_menu extends JPanel implements MouseListener, MouseMotionLis
 		repaint();
 	}
 	public void mouseClicked(MouseEvent e) {
+		if(e.getX() >= 450 && e.getX() <= 514 && e.getY() >= 1 && e.getY() <= 47){ // OPT
+			fenetre.goToOption(panel);
+		}
 		if(e.getX() >= 526 && e.getX() <= 578 && e.getY() >= 1 && e.getY() <= 47){ // CO/DECO
 			selection1 = "decoreco";
-
 				fenetre.goToConnexionAlerte(selection1); // on appel la fonction qui va changer de panel
-
-
-		}	
+		}
+		
 	}
+	
 	public void mouseEntered(MouseEvent arg0) {}
 	public void mouseExited(MouseEvent arg0) {}
 	public void mousePressed(MouseEvent arg0) {}

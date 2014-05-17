@@ -75,7 +75,7 @@ public class Statistiques extends JPanel implements MouseListener, MouseMotionLi
 		maRequete_stats_difficile.recup_Quiz_difficile();
 		ListeQuizStats_difficile_user = maRequete_stats_difficile.getMesQuiz();
         
-        header2 = new Header_menu(fen);
+        header2 = new Header_menu(fen, this);
         header2.setBounds(444, 0, 580, 58);
         header2.addMouseListener(header2);
         header2.addMouseMotionListener(header2);

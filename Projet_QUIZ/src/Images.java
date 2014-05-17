@@ -39,6 +39,8 @@ public class Images {
 			img_fond[0] = ImageIO.read(new File("images/accueil_fond.png"));	// Lecture du fichier .png
 			img_fond[1] = ImageIO.read(new File("images/connexion.png"));	// Lecture du fichier .png
 			img_fond[2] = ImageIO.read(new File("images/inscription.png"));	// Lecture du fichier .png
+			img_fond[3] = ImageIO.read(new File("images/accueil_fond1.png"));	// Lecture du fichier .png
+			img_fond[4] = ImageIO.read(new File("images/option_panel.png"));	// Lecture du fichier .png
 			
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -57,6 +59,8 @@ public class Images {
 			img_element[7] = ImageIO.read(new File("images/header_bleu.png"));
 			img_element[8] = ImageIO.read(new File("images/fond_chargement.png"));
 			img_element[9] = ImageIO.read(new File("images/header_logo.png"));
+			img_element[10] = ImageIO.read(new File("images/theme_defaut.png"));
+			img_element[11] = ImageIO.read(new File("images/theme_carre.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

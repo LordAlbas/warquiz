@@ -4,6 +4,7 @@ import java.sql.SQLException;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 
 
 public class Fenetre extends JFrame {
@@ -16,11 +17,13 @@ public class Fenetre extends JFrame {
 	public Connexion connexion;
 	public Accueil accueil;
 	public Credits credits;
+	public Option option;
 	public Jouer jouer;
 	public Inscription inscription;
 	public Gestion_quiz gestion_quiz;
 	public Correction correction;
 	public Quiz partie;
+	public JPanel back;
 	/**
 	 * Constructeur
 	 */
@@ -106,6 +109,32 @@ public class Fenetre extends JFrame {
 		this.getContentPane().setVisible(true);
 		System.out.println(Connexion.login_general);
 	}
+
+	
+	/**
+	 * Fait un retour
+	 * @param selection
+	 */
+	public void goToBack(JPanel jp) {
+		back = jp;
+		//back = new Option(this, jp); // creation du JPanel accueil
+		//back.addMouseListener(back);		// 'option' implemente les methodes relatif a l'ecoute de la souris
+		this.getContentPane().setVisible(false);
+		this.setContentPane(back);
+		this.getContentPane().setVisible(true);
+	}	
+	
+	/**
+	 * Redirige sur OPTION
+	 * @param selection
+	 */
+	public void goToOption(JPanel jp) {
+		option = new Option(this, jp); // creation du JPanel accueil
+		option.addMouseListener(option);		// 'option' implemente les methodes relatif a l'ecoute de la souris
+		this.getContentPane().setVisible(false);
+		this.setContentPane(option);
+		this.getContentPane().setVisible(true);
+	}	
 	
 	/**
 	 * Redirige sur les STATISTIQUES
