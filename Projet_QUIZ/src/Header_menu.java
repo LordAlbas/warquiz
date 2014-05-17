@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
@@ -22,13 +23,14 @@ public class Header_menu extends JPanel implements MouseListener, MouseMotionLis
 	private Connexion conn;
 	private JPanel panel;
 	private Boolean inOpt = false;
-
+	private JPanel PrePanel;
 	
 	public Header_menu(Fenetre fen, JPanel jp){
 		setLayout(null);
 		setOpaque(false);
 		JLabel textMessage = new JLabel("Bienvenue" + " " );
 		panel = jp;
+
 		textMessage.setForeground(Color.WHITE);
 		textMessage.setFont(new Font("Arial", Font.PLAIN, 18));
 		
@@ -45,28 +47,33 @@ public class Header_menu extends JPanel implements MouseListener, MouseMotionLis
 	
 	public void mouseDragged(MouseEvent e) {}
 	public void mouseMoved(MouseEvent e) {
-		
 		if(e.getX() >= 450 && e.getX() <= 514 && e.getY() >= 1 && e.getY() <= 47){ // OPT
-			bouton_option = "OPTION_hover";
-		}else{bouton_option = "rien";}		
+			bouton_option = "OPTION_hover";	
+			if(inOpt){
+				setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+			}else{setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));}
+		}else{
+			bouton_option = "rien";
+			if(inOpt){
+				bouton_option = "OPTION_hover";
+			}
+		}		
 		
 		if(e.getX() >= 515 && e.getX() <= 578 && e.getY() >= 1 && e.getY() <= 47){ // DECO
 			bouton_deco = "DECO_hover";
+			setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		}else{bouton_deco = "rien";}
 		repaint();
 	}
+	
 	public void mouseClicked(MouseEvent e) {
 		if(e.getX() >= 450 && e.getX() <= 514 && e.getY() >= 1 && e.getY() <= 47){ // OPT
-			
-			
-
 			if(inOpt){
 				fenetre.goToBack(panel);
 			}
 			else{
 				fenetre.goToOption(panel);
 			}
-			
 		}
 		if(e.getX() >= 526 && e.getX() <= 578 && e.getY() >= 1 && e.getY() <= 47){ // CO/DECO
 			selection1 = "decoreco";

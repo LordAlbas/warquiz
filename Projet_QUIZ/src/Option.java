@@ -25,11 +25,13 @@ public class Option extends JPanel implements MouseListener, MouseMotionListener
 	private JRadioButton t2;
 	private Boolean check1;
 	private Boolean check2;
+	private JLabel lb_info;
 	
 	public  Option(Fenetre fen, JPanel jp){
 		setLayout(null);
 		panel = jp;
 		fenetre = fen;
+		
 		//****Inclusion du Header en 2 parties ****
 	    header1 = new Header(fen);
 	    header1.setBounds(0, 0, 444, 130);
@@ -44,11 +46,19 @@ public class Option extends JPanel implements MouseListener, MouseMotionListener
 	    this.add(header2);
 	    repaint();
 	    
-		lb_titreOption = new JLabel("Option");
-		lb_titreOption.setForeground(Color.WHITE);
-		lb_titreOption.setFont(new Font("Arial", Font.PLAIN, 42));
-		lb_titreOption.setBounds(575, 105, 400, 50);
+	    header2.setInOption(true);
+	    
+		lb_titreOption = new JLabel("Selectionnez votre thème puis validez.");
+		lb_titreOption.setForeground(Images.couleurLabel);
+		lb_titreOption.setFont(new Font("Arial", Font.PLAIN, 25));
+		lb_titreOption.setBounds(450, 170, 500, 50);
 		add(lb_titreOption);
+		
+		lb_info = new JLabel("Option");
+		lb_info.setForeground(Color.WHITE);
+		lb_info.setFont(new Font("Arial", Font.PLAIN, 42));
+		lb_info.setBounds(575, 105, 400, 50);
+		add(lb_info);
 		
 		retour = new JButton("Valider");
 		retour.setForeground(Color.WHITE);
@@ -58,11 +68,13 @@ public class Option extends JPanel implements MouseListener, MouseMotionListener
 		retour.setBounds(870, 700, 122, 36);
 		retour.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				header2.setInOption(false);
 				fenetre.goToBack(panel);
 			}
 		});
 		add(retour);
 		
+		header2.setInOption(true);
 		
 		if(Theme.getTheme() == 0){
 			check1 = true;
@@ -91,7 +103,7 @@ public class Option extends JPanel implements MouseListener, MouseMotionListener
 			}
 		});
 		
-		header2.setInOption(true);
+		
 
 		
 		t2 = new JRadioButton("Selectionner ce thème", check2);
@@ -150,6 +162,7 @@ public class Option extends JPanel implements MouseListener, MouseMotionListener
 		//super.paintComponents(g);
 		
 		// le fond et les elements sont en fonction de la taille de la fenetre, donc pas de soucis de redimensionnement de la fenetre
+		
 		g.drawImage(Images.img_fond[Theme.getTheme()], 0, 0, this.getWidth(), this.getHeight(), null);							// dessine le fond d'ecran
 		g.drawImage(Images.img_element[1], 140, 113, 8, 655, null);
 		g.drawImage(Images.img_fond[4], 0, 0, this.getWidth(), this.getHeight(), null);	
