@@ -147,6 +147,7 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 						                if(dbUsername_admin.equals(textField_pseudo.getText()) && dbPassword_admin.equals(textField_mdp.getText())){
 						                	login = true;
 						                	connexion_admin = true;
+						                	erreur_log = false;
 						                	fenetre.goToAccueil(selection);
 						                	dbUsername_admin = textField_pseudo.getText();
 						                	login_general = dbUsername_admin;
@@ -168,6 +169,7 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 						                if(dbUsername_user.equals(textField_pseudo.getText()) && dbPassword_user.equals(textField_mdp.getText())){
 						                	login = true;
 						                	connexion_admin = false;
+						                	erreur_log = false;
 						                	fenetre.goToAccueil(selection);
 						                	login_general = dbUsername_user;
 						                	status = "USER";
@@ -245,6 +247,7 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 						                if(dbUsername_admin.equals(textField_pseudo.getText()) && dbPassword_admin.equals(textField_mdp.getText())){
 						                	login = true;
 						                	connexion_admin = true;
+						                	erreur_log = false;
 						                	fenetre.goToAccueil(selection);
 						                	dbUsername_admin = textField_pseudo.getText();
 						                	login_general = dbUsername_admin;
@@ -267,6 +270,7 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 						                if(dbUsername_user.equals(textField_pseudo.getText()) && dbPassword_user.equals(textField_mdp.getText())){
 						                	login = true;
 						                	connexion_admin = false;
+						                	erreur_log = false;
 						                	fenetre.goToAccueil(selection);
 						                	login_general = dbUsername_user;
 						                	status = "USER";
@@ -297,11 +301,11 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 					}else{
 						textField_mdp.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.RED));
 						bad_mdp=1;erreur_log = true;repaint();
-						tentative++;
+						
 						repaint();
 						if(textField_pseudo.getText().length() == 0){
 							textField_pseudo.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.RED));
-							bad_pseudo=1;erreur_log = true;repaint();
+							bad_pseudo=1;erreur_log = true;tentative++;repaint();
 							repaint();
 						}
 					}
@@ -362,6 +366,7 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 				                	login = true;
 				                	connexion_admin = true;
 				                	fenetre.goToAccueil(selection);
+				                	erreur_log = false;
 				                	dbUsername_admin = textField_pseudo.getText();
 				                	login_general = dbUsername_admin;
 				                	status = "ADMIN";
@@ -383,6 +388,7 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 				                if(dbUsername_user.equals(textField_pseudo.getText()) && dbPassword_user.equals(textField_mdp.getText())){
 				                	login = true;
 				                	connexion_admin = false;
+				                	erreur_log = false;
 				                	fenetre.goToAccueil(selection);
 				                	login_general = dbUsername_user;
 				                	status = "USER";
@@ -414,11 +420,11 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 				System.out.println(" ENTER PSEUDO ERROR ");
 				textField_mdp.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.RED));
 				bad_mdp=1;erreur_log = true;repaint();
-				tentative++;
+				
 				repaint();
 				if(textField_pseudo.getText().length() == 0){
 					textField_pseudo.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.RED));
-					bad_pseudo=1;erreur_log = true;repaint();
+					bad_pseudo=1;tentative++;erreur_log = true;repaint();
 					repaint();
 				}
 			}
