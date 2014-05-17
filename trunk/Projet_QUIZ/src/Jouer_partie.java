@@ -43,16 +43,20 @@ public class Jouer_partie extends JPanel implements MouseListener, MouseMotionLi
 		
 		sqlRQ = new SQL_Requete_Quiz(fen);
 		monQuiz = sqlRQ.getMyQuiz(quiz.getId());	// mon quiz
-		menuQuetions(monQuiz.getNb_questions());
+		creer_menuQuetions(monQuiz.getNb_questions());
 		
-		// Nom du quiz
+		/*
+		 * Nom du quiz
+		 */
 		lb_titrePartie = new JLabel(monQuiz.getNom()+" "+monQuiz.getNb_questions());
 		lb_titrePartie.setForeground(Color.WHITE);
 		lb_titrePartie.setFont(new Font("Arial", Font.PLAIN, 35));
 		lb_titrePartie.setBounds(575, 105, 400, 50);
 		add(lb_titrePartie);
         
-		// Bouton VALIDER reponse
+		/*
+		 * Bouton VALIDER question (affiche la question+1)
+		 */
         JButton bt_valider_rep = new JButton("<html>Valider la r&eacute;ponse</html>");
         bt_valider_rep.setBounds(840, 570, 170, 40);
         bt_valider_rep.addActionListener(new ActionListener() {
@@ -69,9 +73,14 @@ public class Jouer_partie extends JPanel implements MouseListener, MouseMotionLi
 		});
 		add(bt_valider_rep);
         
-        //Chronometre dur�e partie    
+        /*
+         * Chronometre implementé dans la class Chronometre.java    
+         */
         chrono = new Chronometre (fen, this, monQuiz, SQL_Requete_Quiz.getHeures(monQuiz.getId()), SQL_Requete_Quiz.getMin(monQuiz.getId()), SQL_Requete_Quiz.getSec(monQuiz.getId()));
         
+        /*
+         * Chronometre local ... (apparement il en faut un pour le temps et un pour les couleurs ..).
+         */
         //System.out.println(chrono.getTpsRestant());
         Chronometre = new JLabel(chrono.getTpsRestant());
         Chronometre.setForeground(Color.BLACK);
@@ -84,20 +93,33 @@ public class Jouer_partie extends JPanel implements MouseListener, MouseMotionLi
         timer = createTimer();
         timer.start();
         
+        /*
+         * SousPanel contient les reponses de la question en cours.
+         * Plus simple pour changer de contenu dynamiquement (sousPanel.removeAll() je crois).
+         */
         sousPanel = new JPanel();
-		sousPanel.setBounds(30, 347, 734, 368);
+		sousPanel.setBounds(30, 300, 734, 368);
 		sousPanel.setLayout(null);
 		sousPanel.setOpaque(false);
 		add(sousPanel);        
         
+		/*
+		 * JLabel qui contient le nom de la QUESTION (ou bien le message par defaut).
+		 */
         question = new JLabel("<html>Selectionnez une question pour voir les r&eacute;ponses.</html>");
         question.setBounds(10, 250, 1000, 36);
         question.setFont(new Font("Arial", Font.PLAIN, 20));
         question.setForeground(Color.WHITE);
         add(question);
         
+        /*
+         * JLabel de reponse ... ??
+         */
         reponse = new JLabel("");
         
+        /*
+         * Text qui s'affiche quand plus beaucoup de temps.
+         */
         TxtVite = new JLabel("<html>Pensez &agrave;<br/>valider !</html>");
         TxtVite.setHorizontalAlignment(SwingConstants.CENTER); 
         TxtVite.setFont(new Font("Arial", Font.PLAIN, 35));
@@ -123,23 +145,35 @@ public class Jouer_partie extends JPanel implements MouseListener, MouseMotionLi
         //****************************************
 	}
 	
-	public void setQuestion(String txt){
+	public void setQuestion(String txt) {
 		question.setText(txt);
 		question.repaint();
 	}
 	
-	public JCheckBox[] createTabRep(int i){
+	/**
+	 * Creer et renvoi un tableau de checkbox[nb_reponses].
+	 * Appelé dans le constructeur de "Bouton_selection_question"
+	 * (qui sont d'ailleurs construis tous d'un coup (donc multiple appel ici en un coup)).
+	 * @param i
+	 * @return tableau de JCheckBox
+	 */
+	public JCheckBox[] createTabRep(int i) {
 		JCheckBox[] TabCheckRep = new JCheckBox[monQuiz.getQuest(i).getNb_reponses()];
-		for(int v=0;v<monQuiz.getQuest(i).getNb_reponses();v++){
+		for(int v=0;v<TabCheckRep.length;v++){
 			TabCheckRep[v] = new JCheckBox(monQuiz.getQuest(i).getReponse(v).getTxtReponse());
-			TabCheckRep[v].setForeground(Color.WHITE);	
+			TabCheckRep[v].setForeground(Color.WHITE);
 		}
 		return TabCheckRep;
 	}
 	
-	public void affCheckrep(JCheckBox[]tabrep, int num){
+	/**
+	 * Affichage du tableau cree dans la methode "createTabRep".
+	 * @param tabrep
+	 * @param num
+	 */
+	public void affCheckrep(JCheckBox[] tabrep, int num) {
 		for(int i=0;i<monQuiz.getQuest(num).getNb_reponses();i++){
-			tabrep[i].setBounds(30, 50*i, 450, 70);
+			tabrep[i].setBounds(30, 40*i, 300, 30);
 			tabrep[i].setFont(new Font("Arial", Font.PLAIN, 20));
 			tabrep[i].setOpaque(false);
 			sousPanel.add(tabrep[i]);
@@ -147,7 +181,12 @@ public class Jouer_partie extends JPanel implements MouseListener, MouseMotionLi
 		
 	}
 	
-	public void setReponse(int nbRep, String txt){
+	/**
+	 * METHODE CALLED NUL PART ! (a confirmer ?).
+	 * @param nbRep
+	 * @param txt
+	 */
+	public void setReponse(int nbRep, String txt) {
 		reponse.setText(txt);
 		reponse.repaint();	
 	}
@@ -161,8 +200,13 @@ public class Jouer_partie extends JPanel implements MouseListener, MouseMotionLi
 		reponse.removeAll();
 	}*/
 	
-	public void menuQuetions(int num){		
-		for(int i=0;i<num;i++){
+	/**
+	 * Creer un Bouton_selection_question pour chaque question.
+	 * Called localement au debut du constructeur.
+	 * @param nb_quest
+	 */
+	public void creer_menuQuetions(int nb_quest){
+		for(int i=0;i<nb_quest;i++){
 			
 			boutonQuestion = new Bouton_selection_question(i, monQuiz, this);
 			boutonQuestion.addMouseListener(boutonQuestion);
@@ -178,42 +222,43 @@ public class Jouer_partie extends JPanel implements MouseListener, MouseMotionLi
 		}
 	}
 	
-	
-	
-	
+	/**
+	 * Timer local.
+	 * Gestion de la couleur du timer pas local.
+	 * @return objet timer
+	 */
 	private Timer createTimer (){
-	    ActionListener action = new ActionListener() {
-	        // M�thode appel�e � chaque tic du timer
-	        public void actionPerformed (ActionEvent event){
-	        	Chronometre.setText(chrono.getTpsRestant());
-	        	
-	        	tempsInitial = (int)chrono.getChronoInital();
-	        	tempsRestant = (int)chrono.getChrono();
-	        	int case1 = tempsInitial/2;
-	        	int case2 = tempsInitial-(3*(tempsInitial/4));
-	        	
-	        	if(tempsRestant > case1){
-	        		Chronometre.setForeground(Color.BLACK);
-	        		Chronometre.setBackground(Color.GREEN);
-	        	}
-	        	else if((tempsRestant <= case1) && tempsRestant > case2){
-	        		Chronometre.setForeground(Color.BLACK);
-	        		Chronometre.setBackground(Color.ORANGE);
-	        	}
-	        	else {
-	        		Chronometre.setForeground(Color.WHITE);
-	        		Chronometre.setBackground(Color.RED);
-	        		TxtVite.setVisible(true);
-	        		TxtVite.repaint();
-	        	}
-	        	
-	        	Chronometre.repaint();
-	        }
-	      };
-	      
-	    // Cr�ation d'un timer qui g�n�re un tic
-	    // chaque 1000 milli�me de seconde soit une seconde ! h� ouais maggle !
-	    return new Timer (1000, action);
+		ActionListener action = new ActionListener() {
+			// M�thode appel�e � chaque tic du timer
+			public void actionPerformed (ActionEvent event){
+				Chronometre.setText(chrono.getTpsRestant());
+				
+				tempsInitial = (int)chrono.getChronoInital();
+				tempsRestant = (int)chrono.getChrono();
+				int case1 = tempsInitial/2;
+				int case2 = tempsInitial-(3*(tempsInitial/4));
+				
+				if(tempsRestant > case1){
+					Chronometre.setForeground(Color.BLACK);
+					Chronometre.setBackground(Color.GREEN);
+				}
+				else if((tempsRestant <= case1) && tempsRestant > case2){
+					Chronometre.setForeground(Color.BLACK);
+					Chronometre.setBackground(Color.ORANGE);
+				}
+				else {
+					Chronometre.setForeground(Color.WHITE);
+					Chronometre.setBackground(Color.RED);
+					TxtVite.setVisible(true);
+					TxtVite.repaint();
+				}
+				Chronometre.repaint();
+			}
+		};
+		
+		// Cr�ation d'un timer qui g�n�re un tic
+		// chaque 1000 milli�me de seconde soit une seconde ! h� ouais maggle !
+		return new Timer (1000, action);
 	}
 	
 	@Override
