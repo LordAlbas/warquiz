@@ -30,9 +30,9 @@ public class Statistiques extends JPanel implements MouseListener, MouseMotionLi
 	public static String selection; 		// defini quel bouton est selectionn�
 	private Header header1;
 	private Header_menu header2;
-	public String query_score,query_moyenne,query_moyenne_total,query_nb_parties,query_nb_quiz,query_quiz_joue,query_nb_participants_quiz,query_score_diff,query_nb_quiz_dispo;
+	public String query_score,query_score_user,query_moyenne,query_moyenne_total,query_nb_parties,query_nb_quiz,query_quiz_joue,query_nb_participants_quiz,query_score_diff,query_nb_quiz_dispo,query_score_facile,query_score_moyen,query_score_difficile;
 	private String db_score,db_score_diff,db_num_quiz_diff,db_diff,db_moyenne,db_moyenne_total,db_num_quiz,db_nb_parties,db_nb_quiz,db_quiz_joue,db_nb_participants_quiz,db_nb_quiz_dispo; // le score sorti de la bdd
-	public JLabel score,titreA,titreU,score_moyen_total,nb_parties,nb_quiz,quiz_joue,nb_participants_quiz,nb_quiz_dispo; // le score d'un joueur pour un quiz
+	public JLabel score,titreA,titreU,score_moyen_total,nb_parties,nb_quiz,quiz_joue,nb_participants_quiz,nb_quiz_dispo,lb_score_moyen_quiz_difficile,lb_score_moyen_quiz_moyen,lb_score_moyen_quiz_facile,lb_score_user_quiz; // le score d'un joueur pour un quiz
 	private JLabel lb_titreStatistiques,score_diff,lb_nom_quiz,lb_score_quiz,lb_temps_quiz,lb_nb_quest_quiz;
 	private Bouton bouton;
 	private String texte;
@@ -140,6 +140,7 @@ public class Statistiques extends JPanel implements MouseListener, MouseMotionLi
 
 		nbQuizJouees();
 		
+		
 		for (i=0; i<ListeQuizStats_user.length; i++) {
 			list_quiz_stats_user.add(ListeQuizStats_user[i].getNom());
 		}
@@ -147,26 +148,54 @@ public class Statistiques extends JPanel implements MouseListener, MouseMotionLi
 		lb_nom_quiz = new JLabel("Nom du quiz :");
 		lb_nom_quiz.setForeground(Color.WHITE);
 		lb_nom_quiz.setFont(new Font("Arial", Font.PLAIN, 17));
-		lb_nom_quiz.setBounds(180, 600, 400, 50);
+		lb_nom_quiz.setBounds(180, 540, 400, 50);
 		add(lb_nom_quiz);
 		
-		lb_score_quiz = new JLabel("Score du quiz :");
+		lb_score_quiz = new JLabel("Score moyen du quiz :");
 		lb_score_quiz.setForeground(Color.ORANGE);
 		lb_score_quiz.setFont(new Font("Arial", Font.PLAIN, 17));
-		lb_score_quiz.setBounds(180, 620, 400, 50);
+		lb_score_quiz.setBounds(180, 560, 400, 50);
 		add(lb_score_quiz);
+		
+		lb_score_user_quiz = new JLabel("Votre score moyen à ce quiz :");
+		lb_score_user_quiz.setForeground(Color.WHITE);
+		lb_score_user_quiz.setFont(new Font("Arial", Font.PLAIN, 17));
+		lb_score_user_quiz.setBounds(180, 580, 400, 50);
+		add(lb_score_user_quiz);
 		
 		lb_temps_quiz = new JLabel("Temps du quiz :");
 		lb_temps_quiz.setForeground(Color.GREEN);
 		lb_temps_quiz.setFont(new Font("Arial", Font.PLAIN, 17));
-		lb_temps_quiz.setBounds(180, 640, 400, 50);
+		lb_temps_quiz.setBounds(180, 600, 400, 50);
 		add(lb_temps_quiz);
 		
 		lb_nb_quest_quiz = new JLabel("Nombre de questions du quiz : ");
 		lb_nb_quest_quiz.setForeground(Color.WHITE);
 		lb_nb_quest_quiz.setFont(new Font("Arial", Font.PLAIN, 17));
-		lb_nb_quest_quiz.setBounds(180, 660, 400, 50);
+		lb_nb_quest_quiz.setBounds(180, 620, 400, 50);
 		add(lb_nb_quest_quiz);
+		
+		lb_score_moyen_quiz_facile = new JLabel("Score moyen des quiz faciles : ");
+		lb_score_moyen_quiz_facile.setForeground(Color.WHITE);
+		lb_score_moyen_quiz_facile.setFont(new Font("Arial", Font.PLAIN, 17));
+		lb_score_moyen_quiz_facile.setBounds(180, 640, 400, 50);
+		add(lb_score_moyen_quiz_facile);
+		
+		lb_score_moyen_quiz_moyen = new JLabel("Score moyen des quiz moyens : ");
+		lb_score_moyen_quiz_moyen.setForeground(Color.WHITE);
+		lb_score_moyen_quiz_moyen.setFont(new Font("Arial", Font.PLAIN, 17));
+		lb_score_moyen_quiz_moyen.setBounds(180, 660, 400, 50);
+		add(lb_score_moyen_quiz_moyen);
+		
+		lb_score_moyen_quiz_difficile = new JLabel("Score moyen des quiz difficiles : ");
+		lb_score_moyen_quiz_difficile.setForeground(Color.WHITE);
+		lb_score_moyen_quiz_difficile.setFont(new Font("Arial", Font.PLAIN, 17));
+		lb_score_moyen_quiz_difficile.setBounds(180, 680, 400, 50);
+		add(lb_score_moyen_quiz_difficile);
+		
+		scoreMoyenFacile();
+		scoreMoyenMoyen();
+		scoreMoyenDifficile();
 		
 	}
 
@@ -175,25 +204,18 @@ public class Statistiques extends JPanel implements MouseListener, MouseMotionLi
 	 * Récupère le numéro et le score de chaques quiz que le joueur à fait.
 	 * @throws SQLException
 	 */
-	public void Score(){
+	public int Score(){
+		int score_moyen_user = 0;
 		try{
 			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 	        Connection conn = DriverManager.getConnection("jdbc:sqlserver://193.252.48.189\\SQLEXPRESS:1433;" + "database=BDD_B3I_groupe_5;" + "user=b3i_groupe_5;" + "password=123Soleil");
-	        Statement stmt_score;
-	        stmt_score = (Statement) conn.createStatement();
-	        query_score = "SELECT AVG(SCORE_USR_QUIZ) AS score_moyen FROM JOUER WHERE LOGIN_USR ="+Connexion.dbUsername_user;	       
-	        stmt_score.executeQuery(query_score);	
-	        ResultSet rs_score = stmt_score.getResultSet();
-	        int cpt = 200;
-	        while(rs_score.next()){
-	        	db_score = rs_score.getString("SCORE_USR_QUIZ"); // on récupère le score
-	        	db_num_quiz = rs_score.getString("ID_QUIZ"); // on récupère le num quiz
-	        	
-	        	score = new JLabel("Votre score pour le quiz n°" + db_num_quiz + " est de : " + db_score);
-	    		score.setBounds(48, cpt, 600,600);
-	    		score.setForeground(Color.WHITE); 
-	    		add(score);
-	    		cpt = cpt +20;
+	        Statement stmt_score_user;
+	        stmt_score_user = (Statement) conn.createStatement();
+	        query_score_user = "SELECT AVG(SCORE_USR_QUIZ) AS score_moyen_user FROM JOUER WHERE ID_QUIZ = "+ ListeQuizStats_user[list_quiz_stats_user.getSelectedIndex()].getId() +" AND LOGIN_USR = '" +Connexion.login_general + "';";	       
+	        stmt_score_user.executeQuery(query_score_user);	
+	        ResultSet rs_score_user = stmt_score_user.getResultSet();
+	        while(rs_score_user.next()){
+	        	score_moyen_user = rs_score_user.getInt("score_moyen_user"); // on récupère le score
 	        }
 		} catch(ClassNotFoundException e){
 			e.printStackTrace();
@@ -202,6 +224,7 @@ public class Statistiques extends JPanel implements MouseListener, MouseMotionLi
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return score_moyen_user;
 	}
 	
 	/**
@@ -262,6 +285,72 @@ public class Statistiques extends JPanel implements MouseListener, MouseMotionLi
 			e.printStackTrace();
 		}
 		return score_moyen;
+	}
+	public void scoreMoyenFacile(){
+		int score_moyen_facile = 0;
+		try{
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+	        Connection conn = DriverManager.getConnection("jdbc:sqlserver://193.252.48.189\\SQLEXPRESS:1433;" + "database=BDD_B3I_groupe_5;" + "user=b3i_groupe_5;" + "password=123Soleil");
+	        Statement stmt_score_facile = (Statement) conn.createStatement();
+	        query_score_facile = "SELECT AVG(SCORE_USR_QUIZ) AS score_moyen_facile FROM JOUER,QUIZ WHERE JOUER.ID_QUIZ = QUIZ.ID_QUIZ AND QUIZ.DIFFICULTE_QUIZ = 1";      
+	        stmt_score_facile.executeQuery(query_score_facile);	
+	        ResultSet rs_score_facile = stmt_score_facile.getResultSet();
+	        
+	        if(rs_score_facile.next()){
+	        	score_moyen_facile = rs_score_facile.getInt("score_moyen_facile"); // on récupère la moyenne
+	        	lb_score_moyen_quiz_facile.setText("Score moyen des quiz faciles : "+ score_moyen_facile);
+	        }
+		} catch(ClassNotFoundException e){
+			e.printStackTrace();
+		}
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	public void scoreMoyenMoyen(){
+		int score_moyen_moyen = 0;
+		try{
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+	        Connection conn = DriverManager.getConnection("jdbc:sqlserver://193.252.48.189\\SQLEXPRESS:1433;" + "database=BDD_B3I_groupe_5;" + "user=b3i_groupe_5;" + "password=123Soleil");
+	        Statement stmt_score_moyen = (Statement) conn.createStatement();
+	        query_score_moyen = "SELECT AVG(SCORE_USR_QUIZ) AS score_moyen_moyen FROM JOUER, QUIZ WHERE JOUER.ID_QUIZ = QUIZ.ID_QUIZ AND QUIZ.DIFFICULTE_QUIZ = 2";      
+	        stmt_score_moyen.executeQuery(query_score_moyen);	
+	        ResultSet rs_score_moyen = stmt_score_moyen.getResultSet();
+	        
+	        if(rs_score_moyen.next()){
+	        	score_moyen_moyen = rs_score_moyen.getInt("score_moyen_moyen"); // on récupère la moyenne
+	        	lb_score_moyen_quiz_moyen.setText("Score moyen des quiz moyens : "+ score_moyen_moyen);
+	        }
+		} catch(ClassNotFoundException e){
+			e.printStackTrace();
+		}
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	public void scoreMoyenDifficile(){
+		int score_moyen_difficile = 0;
+		try{
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+	        Connection conn = DriverManager.getConnection("jdbc:sqlserver://193.252.48.189\\SQLEXPRESS:1433;" + "database=BDD_B3I_groupe_5;" + "user=b3i_groupe_5;" + "password=123Soleil");
+	        Statement stmt_score_difficile = (Statement) conn.createStatement();
+	        query_score_difficile = "SELECT AVG(SCORE_USR_QUIZ) AS score_moyen_dfifficile FROM JOUER,QUIZ WHERE JOUER.ID_QUIZ = QUIZ.ID_QUIZ AND QUIZ.DIFFICULTE_QUIZ = 3";      
+	        stmt_score_difficile.executeQuery(query_score_difficile);	
+	        ResultSet rs_score_difficile = stmt_score_difficile.getResultSet();
+	        
+	        if(rs_score_difficile.next()){
+	        	score_moyen_difficile = rs_score_difficile.getInt("score_moyen_dfifficile"); // on récupère la moyenne
+	        	lb_score_moyen_quiz_difficile.setText("Score moyen des quiz difficiles : "+ score_moyen_difficile);
+	        }
+		} catch(ClassNotFoundException e){
+			e.printStackTrace();
+		}
+		catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	/**
@@ -463,14 +552,17 @@ public class Statistiques extends JPanel implements MouseListener, MouseMotionLi
 			String item_nom = "";
 			int item_quest = 0;
 			int item_score = 0;
+			int item_score_user = 0;
 			String item_temps = "";
 			item_nom = list_quiz_stats_user.getSelectedItem();
 			item_quest = ListeQuizStats_user[init].getNb_questions();
 			item_score = scoreMoyen();
+			item_score_user = Score();
 			item_temps = ListeQuizStats_user[init].getHeureQuiz() +"h "+  ListeQuizStats_user[init].getMinuteQuiz()+"m "+ ListeQuizStats_user[init].getSecondeQuiz() + "s";
 			lb_nom_quiz.setText("Nom du quiz : " + item_nom);
 			lb_nb_quest_quiz.setText("Nombre de questions du quiz : " + item_quest);
-			lb_score_quiz.setText("Score du quiz : " + item_score);
+			lb_score_quiz.setText("Score moyen du quiz : " + item_score);
+			lb_score_user_quiz.setText("Votre score moyen à ce quiz : " + item_score_user);
 			lb_temps_quiz.setText("Temps du quiz : " + item_temps);
 		}else{System.out.println("marche pas");
 		}
