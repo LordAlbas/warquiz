@@ -540,7 +540,7 @@ public class Statistiques extends JPanel implements MouseListener, MouseMotionLi
 		super.paintComponent(g);
 		
 		// le fond et les elements sont en fonction de la taille de la fenetre, donc pas de soucis de redimensionnement de la fenetre
-		g.drawImage(Images.img_fond[0], 0, 0, this.getWidth(), this.getHeight(), null);						// dessine le fond d'ecran
+		g.drawImage(Images.img_fond[Theme.getTheme()], 0, 0, this.getWidth(), this.getHeight(), null);						// dessine le fond d'ecran
 		g.drawImage(Images.img_element[1], 140, 113, 8, 655, null); // barre bleu
 	}
 

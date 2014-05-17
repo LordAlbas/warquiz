@@ -285,7 +285,7 @@ public class Admin_ajout_reponses extends JPanel  implements MouseListener, Item
 	
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		g.drawImage(Images.img_fond[0], 0, 0, this.getWidth(), this.getHeight(), null);
+		g.drawImage(Images.img_fond[Theme.getTheme()], 0, 0, this.getWidth(), this.getHeight(), null);
 		//g.drawImage(Images.img_element[0], 0, 0, this.getWidth(), (int)(this.getHeight() / 6.1230), null);		// dessine le header	
 		g.drawImage(Images.img_bouton[4], 960, 1, 46, 46, null);
 	}
