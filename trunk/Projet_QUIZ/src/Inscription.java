@@ -31,6 +31,7 @@ public class Inscription extends JPanel implements MouseListener, MouseMotionLis
 	public int bad_mdp=0; // le champ n'est pas encore invalide
 	public int bad_mdp_conf=0; // le champ n'est pas encore invalide
 	public int bad_mail=0; // le champ n'est pas encore invalide
+	public int bad_mdp_mdpConf=0; //vérification du mot de passe
 	public int tentative = 0;  //le nombre de tentative d'authentification
     
 	public static boolean erreur_log,recherche_bdd, erreur_bdd = false;
@@ -130,6 +131,7 @@ public class Inscription extends JPanel implements MouseListener, MouseMotionLis
 					}else{
 						textField_pseudo.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.RED));
 						bad_pseudo=1;
+						bad_mdp_mdpConf = 1;
 						tentative++;
 						repaint();
 						if(textField_mdp.getPassword().length == 0){
@@ -204,6 +206,7 @@ public class Inscription extends JPanel implements MouseListener, MouseMotionLis
 					}else{
 						textField_mdp.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.RED));
 						bad_mdp=1;
+						bad_mdp_mdpConf = 1;
 						tentative++;
 						repaint();
 						if(textField_pseudo.getText().length() == 0){
@@ -278,6 +281,7 @@ public class Inscription extends JPanel implements MouseListener, MouseMotionLis
 					}else{
 						textField_mdp_conf.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.RED));
 						bad_mdp_conf=1;
+						bad_mdp_mdpConf = 1;
 						tentative++;
 						repaint();
 						if(textField_pseudo.getText().length() == 0){
@@ -353,6 +357,7 @@ public class Inscription extends JPanel implements MouseListener, MouseMotionLis
 						textField_mail.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.RED));
 						bad_mail=1;
 						tentative++;
+						bad_mdp_mdpConf = 1;
 						repaint();
 						if(textField_pseudo.getText().length() == 0){
 							textField_pseudo.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.RED));
@@ -462,6 +467,7 @@ public class Inscription extends JPanel implements MouseListener, MouseMotionLis
 			}else if(textField_mdp.getPassword().length == 0){
 				textField_mdp.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.RED));
 				bad_mdp=1;
+				bad_mdp_mdpConf = 1;
 				tentative++;
 				repaint();
 				if(textField_pseudo.getText().length() == 0){
@@ -507,16 +513,19 @@ public class Inscription extends JPanel implements MouseListener, MouseMotionLis
 		g.drawImage(Images.img_fond[2], 0, 0, this.getWidth(), this.getHeight(), null);	
 		
 		if(bad_pseudo==1){
-			g.drawImage(Images.img_element[3], 768, 326, 170, 46, null);	
+			g.drawImage(Images.img_element[3], 768, 284, 170, 46, null);	
 		}
 		if(bad_mdp==1){
-			g.drawImage(Images.img_element[3], 768, 390, 170, 46, null);	
+			g.drawImage(Images.img_element[3], 768, 322, 170, 46, null);	
 		}
 		if(bad_mdp_conf==1){
-			g.drawImage(Images.img_element[3], 768, 454, 170, 46, null);	
+			g.drawImage(Images.img_element[3], 768, 360, 170, 46, null);	
 		}
 		if(bad_mail==1){
-			g.drawImage(Images.img_element[3], 768, 518, 170, 46, null);	
+			g.drawImage(Images.img_element[3], 768, 398, 170, 46, null);	
+		}
+		if(bad_mdp_mdpConf==1){
+			g.drawImage(Images.img_element[12], 140, 50, 800, 130, null);	
 		}
 		repaint();		
 	}
