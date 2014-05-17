@@ -1,10 +1,12 @@
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -12,7 +14,7 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
 
-public class Option extends JPanel implements MouseListener{
+public class Option extends JPanel implements MouseListener, MouseMotionListener{
 	private Header header1;
 	private Header_menu header2;
 	private JPanel panel;
@@ -89,7 +91,7 @@ public class Option extends JPanel implements MouseListener{
 			}
 		});
 		
-		
+		header2.setInOption(true);
 
 		
 		t2 = new JRadioButton("Selectionner ce thème", check2);
@@ -113,12 +115,36 @@ public class Option extends JPanel implements MouseListener{
 	}
 
 
-	public void mouseClicked(MouseEvent arg0) {}
+	public void mouseClicked(MouseEvent arg0) {
+		if (arg0.getX() >= 160 && arg0.getX() <= 360 && arg0.getY() >= 200 && arg0.getY() <= 400) { //Defaut
+			t1.setSelected(true);
+			t2.setSelected(false);
+			Theme.setTheme(0);
+			repaint();
+		}
+		if (arg0.getX() >= 160 && arg0.getX() <= 360 && arg0.getY() >= 500 && arg0.getY() <= 700) { //carré
+			t1.setSelected(false);
+			t2.setSelected(true);
+			Theme.setTheme(3);
+			repaint();
+		}		
+	}
 	public void mouseEntered(MouseEvent arg0) {}
 	public void mouseExited(MouseEvent arg0) {}
 	public void mousePressed(MouseEvent arg0) {}
 	public void mouseReleased(MouseEvent arg0) {}
-
+	public void mouseDragged(MouseEvent arg0) {}
+	public void mouseMoved(MouseEvent arg0) {
+		if (arg0.getX() >= 160 && arg0.getX() <= 360 && arg0.getY() >= 200 && arg0.getY() <= 400) { //Defaut
+			setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		}
+		else if (arg0.getX() >= 160 && arg0.getX() <= 360 && arg0.getY() >= 500 && arg0.getY() <= 700) { //carré
+			setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		}
+		else{
+			setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+		}
+	}
 	
 	public void paintComponent(Graphics g) {
 		//super.paintComponents(g);
@@ -132,4 +158,7 @@ public class Option extends JPanel implements MouseListener{
 		
 		
 	}
+
+
+
 }

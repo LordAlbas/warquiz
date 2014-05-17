@@ -21,6 +21,8 @@ public class Header extends JPanel implements MouseListener, MouseMotionListener
 		setOpaque(false);
 		fenetre = fen;
 		setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+		setToolTipText("Retour à l'accueil");
+		javax.swing.ToolTipManager.sharedInstance().setInitialDelay(1000);
 	}
 
 	public void mouseClicked(MouseEvent e) {
