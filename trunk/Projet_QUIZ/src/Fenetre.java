@@ -118,7 +118,7 @@ public class Fenetre extends JFrame {
 	public void goToBack(JPanel jp) {
 		back = jp;
 		//back = new Option(this, jp); // creation du JPanel accueil
-		//back.addMouseListener(back);		// 'option' implemente les methodes relatif a l'ecoute de la souris
+		//back.addMouseMotionListener(back);		// 'option' implemente les methodes relatif a l'ecoute de la souris
 		this.getContentPane().setVisible(false);
 		this.setContentPane(back);
 		this.getContentPane().setVisible(true);
@@ -132,6 +132,7 @@ public class Fenetre extends JFrame {
 	public void goToOption(JPanel jp) {
 		option = new Option(this, jp); // creation du JPanel accueil
 		option.addMouseListener(option);		// 'option' implemente les methodes relatif a l'ecoute de la souris
+		option.addMouseMotionListener(option);
 		this.getContentPane().setVisible(false);
 		this.setContentPane(option);
 		this.getContentPane().setVisible(true);
