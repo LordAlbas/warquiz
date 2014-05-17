@@ -457,18 +457,21 @@ public class SQL_Requete_Quiz {
 			Statement stmt_del1 = (Statement) conn.createStatement();
 			Statement stmt_del2 = (Statement) conn.createStatement();
 			Statement stmt_del3 = (Statement) conn.createStatement();
+			Statement stmt_del4 = (Statement) conn.createStatement();
 			// la requete doit retourner UNIQUEMENT les quiz de l'admin en cours
 			// l'id_admin doit etre disponible quelque part
 			query_del1 = "DELETE FROM QUIZ WHERE QUIZ.ID_QUIZ = " + id_quiz + ";";
 			query_del2 = "DELETE FROM REPONSE WHERE REPONSE.ID_QUIZ = " + id_quiz + ";";
 			query_del3 = "DELETE FROM QUESTION WHERE QUESTION.ID_QUIZ = " + id_quiz + ";";
+			String query_del4 = "DELETE FROM JOUER WHERE JOUER.ID_QUIZ ="+id_quiz+";";
 			
 			//  /!\ executeUpdate != executeQuery /!\
 			// car Update quand aucun retour (modif la bdd)
 			// et Query quand un retour (aucune modif de la bdd)
-			stmt_del1.executeUpdate(query_del1);
-			stmt_del2.executeUpdate(query_del2);
+			stmt_del4.executeUpdate(query_del4);
 			stmt_del3.executeUpdate(query_del3);
+			stmt_del2.executeUpdate(query_del2);
+			stmt_del1.executeUpdate(query_del1);
 	    } catch (SQLException eeee) {
 	    	eeee.printStackTrace();
 	    } catch (ClassNotFoundException eeee) {

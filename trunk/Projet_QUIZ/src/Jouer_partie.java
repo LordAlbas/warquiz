@@ -7,13 +7,11 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
-import java.util.TimerTask;
-
 import javax.swing.*;
 
 public class Jouer_partie extends JPanel implements MouseListener, MouseMotionListener {
 	private Fenetre fenetre;
-	private Quiz current_quiz;
+	private Quiz monQuiz;
 	
 	// pour les hover sur les images boutons
 	private String selection;
@@ -29,7 +27,6 @@ public class Jouer_partie extends JPanel implements MouseListener, MouseMotionLi
 	private int tempsInitial;
 	private int tempsRestant;
 	private SQL_Requete_Quiz sqlRQ;
-	private Quiz monQuiz;
 	Button boutonMenu;
 	Bouton_selection_question boutonQuestion;
 	private int cpt =0;
@@ -40,39 +37,22 @@ public class Jouer_partie extends JPanel implements MouseListener, MouseMotionLi
 
 	
 	public Jouer_partie(Fenetre fen, Quiz quiz) {
-		fenetre = fen;
-		current_quiz = quiz;
-		sqlRQ = new SQL_Requete_Quiz(fen);
 		setLayout(null);
 		
-		monQuiz = sqlRQ.getMyQuiz(current_quiz.getId()); // mon quiz
+		fenetre = fen;
+		
+		sqlRQ = new SQL_Requete_Quiz(fen);
+		monQuiz = sqlRQ.getMyQuiz(quiz.getId());	// mon quiz
 		menuQuetions(monQuiz.getNb_questions());
 		
-		
+		// Nom du quiz
 		lb_titrePartie = new JLabel(monQuiz.getNom()+" "+monQuiz.getNb_questions());
 		lb_titrePartie.setForeground(Color.WHITE);
 		lb_titrePartie.setFont(new Font("Arial", Font.PLAIN, 35));
 		lb_titrePartie.setBounds(575, 105, 400, 50);
 		add(lb_titrePartie);
-		
-		
-		
-		//****Inclusion du Header en 2 parties ****
-        header1 = new Header(fen);
-        header1.setBounds(0, 0, 444, 130);
-        header1.addMouseListener(header1);
-        header1.addMouseMotionListener(header1);
-        this.add(header1); 
         
-        header1.setWarning(false);
-
-        header2 = new Header_menu(fen, this);
-        header2.setBounds(444, 0, 580, 58);
-        header2.addMouseListener(header2);
-        header2.addMouseMotionListener(header2);
-        this.add(header2); 
-        //****************************************
-        
+		// Bouton VALIDER reponse
         JButton bt_valider_rep = new JButton("<html>Valider la r&eacute;ponse</html>");
         bt_valider_rep.setBounds(840, 570, 170, 40);
         bt_valider_rep.addActionListener(new ActionListener() {
@@ -91,7 +71,6 @@ public class Jouer_partie extends JPanel implements MouseListener, MouseMotionLi
         
         //Chronometre dur�e partie    
         chrono = new Chronometre (fen, this, monQuiz, SQL_Requete_Quiz.getHeures(monQuiz.getId()), SQL_Requete_Quiz.getMin(monQuiz.getId()), SQL_Requete_Quiz.getSec(monQuiz.getId()));
-        
         
         //System.out.println(chrono.getTpsRestant());
         Chronometre = new JLabel(chrono.getTpsRestant());
@@ -126,6 +105,22 @@ public class Jouer_partie extends JPanel implements MouseListener, MouseMotionLi
         TxtVite.setBounds(835, 653, 200, 70);
         add(TxtVite);
         TxtVite.setVisible(false);
+        
+        //****Inclusion du Header en 2 parties ****
+        header1 = new Header(fen);
+        header1.setBounds(0, 0, 444, 130);
+        header1.addMouseListener(header1);
+        header1.addMouseMotionListener(header1);
+        this.add(header1); 
+        
+        header1.setWarning(false);
+
+        header2 = new Header_menu(fen, this);
+        header2.setBounds(444, 0, 580, 58);
+        header2.addMouseListener(header2);
+        header2.addMouseMotionListener(header2);
+        this.add(header2); 
+        //****************************************
 	}
 	
 	public void setQuestion(String txt){
