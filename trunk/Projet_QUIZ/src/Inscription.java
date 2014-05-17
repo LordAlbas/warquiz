@@ -128,10 +128,14 @@ public class Inscription extends JPanel implements MouseListener, MouseMotionLis
 					            repaint();
 					        }
 						}
+						else if(!textField_mdp_conf.getText().equals(textField_mdp.getText()) || textField_mdp.getPassword().length != textField_mdp_conf.getPassword().length){ //Si les MDP sont pas égaux
+							bad_mdp_mdpConf=1;
+							tentative++;
+							repaint();
+						}
 					}else{
 						textField_pseudo.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.RED));
 						bad_pseudo=1;
-						bad_mdp_mdpConf = 1;
 						tentative++;
 						repaint();
 						if(textField_mdp.getPassword().length == 0){
@@ -147,6 +151,11 @@ public class Inscription extends JPanel implements MouseListener, MouseMotionLis
 						if(textField_mail.getText().length() == 0){
 							textField_mail.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.RED));
 							bad_mail=1;
+							repaint();
+						}
+						else if(!textField_mdp_conf.getText().equals(textField_mdp.getText()) || textField_mdp.getPassword().length != textField_mdp_conf.getPassword().length){ //Si les MDP sont pas égaux
+							bad_mdp_mdpConf=1;
+							tentative++;
 							repaint();
 						}
 					}
@@ -203,10 +212,14 @@ public class Inscription extends JPanel implements MouseListener, MouseMotionLis
 					            repaint();
 					        }
 						}
+						else if(!textField_mdp_conf.getText().equals(textField_mdp.getText()) || textField_mdp.getPassword().length != textField_mdp_conf.getPassword().length){ //Si les MDP sont pas égaux
+							bad_mdp_mdpConf=1;
+							tentative++;
+							repaint();
+						}
 					}else{
 						textField_mdp.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.RED));
 						bad_mdp=1;
-						bad_mdp_mdpConf = 1;
 						tentative++;
 						repaint();
 						if(textField_pseudo.getText().length() == 0){
@@ -222,6 +235,11 @@ public class Inscription extends JPanel implements MouseListener, MouseMotionLis
 						if(textField_mail.getText().length() == 0){
 							textField_mail.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.RED));
 							bad_mail=1;
+							repaint();
+						}
+						else if(!textField_mdp_conf.getText().equals(textField_mdp.getText()) || textField_mdp.getPassword().length != textField_mdp_conf.getPassword().length){ //Si les MDP sont pas égaux
+							bad_mdp_mdpConf=1;
+							tentative++;
 							repaint();
 						}
 					}
@@ -278,10 +296,14 @@ public class Inscription extends JPanel implements MouseListener, MouseMotionLis
 					            repaint();
 					        }
 						}
+						else if(!textField_mdp_conf.getText().equals(textField_mdp.getText()) || textField_mdp.getPassword().length != textField_mdp_conf.getPassword().length){ //Si les MDP sont pas égaux
+							bad_mdp_mdpConf=1;
+							tentative++;
+							repaint();
+						}
 					}else{
 						textField_mdp_conf.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.RED));
 						bad_mdp_conf=1;
-						bad_mdp_mdpConf = 1;
 						tentative++;
 						repaint();
 						if(textField_pseudo.getText().length() == 0){
@@ -297,6 +319,11 @@ public class Inscription extends JPanel implements MouseListener, MouseMotionLis
 						if(textField_mail.getText().length() == 0){
 							textField_mail.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.RED));
 							bad_mail=1;
+							repaint();
+						}
+						else if(!textField_mdp_conf.getText().equals(textField_mdp.getText()) || textField_mdp.getPassword().length != textField_mdp_conf.getPassword().length){ //Si les MDP sont pas égaux
+							bad_mdp_mdpConf=1;
+							tentative++;
 							repaint();
 						}
 					}
@@ -353,11 +380,15 @@ public class Inscription extends JPanel implements MouseListener, MouseMotionLis
 					            repaint();
 					        }
 						}
+						else if(!textField_mdp_conf.getText().equals(textField_mdp.getText()) || textField_mdp.getPassword().length != textField_mdp_conf.getPassword().length){ //Si les MDP sont pas égaux
+							bad_mdp_mdpConf=1;
+							tentative++;
+							repaint();
+						}
 					}else{
 						textField_mail.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.RED));
 						bad_mail=1;
 						tentative++;
-						bad_mdp_mdpConf = 1;
 						repaint();
 						if(textField_pseudo.getText().length() == 0){
 							textField_pseudo.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.RED));
@@ -372,6 +403,11 @@ public class Inscription extends JPanel implements MouseListener, MouseMotionLis
 						if(textField_mdp_conf.getPassword().length == 0){
 							textField_mdp_conf.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.RED));
 							bad_mdp_conf=1;
+							repaint();
+						}
+						else if(!textField_mdp_conf.getText().equals(textField_mdp.getText()) || textField_mdp.getPassword().length != textField_mdp_conf.getPassword().length){ //Si les MDP sont pas égaux
+							bad_mdp_mdpConf=1;
+							tentative++;
 							repaint();
 						}
 					}
@@ -464,10 +500,14 @@ public class Inscription extends JPanel implements MouseListener, MouseMotionLis
 			            repaint();
 			        }
 				}
+				else if(!textField_mdp_conf.getText().equals(textField_mdp.getText()) || textField_mdp.getPassword().length != textField_mdp_conf.getPassword().length){ //Si les MDP sont pas égaux
+					bad_mdp_mdpConf=1;
+					tentative++;
+					repaint();
+				}
 			}else if(textField_mdp.getPassword().length == 0){
 				textField_mdp.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.RED));
 				bad_mdp=1;
-				bad_mdp_mdpConf = 1;
 				tentative++;
 				repaint();
 				if(textField_pseudo.getText().length() == 0){
@@ -483,6 +523,11 @@ public class Inscription extends JPanel implements MouseListener, MouseMotionLis
 				if(textField_mail.getText().length() == 0){
 					textField_mail.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.RED));
 					bad_mail=1;
+					repaint();
+				}
+				else if(!textField_mdp_conf.getText().equals(textField_mdp.getText()) || textField_mdp.getPassword().length != textField_mdp_conf.getPassword().length){ //Si les MDP sont pas égaux
+					bad_mdp_mdpConf=1;
+					tentative++;
 					repaint();
 				}
 			}
