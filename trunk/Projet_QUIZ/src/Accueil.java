@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
@@ -121,6 +122,7 @@ public class Accueil extends JPanel implements MouseListener, MouseMotionListene
 	
 	public void mouseMoved(MouseEvent e) { // On recupere constamment la position de la souris
 		if (e.getX() >= 120 && e.getX() <= 490 && e.getY() >= 260 && e.getY() <= 345) { // JOUER
+			setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 			image_select = "JOUER_hover";
 			val_i = 0;
 			L_info.setText("<html>Certains pensent que le génie <br>est héréditaire, d'autres ont <br>des enfants...</html>");
@@ -128,6 +130,7 @@ public class Accueil extends JPanel implements MouseListener, MouseMotionListene
 		}
 		
 		else if (e.getX() >= 120 && e.getX() <= 490 && e.getY() >= 360 && e.getY() <= 445) { // STATS
+			setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 			image_select = "STATS_hover";
 			val_i = 1;
 			L_info.setText("7² dont je retiens 2... + pi... 42 ?");
@@ -135,18 +138,21 @@ public class Accueil extends JPanel implements MouseListener, MouseMotionListene
 		}
 		
 		else if (e.getX() >= 120 && e.getX() <= 490 && e.getY() >= 460 && e.getY() <= 545) { // CREDITS
+			setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 			image_select = "CREDITS_hover";
 			val_i = 2;
 			L_info.setText("<html>Ici c'est les BG qui ont fait tout ça <br/>maggle !</html>");
 			L_info.repaint();
 		}
 		else if (e.getX() >= 120 && e.getX() <= 490 && e.getY() >= 560 && e.getY() <= 645) { // QUITTER
+			setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 			image_select = "QUITTER_hover";
 			val_i = 3;
 			L_info.setText("Si tu cliques, tu meurs !");
 			L_info.repaint();
 		}
 		else {
+			setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
 			L_info.setText("");
 			L_info.repaint();
 		}

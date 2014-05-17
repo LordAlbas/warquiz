@@ -8,6 +8,7 @@ import java.awt.event.MouseMotionListener;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
+import javax.swing.ToolTipManager;
 //import com.jgoodies.forms.factories.DefaultComponentFactory;
 
 
@@ -20,6 +21,7 @@ public class Header_menu extends JPanel implements MouseListener, MouseMotionLis
 	public JLabel textMessage;
 	private Connexion conn;
 	private JPanel panel;
+	private Boolean inOpt = false;
 
 	
 	public Header_menu(Fenetre fen, JPanel jp){
@@ -37,7 +39,9 @@ public class Header_menu extends JPanel implements MouseListener, MouseMotionLis
 		repaint();
 	}
 	
-
+	public void setInOption(Boolean bool){
+		inOpt = bool;
+	}
 	
 	public void mouseDragged(MouseEvent e) {}
 	public void mouseMoved(MouseEvent e) {
@@ -53,7 +57,16 @@ public class Header_menu extends JPanel implements MouseListener, MouseMotionLis
 	}
 	public void mouseClicked(MouseEvent e) {
 		if(e.getX() >= 450 && e.getX() <= 514 && e.getY() >= 1 && e.getY() <= 47){ // OPT
-			fenetre.goToOption(panel);
+			
+			
+
+			if(inOpt){
+				fenetre.goToBack(panel);
+			}
+			else{
+				fenetre.goToOption(panel);
+			}
+			
 		}
 		if(e.getX() >= 526 && e.getX() <= 578 && e.getY() >= 1 && e.getY() <= 47){ // CO/DECO
 			selection1 = "decoreco";

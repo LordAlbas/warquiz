@@ -124,26 +124,27 @@ public class Bouton extends JButton implements MouseListener,ActionListener {
 		System.out.println(diff);
 		if(diff == 0){
 			Jouer.list_quizcree.removeAll();
+			
 			for (short i=0; i<Jouer.ListeQuiz.length; i++) {
-				Jouer.list_quizcree.add(Jouer.ListeQuiz[i].getNom());
+				Jouer.list_quizcree.add(Jouer.ListeQuiz[i].getNom()+" - [ "+Jouer.ListeQuiz[i].getNb_questions()+" question(s) ] - Temps : " + Jouer.ListeQuiz[i].getHeureQuiz() + "h "+ Jouer.ListeQuiz[i].getMinuteQuiz() + "m " + Jouer.ListeQuiz[i].getSecondeQuiz() +"s ");
 			}
 		}
 		if(diff == 1){
 			Jouer.list_quizcree.removeAll();
 			for (short i=0; i<Jouer.ListeQuiz_facile.length; i++) {
-				Jouer.list_quizcree.add(Jouer.ListeQuiz_facile[i].getNom());
+				Jouer.list_quizcree.add(Jouer.ListeQuiz_facile[i].getNom()+" - [ "+Jouer.ListeQuiz[i].getNb_questions()+" question(s) ] - Temps : " + Jouer.ListeQuiz[i].getHeureQuiz() + "h "+ Jouer.ListeQuiz[i].getMinuteQuiz() + "m " + Jouer.ListeQuiz[i].getSecondeQuiz() +"s ");
 			}
 		}
 		if(diff == 2){
 			Jouer.list_quizcree.removeAll();
 			for (short i=0; i<Jouer.ListeQuiz_moyen.length; i++) {
-				Jouer.list_quizcree.add(Jouer.ListeQuiz_moyen[i].getNom());
+				Jouer.list_quizcree.add(Jouer.ListeQuiz_moyen[i].getNom()+" - [ "+Jouer.ListeQuiz[i].getNb_questions()+" question(s) ] - Temps : " + Jouer.ListeQuiz[i].getHeureQuiz() + "h "+ Jouer.ListeQuiz[i].getMinuteQuiz() + "m " + Jouer.ListeQuiz[i].getSecondeQuiz() +"s ");
 			}
 		}
 		if(diff == 3){
 			Jouer.list_quizcree.removeAll();
 			for (short i=0; i<Jouer.ListeQuiz_difficile.length; i++) {
-				Jouer.list_quizcree.add(Jouer.ListeQuiz_difficile[i].getNom());
+				Jouer.list_quizcree.add(Jouer.ListeQuiz_difficile[i].getNom()+" - [ "+Jouer.ListeQuiz[i].getNb_questions()+" question(s) ] - Temps : " + Jouer.ListeQuiz[i].getHeureQuiz() + "h "+ Jouer.ListeQuiz[i].getMinuteQuiz() + "m " + Jouer.ListeQuiz[i].getSecondeQuiz() +"s ");
 			}
 		}
 	}
