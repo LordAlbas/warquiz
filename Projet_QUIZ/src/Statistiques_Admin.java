@@ -31,10 +31,10 @@ public class Statistiques_Admin extends JPanel implements MouseListener, MouseMo
 	public static String selection; 		// defini quel bouton est selectionn�
 	private Header header1;
 	private Header_menu header2;
-	public String query_score,query_moyenne,query_moyenne_total,query_nb_parties,query_nb_quiz,query_quiz_joue,query_nb_participants_quiz,query_score_diff,query_nb_quiz_dispo;
+	public String query_score,query_moyenne,query_moyenne_total,query_nb_parties,query_nb_quiz,query_quiz_joue,query_nb_participants_quiz,query_score_diff,query_nb_quiz_dispo,query_heure_moyenne,query_minute_moyenne,query_seconde_moyenne;
 	private String db_score,db_score_diff,db_num_quiz_diff,db_diff,db_moyenne,db_moyenne_total,db_num_quiz,db_nb_parties,db_nb_quiz,db_quiz_joue,db_nb_participants_quiz,db_nb_quiz_dispo; // le score sorti de la bdd
 	public JLabel score,titreA,titreU,score_moyen,score_moyen_total,nb_parties,nb_quiz,quiz_joue,nb_participants_quiz,nb_quiz_dispo; // le score d'un joueur pour un quiz
-	private JLabel lb_titreStatistiques,score_diff,lb_nom_quiz,lb_score_quiz,lb_temps_quiz,lb_nb_quest_quiz,lb_nb_part_quiz;
+	private JLabel lb_titreStatistiques,score_diff,lb_nom_quiz,lb_score_quiz,lb_temps_quiz,lb_nb_quest_quiz,lb_nb_part_quiz,lb_temps_moyen_quiz;
 	private JList table;
 	private Bouton bouton;
 	private String texte;
@@ -182,6 +182,12 @@ public class Statistiques_Admin extends JPanel implements MouseListener, MouseMo
 		lb_nb_part_quiz.setFont(new Font("Arial", Font.PLAIN, 17));
 		lb_nb_part_quiz.setBounds(180, 640, 400, 50);
 		add(lb_nb_part_quiz);
+		
+		lb_temps_moyen_quiz = new JLabel("Temps moyen sur ce quiz : ");
+		lb_temps_moyen_quiz.setForeground(Color.WHITE);
+		lb_temps_moyen_quiz.setFont(new Font("Arial", Font.PLAIN, 17));
+		lb_temps_moyen_quiz.setBounds(180, 660, 400, 50);
+		add(lb_temps_moyen_quiz);
 		
 		
 	}
@@ -410,6 +416,67 @@ public class Statistiques_Admin extends JPanel implements MouseListener, MouseMo
 		return nb_participants_quiz;
 	}
 	
+	public int getHeuresMoyenne(){
+		Connection conn = null;
+		int heure_quiz_moyenne = 1;
+		try {
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+			conn = DriverManager.getConnection("jdbc:sqlserver://193.252.48.189\\SQLEXPRESS:1433;" + "database=BDD_B3I_groupe_5;" + "user=b3i_groupe_5;" + "password=123Soleil");
+			Statement stmt_heure = (Statement) conn.createStatement();
+			query_heure_moyenne = "SELECT AVG(HEURE_USR_QUIZ) AS heure_moyenne_quiz FROM JOUER WHERE ID_QUIZ="+ ListeQuizStats[list_quiz_stats.getSelectedIndex()].getId();
+			stmt_heure.executeQuery(query_heure_moyenne);
+			ResultSet rs_heure = stmt_heure.getResultSet();
+			while(rs_heure.next()){
+				heure_quiz_moyenne = rs_heure.getInt("heure_moyenne_quiz");
+			}
+	    } catch (SQLException eeee) {
+	    	eeee.printStackTrace();
+	    } catch (ClassNotFoundException eeee) {
+			eeee.printStackTrace();
+		}
+		return heure_quiz_moyenne;	
+	}
+	public int getMinutesMoyenne(){
+		Connection conn = null;
+		int minute_quiz_moyenne = 1;
+		try {
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+			conn = DriverManager.getConnection("jdbc:sqlserver://193.252.48.189\\SQLEXPRESS:1433;" + "database=BDD_B3I_groupe_5;" + "user=b3i_groupe_5;" + "password=123Soleil");
+			Statement stmt_minute = (Statement) conn.createStatement();
+			query_minute_moyenne = "SELECT AVG(MINUTE_USR_QUIZ) AS minute_moyenne_quiz FROM JOUER WHERE ID_QUIZ="+ ListeQuizStats[list_quiz_stats.getSelectedIndex()].getId();
+			stmt_minute.executeQuery(query_minute_moyenne);
+			ResultSet rs_minute = stmt_minute.getResultSet();
+			while(rs_minute.next()){
+				minute_quiz_moyenne = rs_minute.getInt("minute_moyenne_quiz");
+			}
+	    } catch (SQLException eeee) {
+	    	eeee.printStackTrace();
+	    } catch (ClassNotFoundException eeee) {
+			eeee.printStackTrace();
+		}
+		return minute_quiz_moyenne;	
+	}
+	public int getSecondesMoyenne(){
+		Connection conn = null;
+		int seconde_quiz_moyenne = 1;
+		try {
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+			conn = DriverManager.getConnection("jdbc:sqlserver://193.252.48.189\\SQLEXPRESS:1433;" + "database=BDD_B3I_groupe_5;" + "user=b3i_groupe_5;" + "password=123Soleil");
+			Statement stmt_seconde = (Statement) conn.createStatement();
+			query_heure_moyenne = "SELECT AVG(SECONDE_USR_QUIZ) AS seconde_moyenne_quiz FROM JOUER WHERE ID_QUIZ="+ ListeQuizStats[list_quiz_stats.getSelectedIndex()].getId();
+			stmt_seconde.executeQuery(query_heure_moyenne);
+			ResultSet rs_seconde = stmt_seconde.getResultSet();
+			while(rs_seconde.next()){
+				seconde_quiz_moyenne = rs_seconde.getInt("seconde_moyenne_quiz");
+			}
+	    } catch (SQLException eeee) {
+	    	eeee.printStackTrace();
+	    } catch (ClassNotFoundException eeee) {
+			eeee.printStackTrace();
+		}
+		return seconde_quiz_moyenne;	
+	}
+	
 	/**
 	 * Calcule le nombre de quiz.
 	 * @throws SQLException 
@@ -472,16 +539,19 @@ public class Statistiques_Admin extends JPanel implements MouseListener, MouseMo
 			int item_score = 0;
 			String item_temps = "";
 			int item_participant = 0;
+			String item_temps_moyen = "";
 			item_nom = list_quiz_stats.getSelectedItem();
 			item_quest = ListeQuizStats[init].getNb_questions();
 			item_score = scoreMoyen();
 			item_temps = ListeQuizStats[init].getHeureQuiz() +"h "+  ListeQuizStats[init].getMinuteQuiz()+"m "+ ListeQuizStats[init].getSecondeQuiz() + "s";
 			item_participant = nbParticiants();
+			item_temps_moyen = getHeuresMoyenne() + "h " + getMinutesMoyenne() + "m " + getSecondesMoyenne() + "s";
 			lb_nom_quiz.setText("Nom du quiz : " + item_nom);
 			lb_nb_quest_quiz.setText("Nombre de questions du quiz : " + item_quest);
 			lb_score_quiz.setText("Score du quiz : " + item_score);
 			lb_temps_quiz.setText("Temps du quiz : " + item_temps);
 			lb_nb_part_quiz.setText("Nombre de participants : " + item_participant);
+			lb_temps_moyen_quiz.setText("Temps moyen sur ce quiz : " + item_temps_moyen);
 		}else{System.out.println("marche pas");
 		}
 	}
