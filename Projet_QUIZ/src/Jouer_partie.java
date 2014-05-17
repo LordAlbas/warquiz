@@ -36,6 +36,7 @@ public class Jouer_partie extends JPanel implements MouseListener, MouseMotionLi
 	private JLabel TxtVite;
 	private JLabel reponse;
 	private JLabel question;
+	public JPanel sousPanel;
 
 	
 	public Jouer_partie(Fenetre fen, Quiz quiz) {
@@ -72,7 +73,7 @@ public class Jouer_partie extends JPanel implements MouseListener, MouseMotionLi
         this.add(header2); 
         //****************************************
         
-        JButton bt_valider_rep = new JButton("<html>Valider la réponse</html>");
+        JButton bt_valider_rep = new JButton("<html>Valider la r&eacute;ponse</html>");
         bt_valider_rep.setBounds(840, 570, 170, 40);
         bt_valider_rep.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -80,7 +81,7 @@ public class Jouer_partie extends JPanel implements MouseListener, MouseMotionLi
 				if (error_msg != "")
 					JOptionPane.showMessageDialog(null, 
 							error_msg, 
-							"Pas de réponse", 
+							"Pas de r&eacute;ponse", 
 							JOptionPane.ERROR_MESSAGE);
 				else
 					;// validereponse(); et mise dans le tableau de la reponse
@@ -104,11 +105,19 @@ public class Jouer_partie extends JPanel implements MouseListener, MouseMotionLi
         timer = createTimer();
         timer.start();
         
-        question = new JLabel(monQuiz.getQuest(0).getQuestTxt());
+        sousPanel = new JPanel();
+		sousPanel.setBounds(30, 347, 734, 368);
+		sousPanel.setLayout(null);
+		sousPanel.setOpaque(false);
+		add(sousPanel);        
+        
+        question = new JLabel("<html>Selectionnez une question pour voir les r&eacute;ponses.</html>");
         question.setBounds(10, 250, 1000, 36);
         question.setFont(new Font("Arial", Font.PLAIN, 20));
         question.setForeground(Color.WHITE);
         add(question);
+        
+        reponse = new JLabel("");
         
         TxtVite = new JLabel("<html>Pensez &agrave;<br/>valider !</html>");
         TxtVite.setHorizontalAlignment(SwingConstants.CENTER); 
@@ -124,17 +133,28 @@ public class Jouer_partie extends JPanel implements MouseListener, MouseMotionLi
 		question.repaint();
 	}
 	
-	public void setReponse(int nbRep, String txt){
-			
-			
-			reponse = new JLabel(txt);
-			add(reponse);
-			reponse.setBounds(20, 300+20*cpt, 1000, 36);
-			reponse.setFont(new Font("Arial", Font.PLAIN, 15));
-			reponse.setForeground(Color.WHITE);
-			reponse.repaint();
-			cpt++;
+	public JCheckBox[] createTabRep(int i){
+		JCheckBox[] TabCheckRep = new JCheckBox[monQuiz.getQuest(i).getNb_reponses()];
+		for(int v=0;v<monQuiz.getQuest(i).getNb_reponses();v++){
+			TabCheckRep[v] = new JCheckBox(monQuiz.getQuest(i).getReponse(v).getTxtReponse());
+			TabCheckRep[v].setForeground(Color.WHITE);	
+		}
+		return TabCheckRep;
+	}
+	
+	public void affCheckrep(JCheckBox[]tabrep, int num){
+		for(int i=0;i<monQuiz.getQuest(num).getNb_reponses();i++){
+			tabrep[i].setBounds(30, 50*i, 450, 70);
+			tabrep[i].setFont(new Font("Arial", Font.PLAIN, 20));
+			tabrep[i].setOpaque(false);
+			sousPanel.add(tabrep[i]);
+		}	
 		
+	}
+	
+	public void setReponse(int nbRep, String txt){
+		reponse.setText(txt);
+		reponse.repaint();	
 	}
 	
 	public void setCpt(int nb){
@@ -162,6 +182,7 @@ public class Jouer_partie extends JPanel implements MouseListener, MouseMotionLi
 			add(boutonMenu);*/
 		}
 	}
+	
 	
 	
 	
