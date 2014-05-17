@@ -129,24 +129,45 @@ public class Admin_ajout_reponses extends JPanel  implements MouseListener, Item
 		bt_retour.setBounds(855, 570, 130, 40);
 		bt_retour.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// On sauve l'etat actuel
-				short i=0;
-				short y=0;
-				while (i<10 && reponses[i] != null) {
-					current_quiz.getQuest(idQuest).getReponse(i).setTxtReponse(reponses[i].getText());
-					current_quiz.getQuest(idQuest).getReponse(i).setStatutRep(statusRep[i].isSelected());
-					if (statusRep[i].isSelected())
-						y++;
-					i++;
+				boolean existAlready = false;
+				boolean isEmpty = false;
+				for (byte j=0; j<reponses.length-1; j++) {				// boucle les reponses de 0 a n-1
+					if (reponses[j] != null && reponses[j].getText().isEmpty())
+						isEmpty = true;
+					for (byte i=(byte)(j+1); i<reponses.length; i++) {	// boucle les reponses de 1 a n
+						if (reponses[i] != null && reponses[i].getText().isEmpty())
+							isEmpty = true;
+						if (reponses[i] != null && reponses[j].getText().equals(reponses[i].getText()))
+							existAlready = true;
+					}
 				}
-				current_quiz.getQuest(idQuest).setNbr_reponses_juste(y);
-				
-				// ..puis on retourne sur la fenetre Creation_quiz
-				Creation_quiz creation_quiz = new Creation_quiz(fenetre, current_quiz);
-				fenetre.getContentPane().setVisible(false);
-				creation_quiz.addMouseListener(creation_quiz);
-				fenetre.setContentPane(creation_quiz);
-				fenetre.getContentPane().setVisible(true);
+				if (existAlready || isEmpty) {
+					// TODO pop-up d'erreur "il y a des reponses en double (txtQuest = txtQuest)".
+					if (existAlready)
+						System.out.println("Erreur -> Duplicata dans les reponses ! (doublon ou triplon ou quadruplon ou quintuplon ou niktameruplon..)");
+					// TODO pop-up d'erreur "il y a des reponses vide !".
+					if (isEmpty)
+						System.out.println("Erreur -> Des reponses sont carement vides !");
+				} else {
+					// On sauve l'etat actuel
+					short i=0;
+					short y=0;
+					while (i<10 && reponses[i] != null) {
+						current_quiz.getQuest(idQuest).getReponse(i).setTxtReponse(reponses[i].getText());
+						current_quiz.getQuest(idQuest).getReponse(i).setStatutRep(statusRep[i].isSelected());
+						if (statusRep[i].isSelected())
+							y++;
+						i++;
+					}
+					current_quiz.getQuest(idQuest).setNbr_reponses_juste(y);
+					
+					// ..puis on retourne sur la fenetre Creation_quiz
+					Creation_quiz creation_quiz = new Creation_quiz(fenetre, current_quiz);
+					fenetre.getContentPane().setVisible(false);
+					creation_quiz.addMouseListener(creation_quiz);
+					fenetre.setContentPane(creation_quiz);
+					fenetre.getContentPane().setVisible(true);
+				}
 			}
 		});
 		add(bt_retour);
