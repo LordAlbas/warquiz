@@ -5,6 +5,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 //import com.jgoodies.forms.factories.DefaultComponentFactory;
@@ -18,6 +19,7 @@ public class Header_menu extends JPanel implements MouseListener, MouseMotionLis
 	static String selection1; 
 	public JLabel textMessage;
 	private Connexion conn;
+
 	
 	public Header_menu(Fenetre fen){
 		setLayout(null);
@@ -34,6 +36,8 @@ public class Header_menu extends JPanel implements MouseListener, MouseMotionLis
 		repaint();
 	}
 	
+
+	
 	public void mouseDragged(MouseEvent e) {}
 	public void mouseMoved(MouseEvent e) {
 		
@@ -49,7 +53,10 @@ public class Header_menu extends JPanel implements MouseListener, MouseMotionLis
 	public void mouseClicked(MouseEvent e) {
 		if(e.getX() >= 526 && e.getX() <= 578 && e.getY() >= 1 && e.getY() <= 47){ // CO/DECO
 			selection1 = "decoreco";
-			fenetre.goToConnexionAlerte(selection1); // on appel la fonction qui va changer de panel
+
+				fenetre.goToConnexionAlerte(selection1); // on appel la fonction qui va changer de panel
+
+
 		}	
 	}
 	public void mouseEntered(MouseEvent arg0) {}
