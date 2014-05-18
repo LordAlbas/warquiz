@@ -80,14 +80,14 @@ public class Chronometre {
 		if(chrono == 0){
 			tpsRestant = "0 h 0 min 0 sec";
 			timer.stop();
-			int rep_deco = JOptionPane.showConfirmDialog(null, 
-					"<html>Le temps est &eacute;coul&eacute;, voulez vous voir <br/>la correction avant de quitter ?</html>", 
+			JOptionPane.showMessageDialog(null, 
+					"<html>Le temps est &eacute;coul&eacute;.<br/> Vous allez être redirigé vers la correction.</html>", 
 					"Temps Ã©coulÃ© !", 
-					JOptionPane.YES_NO_OPTION);
-			if(rep_deco == 0){
+					JOptionPane.WARNING_MESSAGE);
+			
 				System.out.println("Redirige correction");
 				fenetre.goToCorrection(monQuiz, partie_en_cours.getBoutonQuestion(), partie_en_cours.calculScore());
-			}else {fenetre.goToAccueil("");}
+			
 		}
 	}
 	
