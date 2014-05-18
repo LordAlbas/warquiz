@@ -164,6 +164,7 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 						                	login_general = dbUsername_admin;
 						                	dbUsername_admin = textField_pseudo.getText();
 						                	status = "ADMIN";
+						                	repaint();
 						                	fenetre.goToAccueil(selection);
 						                }
 						                else{
@@ -186,6 +187,7 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 						                	
 						                	login_general = dbUsername_user;
 						                	status = "USER";
+						                	repaint();
 						                	fenetre.goToAccueil(selection);
 						                }
 						                else{
@@ -266,6 +268,7 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 						                	dbUsername_admin = textField_pseudo.getText();
 						                	login_general = dbUsername_admin;
 						                	status = "ADMIN";
+						                	repaint();
 						                	fenetre.goToAccueil(selection);
 						                }
 						                else{
@@ -289,6 +292,7 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 						                	
 						                	login_general = dbUsername_user;
 						                	status = "USER";
+						                	repaint();
 						                	fenetre.goToAccueil(selection);
 						                }
 						                else{
@@ -386,6 +390,7 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 				                	dbUsername_admin = textField_pseudo.getText();
 				                	login_general = dbUsername_admin;
 				                	status = "ADMIN";
+				                	repaint();
 				                	fenetre.goToAccueil(selection);
 				                }
 				                else{
@@ -409,6 +414,7 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 				                	
 				                	login_general = dbUsername_user;
 				                	status = "USER";
+				                	repaint();
 				                	fenetre.goToAccueil(selection);
 				                }
 				                else{
