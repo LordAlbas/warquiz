@@ -508,6 +508,10 @@ public class Creation_quiz extends JPanel implements MouseListener, MouseMotionL
 	 * Called from click sur le bouton valider
 	 */
 	public void validateQuiz() {
+		monQuiz.setHeureQuiz(cb_heure.getSelectedItem().toString());		// recupere les h/min/sec meme si elles n'ont pas ete changer
+		monQuiz.setMinuteQuiz(cb_minute.getSelectedItem().toString());
+		monQuiz.setSecondeQuiz(cb_seconde.getSelectedItem().toString());
+		
 		String error_msg = testValidationQuiz();
 		if (error_msg != "")					// Si la validation renvoi une string non-vide c'est que quelque chose ne va pas.
 			JOptionPane.showMessageDialog(null, 
