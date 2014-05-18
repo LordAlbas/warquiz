@@ -8,6 +8,7 @@ import java.awt.event.MouseMotionListener;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -21,8 +22,8 @@ public class Inscription extends JPanel implements MouseListener, MouseMotionLis
 
 	private Fenetre fenetre;
 	
-	static String selection; 				// defini quel bouton est selectionn�
-    public String query_ajout;
+	static String selection,dbUsername_user; 				// defini quel bouton est selectionn�
+    public String query_ajout,query_user;
     
 	private JTextField textField_pseudo;	// création du champ pseudo
 	private JPasswordField textField_mdp;	// création du cham mdp cypté
@@ -35,6 +36,7 @@ public class Inscription extends JPanel implements MouseListener, MouseMotionLis
 	public int bad_mail=0; // le champ n'est pas encore invalide
 	public int bad_mdp_mdpConf=0; //vérification du mot de passe
 	public int tentative = 0;  //le nombre de tentative d'authentification
+	public int pseudo_existe = 0; // pseudo deja existant
     
 	public static boolean erreur_log,recherche_bdd, erreur_bdd = false;
     public static boolean erreur_requete = true;
@@ -109,17 +111,29 @@ public class Inscription extends JPanel implements MouseListener, MouseMotionLis
 								repaint();
 					        	Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 					            Connection conn = DriverManager.getConnection("jdbc:sqlserver://193.252.48.189\\SQLEXPRESS:1433;" + "database=BDD_B3I_groupe_5;" + "user=b3i_groupe_5;" + "password=123Soleil");
+					            query_user = "SELECT login_usr, mdp_usr FROM UTILISATEUR";
 					            query_ajout = "INSERT INTO UTILISATEUR (LOGIN_USR,MDP_USR,ADR_MAIL_USR,NB_QUIZ_JOUE,NB_PARTIE_JOUE)"
-					            			+ "VALUES (?,?,?,?,?);";
-					            PreparedStatement stmt_ajout = (PreparedStatement) conn.prepareStatement(query_ajout);
-					            stmt_ajout.setString(1, textField_pseudo.getText());
-					            stmt_ajout.setString(2, textField_mdp.getText());
-					            stmt_ajout.setString(3, textField_mail.getText());
-					            stmt_ajout.setInt(4, 0);
-					            stmt_ajout.setInt(5, 0);
-					            stmt_ajout.executeUpdate();
-					            stmt_ajout.close();
-					            fenetre.goToConnexion(selection);
+				            			+ "VALUES (?,?,?,?,?);";
+					            Statement stmt_user = (Statement) conn.createStatement();
+					            stmt_user.executeQuery(query_user);
+					            ResultSet rs_user = stmt_user.getResultSet();
+					            while(rs_user.next()){
+					            	dbUsername_user = rs_user.getString("login_usr");
+					            	if (textField_pseudo.getText().equals(dbUsername_user)){
+					            		pseudo_existe = 1;
+					            	}
+					            	else{
+					            		PreparedStatement stmt_ajout = (PreparedStatement) conn.prepareStatement(query_ajout);
+					            		stmt_ajout.setString(1, textField_pseudo.getText());
+							            stmt_ajout.setString(2, textField_mdp.getText());
+							            stmt_ajout.setString(3, textField_mail.getText());
+							            stmt_ajout.setInt(4, 0);
+							            stmt_ajout.setInt(5, 0);
+							            stmt_ajout.executeUpdate();
+							            stmt_ajout.close();
+							            fenetre.goToConnexion(selection);
+					            	}	            
+					            }
 							}
 							catch (ClassNotFoundException eeee) {
 					            eeee.printStackTrace();
@@ -198,17 +212,29 @@ public class Inscription extends JPanel implements MouseListener, MouseMotionLis
 								repaint();
 					        	Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 					            Connection conn = DriverManager.getConnection("jdbc:sqlserver://193.252.48.189\\SQLEXPRESS:1433;" + "database=BDD_B3I_groupe_5;" + "user=b3i_groupe_5;" + "password=123Soleil");
+					            query_user = "SELECT login_usr, mdp_usr FROM UTILISATEUR";
 					            query_ajout = "INSERT INTO UTILISATEUR (LOGIN_USR,MDP_USR,ADR_MAIL_USR,NB_QUIZ_JOUE,NB_PARTIE_JOUE)"
-					            			+ "VALUES (?,?,?,?,?);";
-					            PreparedStatement stmt_ajout = (PreparedStatement) conn.prepareStatement(query_ajout);
-					            stmt_ajout.setString(1, textField_pseudo.getText());
-					            stmt_ajout.setString(2, textField_mdp.getText());
-					            stmt_ajout.setString(3, textField_mail.getText());
-					            stmt_ajout.setInt(4, 0);
-					            stmt_ajout.setInt(5, 0);
-					            stmt_ajout.executeUpdate();
-					            stmt_ajout.close();
-					            fenetre.goToConnexion(selection);
+				            			+ "VALUES (?,?,?,?,?);";
+					            Statement stmt_user = (Statement) conn.createStatement();
+					            stmt_user.executeQuery(query_user);
+					            ResultSet rs_user = stmt_user.getResultSet();
+					            while(rs_user.next()){
+					            	dbUsername_user = rs_user.getString("login_usr");
+					            	if (textField_pseudo.getText().equals(dbUsername_user)){
+					            		pseudo_existe = 1;
+					            	}
+					            	else{
+					            		PreparedStatement stmt_ajout = (PreparedStatement) conn.prepareStatement(query_ajout);
+					            		stmt_ajout.setString(1, textField_pseudo.getText());
+							            stmt_ajout.setString(2, textField_mdp.getText());
+							            stmt_ajout.setString(3, textField_mail.getText());
+							            stmt_ajout.setInt(4, 0);
+							            stmt_ajout.setInt(5, 0);
+							            stmt_ajout.executeUpdate();
+							            stmt_ajout.close();
+							            fenetre.goToConnexion(selection);
+					            	}	            
+					            }
 							}
 							catch (ClassNotFoundException eeee) {
 					            eeee.printStackTrace();
@@ -287,17 +313,29 @@ public class Inscription extends JPanel implements MouseListener, MouseMotionLis
 								repaint();
 					        	Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 					            Connection conn = DriverManager.getConnection("jdbc:sqlserver://193.252.48.189\\SQLEXPRESS:1433;" + "database=BDD_B3I_groupe_5;" + "user=b3i_groupe_5;" + "password=123Soleil");
-					            PreparedStatement stmt_ajout = (PreparedStatement) conn.prepareStatement(query_ajout);
+					            query_user = "SELECT login_usr, mdp_usr FROM UTILISATEUR";
 					            query_ajout = "INSERT INTO UTILISATEUR (LOGIN_USR,MDP_USR,ADR_MAIL_USR,NB_QUIZ_JOUE,NB_PARTIE_JOUE)"
-					            			+ "VALUES (?,?,?,?,?);";
-					            stmt_ajout.setString(1, textField_pseudo.getText());
-					            stmt_ajout.setString(2, textField_mdp.getText());
-					            stmt_ajout.setString(3, textField_mail.getText());
-					            stmt_ajout.setInt(4, 0);
-					            stmt_ajout.setInt(5, 0);
-					            stmt_ajout.executeUpdate();
-					            stmt_ajout.close();
-					            fenetre.goToConnexion(selection);
+				            			+ "VALUES (?,?,?,?,?);";
+					            Statement stmt_user = (Statement) conn.createStatement();
+					            stmt_user.executeQuery(query_user);
+					            ResultSet rs_user = stmt_user.getResultSet();
+					            while(rs_user.next()){
+					            	dbUsername_user = rs_user.getString("login_usr");
+					            	if (textField_pseudo.getText().equals(dbUsername_user)){
+					            		pseudo_existe = 1;
+					            	}
+					            	else{
+					            		PreparedStatement stmt_ajout = (PreparedStatement) conn.prepareStatement(query_ajout);
+					            		stmt_ajout.setString(1, textField_pseudo.getText());
+							            stmt_ajout.setString(2, textField_mdp.getText());
+							            stmt_ajout.setString(3, textField_mail.getText());
+							            stmt_ajout.setInt(4, 0);
+							            stmt_ajout.setInt(5, 0);
+							            stmt_ajout.executeUpdate();
+							            stmt_ajout.close();
+							            fenetre.goToConnexion(selection);
+					            	}	            
+					            }
 							}
 							catch (ClassNotFoundException eeee) {
 					            eeee.printStackTrace();
@@ -376,17 +414,29 @@ public class Inscription extends JPanel implements MouseListener, MouseMotionLis
 								repaint();
 					        	Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 					            Connection conn = DriverManager.getConnection("jdbc:sqlserver://193.252.48.189\\SQLEXPRESS:1433;" + "database=BDD_B3I_groupe_5;" + "user=b3i_groupe_5;" + "password=123Soleil");
+					            query_user = "SELECT login_usr, mdp_usr FROM UTILISATEUR";
 					            query_ajout = "INSERT INTO UTILISATEUR (LOGIN_USR,MDP_USR,ADR_MAIL_USR,NB_QUIZ_JOUE,NB_PARTIE_JOUE)"
-					            			+ "VALUES (?,?,?,?,?);";
-					            PreparedStatement stmt_ajout = (PreparedStatement) conn.prepareStatement(query_ajout);
-					            stmt_ajout.setString(1, textField_pseudo.getText());
-					            stmt_ajout.setString(2, textField_mdp.getText());
-					            stmt_ajout.setString(3, textField_mail.getText());
-					            stmt_ajout.setInt(4, 0);
-					            stmt_ajout.setInt(5, 0);
-					            stmt_ajout.executeUpdate();
-					            stmt_ajout.close();
-					            fenetre.goToConnexion(selection);
+				            			+ "VALUES (?,?,?,?,?);";
+					            Statement stmt_user = (Statement) conn.createStatement();
+					            stmt_user.executeQuery(query_user);
+					            ResultSet rs_user = stmt_user.getResultSet();
+					            while(rs_user.next()){
+					            	dbUsername_user = rs_user.getString("login_usr");
+					            	if (textField_pseudo.getText().equals(dbUsername_user)){
+					            		pseudo_existe = 1;
+					            	}
+					            	else{
+					            		PreparedStatement stmt_ajout = (PreparedStatement) conn.prepareStatement(query_ajout);
+					            		stmt_ajout.setString(1, textField_pseudo.getText());
+							            stmt_ajout.setString(2, textField_mdp.getText());
+							            stmt_ajout.setString(3, textField_mail.getText());
+							            stmt_ajout.setInt(4, 0);
+							            stmt_ajout.setInt(5, 0);
+							            stmt_ajout.executeUpdate();
+							            stmt_ajout.close();
+							            fenetre.goToConnexion(selection);
+					            	}	            
+					            }
 							}
 							catch (ClassNotFoundException eeee) {
 					            eeee.printStackTrace();
@@ -501,17 +551,29 @@ public class Inscription extends JPanel implements MouseListener, MouseMotionLis
 						repaint();
 			        	Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 			            Connection conn = DriverManager.getConnection("jdbc:sqlserver://193.252.48.189\\SQLEXPRESS:1433;" + "database=BDD_B3I_groupe_5;" + "user=b3i_groupe_5;" + "password=123Soleil");
+			            query_user = "SELECT login_usr, mdp_usr FROM UTILISATEUR";
 			            query_ajout = "INSERT INTO UTILISATEUR (LOGIN_USR,MDP_USR,ADR_MAIL_USR,NB_QUIZ_JOUE,NB_PARTIE_JOUE)"
-			            			+ "VALUES (?,?,?,?,?);";
-			            PreparedStatement stmt_ajout = (PreparedStatement) conn.prepareStatement(query_ajout);
-			            stmt_ajout.setString(1, textField_pseudo.getText());
-			            stmt_ajout.setString(2, textField_mdp.getText());
-			            stmt_ajout.setString(3, textField_mail.getText());
-			            stmt_ajout.setInt(4, 0);
-			            stmt_ajout.setInt(5, 0);
-			            stmt_ajout.executeUpdate();
-			            stmt_ajout.close();
-			            fenetre.goToConnexion(selection);
+		            			+ "VALUES (?,?,?,?,?);";
+			            Statement stmt_user = (Statement) conn.createStatement();
+			            stmt_user.executeQuery(query_user);
+			            ResultSet rs_user = stmt_user.getResultSet();
+			            while(rs_user.next()){
+			            	dbUsername_user = rs_user.getString("login_usr");
+			            	if (textField_pseudo.getText().equals(dbUsername_user)){
+			            		pseudo_existe = 1;
+			            	}
+			            	else{
+			            		PreparedStatement stmt_ajout = (PreparedStatement) conn.prepareStatement(query_ajout);
+			            		stmt_ajout.setString(1, textField_pseudo.getText());
+					            stmt_ajout.setString(2, textField_mdp.getText());
+					            stmt_ajout.setString(3, textField_mail.getText());
+					            stmt_ajout.setInt(4, 0);
+					            stmt_ajout.setInt(5, 0);
+					            stmt_ajout.executeUpdate();
+					            stmt_ajout.close();
+					            fenetre.goToConnexion(selection);
+			            	}	            
+			            }
 					}
 					catch (ClassNotFoundException eeee) {
 			            eeee.printStackTrace();
