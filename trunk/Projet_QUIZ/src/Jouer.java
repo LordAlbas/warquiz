@@ -42,6 +42,8 @@ public class Jouer extends JPanel implements MouseListener, MouseMotionListener,
 	private Bouton bt_afficherAllQuiz;
 	private Bouton bt_afficherQuizRien;
 	private JButton bt_jouer;
+	private int filtre = 0;
+	private Jouer_partie jouer_Quiz;
 	
 	private Tableau Tableau_quiz;
 	public static List list_quizcree;
@@ -111,24 +113,44 @@ public class Jouer extends JPanel implements MouseListener, MouseMotionListener,
 		bt_afficherAllQuiz.setSize(122, 36);
 		bt_afficherAllQuiz.setLocation(60, 282);
 		bt_afficherAllQuiz.addActionListener(bt_afficherAllQuiz);
+		bt_afficherAllQuiz.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				filtre = 0;
+			}
+		});
 		add(bt_afficherAllQuiz);		
 		
 		bt_afficherQuizFacile = new Bouton("Facile");
 		bt_afficherQuizFacile.setSize(122, 36);
 		bt_afficherQuizFacile.setLocation(183, 282);
 		bt_afficherQuizFacile.addActionListener(bt_afficherQuizFacile);
+		bt_afficherQuizFacile.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				filtre = 1;
+			}
+		});
 		add(bt_afficherQuizFacile);
 		
 		bt_afficherQuizMoyen = new Bouton("Moyen");
 		bt_afficherQuizMoyen.setSize(122, 36);
 		bt_afficherQuizMoyen.setLocation(306, 282);
 		bt_afficherQuizMoyen.addActionListener(bt_afficherQuizMoyen);
+		bt_afficherQuizMoyen.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				filtre = 2;
+			}
+		});
 		add(bt_afficherQuizMoyen);
 		
 		bt_afficherQuizDifficile = new Bouton("Difficile");
 		bt_afficherQuizDifficile.setSize(122, 36);
 		bt_afficherQuizDifficile.setLocation(429, 282);
 		bt_afficherQuizDifficile.addActionListener(bt_afficherQuizDifficile);
+		bt_afficherQuizDifficile.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				filtre = 3;
+			}
+		});
 		add(bt_afficherQuizDifficile);
 		
 		JLabel info = new JLabel("Selectionnez un quiz parmis la liste ci-dessus pour jouer.");
@@ -148,7 +170,20 @@ public class Jouer extends JPanel implements MouseListener, MouseMotionListener,
 		bt_jouer.setBounds(850, 500, 122, 36);
 		bt_jouer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Jouer_partie jouer_Quiz = new Jouer_partie(fenetre, ListeQuiz[list_quizcree.getSelectedIndex()]);
+				if(filtre == 1){
+					jouer_Quiz = new Jouer_partie(fenetre, ListeQuiz_facile[list_quizcree.getSelectedIndex()]);
+				}
+				else if(filtre == 2){
+					jouer_Quiz = new Jouer_partie(fenetre, ListeQuiz_moyen[list_quizcree.getSelectedIndex()]);
+				} else if (filtre == 3){
+					jouer_Quiz = new Jouer_partie(fenetre, ListeQuiz_difficile[list_quizcree.getSelectedIndex()]);
+				}else {
+					jouer_Quiz = new Jouer_partie(fenetre, ListeQuiz[list_quizcree.getSelectedIndex()]);
+				}
+				
+				
+				
+				
 				fenetre.getContentPane().setVisible(false);
 				jouer_Quiz.addMouseListener(jouer_Quiz);
 				fenetre.setContentPane(jouer_Quiz);
