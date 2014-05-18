@@ -84,7 +84,7 @@ public class Jouer_partie extends JPanel implements MouseListener, MouseMotionLi
 						JOptionPane.INFORMATION_MESSAGE);
 				if (rep == 0) {												// si OK on redirige
 					if (isReponduPartout()) {
-						fenetre.goToCorrection(monQuiz, boutonQuestion, calculScore());
+						fenetre.goToCorrection(monQuiz, boutonQuestion, calculScore(), calculTemps());
 					} else {
 						timer.start();
 						chrono.startTimer();
@@ -213,7 +213,7 @@ public class Jouer_partie extends JPanel implements MouseListener, MouseMotionLi
         /*
          * Text qui s'affiche quand plus beaucoup de temps.
          */
-        TxtVite = new JLabel("<html>Pensez &agrave;<br/>valider !</html>");
+        TxtVite = new JLabel("<html>Pensez &agrave;<br/>finir !</html>");
         TxtVite.setHorizontalAlignment(SwingConstants.CENTER); 
         TxtVite.setFont(new Font("Arial", Font.PLAIN, 35));
         TxtVite.setForeground(Color.RED);
@@ -325,6 +325,16 @@ public class Jouer_partie extends JPanel implements MouseListener, MouseMotionLi
 		//		Dans tout les cas => JOUER.insertInto (login_usr, id_quiz, score, tempsh,min,sec);
 		
 		return score;
+	}
+	
+	/**
+	 * Renvoi le temps de duree de la partie (type long, en millisec).
+	 * Called au moment de la validation du quiz (soit fin de chrono soit bouton valider).
+	 * @return
+	 */
+	public long calculTemps() {
+		long temps = chrono.getChronoInital() - chrono.getChrono();
+		return temps;
 	}
 	
 	/**

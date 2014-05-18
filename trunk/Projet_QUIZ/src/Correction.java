@@ -29,14 +29,16 @@ public class Correction extends JPanel implements MouseListener{
 	private JLabel lb_numQuest;
 	public JPanel sousPanel;
 	private int monScore;
+	private long monTemps;		// contient le temps de jeu de la partie en milliseconde.
 	private Bouton_selection_question[] chbx_tabRep;	// CONTIENT les reponses jouee par le user (a comparer avec monQuiz).
 	
-	public Correction (Quiz quiz, Bouton_selection_question[] user_tabRep, int score, Fenetre fen) {
+	public Correction (Quiz quiz, Bouton_selection_question[] user_tabRep, int score, long temps, Fenetre fen) {
 		setLayout(null);
 		fenetre = fen;
 		monQuiz = quiz;					// le quiz
 		chbx_tabRep = user_tabRep;		// les reponses du user
 		monScore = score;
+		monTemps = temps;
 		
 		boutonQuestion = new Bouton_selection_question_correction[monQuiz.getNb_questions()];
 		menuQuetions();	// Creation des boutons de question en haut a droite
@@ -63,17 +65,23 @@ public class Correction extends JPanel implements MouseListener{
 		/*
 		 * Affichage du SCORE
 		 */
-		JLabel lb_score = new JLabel("<html>Votre score :</html>");	// Nom du quiz (sur 2 lignes max)
+		JLabel lb_score = new JLabel("<html>Votre score :</html>");
 		lb_score.setForeground(Images.couleurLabel);
 		lb_score.setFont(new Font("Arial", Font.PLAIN, 35));
-		lb_score.setBounds(780, 280, 400, 40);
+		lb_score.setBounds(760, 300, 400, 40);
 		add(lb_score);
-		JLabel lb_scorePartie = new JLabel("<html>"+monScore+" / 100</html>");
+		JLabel lb_scorePartie = new JLabel("<html>"+monScore+" / 100</html>");			// SCORE sur 100
 		lb_scorePartie.setForeground(Color.WHITE);
 		lb_scorePartie.setHorizontalAlignment(SwingConstants.CENTER);
 		lb_scorePartie.setFont(new Font("Arial", Font.BOLD, 40));
-		lb_scorePartie.setBounds(800, 330, 150, 150);
+		lb_scorePartie.setBounds(790, 350, 180, 60);
 		add(lb_scorePartie);
+		JLabel lb_tempsPartie = new JLabel("<html>"+parseTemps(monTemps)+"</html>");	// TEMPS (h min sec)
+		lb_tempsPartie.setForeground(Color.WHITE);
+		lb_tempsPartie.setHorizontalAlignment(SwingConstants.CENTER);
+		lb_tempsPartie.setFont(new Font("Arial", Font.BOLD, 24));
+		lb_tempsPartie.setBounds(775, 410, 240, 60);
+		add(lb_tempsPartie);
         
         /*
          * Bouton retour accueil (fin de correction).
@@ -84,7 +92,7 @@ public class Correction extends JPanel implements MouseListener{
 		terminer.setBackground(new Color(7, 92, 120));
 		terminer.setBorder(null);
 		
-		terminer.setBounds(850, 500, 122, 36);
+		terminer.setBounds(860, 550, 122, 36);
 		terminer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				fenetre.goToAccueil("texte");
@@ -203,6 +211,13 @@ public class Correction extends JPanel implements MouseListener{
 			sousPanel.add(chbx_tabRep[idQuest].getTabCheck(i));
 			sousPanel.add(boutonQuestion[idQuest].getTabLabel(i));
 		}
+	}
+	
+	public String parseTemps(long tempsGame) {
+		long sec = tempsGame%60;
+    	long min = (tempsGame/60)%60;
+    	long hrs = (tempsGame/3600)%60;
+    	return (hrs+" h "+min+" min "+sec+" sec");
 	}
 	
 	public void mouseClicked(MouseEvent arg0) {
