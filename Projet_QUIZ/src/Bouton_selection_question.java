@@ -1,5 +1,6 @@
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.Rectangle;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -41,23 +42,23 @@ public class Bouton_selection_question extends JButton implements MouseListener{
 	 */
 	public JCheckBox[] createTabRep(int i) {
 		JCheckBox[] TabCheckRep = new JCheckBox[quiz.getQuest(i).getNb_reponses()];
-		for (int v=0;v<TabCheckRep.length;v++) {
+		for (int v=0; v<TabCheckRep.length; v++) {
 			TabCheckRep[v] = new JCheckBox("<html>"+quiz.getQuest(i).getReponse(v).getTxtReponse()+"</html>");
+			TabCheckRep[v].setFont(new Font("Arial", Font.PLAIN, 18));
 			TabCheckRep[v].setBackground(new Color(54, 90, 118));
 			TabCheckRep[v].setForeground(Color.WHITE);
+			TabCheckRep[v].setBounds((v%2)*ma_partie.sousPanel.getWidth()/2, 70*(v/2), ma_partie.sousPanel.getWidth()/2, 75);
 		}
 		return TabCheckRep;
 	}
 	
 	/**
-	 * Affichage du tableau cree dans la methode "createTabRep".
+	 * Affichage du tableau cree ci-dessus dans la methode "createTabRep".
 	 * @param tabrep
 	 * @param num
 	 */
 	public void affCheckrep(JCheckBox[] tabrep, int num) {
 		for (int i=0;i<quiz.getQuest(num).getNb_reponses();i++) {
-			tabrep[i].setBounds((i%2)*ma_partie.sousPanel.getWidth()/2, 70*(i/2), ma_partie.sousPanel.getWidth()/2, 75);
-			tabrep[i].setFont(new Font("Arial", Font.PLAIN, 18));
 			tabrep[i].setOpaque(false);
 			ma_partie.sousPanel.add(tabrep[i]);
 		}
