@@ -51,6 +51,9 @@ public class Header_menu extends JPanel implements MouseListener, MouseMotionLis
 		inOpt = bool;
 	}
 	
+	public void setInGame(Boolean bool){
+		inGame = bool;
+	}
 
 	
 	public void mouseDragged(MouseEvent e) {}
@@ -102,8 +105,17 @@ public class Header_menu extends JPanel implements MouseListener, MouseMotionLis
 			}
 		}
 		if(e.getX() >= 526 && e.getX() <= 578 && e.getY() >= 1 && e.getY() <= 47){ // CO/DECO
-			selection1 = "decoreco";
-				fenetre.goToConnexionAlerte(selection1); // on appel la fonction qui va changer de panel
+			if (inGame){
+				JOptionPane.showMessageDialog(null,
+					    "<html>Impossible de vous déconnecter en cours de partie !<br/>Utilisez le bouton de retour puis déconnectez vous.</html>",
+					    "Erreur",
+					    JOptionPane.WARNING_MESSAGE);
+			}else{
+				selection1 = "decoreco";
+				inGame = false;
+				fenetre.goToConnexionAlerte(selection1); // on appel la fonction qui va changer de panel				
+			}
+
 		}
 		
 	}

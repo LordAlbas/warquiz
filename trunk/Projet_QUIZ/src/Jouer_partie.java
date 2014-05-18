@@ -67,7 +67,11 @@ public class Jouer_partie extends JPanel implements MouseListener, MouseMotionLi
 		 * Bouton VALIDER LA GAME
 		 */
 		JButton bt_valider_rep = new JButton("<html>Valider la partie</html>");
-        bt_valider_rep.setBounds(810, 490, 170, 40);
+        bt_valider_rep.setBounds(820, 490, 170, 40);
+        bt_valider_rep.setBackground(new Color(27, 113, 16));
+        bt_valider_rep.setBorder(null);
+        bt_valider_rep.setForeground(Color.WHITE);
+        bt_valider_rep.setFont(new Font("Arial", Font.PLAIN, 20));
         bt_valider_rep.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				timer.stop();												// PAUSE des chronos
@@ -75,9 +79,9 @@ public class Jouer_partie extends JPanel implements MouseListener, MouseMotionLi
 				int rep = JOptionPane.showConfirmDialog(null, 				// AFFICHE attention quitter
 						"<html><b>Fini ?</b><br/><br/>"
 						+ "Par&eacute;(e) &agrave; obtenir votre r&eacute;sultat ?<br/>"
-						+ "Cliquez OK et voyez la correction par vous-m&ecirc;me !</html>", 
+						+ "Cliquez OUI et voyez la correction par vous-m&ecirc;me !</html>", 
 						"Quitter partie", 
-						JOptionPane.OK_CANCEL_OPTION, 
+						JOptionPane.YES_NO_OPTION, 
 						JOptionPane.INFORMATION_MESSAGE);
 				if (rep == 0) {												// si OK on redirige
 					if (isReponduPartout()) {
@@ -99,6 +103,12 @@ public class Jouer_partie extends JPanel implements MouseListener, MouseMotionLi
 		 */
         JButton bt_leave_game = new JButton("<html>Quitter la partie</html>");
         bt_leave_game.setBounds(840, 570, 170, 40);
+        
+        bt_leave_game.setBackground(Color.RED);
+        bt_leave_game.setBorder(null);
+        bt_leave_game.setForeground(Color.WHITE);
+        bt_leave_game.setFont(new Font("Arial", Font.PLAIN, 20));
+        
         bt_leave_game.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				timer.stop();												// PAUSE des chronos
@@ -108,7 +118,7 @@ public class Jouer_partie extends JPanel implements MouseListener, MouseMotionLi
 						+ "Vous &ecirc;tes sur le point de quitter la partie en cours.<br/>"
 						+ "Souhaitez-vous quitter ?</html>", 
 						"Quitter partie", 
-						JOptionPane.OK_CANCEL_OPTION, 
+						JOptionPane.YES_NO_OPTION, 
 						JOptionPane.WARNING_MESSAGE);
 				if (rep == 0) {												// si OK on redirige
 					fenetre.goToJouer("mabite");
@@ -228,6 +238,7 @@ public class Jouer_partie extends JPanel implements MouseListener, MouseMotionLi
         this.add(header2); 
         //****************************************
         
+        header2.setInGame(true);
         boutonQuestion[0].switchQuest();		// Affiche la premiere question des le debut de la game.
 	}
 	
