@@ -7,8 +7,10 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
+
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
@@ -107,10 +109,15 @@ public class Inscription extends JPanel implements MouseListener, MouseMotionLis
 								repaint();
 					        	Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 					            Connection conn = DriverManager.getConnection("jdbc:sqlserver://193.252.48.189\\SQLEXPRESS:1433;" + "database=BDD_B3I_groupe_5;" + "user=b3i_groupe_5;" + "password=123Soleil");
-					            Statement stmt_ajout = (Statement) conn.createStatement();
 					            query_ajout = "INSERT INTO UTILISATEUR (LOGIN_USR,MDP_USR,ADR_MAIL_USR,NB_QUIZ_JOUE,NB_PARTIE_JOUE)"
-					            			+ "VALUES ('"+textField_pseudo.getText()+"','"+textField_mdp.getText()+"','"+textField_mail.getText()+"',0,0);";
-					            stmt_ajout.execute(query_ajout);
+					            			+ "VALUES (?,?,?,?,?);";
+					            PreparedStatement stmt_ajout = (PreparedStatement) conn.prepareStatement(query_ajout);
+					            stmt_ajout.setString(1, textField_pseudo.getText());
+					            stmt_ajout.setString(2, textField_mdp.getText());
+					            stmt_ajout.setString(3, textField_mail.getText());
+					            stmt_ajout.setInt(4, 0);
+					            stmt_ajout.setInt(5, 0);
+					            stmt_ajout.executeUpdate();
 					            stmt_ajout.close();
 					            fenetre.goToConnexion(selection);
 							}
@@ -191,10 +198,15 @@ public class Inscription extends JPanel implements MouseListener, MouseMotionLis
 								repaint();
 					        	Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 					            Connection conn = DriverManager.getConnection("jdbc:sqlserver://193.252.48.189\\SQLEXPRESS:1433;" + "database=BDD_B3I_groupe_5;" + "user=b3i_groupe_5;" + "password=123Soleil");
-					            Statement stmt_ajout = (Statement) conn.createStatement();
 					            query_ajout = "INSERT INTO UTILISATEUR (LOGIN_USR,MDP_USR,ADR_MAIL_USR,NB_QUIZ_JOUE,NB_PARTIE_JOUE)"
-					            			+ "VALUES ('"+textField_pseudo.getText()+"','"+textField_mdp.getText()+"','"+textField_mail.getText()+"',0,0);";
-					            stmt_ajout.execute(query_ajout);
+					            			+ "VALUES (?,?,?,?,?);";
+					            PreparedStatement stmt_ajout = (PreparedStatement) conn.prepareStatement(query_ajout);
+					            stmt_ajout.setString(1, textField_pseudo.getText());
+					            stmt_ajout.setString(2, textField_mdp.getText());
+					            stmt_ajout.setString(3, textField_mail.getText());
+					            stmt_ajout.setInt(4, 0);
+					            stmt_ajout.setInt(5, 0);
+					            stmt_ajout.executeUpdate();
 					            stmt_ajout.close();
 					            fenetre.goToConnexion(selection);
 							}
@@ -275,10 +287,15 @@ public class Inscription extends JPanel implements MouseListener, MouseMotionLis
 								repaint();
 					        	Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 					            Connection conn = DriverManager.getConnection("jdbc:sqlserver://193.252.48.189\\SQLEXPRESS:1433;" + "database=BDD_B3I_groupe_5;" + "user=b3i_groupe_5;" + "password=123Soleil");
-					            Statement stmt_ajout = (Statement) conn.createStatement();
+					            PreparedStatement stmt_ajout = (PreparedStatement) conn.prepareStatement(query_ajout);
 					            query_ajout = "INSERT INTO UTILISATEUR (LOGIN_USR,MDP_USR,ADR_MAIL_USR,NB_QUIZ_JOUE,NB_PARTIE_JOUE)"
-					            			+ "VALUES ('"+textField_pseudo.getText()+"','"+textField_mdp.getText()+"','"+textField_mail.getText()+"',0,0);";
-					            stmt_ajout.execute(query_ajout);
+					            			+ "VALUES (?,?,?,?,?);";
+					            stmt_ajout.setString(1, textField_pseudo.getText());
+					            stmt_ajout.setString(2, textField_mdp.getText());
+					            stmt_ajout.setString(3, textField_mail.getText());
+					            stmt_ajout.setInt(4, 0);
+					            stmt_ajout.setInt(5, 0);
+					            stmt_ajout.executeUpdate();
 					            stmt_ajout.close();
 					            fenetre.goToConnexion(selection);
 							}
@@ -359,10 +376,15 @@ public class Inscription extends JPanel implements MouseListener, MouseMotionLis
 								repaint();
 					        	Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 					            Connection conn = DriverManager.getConnection("jdbc:sqlserver://193.252.48.189\\SQLEXPRESS:1433;" + "database=BDD_B3I_groupe_5;" + "user=b3i_groupe_5;" + "password=123Soleil");
-					            Statement stmt_ajout = (Statement) conn.createStatement();
 					            query_ajout = "INSERT INTO UTILISATEUR (LOGIN_USR,MDP_USR,ADR_MAIL_USR,NB_QUIZ_JOUE,NB_PARTIE_JOUE)"
-					            			+ "VALUES ('"+textField_pseudo.getText()+"','"+textField_mdp.getText()+"','"+textField_mail.getText()+"',0,0);";
-					            stmt_ajout.execute(query_ajout);
+					            			+ "VALUES (?,?,?,?,?);";
+					            PreparedStatement stmt_ajout = (PreparedStatement) conn.prepareStatement(query_ajout);
+					            stmt_ajout.setString(1, textField_pseudo.getText());
+					            stmt_ajout.setString(2, textField_mdp.getText());
+					            stmt_ajout.setString(3, textField_mail.getText());
+					            stmt_ajout.setInt(4, 0);
+					            stmt_ajout.setInt(5, 0);
+					            stmt_ajout.executeUpdate();
 					            stmt_ajout.close();
 					            fenetre.goToConnexion(selection);
 							}
@@ -479,10 +501,15 @@ public class Inscription extends JPanel implements MouseListener, MouseMotionLis
 						repaint();
 			        	Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 			            Connection conn = DriverManager.getConnection("jdbc:sqlserver://193.252.48.189\\SQLEXPRESS:1433;" + "database=BDD_B3I_groupe_5;" + "user=b3i_groupe_5;" + "password=123Soleil");
-			            Statement stmt_ajout = (Statement) conn.createStatement();
 			            query_ajout = "INSERT INTO UTILISATEUR (LOGIN_USR,MDP_USR,ADR_MAIL_USR,NB_QUIZ_JOUE,NB_PARTIE_JOUE)"
-			            			+ "VALUES ('"+textField_pseudo.getText()+"','"+textField_mdp.getText()+"','"+textField_mail.getText()+"',0,0);";
-			            stmt_ajout.execute(query_ajout);
+			            			+ "VALUES (?,?,?,?,?);";
+			            PreparedStatement stmt_ajout = (PreparedStatement) conn.prepareStatement(query_ajout);
+			            stmt_ajout.setString(1, textField_pseudo.getText());
+			            stmt_ajout.setString(2, textField_mdp.getText());
+			            stmt_ajout.setString(3, textField_mail.getText());
+			            stmt_ajout.setInt(4, 0);
+			            stmt_ajout.setInt(5, 0);
+			            stmt_ajout.executeUpdate();
 			            stmt_ajout.close();
 			            fenetre.goToConnexion(selection);
 					}

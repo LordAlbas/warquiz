@@ -204,14 +204,14 @@ public class Statistiques extends JPanel implements MouseListener, MouseMotionLi
 	 * Récupère le numéro et le score de chaques quiz que le joueur à fait.
 	 * @throws SQLException
 	 */
-	public int Score(){
+	public int Score(int id_quiz){
 		int score_moyen_user = 0;
 		try{
 			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 	        Connection conn = DriverManager.getConnection("jdbc:sqlserver://193.252.48.189\\SQLEXPRESS:1433;" + "database=BDD_B3I_groupe_5;" + "user=b3i_groupe_5;" + "password=123Soleil");
 	        Statement stmt_score_user;
 	        stmt_score_user = (Statement) conn.createStatement();
-	        query_score_user = "SELECT AVG(SCORE_USR_QUIZ) AS score_moyen_user FROM JOUER WHERE ID_QUIZ = "+ ListeQuizStats_user[list_quiz_stats_user.getSelectedIndex()].getId() +" AND LOGIN_USR = '" +Connexion.login_general + "';";	       
+	        query_score_user = "SELECT AVG(SCORE_USR_QUIZ) AS score_moyen_user FROM JOUER WHERE ID_QUIZ = "+ id_quiz +" AND LOGIN_USR = '" +Connexion.login_general + "';";	       
 	        stmt_score_user.executeQuery(query_score_user);	
 	        ResultSet rs_score_user = stmt_score_user.getResultSet();
 	        while(rs_score_user.next()){
@@ -264,13 +264,13 @@ public class Statistiques extends JPanel implements MouseListener, MouseMotionLi
 	 * Calcule et affiche le score moyen du joueur
 	 * @throws SQLException 
 	 */
-	public int scoreMoyen(){
+	public int scoreMoyen(int id_quiz){
 		int score_moyen = 0;
 		try{
 			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 	        Connection conn = DriverManager.getConnection("jdbc:sqlserver://193.252.48.189\\SQLEXPRESS:1433;" + "database=BDD_B3I_groupe_5;" + "user=b3i_groupe_5;" + "password=123Soleil");
 	        Statement stmt_moyenne = (Statement) conn.createStatement();
-	        query_moyenne = "SELECT AVG(SCORE_USR_QUIZ) AS score_moyen FROM JOUER WHERE ID_QUIZ = "+ ListeQuizStats_user[list_quiz_stats_user.getSelectedIndex()].getId();      
+	        query_moyenne = "SELECT AVG(SCORE_USR_QUIZ) AS score_moyen FROM JOUER WHERE ID_QUIZ = "+ id_quiz;      
 	        stmt_moyenne.executeQuery(query_moyenne);	
 	        ResultSet rs_moyenne = stmt_moyenne.getResultSet();
 	        
@@ -547,40 +547,50 @@ public class Statistiques extends JPanel implements MouseListener, MouseMotionLi
 
 	@Override
 	public void itemStateChanged(ItemEvent arg0) {
-		if (list_quiz_stats_user.getItemCount() > 0 && list_quiz_stats_user.getSelectedItem() != null) {
-			int init = list_quiz_stats_user.getSelectedIndex();
+		if (list_quiz_stats_user.getItemCount() > 0 && list_quiz_stats_user.getSelectedItem() != null) {	
 			String item_nom = "";
 			int item_quest = 0;
 			int item_score = 0;
 			int item_score_user = 0;
 			String item_temps = "";
-			
-			
+	
 			if(diff == 1){
+				int init = list_quiz_stats_user.getSelectedIndex();
+				int id = ListeQuizStats_facile_user[init].getId();
 				item_quest = ListeQuizStats_facile_user[init].getNb_questions();
 				item_temps = ListeQuizStats_facile_user[init].getHeureQuiz() +"h "+  ListeQuizStats_facile_user[init].getMinuteQuiz()+"m "+ ListeQuizStats_facile_user[init].getSecondeQuiz() + "s";				
+				item_nom = list_quiz_stats_user.getSelectedItem();
+				item_score = scoreMoyen(id);
+				item_score_user = Score(id);
 			}
 			else if(diff == 2){
+				int init = list_quiz_stats_user.getSelectedIndex();
+				int id = ListeQuizStats_moyen_user[init].getId();
 				item_quest = ListeQuizStats_moyen_user[init].getNb_questions();
 				item_temps = ListeQuizStats_moyen_user[init].getHeureQuiz() +"h "+  ListeQuizStats_moyen_user[init].getMinuteQuiz()+"m "+ ListeQuizStats_moyen_user[init].getSecondeQuiz() + "s";				
+				item_nom = list_quiz_stats_user.getSelectedItem();
+				item_score = scoreMoyen(id);
+				item_score_user = Score(id);
 			}
 			else if(diff == 3){
+				int init = list_quiz_stats_user.getSelectedIndex();
+				int id = ListeQuizStats_difficile_user[init].getId();
 				item_quest = ListeQuizStats_difficile_user[init].getNb_questions();
 				item_temps = ListeQuizStats_difficile_user[init].getHeureQuiz() +"h "+  ListeQuizStats_difficile_user[init].getMinuteQuiz()+"m "+ ListeQuizStats_difficile_user[init].getSecondeQuiz() + "s";
+				item_nom = list_quiz_stats_user.getSelectedItem();
+				item_score = scoreMoyen(id);
+				item_score_user = Score(id);
 			}
 			else {
-			
-			item_quest = ListeQuizStats_user[init].getNb_questions();
-			item_temps = ListeQuizStats_user[init].getHeureQuiz() +"h "+  ListeQuizStats_user[init].getMinuteQuiz()+"m "+ ListeQuizStats_user[init].getSecondeQuiz() + "s";
+				int init = list_quiz_stats_user.getSelectedIndex();
+				int id = ListeQuizStats_user[init].getId();
+				item_quest = ListeQuizStats_user[init].getNb_questions();
+				item_temps = ListeQuizStats_user[init].getHeureQuiz() +"h "+  ListeQuizStats_user[init].getMinuteQuiz()+"m "+ ListeQuizStats_user[init].getSecondeQuiz() + "s";
+				item_nom = list_quiz_stats_user.getSelectedItem();
+				item_score = scoreMoyen(id);
+				item_score_user = Score(id);
 			}
-			
 
-			
-			item_nom = list_quiz_stats_user.getSelectedItem();
-			item_score = scoreMoyen();
-			item_score_user = Score();
-			
-			
 			lb_nom_quiz.setText("Nom du quiz : " + item_nom);
 			lb_nb_quest_quiz.setText("Nombre de questions du quiz : " + item_quest);
 			lb_score_quiz.setText("Score moyen du quiz : " + item_score);

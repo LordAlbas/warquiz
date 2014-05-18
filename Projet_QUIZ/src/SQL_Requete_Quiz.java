@@ -105,7 +105,7 @@ public class SQL_Requete_Quiz {
 			Statement stmt_quiz = (Statement) conn.createStatement();
 			// la requete doit retourner UNIQUEMENT les quiz de l'admin en cours
 			// l'id_admin doit etre disponible quelque part
-			query_quiz = "SELECT id_quiz, nom_quiz, nb_question FROM QUIZ WHERE DIFFICULTE_QUIZ = 1";
+			query_quiz = "SELECT id_quiz, nom_quiz, nb_question, minute_quiz, seconde_quiz, heure_quiz FROM QUIZ WHERE DIFFICULTE_QUIZ = 1";
 			stmt_quiz.executeQuery(query_quiz);
 	        
 	        ResultSet rs_quiz = stmt_quiz.getResultSet();
@@ -115,9 +115,15 @@ public class SQL_Requete_Quiz {
 	            	String Nom_quiz = rs_quiz.getString("nom_quiz");
 	            	int Id_quiz = rs_quiz.getInt("id_quiz");
 	            	int Nb_rep = rs_quiz.getInt("nb_question");
+	            	String Minute_quiz = rs_quiz.getString("minute_quiz");
+	            	String Seconde_quiz = rs_quiz.getString("seconde_quiz");
+	            	String Heure_quiz = rs_quiz.getString("heure_quiz");
 	            	mesQuiz[i] = new Quiz(Nom_quiz, fenetre);
 	            	mesQuiz[i].setId(Id_quiz);
 	            	mesQuiz[i].setNb_questions(Nb_rep);
+	            	mesQuiz[i].setMinuteQuiz(Minute_quiz);
+	            	mesQuiz[i].setSecondeQuiz(Seconde_quiz);
+	            	mesQuiz[i].setHeureQuiz(Heure_quiz);
 	            	i++;
 	            }
 	    } catch (SQLException eeee) {
@@ -139,7 +145,7 @@ public class SQL_Requete_Quiz {
 			Statement stmt_quiz = (Statement) conn.createStatement();
 			// la requete doit retourner UNIQUEMENT les quiz de l'admin en cours
 			// l'id_admin doit etre disponible quelque part
-			query_quiz = "SELECT id_quiz, nom_quiz, nb_question FROM QUIZ WHERE DIFFICULTE_QUIZ = 2";
+			query_quiz = "SELECT id_quiz, nom_quiz, nb_question, minute_quiz, seconde_quiz, heure_quiz FROM QUIZ WHERE DIFFICULTE_QUIZ = 2";
 			stmt_quiz.executeQuery(query_quiz);
 	        
 	        ResultSet rs_quiz = stmt_quiz.getResultSet();
@@ -149,9 +155,15 @@ public class SQL_Requete_Quiz {
 	            	String Nom_quiz = rs_quiz.getString("nom_quiz");
 	            	int Id_quiz = rs_quiz.getInt("id_quiz");
 	            	int Nb_rep = rs_quiz.getInt("nb_question");
+	            	String Minute_quiz = rs_quiz.getString("minute_quiz");
+	            	String Seconde_quiz = rs_quiz.getString("seconde_quiz");
+	            	String Heure_quiz = rs_quiz.getString("heure_quiz");
 	            	mesQuiz[i] = new Quiz(Nom_quiz, fenetre);
 	            	mesQuiz[i].setId(Id_quiz);
 	            	mesQuiz[i].setNb_questions(Nb_rep);
+	            	mesQuiz[i].setMinuteQuiz(Minute_quiz);
+	            	mesQuiz[i].setSecondeQuiz(Seconde_quiz);
+	            	mesQuiz[i].setHeureQuiz(Heure_quiz);
 	            	i++;
 	            }
 	    } catch (SQLException eeee) {
@@ -173,7 +185,7 @@ public class SQL_Requete_Quiz {
 			Statement stmt_quiz = (Statement) conn.createStatement();
 			// la requete doit retourner UNIQUEMENT les quiz de l'admin en cours
 			// l'id_admin doit etre disponible quelque part
-			query_quiz = "SELECT id_quiz, nom_quiz, nb_question FROM QUIZ WHERE DIFFICULTE_QUIZ = 3";
+			query_quiz = "SELECT id_quiz, nom_quiz, nb_question, minute_quiz, seconde_quiz, heure_quiz FROM QUIZ WHERE DIFFICULTE_QUIZ = 3";
 			stmt_quiz.executeQuery(query_quiz);
 	        
 	        ResultSet rs_quiz = stmt_quiz.getResultSet();
@@ -183,9 +195,15 @@ public class SQL_Requete_Quiz {
 	            	String Nom_quiz = rs_quiz.getString("nom_quiz");
 	            	int Id_quiz = rs_quiz.getInt("id_quiz");
 	            	int Nb_rep = rs_quiz.getInt("nb_question");
+	            	String Minute_quiz = rs_quiz.getString("minute_quiz");
+	            	String Seconde_quiz = rs_quiz.getString("seconde_quiz");
+	            	String Heure_quiz = rs_quiz.getString("heure_quiz");
 	            	mesQuiz[i] = new Quiz(Nom_quiz, fenetre);
 	            	mesQuiz[i].setId(Id_quiz);
 	            	mesQuiz[i].setNb_questions(Nb_rep);
+	            	mesQuiz[i].setMinuteQuiz(Minute_quiz);
+	            	mesQuiz[i].setSecondeQuiz(Seconde_quiz);
+	            	mesQuiz[i].setHeureQuiz(Heure_quiz);
 	            	i++;
 	            }
 	    } catch (SQLException eeee) {

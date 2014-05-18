@@ -489,7 +489,7 @@ public class Creation_quiz extends JPanel implements MouseListener, MouseMotionL
 		if (monQuiz.getNb_questions() <= 0)
 			msg = "- Le quiz ne contient aucune question pour le moment !\n";
 		if (cb_difficulte.getSelectedItem().toString() == "default")
-			msg += "- La difficult&eacute; du quiz n'a pas &eacute;t&eacute; définie !\n";
+			msg += "- La difficult&eacute; du quiz n'a pas &eacute;t&eacute; d&eacute;finie !\n";
 		for (byte i=0; i<monQuiz.getNb_questions(); i++) {
 			if (monQuiz.getQuest(i).getNbr_reponses_juste() <= 0)
 				nbRepJusteNull = true;

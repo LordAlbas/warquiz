@@ -23,14 +23,7 @@ import javax.swing.JTable;
 public class Bouton extends JButton implements MouseListener,ActionListener {
 
 	private int diff;
-	private String db_quiz_diff;
-	private String query_quiz_diff;
-	private String quiz_diff;
-	private String db_name_quiz_diff;
-	private String db_nbquestion_quiz_diff;
 	private String txt;
-	public static Tableau Tableau;
-	private Object[][] data;
 	public ArrayList<String>tableau_quiz;
 	private int k =0;
 	public static boolean ok =false;
@@ -124,7 +117,6 @@ public class Bouton extends JButton implements MouseListener,ActionListener {
 		System.out.println(diff);
 		if(diff == 0){
 			Jouer.list_quizcree.removeAll();
-			
 			for (short i=0; i<Jouer.ListeQuiz.length; i++) {
 				Jouer.list_quizcree.add(Jouer.ListeQuiz[i].getNom()+" - [ "+Jouer.ListeQuiz[i].getNb_questions()+" question(s) ] - Temps : " + Jouer.ListeQuiz[i].getHeureQuiz() + "h "+ Jouer.ListeQuiz[i].getMinuteQuiz() + "m " + Jouer.ListeQuiz[i].getSecondeQuiz() +"s ");
 			}
