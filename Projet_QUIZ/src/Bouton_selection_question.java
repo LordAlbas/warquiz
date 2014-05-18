@@ -12,8 +12,6 @@ public class Bouton_selection_question extends JButton implements MouseListener{
 	private Quiz quiz;
 	private int num_question;
 	private Jouer_partie ma_partie;
-	private String txt_question;
-	private Reponse[] reponse;
 	private JCheckBox[] TabCheck;
 	
 	public Bouton_selection_question(int _num_question, Quiz _quiz, Jouer_partie _partie){	
@@ -21,33 +19,17 @@ public class Bouton_selection_question extends JButton implements MouseListener{
 		num_question = _num_question;
 		ma_partie = _partie;
 		TabCheck = ma_partie.createTabRep(num_question);				// ICI ------
-		txt_question = quiz.getQuest(num_question).getQuestTxt();
-		reponse = new Reponse[quiz.getQuest(num_question).getNb_reponses()];
 		
 		setText(""+(num_question+1));
 		setBorder(null);
 		setBackground(Color.BLUE);
 		setForeground(Color.WHITE);
-		
-		for(int l=0; l<reponse.length; l++){
-			reponse[l] = quiz.getQuest(num_question).getReponse(l);
-		}	
 	}
-
-	public void AffQuestion() {
-		ma_partie.setQuestion(txt_question);
-		ma_partie.repaint();
-	}
-	
-	/*public void AffReponses(int i){
-		ma_partie.setReponse(quiz.getQuest(num_question).getNb_reponses(), reponse[i].getTxtReponse());
-		ma_partie.repaint();
-	}*/
 
 	public void mouseClicked(MouseEvent arg0) {
 		ma_partie.sousPanel.removeAll();
 		ma_partie.affCheckrep(TabCheck, num_question);					// ICI -------
-		AffQuestion();
+		ma_partie.setQuestion(quiz.getQuest(num_question).getQuestTxt());
 		setBackground(Color.GRAY);
 	}
 	

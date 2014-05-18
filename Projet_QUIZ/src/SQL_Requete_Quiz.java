@@ -554,25 +554,16 @@ public class SQL_Requete_Quiz {
 	 * 
 	 * @param currentQuiz
 	 */
-	public void setModifQuiz(Quiz currentQuiz) {
+	public boolean setModifQuiz(Quiz currentQuiz) {
+		boolean querySuccess = true;
 		int id = 0;
 		boolean exist = false;
-		System.out.println("Validation du quiz num -> "+currentQuiz.getId());
+		Connection conn = null;
 		
 		/*
-		 * /!\ un quiz qui vient d'etre creer n'as pas d'ID_QUIZ valide (id=0) /!\
-		 * Il faut faire la diff entre un quiz cree et un quiz modifie.
-		 * Je pense qu'il faut faire :
-		 * 		id_newQuiz = (select id le plus grand de la bdd) + 1
-		 * Il faut voir si l'incrementation du id_quiz en bdd ne fait pas de feinte..
-		 * 
-		 *  Les questions ont des ID_QUEST de 0 a 19
-		 *  et les reponses ont des ID_REP de 0 a 9.
-		 *  Il faut voir qu'en BDD ces id la ne soit pas les seule a etre PrimaryKey
-		 *  mais bien en complement du ID_QUIZ.
+		 * BLOC de SELECT ID_QUIZ
+		 * pour voir si c'est une MODIF ou une CREATION de quiz
 		 */
-		
-		Connection conn = null;
 		try {
 			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 			conn = DriverManager.getConnection("jdbc:sqlserver://193.252.48.189\\SQLEXPRESS:1433;" + "database=BDD_B3I_groupe_5;" + "user=b3i_groupe_5;" + "password=123Soleil");
@@ -591,8 +582,10 @@ public class SQL_Requete_Quiz {
 			// car Update quand aucun retour (modif la bdd)
 			// et Query quand un retour (aucune modif de la bdd)
 	    } catch (SQLException eeee) {
+	    	querySuccess = false;
 	    	eeee.printStackTrace();
 	    } catch (ClassNotFoundException eeee) {
+	    	querySuccess = false;
 			eeee.printStackTrace();
 		}
 		
@@ -636,6 +629,8 @@ public class SQL_Requete_Quiz {
 				ResultSet rs_getIdQuiz = prep_stmt_getIdQuiz.getResultSet();
 				if (rs_getIdQuiz.next()) {
 					newIdQuiz = rs_getIdQuiz.getInt("id_quiz");
+				} else {
+					querySuccess = false;
 				}
 				
 				for (byte i=0; i<currentQuiz.getNb_questions(); i++) {
@@ -659,6 +654,8 @@ public class SQL_Requete_Quiz {
 					ResultSet rs_getIdQuest = prep_stmt_getIdQuest.getResultSet();
 					if (rs_getIdQuest.next()) {
 						newIdQuest = rs_getIdQuest.getInt("ID_QUESTION");
+					} else {
+						querySuccess = false;
 					}
 					
 					for (byte j=0; j<currentQuiz.getQuest(i).getNb_reponses(); j++) {
@@ -672,14 +669,15 @@ public class SQL_Requete_Quiz {
 						prep_stmt_addRep.executeUpdate();
 					}
 				}
-				
 		    } catch (SQLException eeee) {
 		    	eeee.printStackTrace();
+		    	querySuccess = false;
 		    } catch (ClassNotFoundException eeee) {
 				eeee.printStackTrace();
+				querySuccess = false;
 			}
-			
 		}
+		return querySuccess;
 	}
 
 }

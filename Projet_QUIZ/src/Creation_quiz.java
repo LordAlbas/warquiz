@@ -434,7 +434,31 @@ public class Creation_quiz extends JPanel implements MouseListener, MouseMotionL
 					JOptionPane.ERROR_MESSAGE);
 		else {
 			SQL_Requete_Quiz reqQuiz = new SQL_Requete_Quiz(fenetre);
-			reqQuiz.setModifQuiz(monQuiz);		// Envoi le quiz en validation c'est a dire dans la BDD !
+			
+			if (reqQuiz.setModifQuiz(monQuiz)) {	// Envoi le quiz en validation c'est a dire dans la BDD !
+													// Si tout est OK, on affiche un pop-up et on revient a gestion_quiz.
+				JOptionPane.showMessageDialog(null, 
+						"<html>Votre quiz &agrave; bien &eacute;t&eacute; enregistr&eacute; !<br/>"
+						+ "Les utilisateurs peuvent maintenant y jouer.</html>", 
+						"Quiz Validé", 
+						JOptionPane.INFORMATION_MESSAGE);
+				Gestion_quiz goToGestion = new Gestion_quiz(fenetre);
+				fenetre.getContentPane().setVisible(false);
+				goToGestion.addMouseListener(goToGestion);
+				fenetre.setContentPane(goToGestion);
+				fenetre.getContentPane().setVisible(true);
+			} else {								// ...Sinon (la requete n'est pas passé) on affiche un message d'erreur et gfy.
+				JOptionPane.showMessageDialog(null, 
+						"<html><h1>Fail !</h1>"
+						+ "Une erreur est survenue au moment<br/>"
+						+ "de l'insertion en base de votre quiz !<br/>"
+						+ "La sauvegarde n'a pas eu lieu ... =(<br/><br/>"
+						+ "Contactez un developpeur et esp&eacute;rez<br/>"
+						+ "que vous n'avez pas mis le feu &agrave; nos<br/>"
+						+ "donn&eacute;es ..!</html>", 
+						"Erreur dans l'insertion du Quiz", 
+						JOptionPane.ERROR_MESSAGE);
+			}
 		}
 	}
 	
