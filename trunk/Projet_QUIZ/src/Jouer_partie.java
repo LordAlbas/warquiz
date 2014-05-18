@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+
 import javax.swing.*;
 
 public class Jouer_partie extends JPanel implements MouseListener, MouseMotionListener {
@@ -14,7 +15,6 @@ public class Jouer_partie extends JPanel implements MouseListener, MouseMotionLi
 	private Quiz monQuiz;
 	
 	// pour les hover sur les images boutons
-	private String selection;
 	private String bouton_deco ="rien";
 	private String bouton_retour ="rien";
 	private String image_select;
@@ -28,50 +28,154 @@ public class Jouer_partie extends JPanel implements MouseListener, MouseMotionLi
 	private int tempsRestant;
 	private SQL_Requete_Quiz sqlRQ;
 	Button boutonMenu;
+	private JButton bt_prevQuest;
+	private JButton bt_nextQuest;
+	private Bouton_selection_question boutonQuestion[];
+	private int id_numQuest;
 	private JLabel TxtVite;
-	private JLabel reponse;
+	private JLabel lb_numQuest;
 	private JLabel question;
 	public JPanel sousPanel;
-
 	
 	public Jouer_partie(Fenetre fen, Quiz quiz) {
 		setLayout(null);
-		
+		id_numQuest = 0;
 		fenetre = fen;
 		
 		sqlRQ = new SQL_Requete_Quiz(fen);
 		monQuiz = sqlRQ.getMyQuiz(quiz.getId());	// mon quiz
-		creer_menuQuetions(monQuiz.getNb_questions());
+		
+		boutonQuestion = new Bouton_selection_question[monQuiz.getNb_questions()];
+		creer_menuQuetions();
 		
 		/*
 		 * Nom du quiz
 		 */
-		lb_titrePartie = new JLabel(monQuiz.getNom());
+		JLabel lb_nomQuiz = new JLabel("Quiz ["+monQuiz.getDifficulteQuiz()+"]");
+		lb_nomQuiz.setFont(new Font("Arial", Font.PLAIN, 24));
+		lb_nomQuiz.setForeground(Images.couleurLabel);
+		lb_nomQuiz.setBounds(600, 100, 400, 50);
+        add(lb_nomQuiz);
+		lb_titrePartie = new JLabel("<html>"+monQuiz.getNom()+"</html>");
 		lb_titrePartie.setForeground(Color.WHITE);
 		lb_titrePartie.setFont(new Font("Arial", Font.PLAIN, 35));
-		lb_titrePartie.setBounds(575, 105, 400, 50);
+		lb_titrePartie.setBounds(630, 150, 400, 80);
 		add(lb_titrePartie);
-        
+		
 		/*
-		 * Bouton VALIDER question (affiche la question+1)
+		 * Bouton VALIDER LA GAME
 		 */
-        JButton bt_valider_rep = new JButton("<html>Valider la r&eacute;ponse</html>");
-        bt_valider_rep.setBounds(840, 570, 170, 40);
+		JButton bt_valider_rep = new JButton("<html>Valider la partie</html>");
+        bt_valider_rep.setBounds(810, 490, 170, 40);
         bt_valider_rep.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				String error_msg = "<html>Veuillez choisir une r&eacute;ponse !</html>";
-				if (error_msg != "")
-					JOptionPane.showMessageDialog(null, 
-							error_msg, 
-							"Pas de r&eacute;ponse", 
-							JOptionPane.ERROR_MESSAGE);
-				else
-					;// validereponse(); et mise dans le tableau de la reponse
+				timer.stop();												// PAUSE des chronos
+				chrono.stopTimer();
+				int rep = JOptionPane.showConfirmDialog(null, 				// AFFICHE attention quitter
+						"<html><b>Fini ?</b><br/><br/>"
+						+ "Par&eacute;(e) &agrave; obtenir votre r&eacute;sultat ?<br/>"
+						+ "Cliquez OK et voyez la correction par vous-m&ecirc;me !</html>", 
+						"Quitter partie", 
+						JOptionPane.OK_CANCEL_OPTION, 
+						JOptionPane.INFORMATION_MESSAGE);
+				if (rep == 0) {												// si OK on redirige
+					if (isReponduPartout())
+						fenetre.goToCorrection(monQuiz);
+				} else {													// si CANCEL on reprend les chronos
+					timer.start();
+					chrono.startTimer();
+				}
 			}
 		});
 		add(bt_valider_rep);
+		
+		/*
+		 * Bouton QUITTER PARTIE
+		 */
+        JButton bt_leave_game = new JButton("<html>Quitter la partie</html>");
+        bt_leave_game.setBounds(840, 570, 170, 40);
+        bt_leave_game.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				timer.stop();												// PAUSE des chronos
+				chrono.stopTimer();
+				int rep = JOptionPane.showConfirmDialog(null, 				// AFFICHE attention quitter
+						"<html><b>Attention :</b><br/>"
+						+ "Vous &ecirc;tes sur le point de quitter la partie en cours.<br/>"
+						+ "Souhaitez-vous quitter ?</html>", 
+						"Quitter partie", 
+						JOptionPane.OK_CANCEL_OPTION, 
+						JOptionPane.WARNING_MESSAGE);
+				if (rep == 0) {												// si OK on redirige
+					fenetre.goToJouer("mabite");
+				} else {													// si CANCEL on reprend les chronos
+					timer.start();
+					chrono.startTimer();
+				}
+			}
+		});
+		add(bt_leave_game);
+		
+        /*
+         * numero de la question
+         */
+        lb_numQuest = new JLabel("Q #rien du tout");
+        lb_numQuest.setFont(new Font("Arial", Font.ITALIC, 32));
+        lb_numQuest.setForeground(Images.couleurLabel);
+        lb_numQuest.setBounds(145, 184, 90, 40);
+        lb_numQuest.setHorizontalAlignment(SwingConstants.CENTER);
+        add(lb_numQuest);
         
         /*
+         * Bouton PREVIOUS et NEXT
+         */
+        bt_prevQuest = new JButton("<");
+        bt_prevQuest.setFont(new Font("Arial", Font.BOLD, 18));
+        bt_prevQuest.setForeground(Color.WHITE);
+        bt_prevQuest.setBorder(null);
+        //bt_prevQuest.setBackground(new Color(54, 90, 118));
+		bt_prevQuest.setBounds(110, 189, 20, 30);
+		bt_prevQuest.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (id_numQuest-1 >= 0 && id_numQuest < boutonQuestion.length)
+					boutonQuestion[id_numQuest-1].switchQuest();
+			}
+		});
+		add(bt_prevQuest);
+        bt_nextQuest = new JButton(">");
+        bt_nextQuest.setFont(new Font("Arial", Font.BOLD, 18));
+        bt_nextQuest.setForeground(Color.WHITE);
+        bt_nextQuest.setBorder(null);
+        //bt_nextQuest.setBackground(new Color(54, 90, 118));
+		bt_nextQuest.setBounds(250, 189, 20, 30);
+		bt_nextQuest.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (id_numQuest >= 0 && id_numQuest+1 < boutonQuestion.length)
+					boutonQuestion[id_numQuest+1].switchQuest();
+			}
+		});
+		add(bt_nextQuest);
+		
+        /*
+		 * JLabel qui contient le nom de la QUESTION (ou bien le message par defaut).
+		 */
+        question = new JLabel("<html>Selectionnez une question pour voir les r&eacute;ponses.</html>");
+        question.setBounds(60, 250, 510, 70);
+        question.setFont(new Font("Arial", Font.PLAIN, 20));
+        question.setForeground(Color.WHITE);
+        add(question);
+        
+        /*
+         * SousPanel contient les reponses de la question en cours.
+         * Plus simple pour changer de contenu dynamiquement (sousPanel.removeAll()).
+         */
+        sousPanel = new JPanel();
+		sousPanel.setBounds(40, 330, 620, 390);
+		sousPanel.setLayout(null);
+		sousPanel.setOpaque(false);
+		//sousPanel.setBorder(BorderFactory.createLineBorder(Color.red));		// bordure de test .. a commenter !
+		add(sousPanel);
+        
+		/*
          * Chronometre implementé dans la class Chronometre.java    
          */
         chrono = new Chronometre (fen, this, monQuiz, SQL_Requete_Quiz.getHeures(monQuiz.getId()), SQL_Requete_Quiz.getMin(monQuiz.getId()), SQL_Requete_Quiz.getSec(monQuiz.getId()));
@@ -91,30 +195,7 @@ public class Jouer_partie extends JPanel implements MouseListener, MouseMotionLi
         timer = createTimer();
         timer.start();
         
-        /*
-         * SousPanel contient les reponses de la question en cours.
-         * Plus simple pour changer de contenu dynamiquement (sousPanel.removeAll() je crois).
-         */
-        sousPanel = new JPanel();
-		sousPanel.setBounds(30, 300, 734, 390);
-		sousPanel.setLayout(null);
-		sousPanel.setOpaque(false);
-		add(sousPanel);
-        
-		/*
-		 * JLabel qui contient le nom de la QUESTION (ou bien le message par defaut).
-		 */
-        question = new JLabel("<html>Selectionnez une question pour voir les r&eacute;ponses.</html>");
-        question.setBounds(10, 250, 1000, 36);
-        question.setFont(new Font("Arial", Font.PLAIN, 20));
-        question.setForeground(Color.WHITE);
-        add(question);
-        
-        /*
-         * JLabel de reponse ... ??
-         */
-        reponse = new JLabel("");
-        
+		
         /*
          * Text qui s'affiche quand plus beaucoup de temps.
          */
@@ -141,41 +222,27 @@ public class Jouer_partie extends JPanel implements MouseListener, MouseMotionLi
         header2.addMouseMotionListener(header2);
         this.add(header2); 
         //****************************************
+        
+        boutonQuestion[0].switchQuest();		// Affiche la premiere question des le debut de la game.
 	}
 	
+	public void setNumQuest(int num) {
+		id_numQuest = num;
+		lb_numQuest.setText("Q #"+(num+1));
+		if (num-1 < 0) {
+			bt_prevQuest.setEnabled(false);
+		} else {
+			bt_prevQuest.setEnabled(true);
+		}
+		if (num+1 >= boutonQuestion.length) {
+			bt_nextQuest.setEnabled(false);
+		} else {
+			bt_nextQuest.setEnabled(true);
+		}
+	}
 	public void setQuestion(String txt) {
-		question.setText(txt);
-		repaint();
-	}
-	
-	/**
-	 * Creer et renvoi un tableau de checkbox[nb_reponses].
-	 * Appelé dans le constructeur de "Bouton_selection_question"
-	 * (qui sont d'ailleurs construis tous d'un coup (donc multiple appel ici en un coup)).
-	 * @param i
-	 * @return tableau de JCheckBox
-	 */
-	public JCheckBox[] createTabRep(int i) {
-		JCheckBox[] TabCheckRep = new JCheckBox[monQuiz.getQuest(i).getNb_reponses()];
-		for (int v=0;v<TabCheckRep.length;v++) {
-			TabCheckRep[v] = new JCheckBox(monQuiz.getQuest(i).getReponse(v).getTxtReponse());
-			TabCheckRep[v].setForeground(Color.WHITE);
-		}
-		return TabCheckRep;
-	}
-	
-	/**
-	 * Affichage du tableau cree dans la methode "createTabRep".
-	 * @param tabrep
-	 * @param num
-	 */
-	public void affCheckrep(JCheckBox[] tabrep, int num) {
-		for (int i=0;i<monQuiz.getQuest(num).getNb_reponses();i++) {
-			tabrep[i].setBounds(30, 40*i, 300, 30);
-			tabrep[i].setFont(new Font("Arial", Font.PLAIN, 20));
-			tabrep[i].setOpaque(false);
-			sousPanel.add(tabrep[i]);
-		}
+		question.setText("<html>"+txt+"</html>");
+		//repaint();
 	}
 	
 	/**
@@ -183,13 +250,32 @@ public class Jouer_partie extends JPanel implements MouseListener, MouseMotionLi
 	 * Called localement au debut du constructeur.
 	 * @param nb_quest
 	 */
-	public void creer_menuQuetions(int nb_quest) {
-		for (int i=0;i<nb_quest;i++) {
-			Bouton_selection_question boutonQuestion = new Bouton_selection_question(i, monQuiz, this);
-			boutonQuestion.addMouseListener(boutonQuestion);
-			boutonQuestion.setBounds(480+27*i, 60, 20, 20);
-			add(boutonQuestion);
+	public void creer_menuQuetions() {
+		for (int i=0; i<boutonQuestion.length; i++) {
+			boutonQuestion[i] = new Bouton_selection_question(i, monQuiz, this);
+			boutonQuestion[i].addMouseListener(boutonQuestion[i]);
+			boutonQuestion[i].setBounds(480+27*i, 60, 20, 20);
+			add(boutonQuestion[i]);
 		}
+	}
+	
+	public boolean isReponduPartout() {
+		boolean repondu = true;
+		String str_err = "<html>Quiz non recevable.<br/><br/>";
+		for (byte i=0; i<boutonQuestion.length; i++) {
+			if (!boutonQuestion[i].isRepondu()) {
+				repondu = false;
+				str_err += "La question n&deg;"+(i+1)+" n'a pas de r&eacute;ponse.<br/>";
+			}
+		}
+		str_err += "<br/>Si vous bloquez, cochez au hasard ! ;)</html>";
+		if (!repondu) {
+			JOptionPane.showMessageDialog(null, 
+					str_err, 
+					"Partie pas fini", 
+					JOptionPane.ERROR_MESSAGE);
+		}
+		return repondu;
 	}
 	
 	/**

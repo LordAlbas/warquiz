@@ -1,7 +1,9 @@
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
@@ -14,25 +16,82 @@ public class Bouton_selection_question extends JButton implements MouseListener{
 	private Jouer_partie ma_partie;
 	private JCheckBox[] TabCheck;
 	
+	/**
+	 * Constructeur
+	 * @param _num_question
+	 * @param _quiz
+	 * @param _partie
+	 */
 	public Bouton_selection_question(int _num_question, Quiz _quiz, Jouer_partie _partie){	
 		quiz = _quiz;
 		num_question = _num_question;
 		ma_partie = _partie;
-		TabCheck = ma_partie.createTabRep(num_question);				// ICI ------
+		TabCheck = createTabRep(num_question);
 		
 		setText(""+(num_question+1));
 		setBorder(null);
 		setBackground(Color.BLUE);
 		setForeground(Color.WHITE);
 	}
-
-	public void mouseClicked(MouseEvent arg0) {
-		ma_partie.sousPanel.removeAll();
-		ma_partie.affCheckrep(TabCheck, num_question);					// ICI -------
-		ma_partie.setQuestion(quiz.getQuest(num_question).getQuestTxt());
-		setBackground(Color.GRAY);
+	
+	/**
+	 * Creer et renvoi un tableau de checkbox[nb_reponses].
+	 * @param i
+	 * @return tableau de JCheckBox
+	 */
+	public JCheckBox[] createTabRep(int i) {
+		JCheckBox[] TabCheckRep = new JCheckBox[quiz.getQuest(i).getNb_reponses()];
+		for (int v=0;v<TabCheckRep.length;v++) {
+			TabCheckRep[v] = new JCheckBox("<html>"+quiz.getQuest(i).getReponse(v).getTxtReponse()+"</html>");
+			TabCheckRep[v].setBackground(new Color(54, 90, 118));
+			TabCheckRep[v].setForeground(Color.WHITE);
+		}
+		return TabCheckRep;
 	}
 	
+	/**
+	 * Affichage du tableau cree dans la methode "createTabRep".
+	 * @param tabrep
+	 * @param num
+	 */
+	public void affCheckrep(JCheckBox[] tabrep, int num) {
+		for (int i=0;i<quiz.getQuest(num).getNb_reponses();i++) {
+			tabrep[i].setBounds((i%2)*ma_partie.sousPanel.getWidth()/2, 70*(i/2), ma_partie.sousPanel.getWidth()/2, 75);
+			tabrep[i].setFont(new Font("Arial", Font.PLAIN, 18));
+			tabrep[i].setOpaque(false);
+			ma_partie.sousPanel.add(tabrep[i]);
+		}
+	}
+	
+	/**
+	 * Correspond a "mouseClicked()".
+	 * Affiche le tableau des reponses de la question clicked
+	 */
+	public void switchQuest() {
+		ma_partie.sousPanel.removeAll();
+		affCheckrep(TabCheck, num_question);
+		ma_partie.setQuestion(quiz.getQuest(num_question).getQuestTxt());
+		ma_partie.setNumQuest(num_question);
+		setBackground(Color.GRAY);
+		ma_partie.repaint();
+	}
+	
+	/**
+	 * Verifie si la question a ete repondu.
+	 * (s'arrete a la premiere reponse trouvee)
+	 * @return
+	 */
+	public boolean isRepondu() {
+		for (JCheckBox reponse : TabCheck) {
+			if (reponse.isSelected())
+				return true;
+		}
+		return false;
+	}
+	
+	public void mouseClicked(MouseEvent arg0) {
+		switchQuest();
+	}
 	
 	public void mouseEntered(MouseEvent arg0) {}
 	public void mouseExited(MouseEvent arg0) {}
