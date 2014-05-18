@@ -184,7 +184,7 @@ public class Gestion_quiz extends JPanel implements MouseListener, ItemListener 
 						
 						list_quizcree.remove(list_quizcree.getSelectedItem());
 					} else {
-						System.out.println("Erreur dans la suppression de quiz !");
+						//System.out.println("Erreur dans la suppression de quiz !");
 					}
 				}
 			}

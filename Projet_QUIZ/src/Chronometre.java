@@ -95,5 +95,8 @@ public class Chronometre {
 	public void stopTimer(){
 		timer.stop();
 	}
+	public void startTimer() {
+		timer.start();
+	}
 
 }

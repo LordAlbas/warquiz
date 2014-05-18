@@ -21,7 +21,7 @@ public class Header extends JPanel implements MouseListener, MouseMotionListener
 		setOpaque(false);
 		fenetre = fen;
 		setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		setToolTipText("Retour à l'accueil");
+		setToolTipText("<html>Retour &agrave; l'accueil</html>");
 		javax.swing.ToolTipManager.sharedInstance().setInitialDelay(1000);
 	}
 
@@ -33,7 +33,7 @@ public class Header extends JPanel implements MouseListener, MouseMotionListener
 			fenetre.goToAccueil(selection1);
 		} else {
 			JOptionPane.showMessageDialog(null,
-				    "Impossible de retourner à l'accueil en cours de partie !",
+				    "Impossible de retourner ï¿½ l'accueil en cours de partie !",
 				    "Erreur",
 				    JOptionPane.WARNING_MESSAGE);
 		}
