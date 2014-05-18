@@ -14,7 +14,7 @@ import javax.swing.ToolTipManager;
 
 
 public class Header_menu extends JPanel implements MouseListener, MouseMotionListener{
-	
+
 	String bouton_deco ="rien";				// defini l'image survol��� bouton deco
 	String bouton_option ="rien";
 	private Fenetre fenetre;
@@ -28,14 +28,18 @@ public class Header_menu extends JPanel implements MouseListener, MouseMotionLis
 	public Header_menu(Fenetre fen, JPanel jp){
 		setLayout(null);
 		setOpaque(false);
-		JLabel textMessage = new JLabel("Bienvenue" + " " );
+		JLabel textMessage = new JLabel("Bienvenue" + " " + Connexion.getLoginGeneral() +" ["+Connexion.getStatus()+"]");
 		panel = jp;
-
+		
+		if(!inOpt){
+			PrePanel = panel;
+		}
+		
 		textMessage.setForeground(Color.WHITE);
 		textMessage.setFont(new Font("Arial", Font.PLAIN, 18));
 		
 		
-		textMessage.setBounds(55, 15, 200, 18);
+		textMessage.setBounds(55, 15, 250, 18);
 		add(textMessage);
 		fenetre = fen;
 		repaint();
@@ -51,25 +55,43 @@ public class Header_menu extends JPanel implements MouseListener, MouseMotionLis
 			bouton_option = "OPTION_hover";	
 			if(inOpt){
 				setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
-			}else{setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));}
-		}else{
-			bouton_option = "rien";
+			}
+			else{
+				setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+			}
+		}
+		
+		
+		else if(e.getX() >= 515 && e.getX() <= 578 && e.getY() >= 1 && e.getY() <= 47){ // DECO
 			if(inOpt){
 				bouton_option = "OPTION_hover";
 			}
-		}		
-		
-		if(e.getX() >= 515 && e.getX() <= 578 && e.getY() >= 1 && e.getY() <= 47){ // DECO
 			bouton_deco = "DECO_hover";
 			setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-		}else{bouton_deco = "rien";}
+		}
+		
+		else{
+			
+			if(inOpt){
+				bouton_option = "OPTION_hover";
+				bouton_deco = "rien";
+				setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+			}
+			else{
+				bouton_option = "rien";
+				bouton_deco = "rien";
+				setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+			}
+			bouton_deco = "rien";
+			//setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
+		}
 		repaint();
 	}
 	
 	public void mouseClicked(MouseEvent e) {
 		if(e.getX() >= 450 && e.getX() <= 514 && e.getY() >= 1 && e.getY() <= 47){ // OPT
 			if(inOpt){
-				fenetre.goToBack(panel);
+				fenetre.goToBack(PrePanel);
 			}
 			else{
 				fenetre.goToOption(panel);
