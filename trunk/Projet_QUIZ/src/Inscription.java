@@ -119,6 +119,7 @@ public class Inscription extends JPanel implements MouseListener, MouseMotionLis
 					            	dbUsername_user = rs_user.getString("login_usr");
 					            	if (dbUsername_user.equals(textField_pseudo.getText())){
 					            		pseudo_existe = 1;
+					            		fenetre.goToInscription(selection);
 					            	}
 					            	else{
 					            		query_ajout = "INSERT INTO UTILISATEUR (LOGIN_USR,MDP_USR,ADR_MAIL_USR,NB_QUIZ_JOUE,NB_PARTIE_JOUE)"
@@ -221,6 +222,7 @@ public class Inscription extends JPanel implements MouseListener, MouseMotionLis
 					            	dbUsername_user = rs_user.getString("login_usr");
 					            	if (dbUsername_user.equals(textField_pseudo.getText())){
 					            		pseudo_existe = 1;
+					            		fenetre.goToInscription(selection);
 					            	}
 					            	else{
 					            		query_ajout = "INSERT INTO UTILISATEUR (LOGIN_USR,MDP_USR,ADR_MAIL_USR,NB_QUIZ_JOUE,NB_PARTIE_JOUE)"
@@ -323,6 +325,7 @@ public class Inscription extends JPanel implements MouseListener, MouseMotionLis
 					            	dbUsername_user = rs_user.getString("login_usr");
 					            	if (dbUsername_user.equals(textField_pseudo.getText())){
 					            		pseudo_existe = 1;
+					            		fenetre.goToInscription(selection);
 					            	}
 					            	else{
 					            		query_ajout = "INSERT INTO UTILISATEUR (LOGIN_USR,MDP_USR,ADR_MAIL_USR,NB_QUIZ_JOUE,NB_PARTIE_JOUE)"
@@ -425,6 +428,7 @@ public class Inscription extends JPanel implements MouseListener, MouseMotionLis
 					            	dbUsername_user = rs_user.getString("login_usr");
 					            	if (dbUsername_user.equals(textField_pseudo.getText())){
 					            		pseudo_existe = 1;
+					            		fenetre.goToInscription(selection);
 					            	}
 					            	else{
 					            		query_ajout = "INSERT INTO UTILISATEUR (LOGIN_USR,MDP_USR,ADR_MAIL_USR,NB_QUIZ_JOUE,NB_PARTIE_JOUE)"
@@ -563,6 +567,7 @@ public class Inscription extends JPanel implements MouseListener, MouseMotionLis
 			            	dbUsername_user = rs_user.getString("login_usr");
 			            	if (textField_pseudo.getText().equals(dbUsername_user)){
 			            		pseudo_existe = 1;
+			            		fenetre.goToInscription(selection);
 			            	}
 			            	else{
 			            		query_ajout = "INSERT INTO UTILISATEUR (LOGIN_USR,MDP_USR,ADR_MAIL_USR,NB_QUIZ_JOUE,NB_PARTIE_JOUE)"
@@ -668,8 +673,7 @@ public class Inscription extends JPanel implements MouseListener, MouseMotionLis
 			g.drawImage(Images.img_element[12], 140, 50, 800, 130, null);	
 		}
 		if(pseudo_existe == 1){
-			g.drawImage(Images.img_element[13], 140, 50, 800, 130, null);	
-			
+			g.drawImage(Images.img_element[13], 140, 50, 800, 130, null);
 		}
 		repaint();		
 	}
