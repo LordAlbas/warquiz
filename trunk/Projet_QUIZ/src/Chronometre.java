@@ -83,8 +83,7 @@ public class Chronometre {
 			int rep_deco = JOptionPane.showConfirmDialog(null, 
 					"<html>Le temps est &eacute;coul&eacute;, voulez vous voir <br/>la correction avant de quitter ?</html>", 
 					"Temps écoulé !", 
-					JOptionPane.OK_CANCEL_OPTION, 
-					JOptionPane.WARNING_MESSAGE);
+					JOptionPane.YES_NO_OPTION);
 			if(rep_deco == 0){
 				System.out.println("Redirige correction");
 				fenetre.goToCorrection(monQuiz, partie_en_cours.getBoutonQuestion());

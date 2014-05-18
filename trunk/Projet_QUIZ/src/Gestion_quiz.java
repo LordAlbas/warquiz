@@ -227,7 +227,7 @@ public class Gestion_quiz extends JPanel implements MouseListener, ItemListener 
 			bt_modifQuiz.setEnabled(true);
 			bt_modifQuiz.setBackground(Color.RED);
 			bt_supprQuiz.setEnabled(true);
-			bt_supprQuiz.setBackground(new Color(255,153,51));
+			bt_supprQuiz.setBackground(new Color(219,113,0));
 		} else {
 			bt_modifQuiz.setEnabled(false);
 			bt_supprQuiz.setEnabled(false);

@@ -242,7 +242,7 @@ public class Jouer_partie extends JPanel implements MouseListener, MouseMotionLi
 		// lieu arbitraire pour checker les reponses au fur et a mesure
 		for (Bouton_selection_question bsq : boutonQuestion) {
 			if (bsq.isRepondu())
-				bsq.setBackground(Color.GREEN);
+				bsq.setBackground(new Color(27, 113, 16));
 		}
 	}
 	public void setQuestion(String txt) {

@@ -77,6 +77,10 @@ public class Admin_ajout_reponses extends JPanel  implements MouseListener, Item
 		 */
 		JButton ajout_question = new JButton("<html>Ajouter une r&eacute;ponse</html>");
 		ajout_question.setBounds(795, 395, 200, 40);
+		ajout_question.setBackground(new Color(27, 113, 16));
+		ajout_question.setForeground(Color.WHITE);
+		ajout_question.setBorder(null);
+		ajout_question.setFont(new Font("Arial", Font.PLAIN, 20));
 		ajout_question.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// Ajoute une reponse au moment du click
@@ -126,7 +130,11 @@ public class Admin_ajout_reponses extends JPanel  implements MouseListener, Item
 		 * Bouton pour retourner a la page du Quiz
 		 */
 		bt_retour = new JButton("Retour au Quiz");
-		bt_retour.setBounds(855, 570, 130, 40);
+		bt_retour.setBounds(855, 570, 140, 40);
+		bt_retour.setBackground(new Color(7, 92, 158));
+		bt_retour.setForeground(Color.WHITE);
+		bt_retour.setBorder(null);
+		bt_retour.setFont(new Font("Arial", Font.PLAIN, 20));
 		bt_retour.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				boolean existAlready = false;
@@ -144,9 +152,17 @@ public class Admin_ajout_reponses extends JPanel  implements MouseListener, Item
 				if (existAlready || isEmpty) {
 					// TODO pop-up d'erreur "il y a des reponses en double (txtQuest = txtQuest)".
 					if (existAlready)
+						JOptionPane.showMessageDialog(null,
+							    "<html>Impossible de valider vos réponses !<br/>- Il semble qu'au moins 2 réponses soient identiques !</html>",
+							    "Erreur",
+							    JOptionPane.WARNING_MESSAGE);
 						System.out.println("Erreur -> Duplicata dans les reponses ! (doublon ou triplon ou quadruplon ou quintuplon ou niktameruplon..)");
 					// TODO pop-up d'erreur "il y a des reponses vide !".
 					if (isEmpty)
+						JOptionPane.showMessageDialog(null,
+							    "<html>Impossible de valider vos réponses !<br/>- Il semble qu'au moins 1 réponse soit vide !</html>",
+							    "Erreur",
+							    JOptionPane.WARNING_MESSAGE);
 						System.out.println("Erreur -> Des reponses sont carement vides !");
 				} else {
 					// On sauve l'etat actuel
@@ -194,7 +210,7 @@ public class Admin_ajout_reponses extends JPanel  implements MouseListener, Item
         header2.addMouseMotionListener(header2);
         this.add(header2); 
         //****************************************
-		
+		header1.setInCreateQuiz(true);
 	}
 	
 	public void addReponse() {
