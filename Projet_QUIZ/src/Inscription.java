@@ -111,18 +111,18 @@ public class Inscription extends JPanel implements MouseListener, MouseMotionLis
 								repaint();
 					        	Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 					            Connection conn = DriverManager.getConnection("jdbc:sqlserver://193.252.48.189\\SQLEXPRESS:1433;" + "database=BDD_B3I_groupe_5;" + "user=b3i_groupe_5;" + "password=123Soleil");
-					            query_user = "SELECT login_usr, mdp_usr FROM UTILISATEUR";
-					            query_ajout = "INSERT INTO UTILISATEUR (LOGIN_USR,MDP_USR,ADR_MAIL_USR,NB_QUIZ_JOUE,NB_PARTIE_JOUE)"
-				            			+ "VALUES (?,?,?,?,?);";
+					            query_user = "SELECT login_usr FROM UTILISATEUR";
 					            Statement stmt_user = (Statement) conn.createStatement();
 					            stmt_user.executeQuery(query_user);
 					            ResultSet rs_user = stmt_user.getResultSet();
 					            while(rs_user.next()){
 					            	dbUsername_user = rs_user.getString("login_usr");
-					            	if (textField_pseudo.getText().equals(dbUsername_user)){
+					            	if (dbUsername_user.equals(textField_pseudo.getText())){
 					            		pseudo_existe = 1;
 					            	}
 					            	else{
+					            		query_ajout = "INSERT INTO UTILISATEUR (LOGIN_USR,MDP_USR,ADR_MAIL_USR,NB_QUIZ_JOUE,NB_PARTIE_JOUE)"
+						            			+ "VALUES (?,?,?,?,?);";
 					            		PreparedStatement stmt_ajout = (PreparedStatement) conn.prepareStatement(query_ajout);
 					            		stmt_ajout.setString(1, textField_pseudo.getText());
 							            stmt_ajout.setString(2, textField_mdp.getText());
@@ -212,18 +212,18 @@ public class Inscription extends JPanel implements MouseListener, MouseMotionLis
 								repaint();
 					        	Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 					            Connection conn = DriverManager.getConnection("jdbc:sqlserver://193.252.48.189\\SQLEXPRESS:1433;" + "database=BDD_B3I_groupe_5;" + "user=b3i_groupe_5;" + "password=123Soleil");
-					            query_user = "SELECT login_usr, mdp_usr FROM UTILISATEUR";
-					            query_ajout = "INSERT INTO UTILISATEUR (LOGIN_USR,MDP_USR,ADR_MAIL_USR,NB_QUIZ_JOUE,NB_PARTIE_JOUE)"
-				            			+ "VALUES (?,?,?,?,?);";
+					            query_user = "SELECT login_usr FROM UTILISATEUR";
 					            Statement stmt_user = (Statement) conn.createStatement();
 					            stmt_user.executeQuery(query_user);
 					            ResultSet rs_user = stmt_user.getResultSet();
 					            while(rs_user.next()){
 					            	dbUsername_user = rs_user.getString("login_usr");
-					            	if (textField_pseudo.getText().equals(dbUsername_user)){
+					            	if (dbUsername_user.equals(textField_pseudo.getText())){
 					            		pseudo_existe = 1;
 					            	}
 					            	else{
+					            		query_ajout = "INSERT INTO UTILISATEUR (LOGIN_USR,MDP_USR,ADR_MAIL_USR,NB_QUIZ_JOUE,NB_PARTIE_JOUE)"
+						            			+ "VALUES (?,?,?,?,?);";
 					            		PreparedStatement stmt_ajout = (PreparedStatement) conn.prepareStatement(query_ajout);
 					            		stmt_ajout.setString(1, textField_pseudo.getText());
 							            stmt_ajout.setString(2, textField_mdp.getText());
@@ -313,18 +313,18 @@ public class Inscription extends JPanel implements MouseListener, MouseMotionLis
 								repaint();
 					        	Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 					            Connection conn = DriverManager.getConnection("jdbc:sqlserver://193.252.48.189\\SQLEXPRESS:1433;" + "database=BDD_B3I_groupe_5;" + "user=b3i_groupe_5;" + "password=123Soleil");
-					            query_user = "SELECT login_usr, mdp_usr FROM UTILISATEUR";
-					            query_ajout = "INSERT INTO UTILISATEUR (LOGIN_USR,MDP_USR,ADR_MAIL_USR,NB_QUIZ_JOUE,NB_PARTIE_JOUE)"
-				            			+ "VALUES (?,?,?,?,?);";
+					            query_user = "SELECT login_usr FROM UTILISATEUR";
 					            Statement stmt_user = (Statement) conn.createStatement();
 					            stmt_user.executeQuery(query_user);
 					            ResultSet rs_user = stmt_user.getResultSet();
 					            while(rs_user.next()){
 					            	dbUsername_user = rs_user.getString("login_usr");
-					            	if (textField_pseudo.getText().equals(dbUsername_user)){
+					            	if (dbUsername_user.equals(textField_pseudo.getText())){
 					            		pseudo_existe = 1;
 					            	}
 					            	else{
+					            		query_ajout = "INSERT INTO UTILISATEUR (LOGIN_USR,MDP_USR,ADR_MAIL_USR,NB_QUIZ_JOUE,NB_PARTIE_JOUE)"
+						            			+ "VALUES (?,?,?,?,?);";
 					            		PreparedStatement stmt_ajout = (PreparedStatement) conn.prepareStatement(query_ajout);
 					            		stmt_ajout.setString(1, textField_pseudo.getText());
 							            stmt_ajout.setString(2, textField_mdp.getText());
@@ -414,18 +414,18 @@ public class Inscription extends JPanel implements MouseListener, MouseMotionLis
 								repaint();
 					        	Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 					            Connection conn = DriverManager.getConnection("jdbc:sqlserver://193.252.48.189\\SQLEXPRESS:1433;" + "database=BDD_B3I_groupe_5;" + "user=b3i_groupe_5;" + "password=123Soleil");
-					            query_user = "SELECT login_usr, mdp_usr FROM UTILISATEUR";
-					            query_ajout = "INSERT INTO UTILISATEUR (LOGIN_USR,MDP_USR,ADR_MAIL_USR,NB_QUIZ_JOUE,NB_PARTIE_JOUE)"
-				            			+ "VALUES (?,?,?,?,?);";
+					            query_user = "SELECT login_usr FROM UTILISATEUR";
 					            Statement stmt_user = (Statement) conn.createStatement();
 					            stmt_user.executeQuery(query_user);
 					            ResultSet rs_user = stmt_user.getResultSet();
 					            while(rs_user.next()){
 					            	dbUsername_user = rs_user.getString("login_usr");
-					            	if (textField_pseudo.getText().equals(dbUsername_user)){
+					            	if (dbUsername_user.equals(textField_pseudo.getText())){
 					            		pseudo_existe = 1;
 					            	}
 					            	else{
+					            		query_ajout = "INSERT INTO UTILISATEUR (LOGIN_USR,MDP_USR,ADR_MAIL_USR,NB_QUIZ_JOUE,NB_PARTIE_JOUE)"
+						            			+ "VALUES (?,?,?,?,?);";
 					            		PreparedStatement stmt_ajout = (PreparedStatement) conn.prepareStatement(query_ajout);
 					            		stmt_ajout.setString(1, textField_pseudo.getText());
 							            stmt_ajout.setString(2, textField_mdp.getText());
@@ -551,9 +551,7 @@ public class Inscription extends JPanel implements MouseListener, MouseMotionLis
 						repaint();
 			        	Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 			            Connection conn = DriverManager.getConnection("jdbc:sqlserver://193.252.48.189\\SQLEXPRESS:1433;" + "database=BDD_B3I_groupe_5;" + "user=b3i_groupe_5;" + "password=123Soleil");
-			            query_user = "SELECT login_usr, mdp_usr FROM UTILISATEUR";
-			            query_ajout = "INSERT INTO UTILISATEUR (LOGIN_USR,MDP_USR,ADR_MAIL_USR,NB_QUIZ_JOUE,NB_PARTIE_JOUE)"
-		            			+ "VALUES (?,?,?,?,?);";
+			            query_user = "SELECT login_usr FROM UTILISATEUR";
 			            Statement stmt_user = (Statement) conn.createStatement();
 			            stmt_user.executeQuery(query_user);
 			            ResultSet rs_user = stmt_user.getResultSet();
@@ -563,6 +561,8 @@ public class Inscription extends JPanel implements MouseListener, MouseMotionLis
 			            		pseudo_existe = 1;
 			            	}
 			            	else{
+			            		query_ajout = "INSERT INTO UTILISATEUR (LOGIN_USR,MDP_USR,ADR_MAIL_USR,NB_QUIZ_JOUE,NB_PARTIE_JOUE)"
+				            			+ "VALUES (?,?,?,?,?);";
 			            		PreparedStatement stmt_ajout = (PreparedStatement) conn.prepareStatement(query_ajout);
 			            		stmt_ajout.setString(1, textField_pseudo.getText());
 					            stmt_ajout.setString(2, textField_mdp.getText());
@@ -661,6 +661,9 @@ public class Inscription extends JPanel implements MouseListener, MouseMotionLis
 		}
 		if(bad_mdp_mdpConf==1){
 			g.drawImage(Images.img_element[12], 140, 50, 800, 130, null);	
+		}
+		if(pseudo_existe == 1){
+			
 		}
 		repaint();		
 	}
