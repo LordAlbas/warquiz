@@ -87,7 +87,7 @@ public class Chronometre {
 					JOptionPane.WARNING_MESSAGE);
 			if(rep_deco == 0){
 				System.out.println("Redirige correction");
-				fenetre.goToCorrection(monQuiz);
+				fenetre.goToCorrection(monQuiz, partie_en_cours.getBoutonQuestion());
 			}else {fenetre.goToAccueil("");}
 		}
 	}

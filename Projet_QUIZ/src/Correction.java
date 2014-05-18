@@ -28,11 +28,13 @@ public class Correction extends JPanel implements MouseListener{
 	private JLabel mauvais;
 	private JLabel[] affTabLabel;
 	public JPanel sousPanel;
-
+	private Bouton_selection_question[] chbx_tabRep;	// CONTIENT les reponses jouee par le user (a comparer avec monQuiz).
 	
-	public Correction (Quiz quiz, Fenetre fen){
+	public Correction (Quiz quiz, Bouton_selection_question[] user_tabRep, Fenetre fen){
 		setLayout(null);
 		monQuiz = quiz;
+		chbx_tabRep = user_tabRep;
+		
 		menuQuetions(monQuiz.getNb_questions());
 		fenetre = fen;
 		

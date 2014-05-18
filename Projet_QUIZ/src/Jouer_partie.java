@@ -79,8 +79,12 @@ public class Jouer_partie extends JPanel implements MouseListener, MouseMotionLi
 						JOptionPane.OK_CANCEL_OPTION, 
 						JOptionPane.INFORMATION_MESSAGE);
 				if (rep == 0) {												// si OK on redirige
-					if (isReponduPartout())
-						fenetre.goToCorrection(monQuiz);
+					if (isReponduPartout()) {
+						fenetre.goToCorrection(monQuiz, boutonQuestion);
+					} else {
+						timer.start();
+						chrono.startTimer();
+					}
 				} else {													// si CANCEL on reprend les chronos
 					timer.start();
 					chrono.startTimer();
@@ -132,7 +136,7 @@ public class Jouer_partie extends JPanel implements MouseListener, MouseMotionLi
         bt_prevQuest.setFont(new Font("Arial", Font.BOLD, 18));
         bt_prevQuest.setForeground(Color.WHITE);
         bt_prevQuest.setBorder(null);
-        //bt_prevQuest.setBackground(new Color(54, 90, 118));
+        bt_prevQuest.setBackground(new Color(54, 90, 118));
 		bt_prevQuest.setBounds(110, 189, 20, 30);
 		bt_prevQuest.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -145,7 +149,7 @@ public class Jouer_partie extends JPanel implements MouseListener, MouseMotionLi
         bt_nextQuest.setFont(new Font("Arial", Font.BOLD, 18));
         bt_nextQuest.setForeground(Color.WHITE);
         bt_nextQuest.setBorder(null);
-        //bt_nextQuest.setBackground(new Color(54, 90, 118));
+        bt_nextQuest.setBackground(new Color(54, 90, 118));
 		bt_nextQuest.setBounds(250, 189, 20, 30);
 		bt_nextQuest.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -226,18 +230,19 @@ public class Jouer_partie extends JPanel implements MouseListener, MouseMotionLi
         boutonQuestion[0].switchQuest();		// Affiche la premiere question des le debut de la game.
 	}
 	
+	public Bouton_selection_question[] getBoutonQuestion() {
+		return boutonQuestion;
+	}
 	public void setNumQuest(int num) {
 		id_numQuest = num;
 		lb_numQuest.setText("Q #"+(num+1));
-		if (num-1 < 0) {
-			bt_prevQuest.setEnabled(false);
-		} else {
-			bt_prevQuest.setEnabled(true);
-		}
-		if (num+1 >= boutonQuestion.length) {
-			bt_nextQuest.setEnabled(false);
-		} else {
-			bt_nextQuest.setEnabled(true);
+		bt_prevQuest.setEnabled(num-1 >= 0);
+		bt_nextQuest.setEnabled(num+1 < boutonQuestion.length);
+		
+		// lieu arbitraire pour checker les reponses au fur et a mesure
+		for (Bouton_selection_question bsq : boutonQuestion) {
+			if (bsq.isRepondu())
+				bsq.setBackground(Color.GREEN);
 		}
 	}
 	public void setQuestion(String txt) {
