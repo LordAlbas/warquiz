@@ -350,7 +350,7 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 		}
 		if(e.getX() >= 400 && e.getX() <= 585 && e.getY() >= 462 && e.getY() <= 510){ // Bouton d'inscription
 			tentative = 0;
-			fenetre.goToInscription(selection); // on appel la fonction qui va changer de panel
+			fenetre.goToInscription(0); // on appel la fonction qui va changer de panel
 		}
 		if(e.getX() >= 605 && e.getX() <= 790 && e.getY() >= 465 && e.getY() <= 513){ // Bouton de validation
 			if(textField_mdp.getPassword().length != 0){
