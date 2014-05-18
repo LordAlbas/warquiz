@@ -30,7 +30,7 @@ public class Bouton_selection_question extends JButton implements MouseListener{
 		
 		setText(""+(num_question+1));
 		setBorder(null);
-		setBackground(Color.BLUE);
+		setBackground(new Color(23, 78, 116));
 		setForeground(Color.WHITE);
 	}
 	

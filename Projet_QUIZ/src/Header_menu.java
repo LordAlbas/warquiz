@@ -23,6 +23,7 @@ public class Header_menu extends JPanel implements MouseListener, MouseMotionLis
 	private Connexion conn;
 	private JPanel panel;
 	private Boolean inOpt = false;
+	private Boolean inGame = false;
 	private JPanel PrePanel;
 	
 	public Header_menu(Fenetre fen, JPanel jp){
@@ -34,6 +35,7 @@ public class Header_menu extends JPanel implements MouseListener, MouseMotionLis
 		if(!inOpt){
 			PrePanel = panel;
 		}
+
 		
 		textMessage.setForeground(Color.WHITE);
 		textMessage.setFont(new Font("Arial", Font.PLAIN, 18));
@@ -48,6 +50,8 @@ public class Header_menu extends JPanel implements MouseListener, MouseMotionLis
 	public void setInOption(Boolean bool){
 		inOpt = bool;
 	}
+	
+
 	
 	public void mouseDragged(MouseEvent e) {}
 	public void mouseMoved(MouseEvent e) {

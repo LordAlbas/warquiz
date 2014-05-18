@@ -15,7 +15,7 @@ public class Header extends JPanel implements MouseListener, MouseMotionListener
 	private Fenetre fenetre;
 	static String selection1;
 	private Boolean warning = true;
-	
+	private Boolean InCreateQuiz = false;
 	public Header(Fenetre fen){
 		setLayout(null);
 		setOpaque(false);
@@ -30,7 +30,19 @@ public class Header extends JPanel implements MouseListener, MouseMotionListener
 		
 		
 		if (warning){
-			fenetre.goToAccueil(selection1);
+			if(InCreateQuiz){
+				int choix = JOptionPane.showConfirmDialog(
+					    null,
+					    "<html>Si vous revenez à l'acceuil sans avoir validé le quiz,<br/> il sera définitivement perdu !<br/>Continuer ?</html>",
+					    "Attention !",
+					    JOptionPane.YES_NO_OPTION,
+					    JOptionPane.WARNING_MESSAGE);
+				if(choix ==0){
+					fenetre.goToAccueil(selection1);
+					InCreateQuiz = false;
+				}else{}
+			}
+			
 		} else {
 			JOptionPane.showMessageDialog(null,
 				    "Impossible de retourner ï¿½ l'accueil en cours de partie !",
@@ -45,6 +57,11 @@ public class Header extends JPanel implements MouseListener, MouseMotionListener
 			fenetre.goToConnexionAlerte(selection1); // on appel la fonction qui va changer de panel
 
 		}	*/
+	}
+	
+	
+	public void setInCreateQuiz(Boolean bool){
+		InCreateQuiz = bool;
 	}
 	
 	public void mouseEntered(MouseEvent arg0) {}

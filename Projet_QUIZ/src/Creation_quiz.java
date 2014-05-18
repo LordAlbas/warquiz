@@ -113,7 +113,7 @@ public class Creation_quiz extends JPanel implements MouseListener, MouseMotionL
 		JButton ajout_question = new JButton("Ajouter une question");
 		ajout_question.setBounds(795, 440, 200, 40);
 		ajout_question.setFont(new Font("Arial", Font.PLAIN, 20));
-		ajout_question.setBackground(new Color(255,153,51));
+		ajout_question.setBackground(new Color(219,113,0));
 		ajout_question.setBorder(null);
 		ajout_question.setForeground(Color.WHITE);
 		ajout_question.addActionListener(new ActionListener() {
@@ -254,7 +254,7 @@ public class Creation_quiz extends JPanel implements MouseListener, MouseMotionL
 		JButton bt_valider = new JButton("Valider le Quiz");
 		bt_valider.setBounds(860, 570, 136, 40);
 		bt_valider.setFont(new Font("Arial", Font.PLAIN, 20));
-		bt_valider.setBackground(new Color(102,204,0));
+		bt_valider.setBackground(new Color(27, 113, 16));
 		bt_valider.setBorder(null);
 		bt_valider.setForeground(Color.WHITE);
 		
@@ -282,6 +282,8 @@ public class Creation_quiz extends JPanel implements MouseListener, MouseMotionL
         header2.addMouseMotionListener(header2);
         this.add(header2); 
         //****************************************
+        
+        header1.setInCreateQuiz(true);
 	}
 	
 	public void setHintMsg() {

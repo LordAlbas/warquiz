@@ -85,8 +85,7 @@ public class Fenetre extends JFrame {
 		int rep_deco = JOptionPane.showConfirmDialog(null, 
 				"<html>Voulez-vous vraiment vous d&eacute;connecter ?</html>", 
 				"Deconnexion", 
-				JOptionPane.OK_CANCEL_OPTION, 
-				JOptionPane.WARNING_MESSAGE);
+				JOptionPane.YES_NO_OPTION);
 		if(rep_deco == 0){
 			this.getContentPane().setVisible(false);	
 			this.setContentPane(connexion);

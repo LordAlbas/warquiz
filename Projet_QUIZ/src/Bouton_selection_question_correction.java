@@ -23,7 +23,7 @@ public class Bouton_selection_question_correction extends JButton implements Mou
 		
 		setText(""+aff_num_question);
 		setBorder(null);
-		setBackground(Color.BLUE);
+		setBackground(new Color(54, 90, 118));
 		setForeground(Color.WHITE);
 
 		TabLabel = maCorr.createTab(num_question);
