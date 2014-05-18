@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
@@ -10,54 +11,61 @@ public class Bouton_selection_question_correction extends JButton implements Mou
 	private Quiz monQuiz;
 	private int num_question;
 	private Correction maCorr;
-	private int aff_num_question;
-	private Reponse[]reponse;
-	private String questionTxt;
-	private JLabel[]TabLabel;
+	private JLabel[] TabLabel;
 	
-	public Bouton_selection_question_correction(int _num_question,Quiz _quiz, Correction corr){
+	public Bouton_selection_question_correction(int _num_question, Quiz _quiz, Correction _corr){
 		monQuiz = _quiz;
 		num_question = _num_question;
-		maCorr= corr;
-		aff_num_question = num_question+1;
+		maCorr = _corr;
 		
-		setText(""+aff_num_question);
+		setText(""+(num_question+1));
 		setBorder(null);
 		setBackground(new Color(54, 90, 118));
 		setForeground(Color.WHITE);
-
-		TabLabel = maCorr.createTab(num_question);
-			
-		questionTxt = monQuiz.getQuest(num_question).getQuestTxt();
-		reponse = new Reponse[monQuiz.getQuest(num_question).getNb_reponses()];
-		for(int i=0;i<monQuiz.getQuest(num_question).getNb_reponses();i++){
-			reponse[i] = monQuiz.getQuest(num_question).getReponse(i);
-		}
 		
-
-		
-		
+		createTab(num_question);
 	}
 	
-	public void AffQuestion(){
-		maCorr.setQuestion(questionTxt);
-		maCorr.repaint();
+	/**
+	 * Creation du tableau de JLabel reponse CORRECTION
+	 * @param i
+	 * @return
+	 */
+	public void createTab(int i) {
+		TabLabel = new JLabel[monQuiz.getQuest(i).getNb_reponses()];
+		
+		for (int v=0; v<TabLabel.length; v++) {
+			TabLabel[v] = new JLabel(monQuiz.getQuest(i).getReponse(v).getTxtReponse());
+			/*
+			TabLabel[v].setForeground(Color.RED);
+			if (monQuiz.getQuest(i).getReponse(v).getStatutRep())
+				TabLabel[v].setForeground(Color.GREEN);
+			*/
+		}
 	}
-
-
+	
+	/**
+	 * affiche le tableau de JLabel reponse CORRECTION
+	 */
+	// je m'en sert pas de cette methode, je la laisse pour si jamais on change de facon d'afficher.
+	public void affLabel() {
+		for (int i=0;i<TabLabel.length;i++) {
+			TabLabel[i].setBounds(30, 30*i, 450, 50);
+			TabLabel[i].setFont(new Font("Arial", Font.PLAIN, 20));
+			maCorr.sousPanel.add(TabLabel[i]);
+		}
+	}
+	
+	public JLabel getTabLabel(int id) {
+		return TabLabel[id];
+	}
 	
 	public void mouseClicked(MouseEvent e) {
-		maCorr.sousPanel.removeAll();
-		maCorr.affLabel(TabLabel, num_question);
-		
-		
-		AffQuestion();
-		/*
-		for (int k=0;k<monQuiz.getQuest(num_question).getNb_reponses();k++){
-			AffReponses(k);
-		}
-		*/
-		setBackground(Color.GRAY);
+		maCorr.sousPanel.removeAll();											// vire tout
+		maCorr.setQuestion(monQuiz.getQuest(num_question).getQuestTxt());		// affiche la question
+		//affLabel();	// affiche les reponses correction (NO NEED)
+		maCorr.affchckPlayed(num_question);										// affiche les reponses jouees
+		setBackground(Color.GRAY);												// passe le bouton en gris
 	}
 	public void mouseEntered(MouseEvent e) {}
 	public void mouseExited(MouseEvent e) {}
