@@ -144,7 +144,7 @@ public class Jouer extends JPanel implements MouseListener, MouseMotionListener,
 		bt_jouer.setFont(new Font("Arial", Font.PLAIN, 20));
 		bt_jouer.setBackground(new Color(7, 92, 120));
 		bt_jouer.setBorder(null);
-		
+
 		bt_jouer.setBounds(850, 500, 122, 36);
 		bt_jouer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -202,6 +202,8 @@ public class Jouer extends JPanel implements MouseListener, MouseMotionListener,
 		if (list_quizcree.getItemCount() > 0 && list_quizcree.getSelectedItem() != null) {
 			bt_jouer.setEnabled(true);
 			bt_jouer.setBackground(new Color(27, 113, 16));
-		}else{bt_jouer.setEnabled(false);}
+		}else{
+			bt_jouer.setEnabled(false);
+		}
 	}
 }

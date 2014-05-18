@@ -1,5 +1,7 @@
 import java.awt.*;
 import java.awt.event.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
@@ -8,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 
 /**
@@ -21,6 +24,7 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 	public static Fenetre fenetre;
     public JLayeredPane layeredPane;
     public Gif_anime panel;
+    public ImageIcon ii;
 	
 	public static JTextField textField_pseudo;	// création du champ pseudo
 	public static JPasswordField textField_mdp;	// création du cham mdp cypté
@@ -39,7 +43,7 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
     public static boolean recherche_bdd = false;
     public static boolean erreur_bdd = false;
     public static boolean connexion_admin = false; 
-    
+    BufferedImage img;
     
     
     
@@ -84,10 +88,15 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 		/**
 		 * Ajout de l'image de chargement du loading
 		 */
+		//file:///C:/Users/Sinardet/Documents/ProjetOracle/warquiz/Projet_QUIZ/images/chargement_anime.gif
 		//file:///C:/Users/Sinardet/Documents/ProjetOracle/warquiz/Projet_QUIZ/images/loading.gif
 		//URL url = new URL("images/loading.gif");
+		//url.getFile().get
+		//String path = url.getAbsolutePath();
+
+		File file = new File ("images/chargement_anime.gif");
 		
-        panel = new Gif_anime(load("file:///C:/Users/Sinardet/Documents/ProjetOracle/warquiz/Projet_QUIZ/images/chargement_anime.gif"));
+        panel = new Gif_anime(load("file:///"+file.getAbsolutePath()));
         panel.setBounds(646, 632, 95, 90);
         add(panel);  	
 	}
