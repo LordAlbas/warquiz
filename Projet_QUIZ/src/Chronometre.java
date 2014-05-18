@@ -86,7 +86,7 @@ public class Chronometre {
 					JOptionPane.WARNING_MESSAGE);
 			
 				System.out.println("Redirige correction");
-				fenetre.goToCorrection(monQuiz, partie_en_cours.getBoutonQuestion(), partie_en_cours.calculScore());
+				fenetre.goToCorrection(monQuiz, partie_en_cours.getBoutonQuestion(), partie_en_cours.calculScore(), partie_en_cours.calculTemps());
 			
 		}
 	}

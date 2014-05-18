@@ -217,9 +217,9 @@ public class Fenetre extends JFrame {
 		}
 	}
 	
-	public void goToCorrection(Quiz partie, Bouton_selection_question[] tabRep, int score){
+	public void goToCorrection(Quiz partie, Bouton_selection_question[] tabRep, int score, long temps){
 		// TODO Auto-generated method stub
-		correction = new Correction(partie, tabRep, score, this);
+		correction = new Correction(partie, tabRep, score, temps, this);
 		correction.addMouseListener(correction);
 		this.getContentPane().setVisible(false);
 		correction.addMouseListener(correction);
