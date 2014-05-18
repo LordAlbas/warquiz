@@ -97,6 +97,11 @@ public class Creation_quiz extends JPanel implements MouseListener, MouseMotionL
 		add(lb_diff);
 		// UTILISATION D'UNE COMBOBOX
 		cb_difficulte = new JComboBox<String>(diff);
+		cb_difficulte.setBackground(new Color(54, 90, 118));
+		cb_difficulte.setForeground(Color.WHITE);
+		cb_difficulte.setFont(new Font("Arial", Font.PLAIN, 22));
+		((JLabel)cb_difficulte.getRenderer()).setHorizontalAlignment(SwingConstants.CENTER);
+		cb_difficulte.setBorder(null);
 		cb_difficulte.setSelectedItem(monQuiz.getDifficulteQuiz());
 		cb_difficulte.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -104,7 +109,7 @@ public class Creation_quiz extends JPanel implements MouseListener, MouseMotionL
 				monQuiz.setDifficulteQuiz(cb_difficulte.getSelectedItem().toString());
 			}
 		});
-		cb_difficulte.setBounds(720, 235, 100, 40);
+		cb_difficulte.setBounds(720, 235, 200, 40);
 		add(cb_difficulte);
 
 		/*
@@ -173,55 +178,67 @@ public class Creation_quiz extends JPanel implements MouseListener, MouseMotionL
 		JLabel lb_heure = new JLabel("<html>h</html>");
 		lb_heure.setForeground(Color.WHITE);
 		lb_heure.setFont(new Font("Arial", Font.PLAIN, 22)); 
-		lb_heure.setBounds(815, 370, 20, 30);
+		lb_heure.setBounds(815, 370, 25, 30);
 		add(lb_heure);
 		cb_heure = new JComboBox();
-		for (short i=0 ; i<60; i++){
+		for (short i=0 ; i<10; i++){
 			cb_heure.addItem(""+i);
 		}
 		cb_heure.setSelectedItem(monQuiz.getHeureQuiz());
+		cb_heure.setBackground(new Color(54, 90, 118));
+		cb_heure.setForeground(Color.WHITE);
+		cb_heure.setFont(new Font("Arial", Font.PLAIN, 22));
+		((JLabel)cb_heure.getRenderer()).setHorizontalAlignment(SwingConstants.CENTER);
 		cb_heure.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				monQuiz.setHeureQuiz(cb_heure.getSelectedItem().toString());
 			}
 		});
-		cb_heure.setBounds(770, 360, 40, 40);
+		cb_heure.setBounds(765, 360, 50, 40);
 		add(cb_heure);
 		
-		JLabel lb_minute = new JLabel("<html>m</html>");
+		JLabel lb_minute = new JLabel("<html>min</html>");
 		lb_minute.setForeground(Color.WHITE);
-		lb_minute.setFont(new Font("Arial", Font.PLAIN, 22)); 
-		lb_minute.setBounds(885, 370, 20, 30);
+		lb_minute.setFont(new Font("Arial", Font.PLAIN, 22));
+		lb_minute.setBounds(880, 370, 35, 30);
 		add(lb_minute);	
 		cb_minute = new JComboBox();
 		for (short i=0 ; i<60; i++){
 			cb_minute.addItem(""+i);
 		}
 		cb_minute.setSelectedItem(monQuiz.getMinuteQuiz());
+		cb_minute.setBackground(new Color(54, 90, 118));
+		cb_minute.setForeground(Color.WHITE);
+		cb_minute.setFont(new Font("Arial", Font.PLAIN, 22));
+		((JLabel)cb_minute.getRenderer()).setHorizontalAlignment(SwingConstants.CENTER);
 		cb_minute.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				monQuiz.setMinuteQuiz(cb_minute.getSelectedItem().toString());
 			}
 		});
-		cb_minute.setBounds(840, 360, 40, 40);
+		cb_minute.setBounds(830, 360, 50, 40);
 		add(cb_minute);
 		
-		JLabel lb_seconde = new JLabel("<html>s</html>");
+		JLabel lb_seconde = new JLabel("<html>sec</html>");
 		lb_seconde.setForeground(Color.WHITE);
 		lb_seconde.setFont(new Font("Arial", Font.PLAIN, 22)); 
-		lb_seconde.setBounds(955, 370, 20, 30);
+		lb_seconde.setBounds(965, 370, 35, 30);
 		add(lb_seconde);
 		cb_seconde = new JComboBox();
 		for (short i=0 ; i<60; i++){
 			cb_seconde.addItem(""+i);
 		}
 		cb_seconde.setSelectedItem(monQuiz.getSecondeQuiz());
+		cb_seconde.setBackground(new Color(54, 90, 118));
+		cb_seconde.setForeground(Color.WHITE);
+		cb_seconde.setFont(new Font("Arial", Font.PLAIN, 22));
+		((JLabel)cb_seconde.getRenderer()).setHorizontalAlignment(SwingConstants.CENTER);
 		cb_seconde.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				monQuiz.setSecondeQuiz(cb_seconde.getSelectedItem().toString());
 			}
 		});
-		cb_seconde.setBounds(910, 360, 40, 40);
+		cb_seconde.setBounds(915, 360, 50, 40);
 		add(cb_seconde);
 		
 		/*
