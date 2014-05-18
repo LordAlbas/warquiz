@@ -74,9 +74,9 @@ public class SQL_Requete_Quiz {
 	            	int Id_quiz = rs_quiz.getInt("id_quiz");
 	            	String Login_admin = rs_quiz.getString("login_admin");
 	            	int Nb_quest = rs_quiz.getInt("nb_question");
-	            	int Heure_quiz = rs_quiz.getInt("heure_quiz");
-	            	int Minute_quiz = rs_quiz.getInt("minute_quiz");
-	            	int Seconde_quiz = rs_quiz.getInt("seconde_quiz");
+	            	String Heure_quiz = rs_quiz.getString("heure_quiz");
+	            	String Minute_quiz = rs_quiz.getString("minute_quiz");
+	            	String Seconde_quiz = rs_quiz.getString("seconde_quiz");
 	            	mesQuiz[i] = new Quiz(Nom_quiz, fenetre);
 	            	mesQuiz[i].setId(Id_quiz);
 	            	mesQuiz[i].setLoginAdmin(Login_admin);
@@ -328,9 +328,9 @@ public class SQL_Requete_Quiz {
 		String logAdminQuiz = "";
 		int idQuiz = id_quiz;
 		int nbQuest = 0;
-		int heureQuiz = 0;
-		int minuteQuiz = 0;
-		int secondeQuiz = 0;
+		String heureQuiz = "";
+		String minuteQuiz = "";
+		String secondeQuiz = "";
 		
 		// Requete
 		try {
@@ -358,9 +358,9 @@ public class SQL_Requete_Quiz {
 	            logAdminQuiz = rs_quiz.getString("login_admin");
 	            // nbQuest doit rester a zero ici car il est incremente quand on ajoute des question juste en dessous.
 	            nbQuest = rs_quiz.getInt("nb_question"); // mais je l'utilise pour autre chose
-	            heureQuiz = rs_quiz.getInt("heure_quiz");
-	            minuteQuiz = rs_quiz.getInt("minute_quiz");
-	            secondeQuiz = rs_quiz.getInt("seconde_quiz");
+	            heureQuiz = rs_quiz.getString("heure_quiz");
+	            minuteQuiz = rs_quiz.getString("minute_quiz");
+	            secondeQuiz = rs_quiz.getString("seconde_quiz");
 	            
 	            String diff;
 	    		switch (diffQuiz) {
@@ -615,9 +615,9 @@ public class SQL_Requete_Quiz {
 				prep_stmt_addQuiz.setString(1, Connexion.login_general);
 				prep_stmt_addQuiz.setInt(2, currentQuiz.getDifficulteQuizInt());
 				prep_stmt_addQuiz.setString(3, currentQuiz.getNom());
-				prep_stmt_addQuiz.setInt(4, 2);		// minutes
-				prep_stmt_addQuiz.setInt(5, 34);	// secondes
-				prep_stmt_addQuiz.setInt(6, 0);		// heures
+				prep_stmt_addQuiz.setString(4, currentQuiz.getMinuteQuiz());		// minutes
+				prep_stmt_addQuiz.setString(5, currentQuiz.getSecondeQuiz());	// secondes
+				prep_stmt_addQuiz.setString(6, currentQuiz.getHeureQuiz());		// heures
 				prep_stmt_addQuiz.setInt(7, currentQuiz.getNb_questions());
 				prep_stmt_addQuiz.executeUpdate();
 				

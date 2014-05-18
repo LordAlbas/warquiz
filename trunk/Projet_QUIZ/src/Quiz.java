@@ -15,9 +15,9 @@ public class Quiz {
 	private String nomQuiz;
 	private String difficulteQuiz;
 	private String categorieQuiz;
-	private int heureQuiz = 0;	
-	private int minuteQuiz = 0;
-	private int secondeQuiz = 0;// ceci est le temps limite du quiz
+	private String heureQuiz = "";	
+	private String minuteQuiz = "";
+	private String secondeQuiz = "";// ceci est le temps limite du quiz
 	// pour lancer le timer, faire timerQuiz.start(), et il execute le 'actionPerformed' au bout de 'tempsQuiz' milisecond.
 	
 	/**
@@ -66,12 +66,12 @@ public class Quiz {
 	public void setNb_questions(int nb) { nb_questions = nb; }
 	public int getNb_questions() { return nb_questions; }
 	// tempsQuiz
-	public void setHeureQuiz(int heure) { heureQuiz = heure; }
-	public int getHeureQuiz() { return heureQuiz; }
-	public void setMinuteQuiz(int tmps) { minuteQuiz = tmps; }
-	public int getMinuteQuiz() { return minuteQuiz; }
-	public void setSecondeQuiz(int tmps) { secondeQuiz = tmps; }
-	public int getSecondeQuiz() { return secondeQuiz; }
+	public void setHeureQuiz(String heure) { heureQuiz = heure; }
+	public String getHeureQuiz() { return heureQuiz; }
+	public void setMinuteQuiz(String minute) { minuteQuiz = minute; }
+	public String getMinuteQuiz() { return minuteQuiz; }
+	public void setSecondeQuiz(String seconde) { secondeQuiz = seconde; }
+	public String getSecondeQuiz() { return secondeQuiz; }
 	// questQuiz[i]
 	public Question getQuest(int i) { return questQuiz[i]; }
 	

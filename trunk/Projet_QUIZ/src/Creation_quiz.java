@@ -15,6 +15,7 @@ import javax.swing.SwingConstants;
 
 import java.awt.Font;
 import java.awt.Color;
+import java.util.List;
 
 
 public class Creation_quiz extends JPanel implements MouseListener, MouseMotionListener{
@@ -50,8 +51,7 @@ public class Creation_quiz extends JPanel implements MouseListener, MouseMotionL
 	
 	// selection de la difficulte du quiz
 	private String[] diff = {"default", "facile", "moyen", "difficile"};
-	private JComboBox<String> cb_difficulte;
-	
+	private JComboBox<String> cb_difficulte,cb_seconde,cb_heure,cb_minute;
 	// pour gestions des questions
 	private JButton[] tabQuest = new JButton[20];
 	
@@ -78,22 +78,22 @@ public class Creation_quiz extends JPanel implements MouseListener, MouseMotionL
 		JLabel lb_titre = new JLabel("Nom du Quiz :");
 		lb_titre.setForeground(Images.couleurLabel);
 		lb_titre.setFont(new Font("Arial", Font.PLAIN, 22)); 
-		lb_titre.setBounds(565, 125, 400, 30);
+		lb_titre.setBounds(555, 105, 400, 30);
 		add(lb_titre);
 		// ICI ON ENVOI LE NOM DU QUIZ (ou nom racourci)
 		lb_nomQuiz = new JLabel(monQuiz.getNom());
 		lb_nomQuiz.setForeground(Color.WHITE);
 		lb_nomQuiz.setFont(new Font("Arial", Font.BOLD, 32)); 
-		lb_nomQuiz.setBounds(615, 155, 400, 36);
+		lb_nomQuiz.setBounds(605, 135, 400, 36);
 		add(lb_nomQuiz);
 		
 		/*
 		 * Selection de la difficulte du Quiz
 		 */
-		JLabel lb_diff = new JLabel("<html>Choix de la difficult&eacute;e du Quiz :</html>");
+		JLabel lb_diff = new JLabel("<html>Choix de la difficult&eacute; du Quiz :</html>");
 		lb_diff.setForeground(Images.couleurLabel);
 		lb_diff.setFont(new Font("Arial", Font.PLAIN, 22)); 
-		lb_diff.setBounds(676, 240, 400, 30);
+		lb_diff.setBounds(650, 200, 400, 30);
 		add(lb_diff);
 		// UTILISATION D'UNE COMBOBOX
 		cb_difficulte = new JComboBox<String>(diff);
@@ -104,14 +104,14 @@ public class Creation_quiz extends JPanel implements MouseListener, MouseMotionL
 				monQuiz.setDifficulteQuiz(cb_difficulte.getSelectedItem().toString());
 			}
 		});
-		cb_difficulte.setBounds(720, 275, 100, 40);
+		cb_difficulte.setBounds(720, 235, 100, 40);
 		add(cb_difficulte);
 
 		/*
 		 * Bouton d'AJOUT QUESTIONS
 		 */
 		JButton ajout_question = new JButton("Ajouter une question");
-		ajout_question.setBounds(795, 395, 200, 40);
+		ajout_question.setBounds(795, 440, 200, 40);
 		ajout_question.setFont(new Font("Arial", Font.PLAIN, 20));
 		ajout_question.setBackground(new Color(255,153,51));
 		ajout_question.setBorder(null);
@@ -160,6 +160,69 @@ public class Creation_quiz extends JPanel implements MouseListener, MouseMotionL
 			addSuppr(y);
 			y++;
 		}
+		
+		/* 
+		 * Ajout des combobox pour les timers
+		 */
+		JLabel lb_temps = new JLabel("<html>Temps du Quiz :</html>");
+		lb_temps.setForeground(Images.couleurLabel);
+		lb_temps.setFont(new Font("Arial", Font.PLAIN, 22)); 
+		lb_temps.setBounds(750, 320, 400, 30);
+		add(lb_temps);
+		
+		JLabel lb_heure = new JLabel("<html>h</html>");
+		lb_heure.setForeground(Color.WHITE);
+		lb_heure.setFont(new Font("Arial", Font.PLAIN, 22)); 
+		lb_heure.setBounds(815, 370, 20, 30);
+		add(lb_heure);
+		cb_heure = new JComboBox();
+		for (short i=0 ; i<60; i++){
+			cb_heure.addItem(""+i);
+		}
+		cb_heure.setSelectedItem(monQuiz.getHeureQuiz());
+		cb_heure.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				monQuiz.setHeureQuiz(cb_heure.getSelectedItem().toString());
+			}
+		});
+		cb_heure.setBounds(770, 360, 40, 40);
+		add(cb_heure);
+		
+		JLabel lb_minute = new JLabel("<html>m</html>");
+		lb_minute.setForeground(Color.WHITE);
+		lb_minute.setFont(new Font("Arial", Font.PLAIN, 22)); 
+		lb_minute.setBounds(885, 370, 20, 30);
+		add(lb_minute);	
+		cb_minute = new JComboBox();
+		for (short i=0 ; i<60; i++){
+			cb_minute.addItem(""+i);
+		}
+		cb_minute.setSelectedItem(monQuiz.getMinuteQuiz());
+		cb_minute.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				monQuiz.setMinuteQuiz(cb_minute.getSelectedItem().toString());
+			}
+		});
+		cb_minute.setBounds(840, 360, 40, 40);
+		add(cb_minute);
+		
+		JLabel lb_seconde = new JLabel("<html>s</html>");
+		lb_seconde.setForeground(Color.WHITE);
+		lb_seconde.setFont(new Font("Arial", Font.PLAIN, 22)); 
+		lb_seconde.setBounds(955, 370, 20, 30);
+		add(lb_seconde);
+		cb_seconde = new JComboBox();
+		for (short i=0 ; i<60; i++){
+			cb_seconde.addItem(""+i);
+		}
+		cb_seconde.setSelectedItem(monQuiz.getSecondeQuiz());
+		cb_seconde.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				monQuiz.setSecondeQuiz(cb_seconde.getSelectedItem().toString());
+			}
+		});
+		cb_seconde.setBounds(910, 360, 40, 40);
+		add(cb_seconde);
 		
 		/*
 		 * Si aucune question pour le moment, mettre un petit message.
