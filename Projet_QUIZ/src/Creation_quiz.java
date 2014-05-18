@@ -470,7 +470,7 @@ public class Creation_quiz extends JPanel implements MouseListener, MouseMotionL
 		if (monQuiz.getNb_questions() <= 0)
 			msg = "- Le quiz ne contient aucune question pour le moment !\n";
 		if (cb_difficulte.getSelectedItem().toString() == "default")
-			msg += "- La difficulté du quiz n'a pas été définie !\n";
+			msg += "- La difficult&eacute; du quiz n'a pas &eacute;t&eacute; définie !\n";
 		for (byte i=0; i<monQuiz.getNb_questions(); i++) {
 			if (monQuiz.getQuest(i).getNbr_reponses_juste() <= 0)
 				nbRepJusteNull = true;
@@ -478,9 +478,9 @@ public class Creation_quiz extends JPanel implements MouseListener, MouseMotionL
 				nbRepNull = true;
 		}
 		if (nbRepNull)
-			msg += "- Le quiz contient des questions sans réponses !\n";
+			msg += "- Le quiz contient des questions sans r&eacute;ponses !\n";
 		if (nbRepJusteNull)
-			msg += "- Le quiz comporte des questions sans bonnes réponses !\n";
+			msg += "- Le quiz comporte des questions sans bonnes r&eacute;ponses !\n";
 		return msg;
 	}
 	
@@ -503,7 +503,7 @@ public class Creation_quiz extends JPanel implements MouseListener, MouseMotionL
 				JOptionPane.showMessageDialog(null, 
 						"<html>Votre quiz &agrave; bien &eacute;t&eacute; enregistr&eacute; !<br/>"
 						+ "Les utilisateurs peuvent maintenant y jouer.</html>", 
-						"Quiz Validé", 
+						"Quiz Valid&eacute;", 
 						JOptionPane.INFORMATION_MESSAGE);
 				Gestion_quiz goToGestion = new Gestion_quiz(fenetre);
 				fenetre.getContentPane().setVisible(false);
