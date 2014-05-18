@@ -28,8 +28,6 @@ public class Jouer_partie extends JPanel implements MouseListener, MouseMotionLi
 	private int tempsRestant;
 	private SQL_Requete_Quiz sqlRQ;
 	Button boutonMenu;
-	Bouton_selection_question boutonQuestion;
-	private int cpt =0;
 	private JLabel TxtVite;
 	private JLabel reponse;
 	private JLabel question;
@@ -48,7 +46,7 @@ public class Jouer_partie extends JPanel implements MouseListener, MouseMotionLi
 		/*
 		 * Nom du quiz
 		 */
-		lb_titrePartie = new JLabel(monQuiz.getNom()+" "+monQuiz.getNb_questions());
+		lb_titrePartie = new JLabel(monQuiz.getNom());
 		lb_titrePartie.setForeground(Color.WHITE);
 		lb_titrePartie.setFont(new Font("Arial", Font.PLAIN, 35));
 		lb_titrePartie.setBounds(575, 105, 400, 50);
@@ -101,7 +99,7 @@ public class Jouer_partie extends JPanel implements MouseListener, MouseMotionLi
 		sousPanel.setBounds(30, 300, 734, 390);
 		sousPanel.setLayout(null);
 		sousPanel.setOpaque(false);
-		add(sousPanel);        
+		add(sousPanel);
         
 		/*
 		 * JLabel qui contient le nom de la QUESTION (ou bien le message par defaut).
@@ -147,7 +145,7 @@ public class Jouer_partie extends JPanel implements MouseListener, MouseMotionLi
 	
 	public void setQuestion(String txt) {
 		question.setText(txt);
-		question.repaint();
+		repaint();
 	}
 	
 	/**
@@ -159,7 +157,7 @@ public class Jouer_partie extends JPanel implements MouseListener, MouseMotionLi
 	 */
 	public JCheckBox[] createTabRep(int i) {
 		JCheckBox[] TabCheckRep = new JCheckBox[monQuiz.getQuest(i).getNb_reponses()];
-		for(int v=0;v<TabCheckRep.length;v++){
+		for (int v=0;v<TabCheckRep.length;v++) {
 			TabCheckRep[v] = new JCheckBox(monQuiz.getQuest(i).getReponse(v).getTxtReponse());
 			TabCheckRep[v].setForeground(Color.WHITE);
 		}
@@ -172,53 +170,25 @@ public class Jouer_partie extends JPanel implements MouseListener, MouseMotionLi
 	 * @param num
 	 */
 	public void affCheckrep(JCheckBox[] tabrep, int num) {
-		for(int i=0;i<monQuiz.getQuest(num).getNb_reponses();i++){
+		for (int i=0;i<monQuiz.getQuest(num).getNb_reponses();i++) {
 			tabrep[i].setBounds(30, 40*i, 300, 30);
 			tabrep[i].setFont(new Font("Arial", Font.PLAIN, 20));
 			tabrep[i].setOpaque(false);
 			sousPanel.add(tabrep[i]);
-		}	
-		
+		}
 	}
-	
-	/**
-	 * METHODE CALLED NUL PART ! (a confirmer ?).
-	 * @param nbRep
-	 * @param txt
-	 */
-	public void setReponse(int nbRep, String txt) {
-		reponse.setText(txt);
-		reponse.repaint();	
-	}
-	
-	public void setCpt(int nb){
-		cpt = nb;
-	}
-	
-	/*public void clearLabel (){
-		
-		reponse.removeAll();
-	}*/
 	
 	/**
 	 * Creer un Bouton_selection_question pour chaque question.
 	 * Called localement au debut du constructeur.
 	 * @param nb_quest
 	 */
-	public void creer_menuQuetions(int nb_quest){
-		for(int i=0;i<nb_quest;i++){
-			
-			boutonQuestion = new Bouton_selection_question(i, monQuiz, this);
+	public void creer_menuQuetions(int nb_quest) {
+		for (int i=0;i<nb_quest;i++) {
+			Bouton_selection_question boutonQuestion = new Bouton_selection_question(i, monQuiz, this);
 			boutonQuestion.addMouseListener(boutonQuestion);
 			boutonQuestion.setBounds(480+27*i, 60, 20, 20);
 			add(boutonQuestion);
-			/*
-			boutonMenu = new Button(""+(i+1));
-			boutonMenu.addMouseListener(this);
-			boutonMenu.setBackground(Color.BLUE);
-			boutonMenu.setForeground(Color.WHITE);
-			boutonMenu.setBounds(480+27*i, 60, 20, 20);
-			add(boutonMenu);*/
 		}
 	}
 	
@@ -227,7 +197,7 @@ public class Jouer_partie extends JPanel implements MouseListener, MouseMotionLi
 	 * Gestion de la couleur du timer pas local.
 	 * @return objet timer
 	 */
-	private Timer createTimer (){
+	private Timer createTimer () {
 		ActionListener action = new ActionListener() {
 			// M�thode appel�e � chaque tic du timer
 			public void actionPerformed (ActionEvent event){
