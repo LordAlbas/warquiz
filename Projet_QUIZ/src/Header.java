@@ -14,7 +14,7 @@ public class Header extends JPanel implements MouseListener, MouseMotionListener
 	String bouton_option ="rien";
 	private Fenetre fenetre;
 	static String selection1;
-	private Boolean warning = true;
+	private Boolean inGame = false;
 	private Boolean InCreateQuiz = false;
 	public Header(Fenetre fen){
 		setLayout(null);
@@ -27,28 +27,24 @@ public class Header extends JPanel implements MouseListener, MouseMotionListener
 
 	public void mouseClicked(MouseEvent e) {
 		
-		
-		
-		if (warning){
-			if(InCreateQuiz){
-				int choix = JOptionPane.showConfirmDialog(
-					    null,
-					    "<html>Si vous revenez à l'acceuil sans avoir validé le quiz,<br/> il sera définitivement perdu !<br/>Continuer ?</html>",
-					    "Attention !",
-					    JOptionPane.YES_NO_OPTION,
-					    JOptionPane.WARNING_MESSAGE);
-				if(choix ==0){
-					fenetre.goToAccueil(selection1);
-					InCreateQuiz = false;
-				}else{}
-			}
-			
-		} else {
+		if (inGame){
 			JOptionPane.showMessageDialog(null,
 				    "Impossible de retourner ï¿½ l'accueil en cours de partie !",
 				    "Erreur",
 				    JOptionPane.WARNING_MESSAGE);
 		}
+		else if(InCreateQuiz){
+			int choix = JOptionPane.showConfirmDialog(
+				    null,
+				    "<html>Si vous revenez à l'acceuil sans avoir validé le quiz,<br/> il sera définitivement perdu !<br/>Continuer ?</html>",
+				    "Attention !",
+				    JOptionPane.YES_NO_OPTION,
+				    JOptionPane.WARNING_MESSAGE);
+			if(choix ==0){
+				fenetre.goToAccueil(selection1);
+				InCreateQuiz = false;
+			}else{}
+		}else{fenetre.goToAccueil(selection1);}
 		
 		/*
 		if(e.getX() >= 959 && e.getX() <= 1022 && e.getY() >= 1 && e.getY() <= 47){ // CO/DECO
@@ -74,8 +70,8 @@ public class Header extends JPanel implements MouseListener, MouseMotionListener
 
 	public void mouseMoved(MouseEvent e) {}
 	
-	public void setWarning(Boolean msg) { warning = msg; }
-	public Boolean getWarning() { return warning; }
+	public void setInGame(Boolean msg) { inGame = msg; }
+	public Boolean getInGame() { return inGame; }
 
     @Override
     protected void paintComponent(Graphics g){
