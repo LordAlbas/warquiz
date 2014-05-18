@@ -81,7 +81,7 @@ public class Chronometre {
 			tpsRestant = "0 h 0 min 0 sec";
 			timer.stop();
 			JOptionPane.showMessageDialog(null, 
-					"<html>Le temps est &eacute;coul&eacute;.<br/> Vous allez être redirigé vers la correction.</html>", 
+					"<html>Le temps est &eacute;coul&eacute;.<br/> Vous allez &eacute;tre redirig&eacute; vers la correction.</html>", 
 					"Temps Ã©coulÃ© !", 
 					JOptionPane.WARNING_MESSAGE);
 			

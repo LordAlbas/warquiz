@@ -36,23 +36,6 @@ public class Bouton_selection_question_correction extends JButton implements Mou
 		
 		for (int v=0; v<TabLabel.length; v++) {
 			TabLabel[v] = new JLabel(monQuiz.getQuest(i).getReponse(v).getTxtReponse());
-			/*
-			TabLabel[v].setForeground(Color.RED);
-			if (monQuiz.getQuest(i).getReponse(v).getStatutRep())
-				TabLabel[v].setForeground(Color.GREEN);
-			*/
-		}
-	}
-	
-	/**
-	 * affiche le tableau de JLabel reponse CORRECTION
-	 */
-	// je m'en sert pas de cette methode, je la laisse pour si jamais on change de facon d'afficher.
-	public void affLabel() {
-		for (int i=0;i<TabLabel.length;i++) {
-			TabLabel[i].setBounds(30, 30*i, 450, 50);
-			TabLabel[i].setFont(new Font("Arial", Font.PLAIN, 20));
-			maCorr.sousPanel.add(TabLabel[i]);
 		}
 	}
 	
@@ -64,7 +47,6 @@ public class Bouton_selection_question_correction extends JButton implements Mou
 		maCorr.sousPanel.removeAll();											// vire tout
 		maCorr.setQuestion(monQuiz.getQuest(num_question).getQuestTxt());		// affiche la question
 		maCorr.setNumQuest(num_question);
-		//affLabel();	// affiche les reponses correction (NO NEED)
 		maCorr.affchckPlayed(num_question);										// affiche les reponses jouees
 		setBackground(Color.GRAY);												// passe le bouton en gris
 	}

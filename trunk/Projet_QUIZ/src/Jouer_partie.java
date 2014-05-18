@@ -47,7 +47,6 @@ public class Jouer_partie extends JPanel implements MouseListener, MouseMotionLi
 		monQuiz = sqlRQ.getMyQuiz(quiz.getId());	// mon quiz
 		
 		boutonQuestion = new Bouton_selection_question[monQuiz.getNb_questions()];
-		creer_menuQuetions();
 		
 		/*
 		 * Nom du quiz
@@ -239,6 +238,8 @@ public class Jouer_partie extends JPanel implements MouseListener, MouseMotionLi
         //****************************************
         
         header2.setInGame(true);
+        
+        creer_menuQuetions();					// Creation des tableau de reponses
         boutonQuestion[0].switchQuest();		// Affiche la premiere question des le debut de la game.
 	}
 	
@@ -306,7 +307,7 @@ public class Jouer_partie extends JPanel implements MouseListener, MouseMotionLi
 			if (questJuste)
 				score++;
 		}
-		// ici le score vaut le nombre de question juste (genre 7 sur 10questions)
+		// ici "score" vaut le nombre de question juste (genre 7 sur 10questions)
 		
 		score *= 100;	// donc ici on a genre 700
 		
