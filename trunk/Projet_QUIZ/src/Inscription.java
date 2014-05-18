@@ -668,6 +668,7 @@ public class Inscription extends JPanel implements MouseListener, MouseMotionLis
 			g.drawImage(Images.img_element[12], 140, 50, 800, 130, null);	
 		}
 		if(pseudo_existe == 1){
+			g.drawImage(Images.img_element[13], 140, 50, 800, 130, null);	
 			
 		}
 		repaint();		
