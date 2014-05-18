@@ -62,7 +62,7 @@ public class Images {
 			img_element[10] = ImageIO.read(new File("images/theme_defaut.png"));
 			img_element[11] = ImageIO.read(new File("images/theme_carre.png"));
 			img_element[12] = ImageIO.read(new File("images/information_bad_combi_mdp.png"));
-			img_element[13] = ImageIO.read(new File("information_pseudo_isset.png"));
+			img_element[13] = ImageIO.read(new File("images/information_pseudo_isset.png"));
 			
 		} catch (IOException e) {
 			e.printStackTrace();

@@ -58,8 +58,8 @@ public class Fenetre extends JFrame {
 	 * Redirige sur INSCRIPTION
 	 * @param selection
 	 */
-	public void goToInscription(String selection) {
-		inscription = new Inscription(this);
+	public void goToInscription(int selection) {
+		inscription = new Inscription(this, selection);
 		inscription.addMouseListener(inscription);	// 'inscription' implemente les methodes relatif a l'ecoute de la souris
 		inscription.addMouseMotionListener(inscription);
 		this.getContentPane().setVisible(false);
