@@ -49,6 +49,7 @@ public class Statistiques_Admin extends JPanel implements MouseListener, MouseMo
 	public static Quiz[] ListeQuizStats_facile;
 	public static Quiz[] ListeQuizStats_moyen;
 	public static Quiz[] ListeQuizStats_difficile;
+	private int diff=0;
 	
 	/**
 	 * Constructeur
@@ -101,7 +102,7 @@ public class Statistiques_Admin extends JPanel implements MouseListener, MouseMo
 		bt_afficherQuizFacile.setLocation(264, 300);
 		bt_afficherQuizFacile.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-					
+				diff = 1;
 			}
 		});
 		add(bt_afficherQuizFacile);
@@ -110,7 +111,7 @@ public class Statistiques_Admin extends JPanel implements MouseListener, MouseMo
 		bt_afficherQuizMoyen.setLocation(380, 300);
 		bt_afficherQuizMoyen.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				diff = 2;
 			}
 		});
 		add(bt_afficherQuizMoyen);
@@ -119,7 +120,7 @@ public class Statistiques_Admin extends JPanel implements MouseListener, MouseMo
 		bt_afficherQuizDifficile.setLocation(496, 300);
 		bt_afficherQuizDifficile.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				diff = 3;
 			}
 		});
 		add(bt_afficherQuizDifficile);
@@ -128,7 +129,7 @@ public class Statistiques_Admin extends JPanel implements MouseListener, MouseMo
 		bt_afficherAllQuiz.setLocation(148, 300);
 		bt_afficherAllQuiz.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				diff = 0;
 			}
 		});
 		add(bt_afficherAllQuiz);
@@ -262,13 +263,13 @@ public class Statistiques_Admin extends JPanel implements MouseListener, MouseMo
 	 * @return 
 	 * @throws SQLException 
 	 */
-	public int scoreMoyen(){
+	public int scoreMoyen(int id_quiz){
 		int score_moyen = 0;
 		try{
 			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 	        Connection conn = DriverManager.getConnection("jdbc:sqlserver://193.252.48.189\\SQLEXPRESS:1433;" + "database=BDD_B3I_groupe_5;" + "user=b3i_groupe_5;" + "password=123Soleil");
 	        Statement stmt_moyenne = (Statement) conn.createStatement();
-	        query_moyenne = "SELECT AVG(SCORE_USR_QUIZ) AS score_moyen FROM JOUER WHERE ID_QUIZ = "+ ListeQuizStats[list_quiz_stats.getSelectedIndex()].getId();	       
+	        query_moyenne = "SELECT AVG(SCORE_USR_QUIZ) AS score_moyen FROM JOUER WHERE ID_QUIZ = "+ id_quiz;	       
 	        stmt_moyenne.executeQuery(query_moyenne);	
 	        ResultSet rs_moyenne = stmt_moyenne.getResultSet();
 	        
@@ -392,13 +393,13 @@ public class Statistiques_Admin extends JPanel implements MouseListener, MouseMo
 	 * @param num_quiz
 	 * @throws SQLException
 	 */
-	public int nbParticiants(){
+	public int nbParticiants(int id_quiz){
 		int nb_participants_quiz = 0;
 		try{
 			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 	        Connection conn = DriverManager.getConnection("jdbc:sqlserver://193.252.48.189\\SQLEXPRESS:1433;" + "database=BDD_B3I_groupe_5;" + "user=b3i_groupe_5;" + "password=123Soleil");     
 	        Statement stmt_nb_participants_quiz = (Statement) conn.createStatement();
-	        query_nb_participants_quiz = "SELECT COUNT (LOGIN_USR) AS nb_participants_quiz FROM JOUER WHERE ID_QUIZ = " + ListeQuizStats[list_quiz_stats.getSelectedIndex()].getId();	       
+	        query_nb_participants_quiz = "SELECT COUNT (DISTINCT LOGIN_USR) AS nb_participants_quiz FROM JOUER WHERE ID_QUIZ = " + id_quiz;	       
 	        stmt_nb_participants_quiz.executeQuery(query_nb_participants_quiz);	
 	        ResultSet rs_nb_participants_quiz = stmt_nb_participants_quiz.getResultSet();
 	        
@@ -416,14 +417,14 @@ public class Statistiques_Admin extends JPanel implements MouseListener, MouseMo
 		return nb_participants_quiz;
 	}
 	
-	public int getHeuresMoyenne(){
+	public int getHeuresMoyenne(int id_quiz){
 		Connection conn = null;
 		int heure_quiz_moyenne = 1;
 		try {
 			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 			conn = DriverManager.getConnection("jdbc:sqlserver://193.252.48.189\\SQLEXPRESS:1433;" + "database=BDD_B3I_groupe_5;" + "user=b3i_groupe_5;" + "password=123Soleil");
 			Statement stmt_heure = (Statement) conn.createStatement();
-			query_heure_moyenne = "SELECT AVG(HEURE_USR_QUIZ) AS heure_moyenne_quiz FROM JOUER WHERE ID_QUIZ="+ ListeQuizStats[list_quiz_stats.getSelectedIndex()].getId();
+			query_heure_moyenne = "SELECT AVG(HEURE_USR_QUIZ) AS heure_moyenne_quiz FROM JOUER WHERE ID_QUIZ="+ id_quiz;
 			stmt_heure.executeQuery(query_heure_moyenne);
 			ResultSet rs_heure = stmt_heure.getResultSet();
 			while(rs_heure.next()){
@@ -436,14 +437,14 @@ public class Statistiques_Admin extends JPanel implements MouseListener, MouseMo
 		}
 		return heure_quiz_moyenne;	
 	}
-	public int getMinutesMoyenne(){
+	public int getMinutesMoyenne(int id_quiz){
 		Connection conn = null;
 		int minute_quiz_moyenne = 1;
 		try {
 			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 			conn = DriverManager.getConnection("jdbc:sqlserver://193.252.48.189\\SQLEXPRESS:1433;" + "database=BDD_B3I_groupe_5;" + "user=b3i_groupe_5;" + "password=123Soleil");
 			Statement stmt_minute = (Statement) conn.createStatement();
-			query_minute_moyenne = "SELECT AVG(MINUTE_USR_QUIZ) AS minute_moyenne_quiz FROM JOUER WHERE ID_QUIZ="+ ListeQuizStats[list_quiz_stats.getSelectedIndex()].getId();
+			query_minute_moyenne = "SELECT AVG(MINUTE_USR_QUIZ) AS minute_moyenne_quiz FROM JOUER WHERE ID_QUIZ="+ id_quiz;
 			stmt_minute.executeQuery(query_minute_moyenne);
 			ResultSet rs_minute = stmt_minute.getResultSet();
 			while(rs_minute.next()){
@@ -456,14 +457,14 @@ public class Statistiques_Admin extends JPanel implements MouseListener, MouseMo
 		}
 		return minute_quiz_moyenne;	
 	}
-	public int getSecondesMoyenne(){
+	public int getSecondesMoyenne(int id_quiz){
 		Connection conn = null;
 		int seconde_quiz_moyenne = 1;
 		try {
 			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 			conn = DriverManager.getConnection("jdbc:sqlserver://193.252.48.189\\SQLEXPRESS:1433;" + "database=BDD_B3I_groupe_5;" + "user=b3i_groupe_5;" + "password=123Soleil");
 			Statement stmt_seconde = (Statement) conn.createStatement();
-			query_heure_moyenne = "SELECT AVG(SECONDE_USR_QUIZ) AS seconde_moyenne_quiz FROM JOUER WHERE ID_QUIZ="+ ListeQuizStats[list_quiz_stats.getSelectedIndex()].getId();
+			query_heure_moyenne = "SELECT AVG(SECONDE_USR_QUIZ) AS seconde_moyenne_quiz FROM JOUER WHERE ID_QUIZ="+id_quiz;
 			stmt_seconde.executeQuery(query_heure_moyenne);
 			ResultSet rs_seconde = stmt_seconde.getResultSet();
 			while(rs_seconde.next()){
@@ -533,19 +534,52 @@ public class Statistiques_Admin extends JPanel implements MouseListener, MouseMo
 	@Override
 	public void itemStateChanged(ItemEvent arg0) {
 		if (list_quiz_stats.getItemCount() > 0 && list_quiz_stats.getSelectedItem() != null) {
-			int init = list_quiz_stats.getSelectedIndex();
 			String item_nom = "";
 			int item_quest = 0;
 			int item_score = 0;
 			String item_temps = "";
 			int item_participant = 0;
 			String item_temps_moyen = "";
-			item_nom = list_quiz_stats.getSelectedItem();
-			item_quest = ListeQuizStats[init].getNb_questions();
-			item_score = scoreMoyen();
-			item_temps = ListeQuizStats[init].getHeureQuiz() +"h "+  ListeQuizStats[init].getMinuteQuiz()+"m "+ ListeQuizStats[init].getSecondeQuiz() + "s";
-			item_participant = nbParticiants();
-			item_temps_moyen = getHeuresMoyenne() + "h " + getMinutesMoyenne() + "m " + getSecondesMoyenne() + "s";
+			if(diff == 1){
+				int init = list_quiz_stats.getSelectedIndex();
+				int id = ListeQuizStats_facile[init].getId();
+				item_quest = ListeQuizStats_facile[init].getNb_questions();
+				item_temps = ListeQuizStats_facile[init].getHeureQuiz() +"h "+  ListeQuizStats_facile[init].getMinuteQuiz()+"m "+ ListeQuizStats_facile[init].getSecondeQuiz() + "s";
+				item_nom = list_quiz_stats.getSelectedItem();
+				item_score = scoreMoyen(id);
+				item_participant = nbParticiants(id);
+				item_temps_moyen = getHeuresMoyenne(id) + "h " + getMinutesMoyenne(id) + "m " + getSecondesMoyenne(id) + "s";
+			}
+			else if(diff == 2){
+				int init = list_quiz_stats.getSelectedIndex();
+				int id = ListeQuizStats_moyen[init].getId();
+				item_quest = ListeQuizStats_moyen[init].getNb_questions();
+				item_temps = ListeQuizStats_moyen[init].getHeureQuiz() +"h "+  ListeQuizStats_moyen[init].getMinuteQuiz()+"m "+ ListeQuizStats_moyen[init].getSecondeQuiz() + "s";
+				item_nom = list_quiz_stats.getSelectedItem();
+				item_score = scoreMoyen(id);
+				item_participant = nbParticiants(id);
+				item_temps_moyen = getHeuresMoyenne(id) + "h " + getMinutesMoyenne(id) + "m " + getSecondesMoyenne(id) + "s";
+			}
+			else if(diff == 3){
+				int init = list_quiz_stats.getSelectedIndex();
+				int id = ListeQuizStats_difficile[init].getId();
+				item_quest = ListeQuizStats_difficile[init].getNb_questions();
+				item_temps = ListeQuizStats_difficile[init].getHeureQuiz() +"h "+  ListeQuizStats_difficile[init].getMinuteQuiz()+"m "+ ListeQuizStats_difficile[init].getSecondeQuiz() + "s";
+				item_nom = list_quiz_stats.getSelectedItem();
+				item_score = scoreMoyen(id);
+				item_participant = nbParticiants(id);
+				item_temps_moyen = getHeuresMoyenne(id) + "h " + getMinutesMoyenne(id) + "m " + getSecondesMoyenne(id) + "s";
+			}
+			else {
+				int init = list_quiz_stats.getSelectedIndex();
+				int id = ListeQuizStats[init].getId();
+				item_quest = ListeQuizStats[init].getNb_questions();
+				item_temps = ListeQuizStats[init].getHeureQuiz() +"h "+  ListeQuizStats[init].getMinuteQuiz()+"m "+ ListeQuizStats[init].getSecondeQuiz() + "s";
+				item_nom = list_quiz_stats.getSelectedItem();
+				item_score = scoreMoyen(id);
+				item_participant = nbParticiants(id);
+				item_temps_moyen = getHeuresMoyenne(id) + "h " + getMinutesMoyenne(id) + "m " + getSecondesMoyenne(id) + "s";
+			}
 			lb_nom_quiz.setText("Nom du quiz : " + item_nom);
 			lb_nb_quest_quiz.setText("Nombre de questions du quiz : " + item_quest);
 			lb_score_quiz.setText("Score du quiz : " + item_score);

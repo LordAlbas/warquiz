@@ -15,9 +15,9 @@ public class Quiz {
 	private String nomQuiz;
 	private String difficulteQuiz;
 	private String categorieQuiz;
-	private String heureQuiz = "";	
-	private String minuteQuiz = "";
-	private String secondeQuiz = "";// ceci est le temps limite du quiz
+	private String heureQuiz;	
+	private String minuteQuiz;
+	private String secondeQuiz;// ceci est le temps limite du quiz
 	// pour lancer le timer, faire timerQuiz.start(), et il execute le 'actionPerformed' au bout de 'tempsQuiz' milisecond.
 	
 	/**

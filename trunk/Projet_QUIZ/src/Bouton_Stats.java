@@ -2,6 +2,7 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.event.ActionEvent;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.sql.Connection;
@@ -22,7 +23,7 @@ public class Bouton_Stats extends JButton implements MouseListener {
 
 	private int diff;
 	private String txt;
-	
+	public ArrayList<String>tableau_quiz;
 	
 	public Bouton_Stats(String texte) {
 		txt = texte;
@@ -52,11 +53,13 @@ public class Bouton_Stats extends JButton implements MouseListener {
 		}
 	}
 
-	
+	public String getQuiz(int i){
+		return tableau_quiz.get(i);
+	}
 	
 	public void mouseClicked(MouseEvent e) {
 		Statistiques_Admin.list_quiz_stats.removeAll();
-		switch (txt){
+		switch (txt){	
 			case "Tous":
 				for (int i=0; i<Statistiques_Admin.ListeQuizStats.length; i++) {
 					Statistiques_Admin.list_quiz_stats.add(Statistiques_Admin.ListeQuizStats[i].getNom());
@@ -68,7 +71,6 @@ public class Bouton_Stats extends JButton implements MouseListener {
 				}
 				break;
 			case "Moyen":
-
 				for (int k=0; k<Statistiques_Admin.ListeQuizStats_moyen.length; k++) {
 					Statistiques_Admin.list_quiz_stats.add(Statistiques_Admin.ListeQuizStats_moyen[k].getNom());
 				}
@@ -100,4 +102,32 @@ public class Bouton_Stats extends JButton implements MouseListener {
 		// g.drawImage(Images.img_bouton[8], 0, 0,getWidth(),getHeight(), null);
 
 	}
+	public void actionPerformed(ActionEvent e) {
+		System.out.println(diff);
+		if(diff==0){
+			Statistiques_Admin.list_quiz_stats.removeAll();
+			for (int i=0; i<Statistiques_Admin.ListeQuizStats.length; i++) {
+				Statistiques_Admin.list_quiz_stats.add(Statistiques_Admin.ListeQuizStats[i].getNom());
+			}
+		}
+		else if(diff==1){
+			Statistiques_Admin.list_quiz_stats.removeAll();
+			for (int j=0; j<Statistiques_Admin.ListeQuizStats_facile.length; j++) {
+				Statistiques_Admin.list_quiz_stats.add(Statistiques_Admin.ListeQuizStats_facile[j].getNom());
+			}
+		}
+		else if(diff==2){
+			Statistiques_Admin.list_quiz_stats.removeAll();
+			for (int k=0; k<Statistiques_Admin.ListeQuizStats_moyen.length; k++) {
+				Statistiques_Admin.list_quiz_stats.add(Statistiques_Admin.ListeQuizStats_moyen[k].getNom());
+			}
+		}
+		else if(diff==3){
+			Statistiques_Admin.list_quiz_stats.removeAll();
+			for (int l=0; l<Statistiques_Admin.ListeQuizStats_difficile.length; l++) {
+				Statistiques_Admin.list_quiz_stats.add(Statistiques_Admin.ListeQuizStats_difficile[l].getNom());
+			}
+		}
+	}
+	
 }
