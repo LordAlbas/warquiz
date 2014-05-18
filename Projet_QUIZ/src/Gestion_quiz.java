@@ -174,7 +174,7 @@ public class Gestion_quiz extends JPanel implements MouseListener, ItemListener 
 						+ "Vous etes sur le point de supprimer un Quiz.<br/>"
 						+ "Souhaitez-vous continuer ?</html>", 
 						"Suppression Quiz", 
-						JOptionPane.OK_CANCEL_OPTION, 
+						JOptionPane.YES_NO_OPTION, 
 						JOptionPane.WARNING_MESSAGE);
 				if (rep == 0) {
 					if (list_quizcree.getItemCount() > 0 && list_quizcree.getSelectedItem() != null) {
