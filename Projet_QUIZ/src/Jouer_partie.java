@@ -67,7 +67,7 @@ public class Jouer_partie extends JPanel implements MouseListener, MouseMotionLi
 		 * Bouton VALIDER LA GAME
 		 */
 		JButton bt_valider_rep = new JButton("<html>Valider la partie</html>");
-        bt_valider_rep.setBounds(820, 490, 170, 40);
+        bt_valider_rep.setBounds(840, 490, 170, 40);
         bt_valider_rep.setBackground(new Color(27, 113, 16));
         bt_valider_rep.setBorder(null);
         bt_valider_rep.setForeground(Color.WHITE);
