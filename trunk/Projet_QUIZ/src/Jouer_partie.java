@@ -297,11 +297,16 @@ public class Jouer_partie extends JPanel implements MouseListener, MouseMotionLi
 		}
 		// ici le score vaut le nombre de question juste (genre 7 sur 10questions)
 		
+		System.out.println("score brute = "+score);
+		
 		// alors on calcul un pourcentage pour avoir un score sur 100.
 		double resultat = score/monQuiz.getNb_questions();
-		resultat += resultat*100;
-		DecimalFormat df = new DecimalFormat("###");
+		System.out.println("resultat double = "+resultat);
+		resultat = resultat*100;
+		System.out.println("resultat double*100 = "+resultat);
+		DecimalFormat df = new DecimalFormat("###.##");
 		score = Integer.parseInt(df.format(resultat));
+		System.out.println("score calucled = "+score);
 		
 		//score = (score/monQuiz.getNb_questions())*100;
 		

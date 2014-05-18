@@ -26,6 +26,7 @@ public class Correction extends JPanel implements MouseListener{
 	private JLabel titreQuiz;
 	private JLabel bon;
 	private JLabel mauvais;
+	private JLabel lb_numQuest;
 	public JPanel sousPanel;
 	private int monScore;
 	private Bouton_selection_question[] chbx_tabRep;	// CONTIENT les reponses jouee par le user (a comparer avec monQuiz).
@@ -69,8 +70,9 @@ public class Correction extends JPanel implements MouseListener{
 		add(lb_score);
 		JLabel lb_scorePartie = new JLabel("<html>"+monScore+" / 100</html>");
 		lb_scorePartie.setForeground(Color.WHITE);
-		lb_scorePartie.setFont(new Font("Arial", Font.BOLD, 42));
-		lb_scorePartie.setBounds(810, 330, 150, 90);
+		lb_scorePartie.setHorizontalAlignment(SwingConstants.CENTER);
+		lb_scorePartie.setFont(new Font("Arial", Font.BOLD, 40));
+		lb_scorePartie.setBounds(800, 330, 150, 150);
 		add(lb_scorePartie);
         
         /*
@@ -94,7 +96,7 @@ public class Correction extends JPanel implements MouseListener{
 		 * JLabel d'explication dans leur sous-panel particulier
 		 */
 		JPanel sousPanelExpl = new JPanel();
-		sousPanelExpl.setBounds(30, 180, 520, 100);
+		sousPanelExpl.setBounds(30, 160, 520, 100);
 		sousPanelExpl.setLayout(null);
 		sousPanelExpl.setOpaque(false);
 		//sousPanelExpl.setBorder(BorderFactory.createLineBorder(Color.GREEN));
@@ -116,6 +118,13 @@ public class Correction extends JPanel implements MouseListener{
 		/*
 		 * Label d'affichage de la question
 		 */
+		lb_numQuest = new JLabel("Q #10");
+        lb_numQuest.setFont(new Font("Arial", Font.ITALIC, 20));
+        lb_numQuest.setForeground(Images.couleurLabel);
+        lb_numQuest.setBounds(20, 260, 90, 30);
+        lb_numQuest.setHorizontalAlignment(SwingConstants.CENTER);
+        lb_numQuest.setVisible(false);
+        add(lb_numQuest);
 		question = new JLabel("<html>Selectionnez une question en haut &agrave; gauche pour voir les r&eacute;ponses.</html>");
 		question.setBounds(60, 280, 520, 70);
 		question.setForeground(Color.WHITE);
@@ -166,6 +175,11 @@ public class Correction extends JPanel implements MouseListener{
 	public void setQuestion(String txt) {
 		question.setText("<html>"+txt+"</html>");
 		repaint();
+	}
+	
+	public void setNumQuest(int num) {
+		lb_numQuest.setText("Q #"+(num+1));
+		lb_numQuest.setVisible(true);
 	}
 	
 	/**
