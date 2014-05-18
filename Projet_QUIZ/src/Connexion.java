@@ -92,8 +92,12 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
         add(panel);  	
 	}
 
-	public String getLoginGeneral(){
+	public static String getLoginGeneral(){
 		return login_general;
+	}
+	
+	public static String getStatus(){
+		return status;
 	}
 	
 	 private Image load(final String url) {
@@ -148,10 +152,10 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 						                	login = true;
 						                	connexion_admin = true;
 						                	erreur_log = false;
-						                	fenetre.goToAccueil(selection);
-						                	dbUsername_admin = textField_pseudo.getText();
 						                	login_general = dbUsername_admin;
+						                	dbUsername_admin = textField_pseudo.getText();
 						                	status = "ADMIN";
+						                	fenetre.goToAccueil(selection);
 						                }
 						                else{
 						                	erreur_log = true; repaint();
@@ -170,9 +174,10 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 						                	login = true;
 						                	connexion_admin = false;
 						                	erreur_log = false;
-						                	fenetre.goToAccueil(selection);
+						                	
 						                	login_general = dbUsername_user;
 						                	status = "USER";
+						                	fenetre.goToAccueil(selection);
 						                }
 						                else{
 						                	erreur_log = true;repaint();
@@ -248,10 +253,11 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 						                	login = true;
 						                	connexion_admin = true;
 						                	erreur_log = false;
-						                	fenetre.goToAccueil(selection);
+						                	
 						                	dbUsername_admin = textField_pseudo.getText();
 						                	login_general = dbUsername_admin;
 						                	status = "ADMIN";
+						                	fenetre.goToAccueil(selection);
 						                }
 						                else{
 						                	erreur_log = true;repaint();
@@ -271,9 +277,10 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 						                	login = true;
 						                	connexion_admin = false;
 						                	erreur_log = false;
-						                	fenetre.goToAccueil(selection);
+						                	
 						                	login_general = dbUsername_user;
 						                	status = "USER";
+						                	fenetre.goToAccueil(selection);
 						                }
 						                else{
 						                	erreur_log = true;repaint();
@@ -365,11 +372,12 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 				                if(dbUsername_admin.equals(textField_pseudo.getText()) && dbPassword_admin.equals(textField_mdp.getText())){
 				                	login = true;
 				                	connexion_admin = true;
-				                	fenetre.goToAccueil(selection);
+				                	
 				                	erreur_log = false;
 				                	dbUsername_admin = textField_pseudo.getText();
 				                	login_general = dbUsername_admin;
 				                	status = "ADMIN";
+				                	fenetre.goToAccueil(selection);
 				                }
 				                else{
 				                	erreur_log = true;
@@ -389,9 +397,10 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 				                	login = true;
 				                	connexion_admin = false;
 				                	erreur_log = false;
-				                	fenetre.goToAccueil(selection);
+				                	
 				                	login_general = dbUsername_user;
 				                	status = "USER";
+				                	fenetre.goToAccueil(selection);
 				                }
 				                else{
 				                	erreur_log = true;
