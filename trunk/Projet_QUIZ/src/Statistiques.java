@@ -42,7 +42,7 @@ public class Statistiques extends JPanel implements MouseListener, MouseMotionLi
 	public static Quiz[] ListeQuizStats_moyen_user;
 	public static Quiz[] ListeQuizStats_difficile_user;
 	public static short i;
-	
+	private int diff=0;
 
 	/**
 	 * Constructeur
@@ -92,7 +92,7 @@ public class Statistiques extends JPanel implements MouseListener, MouseMotionLi
 		filtre_tous.setLocation(148, 300);
 		filtre_tous.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				diff = 0;
 			}
 		});
 		add(filtre_tous);
@@ -101,7 +101,7 @@ public class Statistiques extends JPanel implements MouseListener, MouseMotionLi
 		filtre_facile.setLocation(264, 300);
 		filtre_facile.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				diff = 1;
 			}
 		});
 		add(filtre_facile);
@@ -110,7 +110,7 @@ public class Statistiques extends JPanel implements MouseListener, MouseMotionLi
 		filtre_moyen.setLocation(380, 300);
 		filtre_moyen.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				diff = 2;
 			}
 		});
 		add(filtre_moyen);
@@ -119,7 +119,7 @@ public class Statistiques extends JPanel implements MouseListener, MouseMotionLi
 		filtre_difficile.setLocation(496, 300);
 		filtre_difficile.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-					
+				diff = 3;
 			}
 		});
 		add(filtre_difficile);
@@ -554,11 +554,33 @@ public class Statistiques extends JPanel implements MouseListener, MouseMotionLi
 			int item_score = 0;
 			int item_score_user = 0;
 			String item_temps = "";
-			item_nom = list_quiz_stats_user.getSelectedItem();
+			
+			
+			if(diff == 1){
+				item_quest = ListeQuizStats_facile_user[init].getNb_questions();
+				item_temps = ListeQuizStats_facile_user[init].getHeureQuiz() +"h "+  ListeQuizStats_facile_user[init].getMinuteQuiz()+"m "+ ListeQuizStats_facile_user[init].getSecondeQuiz() + "s";				
+			}
+			else if(diff == 2){
+				item_quest = ListeQuizStats_moyen_user[init].getNb_questions();
+				item_temps = ListeQuizStats_moyen_user[init].getHeureQuiz() +"h "+  ListeQuizStats_moyen_user[init].getMinuteQuiz()+"m "+ ListeQuizStats_moyen_user[init].getSecondeQuiz() + "s";				
+			}
+			else if(diff == 3){
+				item_quest = ListeQuizStats_difficile_user[init].getNb_questions();
+				item_temps = ListeQuizStats_difficile_user[init].getHeureQuiz() +"h "+  ListeQuizStats_difficile_user[init].getMinuteQuiz()+"m "+ ListeQuizStats_difficile_user[init].getSecondeQuiz() + "s";
+			}
+			else {
+			
 			item_quest = ListeQuizStats_user[init].getNb_questions();
+			item_temps = ListeQuizStats_user[init].getHeureQuiz() +"h "+  ListeQuizStats_user[init].getMinuteQuiz()+"m "+ ListeQuizStats_user[init].getSecondeQuiz() + "s";
+			}
+			
+
+			
+			item_nom = list_quiz_stats_user.getSelectedItem();
 			item_score = scoreMoyen();
 			item_score_user = Score();
-			item_temps = ListeQuizStats_user[init].getHeureQuiz() +"h "+  ListeQuizStats_user[init].getMinuteQuiz()+"m "+ ListeQuizStats_user[init].getSecondeQuiz() + "s";
+			
+			
 			lb_nom_quiz.setText("Nom du quiz : " + item_nom);
 			lb_nb_quest_quiz.setText("Nombre de questions du quiz : " + item_quest);
 			lb_score_quiz.setText("Score moyen du quiz : " + item_score);
