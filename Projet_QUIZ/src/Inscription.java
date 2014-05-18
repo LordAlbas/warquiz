@@ -131,6 +131,7 @@ public class Inscription extends JPanel implements MouseListener, MouseMotionLis
 							            stmt_ajout.setInt(5, 0);
 							            stmt_ajout.executeUpdate();
 							            stmt_ajout.close();
+							            pseudo_existe = 0;
 							            fenetre.goToConnexion(selection);
 					            	}	            
 					            }
@@ -232,6 +233,7 @@ public class Inscription extends JPanel implements MouseListener, MouseMotionLis
 							            stmt_ajout.setInt(5, 0);
 							            stmt_ajout.executeUpdate();
 							            stmt_ajout.close();
+							            pseudo_existe = 0;
 							            fenetre.goToConnexion(selection);
 					            	}	            
 					            }
@@ -333,6 +335,7 @@ public class Inscription extends JPanel implements MouseListener, MouseMotionLis
 							            stmt_ajout.setInt(5, 0);
 							            stmt_ajout.executeUpdate();
 							            stmt_ajout.close();
+							            pseudo_existe = 0;
 							            fenetre.goToConnexion(selection);
 					            	}	            
 					            }
@@ -434,6 +437,7 @@ public class Inscription extends JPanel implements MouseListener, MouseMotionLis
 							            stmt_ajout.setInt(5, 0);
 							            stmt_ajout.executeUpdate();
 							            stmt_ajout.close();
+							            pseudo_existe = 0;
 							            fenetre.goToConnexion(selection);
 					            	}	            
 					            }
@@ -571,6 +575,7 @@ public class Inscription extends JPanel implements MouseListener, MouseMotionLis
 					            stmt_ajout.setInt(5, 0);
 					            stmt_ajout.executeUpdate();
 					            stmt_ajout.close();
+					            pseudo_existe = 0;
 					            fenetre.goToConnexion(selection);
 			            	}	            
 			            }
