@@ -89,6 +89,14 @@ public class Bouton_selection_question extends JButton implements MouseListener{
 		return false;
 	}
 	
+	public JCheckBox getTabCheck(int id) {
+		return TabCheck[id];
+	}
+	
+	public int getTabCheckLength() {
+		return TabCheck.length;
+	}
+	
 	public void mouseClicked(MouseEvent arg0) {
 		switchQuest();
 	}

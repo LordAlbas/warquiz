@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.text.DecimalFormat;
 
 import javax.swing.*;
 
@@ -80,7 +81,7 @@ public class Jouer_partie extends JPanel implements MouseListener, MouseMotionLi
 						JOptionPane.INFORMATION_MESSAGE);
 				if (rep == 0) {												// si OK on redirige
 					if (isReponduPartout()) {
-						fenetre.goToCorrection(monQuiz, boutonQuestion);
+						fenetre.goToCorrection(monQuiz, boutonQuestion, calculScore());
 					} else {
 						timer.start();
 						chrono.startTimer();
@@ -281,6 +282,37 @@ public class Jouer_partie extends JPanel implements MouseListener, MouseMotionLi
 					JOptionPane.ERROR_MESSAGE);
 		}
 		return repondu;
+	}
+	
+	public int calculScore() {
+		int score = 0;
+		for (byte z=0; z<boutonQuestion.length; z++) {		// pour chaque Question
+			boolean questJuste = true;
+			for (byte k=0; k<boutonQuestion[z].getTabCheckLength(); k++) {		// pour chaque Reponse de la Quest
+				if (boutonQuestion[z].getTabCheck(k).isSelected() != monQuiz.getQuest(z).getReponse(k).getStatutRep())
+					questJuste = false;
+			}
+			if (questJuste)
+				score++;
+		}
+		// ici le score vaut le nombre de question juste (genre 7 sur 10questions)
+		
+		// alors on calcul un pourcentage pour avoir un score sur 100.
+		double resultat = score/monQuiz.getNb_questions();
+		resultat += resultat*100;
+		DecimalFormat df = new DecimalFormat("###");
+		score = Integer.parseInt(df.format(resultat));
+		
+		//score = (score/monQuiz.getNb_questions())*100;
+		
+		// user => quiz deja joue ? null : quizJoue++
+		//			table JOUER where JOUER.login_user == connexion.login_generel
+		//			AND JOUER.id_quiz == monQuiz.getID;
+		//		Si oui (deja jouee) => nb_partieJouer++
+		//		Si non (pas jouee) => nb_partieJouer++ && nb_quizJouer++
+		//		Dans tout les cas => JOUER.insertInto (login_usr, id_quiz, score, tempsh,min,sec);
+		
+		return score;
 	}
 	
 	/**
