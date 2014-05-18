@@ -63,6 +63,7 @@ public class Bouton_selection_question_correction extends JButton implements Mou
 	public void mouseClicked(MouseEvent e) {
 		maCorr.sousPanel.removeAll();											// vire tout
 		maCorr.setQuestion(monQuiz.getQuest(num_question).getQuestTxt());		// affiche la question
+		maCorr.setNumQuest(num_question);
 		//affLabel();	// affiche les reponses correction (NO NEED)
 		maCorr.affchckPlayed(num_question);										// affiche les reponses jouees
 		setBackground(Color.GRAY);												// passe le bouton en gris
