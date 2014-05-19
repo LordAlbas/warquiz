@@ -43,6 +43,8 @@ public class Images {
 			img_fond[4] = ImageIO.read(new File("images/option_panel.png"));	// Lecture du fichier .png
 			
 			img_fond[5] = ImageIO.read(new File("images/accueil_fond_use.png"));
+			img_fond[6] = ImageIO.read(new File("images/option_panel_carre.png"));
+			img_fond[7] = ImageIO.read(new File("images/option_panel_use.png"));
 			
 		} catch (IOException e) {
 			e.printStackTrace();

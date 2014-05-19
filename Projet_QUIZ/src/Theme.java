@@ -16,6 +16,7 @@ public class Theme {
 	public static int btnCredits_hover = 2;
 	public static int btnQuitter_hover = 3;
 	
+	public static int fondOption = 4;
 	public static int barre = 1;
 	
 	
@@ -37,6 +38,7 @@ public class Theme {
 	public static int getCredits_hover()		{return btnCredits_hover;}	
 	public static int getQuitter_hover()		{return btnQuitter_hover;}
 
+	public static int getOption()				{return fondOption;}
 	public static int getBarre()				{return barre;}
 	//setteurs
 	public static void setTheme(int i){theme = i;}
@@ -54,5 +56,6 @@ public class Theme {
 	public static void setCredits_hover(int i)			{btnCredits_hover = i;}
 	public static void setQuitter_hover(int i)			{btnQuitter_hover = i;}
 
+	public static void setOption(int i)					{fondOption = i;}
 	public static void setBarre(int i)					{barre = i;}
 }
