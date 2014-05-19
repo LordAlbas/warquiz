@@ -57,7 +57,7 @@ public class Correction extends JPanel implements MouseListener{
 		JLabel lb_titrePartie = new JLabel("<html>"+monQuiz.getNom()+"</html>");	// Nom du quiz (sur 2 lignes max)
 		lb_titrePartie.setForeground(Color.WHITE);
 		lb_titrePartie.setFont(new Font("Arial", Font.PLAIN, 35));
-		lb_titrePartie.setBounds(660, 185, 400, 80);
+		lb_titrePartie.setBounds(660, 185, 370, 80);
 		add(lb_titrePartie);
 		
 		/*
@@ -108,14 +108,14 @@ public class Correction extends JPanel implements MouseListener{
 		//sousPanelExpl.setBorder(BorderFactory.createLineBorder(Color.GREEN));			// border de debug
 		add(sousPanelExpl);
 		bon = new JLabel("<html>Vos r&eacute;ponse(s) juste(s) sont &eacute;crites en "			// explication GREEN
-				+ "<span style='color:green;'>VERT</span></html>");
+				+ "<span style='color:rgb(0,255,0);'>VERT</span></html>");
 		bon.setForeground(Color.WHITE);
 		bon.setFont(new Font("Arial", Font.PLAIN, 18));
 		bon.setBounds(0, 0, sousPanelExpl.getWidth()/2, sousPanelExpl.getHeight());
 		sousPanelExpl.add(bon);
 		
 		mauvais = new JLabel("<html>Vos mauvaise(s) r&eacute;ponse(s) sont &eacute;crites en "	// explication RED
-				+ "<span style='color:red;'>ROUGE</span></html>");
+				+ "<span style='color:rgb(255,0,0);'>ROUGE</span></html>");
 		mauvais.setForeground(Color.WHITE);
 		mauvais.setFont(new Font("Arial", Font.PLAIN, 18));
 		mauvais.setBounds(sousPanelExpl.getWidth()/2, 0, sousPanelExpl.getWidth()/2, sousPanelExpl.getHeight());
