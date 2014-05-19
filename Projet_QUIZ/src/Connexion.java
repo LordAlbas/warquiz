@@ -10,7 +10,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 
 /**
@@ -65,8 +64,6 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 		fenetre = fen;
 		setLayout(null); // on met le layout en absolute pour mettre les JTextbox où on veut
 
-		
-
 		// Création du textBox pseudo et placement + suppression du style
 		textField_pseudo = new JTextField();
 		textField_pseudo.addFocusListener(this); 
@@ -88,11 +85,6 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 		/**
 		 * Ajout de l'image de chargement du loading
 		 */
-		//file:///C:/Users/Sinardet/Documents/ProjetOracle/warquiz/Projet_QUIZ/images/chargement_anime.gif
-		//file:///C:/Users/Sinardet/Documents/ProjetOracle/warquiz/Projet_QUIZ/images/loading.gif
-		//URL url = new URL("images/loading.gif");
-		//url.getFile().get
-		//String path = url.getAbsolutePath();
 
 		File file = new File ("images/chargement_anime.gif");
 		
@@ -109,18 +101,18 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 		return status;
 	}
 	
-	 private Image load(final String url) {
-	       try {
-	           final Toolkit tk = Toolkit.getDefaultToolkit();
-	           final Image img = tk.createImage(new URL(url));
-	           tk.prepareImage(img, -1, -1, null);
-	           System.out.println("PASSAGE IMG GIF");
-	           return img;
-	       }catch (Exception e) {
-	           e.printStackTrace();
-	           return null;
-	       }
-	  }
+	private Image load(final String url) {
+	      try {
+	          final Toolkit tk = Toolkit.getDefaultToolkit();
+	          final Image img = tk.createImage(new URL(url));
+	          tk.prepareImage(img, -1, -1, null);
+	          System.out.println("PASSAGE IMG GIF");
+	          return img;
+	      }catch (Exception e) {
+	          e.printStackTrace();
+	          return null;
+	      }
+	 }
 	 
 	/**
 	 * Défini les actions du bouton ENTREE
@@ -170,10 +162,7 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 						                else{
 						                	erreur_log = true; repaint();
 						                }
-						                
-						            	
 						            }
-						       
 						            repaint(); 
 						            while(rs_user.next()){
 						            	dbUsername_user = rs_user.getString("login_usr");
@@ -184,7 +173,6 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 						                	login = true;
 						                	connexion_admin = false;
 						                	erreur_log = false;
-						                	
 						                	login_general = dbUsername_user;
 						                	status = "USER";
 						                	repaint();
@@ -194,10 +182,8 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 						                	erreur_log = true;repaint();
 						                }
 						                recherche_bdd = true;
-						            	
 						            	repaint();
 						            }
-					            
 					            recherche_bdd=false;
 					            repaint(); 
 					        } catch (SQLException eeee) {
@@ -225,7 +211,6 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 					}
 				}
 			}
-		
 		});	
 		 
 		textField_mdp.addKeyListener(new java.awt.event.KeyAdapter(){
@@ -264,7 +249,6 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 						                	login = true;
 						                	connexion_admin = true;
 						                	erreur_log = false;
-						                	
 						                	dbUsername_admin = textField_pseudo.getText();
 						                	login_general = dbUsername_admin;
 						                	status = "ADMIN";
@@ -273,12 +257,9 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 						                }
 						                else{
 						                	erreur_log = true;repaint();
-						                	
 						                }
 						                recherche_bdd = true;
-						            	
 						            }
-						       
 						            repaint(); 
 						            while(rs_user.next()){
 						            	dbUsername_user = rs_user.getString("login_usr");
@@ -297,13 +278,9 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 						                }
 						                else{
 						                	erreur_log = true;repaint();
-						                	
-						                	
 						                }
 						                recherche_bdd = true;
-						            	
 						            }
-					            
 					            recherche_bdd=false;
 					            repaint(); 
 					        } catch (SQLException eeee) {
@@ -321,7 +298,6 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 					}else{
 						textField_mdp.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.RED));
 						bad_mdp=1;erreur_log = true;repaint();
-						
 						repaint();
 						if(textField_pseudo.getText().length() == 0){
 							textField_pseudo.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.RED));
@@ -385,7 +361,6 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 				                if(dbUsername_admin.equals(textField_pseudo.getText()) && dbPassword_admin.equals(textField_mdp.getText())){
 				                	login = true;
 				                	connexion_admin = true;
-				                	
 				                	erreur_log = false;
 				                	dbUsername_admin = textField_pseudo.getText();
 				                	login_general = dbUsername_admin;
@@ -395,23 +370,18 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 				                }
 				                else{
 				                	erreur_log = true;
-				                	
 				                }
 				                recherche_bdd = true;
-				            	
 				            }
-				       
 				            repaint(); 
 				            while(rs_user.next()){
 				            	dbUsername_user = rs_user.getString("login_usr");
 				            	dbPassword_user = rs_user.getString("mdp_usr");
-				            	
 				            	repaint();
 				                if(dbUsername_user.equals(textField_pseudo.getText()) && dbPassword_user.equals(textField_mdp.getText())){
 				                	login = true;
 				                	connexion_admin = false;
 				                	erreur_log = false;
-				                	
 				                	login_general = dbUsername_user;
 				                	status = "USER";
 				                	repaint();
@@ -419,13 +389,9 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 				                }
 				                else{
 				                	erreur_log = true;
-				                	
-				                	
 				                }
 				                recherche_bdd = true;
-				            	
 				            }
-			            
 			            recherche_bdd=false;
 			            repaint(); 
 			        } catch (SQLException eeee) {
@@ -444,7 +410,6 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 				System.out.println(" ENTER PSEUDO ERROR ");
 				textField_mdp.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.RED));
 				bad_mdp=1;erreur_log = true;repaint();
-				
 				repaint();
 				if(textField_pseudo.getText().length() == 0){
 					textField_pseudo.setBorder(BorderFactory.createMatteBorder(1, 1, 1, 1, Color.RED));
@@ -482,12 +447,8 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 		
 		g.drawImage(Images.img_fond[Theme.getTheme()], 0, 0, this.getWidth(), this.getHeight(), null);
 		g.drawImage(Images.img_element[0], 0, 0, this.getWidth(), (int)(this.getHeight() / 6.1230), null);		// dessine le header	
-		
 		g.drawImage(Images.img_bouton[6], 901, 0, 46, 46, null);
 		g.drawImage(Images.img_bouton[4], 967, 0, 46, 46, null);
-		//g.drawImage(Images.img_bouton[4], 523, 0, 46, 46, null);
-		
-		
 		/*
 		 * On boucle sur tous les boutons (de [0] a [3]).
 		 * Chaque bouton obtient une position X (hauteur) en fonction de son numero (i).

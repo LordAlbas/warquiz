@@ -1,5 +1,4 @@
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.List;
@@ -15,13 +14,9 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
-import javax.swing.JTable;
-import javax.swing.SwingConstants;
 
 
 public class Statistiques_Admin extends JPanel implements MouseListener, MouseMotionListener, ItemListener{
@@ -189,8 +184,6 @@ public class Statistiques_Admin extends JPanel implements MouseListener, MouseMo
 		lb_temps_moyen_quiz.setFont(new Font("Arial", Font.PLAIN, 17));
 		lb_temps_moyen_quiz.setBounds(180, 660, 400, 50);
 		add(lb_temps_moyen_quiz);
-		
-		
 	}
 
 	/**
@@ -220,7 +213,6 @@ public class Statistiques_Admin extends JPanel implements MouseListener, MouseMo
 			e.printStackTrace();
 		}
 		catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -253,7 +245,6 @@ public class Statistiques_Admin extends JPanel implements MouseListener, MouseMo
 			e.printStackTrace();
 		}
 		catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -280,7 +271,6 @@ public class Statistiques_Admin extends JPanel implements MouseListener, MouseMo
 			e.printStackTrace();
 		}	
 		catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return score_moyen;
@@ -311,7 +301,6 @@ public class Statistiques_Admin extends JPanel implements MouseListener, MouseMo
 			e.printStackTrace();
 		}
 		catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -340,7 +329,6 @@ public class Statistiques_Admin extends JPanel implements MouseListener, MouseMo
 			e.printStackTrace();
 		}
 		catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -367,7 +355,6 @@ public class Statistiques_Admin extends JPanel implements MouseListener, MouseMo
 	        
 	        while(rs_quiz_joue.next()){
 	        	db_quiz_joue = rs_quiz_joue.getString("NB_QUIZ_JOUE"); // on récupère la moyenne
-	        	
 	        }
 	        while(rs_nb_quiz.next()){
 	        	db_nb_quiz = rs_nb_quiz.getString("nb_quiz"); // on récupère la moyenne
@@ -381,12 +368,9 @@ public class Statistiques_Admin extends JPanel implements MouseListener, MouseMo
 			e.printStackTrace();
 		}	
 		catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-	
-	public void meilleurScore(){} 
 	
 	/**
 	 * Le nombre de personnes qui on paticipé à un quiz donné
@@ -411,7 +395,6 @@ public class Statistiques_Admin extends JPanel implements MouseListener, MouseMo
 			e.printStackTrace();
 		}
 		catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return nb_participants_quiz;
@@ -504,7 +487,6 @@ public class Statistiques_Admin extends JPanel implements MouseListener, MouseMo
 			e.printStackTrace();
 		}	
 		catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}	
@@ -525,7 +507,6 @@ public class Statistiques_Admin extends JPanel implements MouseListener, MouseMo
 	 */
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		
 		// le fond et les elements sont en fonction de la taille de la fenetre, donc pas de soucis de redimensionnement de la fenetre
 		g.drawImage(Images.img_fond[0], 0, 0, this.getWidth(), this.getHeight(), null);						// dessine le fond d'ecran
 		g.drawImage(Images.img_element[1], 140, 113, 8, 655, null); // barre bleu

@@ -1,5 +1,4 @@
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
@@ -15,11 +14,8 @@ import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-
-import java.awt.List;
 
 
 public class Admin_ajout_reponses extends JPanel  implements MouseListener, ItemListener{
@@ -220,7 +216,6 @@ public class Admin_ajout_reponses extends JPanel  implements MouseListener, Item
 		if (i<10) {
 			reponses[i] = new JTextField("Write here..");
 			reponses[i].setBounds(65+((i%2)*315), 330+((i/2)*70), 230, 23); // calcul dont je suis fier. (no need 'if')
-			//reponses[i].setFont(new Font("Arial", Font.PLAIN, 16));
 			add(reponses[i]);
 			addNbRep(i);
 			addChkBox(i);
@@ -302,15 +297,11 @@ public class Admin_ajout_reponses extends JPanel  implements MouseListener, Item
 		this.remove(bt_suppr[id]);
 		this.remove(lb_nbRep[id]);
 		this.repaint();
-		//this.revalidate();
 	}
 	
 	public void mouseDragged(MouseEvent arg0) {}
 	public void mouseMoved(MouseEvent arg0) {}
 	public void mouseClicked(MouseEvent e) {
-		//System.out.println(list.locationToIndex(e.getPoint()));
-		//System.out.println(list.getSelectedValue());
-		//System.out.println(list.getSelectedItem());
 	}
 	public void mouseEntered(MouseEvent arg0) {}
 	public void mouseExited(MouseEvent arg0) {}
@@ -322,8 +313,7 @@ public class Admin_ajout_reponses extends JPanel  implements MouseListener, Item
 	
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		g.drawImage(Images.img_fond[Theme.getTheme()], 0, 0, this.getWidth(), this.getHeight(), null);
-		//g.drawImage(Images.img_element[0], 0, 0, this.getWidth(), (int)(this.getHeight() / 6.1230), null);		// dessine le header	
+		g.drawImage(Images.img_fond[Theme.getTheme()], 0, 0, this.getWidth(), this.getHeight(), null);		// dessine le header	
 		g.drawImage(Images.img_bouton[4], 960, 1, 46, 46, null);
 	}
 }

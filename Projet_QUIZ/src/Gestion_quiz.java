@@ -8,8 +8,6 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
-
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -122,12 +120,8 @@ public class Gestion_quiz extends JPanel implements MouseListener, ItemListener 
 																	"Creation Quiz",
 																	JOptionPane.QUESTION_MESSAGE);
 				if ((nomQuiz != null) && (nomQuiz.length() > 0)) {
-					//System.out.println("Entry = "+nomQuiz);
-					
 					// On ecrit pas encore dans la liste, ca sera fait avec une requete SQL au chargement de cette page
 					// donc tant que le quiz en creation n'a pas ete valide, il n'apparaitra pas ici.
-					//list_quizcree.add(nomQuiz);
-					
 					// creation d'un nouveau quiz
 					monQuiz = new Quiz(nomQuiz, fenetre);
 					// qui est le parametre de Creation_quiz
@@ -138,7 +132,7 @@ public class Gestion_quiz extends JPanel implements MouseListener, ItemListener 
 					fenetre.setContentPane(creation_quiz);
 					fenetre.getContentPane().setVisible(true);
 				} else {
-					System.out.println("Aucune string retournee");
+					//System.out.println("Aucune string retournee");
 				}
 			}
 		});
@@ -151,8 +145,6 @@ public class Gestion_quiz extends JPanel implements MouseListener, ItemListener 
 		bt_supprQuiz.setBorder(null);
 		bt_supprQuiz.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//System.out.println("click sur Modification de quiz");
-				
 				if (list_quizcree.getItemCount() > 0 && list_quizcree.getSelectedItem() != null) {
 					// On recupere le Quiz choisi en entier (avec Questions et Reponses comprises)
 					SQL_Requete_Quiz maRequete = new SQL_Requete_Quiz(fenetre);
@@ -179,7 +171,6 @@ public class Gestion_quiz extends JPanel implements MouseListener, ItemListener 
 		bt_modifQuiz.setBorder(null);
 		bt_modifQuiz.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//System.out.println("click sur Suppression de quiz");
 				int rep = JOptionPane.showConfirmDialog(null, 
 						"<html><b>Attention :</b><br/>"
 						+ "Vous etes sur le point de supprimer un Quiz.<br/>"
@@ -189,10 +180,8 @@ public class Gestion_quiz extends JPanel implements MouseListener, ItemListener 
 						JOptionPane.WARNING_MESSAGE);
 				if (rep == 0) {
 					if (list_quizcree.getItemCount() > 0 && list_quizcree.getSelectedItem() != null) {
-						
 						SQL_Requete_Quiz maRequete = new SQL_Requete_Quiz(fenetre);
 						maRequete.deleteQuiz(mesQuiz[list_quizcree.getSelectedIndex()].getId());
-						
 						list_quizcree.remove(list_quizcree.getSelectedItem());
 					} else {
 						//System.out.println("Erreur dans la suppression de quiz !");
@@ -258,8 +247,6 @@ public class Gestion_quiz extends JPanel implements MouseListener, ItemListener 
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		g.drawImage(Images.img_fond[Theme.getTheme()], 0, 0, this.getWidth(), this.getHeight(), null);
-		//g.drawImage(Images.img_element[0], 0, 0, this.getWidth(), (int)(this.getHeight() / 6.1230), null);		// dessine le header
-		
 		switch (bouton_deco){
 		case "rien" :
 			g.drawImage(Images.img_bouton[4], 960, 1, 46, 46, null);
@@ -269,6 +256,5 @@ public class Gestion_quiz extends JPanel implements MouseListener, ItemListener 
 			bouton_deco = "rien";
 			break;
 		}
-		
 	}
 }

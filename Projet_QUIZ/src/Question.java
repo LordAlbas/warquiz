@@ -78,11 +78,9 @@ public class Question implements ActionListener {
 	
 	public void actionPerformed(ActionEvent e) {
 		admin_ajout_reponses = new Admin_ajout_reponses(fenetre, currentQuiz, id_question);
-		//System.out.println("CLICK SUR QUEST num -> "+QuestNum);
 		fenetre.getContentPane().setVisible(false);
 		admin_ajout_reponses.addMouseListener(admin_ajout_reponses);
 		fenetre.setContentPane(admin_ajout_reponses);
 		fenetre.getContentPane().setVisible(true);
 	}
-
 }

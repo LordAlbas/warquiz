@@ -2,8 +2,6 @@ import java.sql.*;
 
 import javax.swing.*;
 
-import java.awt.Graphics;
-
 public class SQL_Connect extends JPanel{
 
 	private Fenetre fenetre;
@@ -22,24 +20,17 @@ public class SQL_Connect extends JPanel{
 		fenetre.goToAccueil(selection);
 	}
 	    
-	  
 	public static void tryConnect() {
 		Connection conn = null;
-		
 		try {
 			Connexion.recherche_bdd=true;
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
             conn = DriverManager.getConnection("jdbc:sqlserver://193.252.48.189\\SQLEXPRESS:1433;" + "database=BDD_B3I_groupe_5;" + "user=b3i_groupe_5;" + "password=123Soleil");
-            System.out.println("Connecté");
             Connexion.recherche_bdd=false;
 		} 
 		catch (Exception e) {
-            System.out.println(e.getMessage());
-            System.out.println("erreur connexion");
             Connexion.erreur_bdd=true;
             Connexion.recherche_bdd=false;
-           
-            
 		}
 		
 	}
@@ -47,7 +38,6 @@ public class SQL_Connect extends JPanel{
 		Connection conn = null;
 		try {
 			Connexion.recherche_bdd=true;
-			//repaint();
 			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 			conn = DriverManager.getConnection("jdbc:sqlserver://193.252.48.189\\SQLEXPRESS:1433;" + "database=BDD_B3I_groupe_5;" + "user=b3i_groupe_5;" + "password=123Soleil");
 			Statement stmt_admin = (Statement) conn.createStatement();
@@ -74,18 +64,15 @@ public class SQL_Connect extends JPanel{
 	                }
 	                else{
 	                	Connexion.erreur_log = true;
-	                	
 	                }
 	                Connexion.recherche_bdd = true;
 	            	Connexion.erreur_log = false;
 	            }
-	       
-	            //repaint(); 
+	            
 	            while(rs_user.next()){
 	            	Connexion.dbUsername_user = rs_user.getString("login_usr");
 	            	Connexion.dbPassword_user = rs_user.getString("mdp_usr");
 	            	
-	            	//repaint();
 	                if(Connexion.dbUsername_user.equals(Connexion.textField_pseudo.getText()) && Connexion.dbPassword_user.equals(Connexion.textField_mdp.getText())){
 	                	Connexion.login = true;
 	                	Connexion.connexion_admin = false;
@@ -95,25 +82,20 @@ public class SQL_Connect extends JPanel{
 	                }
 	                else{
 	                	Connexion.erreur_log = true;
-	                	
-	                	
 	                }
 	                Connexion.recherche_bdd = true;
 	            	Connexion.erreur_log = false;
 	            }
             
             Connexion.recherche_bdd=false;
-            //repaint(); 
         } catch (SQLException eeee) {
         	eeee.printStackTrace();
         	Connexion.erreur_bdd = true;
         	Connexion.recherche_bdd=false;
-            //repaint();
         } catch (ClassNotFoundException eeee) {
 			eeee.printStackTrace();
 			Connexion.erreur_bdd = true;
 			Connexion.recherche_bdd=false;
-            //repaint();
 		}		
 	}
 }
