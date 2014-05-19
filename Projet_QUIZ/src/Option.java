@@ -50,7 +50,7 @@ public class Option extends JPanel implements MouseListener, MouseMotionListener
 	    
 	    header2.setInOption(true);
 	    
-		lb_titreOption = new JLabel("Selectionnez votre thème puis validez.");
+		lb_titreOption = new JLabel("<html>Selectionnez votre th&egrave;me puis validez.</html>");
 		lb_titreOption.setForeground(Images.couleurLabel);
 		lb_titreOption.setFont(new Font("Arial", Font.PLAIN, 25));
 		lb_titreOption.setBounds(450, 170, 500, 50);
@@ -95,7 +95,7 @@ public class Option extends JPanel implements MouseListener, MouseMotionListener
 			check3 = true;
 		}
 		
-		t1 = new JRadioButton("  Selectionner le thème défaut", check1);
+		t1 = new JRadioButton("<html>Selectionner le th&egrave;me d&eacute;faut</html>", check1);
 		t1.setOpaque(false);
 		t1.setForeground(Color.WHITE);
 		t1.setBorder(null);
@@ -133,7 +133,7 @@ public class Option extends JPanel implements MouseListener, MouseMotionListener
 		
 
 		
-		t2 = new JRadioButton("Selectionner le thème carré", check2);
+		t2 = new JRadioButton("<html>Selectionner le th&egrave;me carr&eacute;</html>", check2);
 		t2.setOpaque(false);
 		t2.setForeground(Color.WHITE);
 		t2.setBorder(null);
@@ -166,7 +166,7 @@ public class Option extends JPanel implements MouseListener, MouseMotionListener
 			}
 		});
 		
-		t3 = new JRadioButton("Selectionner le thème Toxic", check3);
+		t3 = new JRadioButton("<html>Selectionner le th&egrave;me Toxic</html>", check3);
 		t3.setOpaque(false);
 		t3.setForeground(Color.WHITE);
 		t3.setBorder(null);
@@ -233,7 +233,7 @@ public class Option extends JPanel implements MouseListener, MouseMotionListener
 			Theme.setBarre(1);
 			repaint();
 		}
-		if (arg0.getX() >= 60 && arg0.getX() <= 260 && arg0.getY() >= 343 && arg0.getY() <= 543) { //carré
+		if (arg0.getX() >= 60 && arg0.getX() <= 260 && arg0.getY() >= 343 && arg0.getY() <= 543) { //carrï¿½
 			t1.setSelected(false);
 			t2.setSelected(true);
 			t3.setSelected(false);
@@ -297,7 +297,7 @@ public class Option extends JPanel implements MouseListener, MouseMotionListener
 		if (arg0.getX() >= 60 && arg0.getX() <= 260 && arg0.getY() >= 140 && arg0.getY() <= 340) { //Defaut
 			setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		}
-		else if (arg0.getX() >= 60 && arg0.getX() <= 260 && arg0.getY() >= 343 && arg0.getY() <= 543) { //carré
+		else if (arg0.getX() >= 60 && arg0.getX() <= 260 && arg0.getY() >= 343 && arg0.getY() <= 543) { //carrï¿½
 			setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		}
 		else if(arg0.getX() >= 60 && arg0.getX() <= 260 && arg0.getY() >= 546 && arg0.getY() <= 746){//toxic

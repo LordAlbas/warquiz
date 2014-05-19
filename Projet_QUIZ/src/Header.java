@@ -29,14 +29,14 @@ public class Header extends JPanel implements MouseListener, MouseMotionListener
 		
 		if (inGame){
 			JOptionPane.showMessageDialog(null,
-				    "Impossible de retourner ï¿½ l'accueil en cours de partie !",
+				    "<html>Impossible de retourner &agrave; l'accueil en cours de partie !</html>",
 				    "Erreur",
 				    JOptionPane.WARNING_MESSAGE);
 		}
 		else if(InCreateQuiz){
 			int choix = JOptionPane.showConfirmDialog(
 				    null,
-				    "<html>Si vous revenez à l'acceuil sans avoir validé le quiz,<br/> il sera définitivement perdu !<br/>Continuer ?</html>",
+				    "<html>Si vous revenez &agrave; l'acceuil sans avoir valid&eacute; le quiz,<br/> il sera d&eacute;finitivement perdu !<br/>Continuer ?</html>",
 				    "Attention !",
 				    JOptionPane.YES_NO_OPTION,
 				    JOptionPane.WARNING_MESSAGE);
