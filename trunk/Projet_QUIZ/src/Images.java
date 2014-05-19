@@ -42,6 +42,8 @@ public class Images {
 			img_fond[3] = ImageIO.read(new File("images/accueil_fond1.png"));	// Lecture du fichier .png
 			img_fond[4] = ImageIO.read(new File("images/option_panel.png"));	// Lecture du fichier .png
 			
+			img_fond[5] = ImageIO.read(new File("images/accueil_fond_use.png"));
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -63,6 +65,12 @@ public class Images {
 			img_element[11] = ImageIO.read(new File("images/theme_carre.png"));
 			img_element[12] = ImageIO.read(new File("images/information_bad_combi_mdp.png"));
 			img_element[13] = ImageIO.read(new File("images/information_pseudo_isset.png"));
+		
+			img_element[14] = ImageIO.read(new File("images/header_logo_use.png"));
+			img_element[15] = ImageIO.read(new File("images/barre_bleu_header_use.png"));
+			
+			img_element[16] = ImageIO.read(new File("images/barre_verticale_use.png"));
+			img_element[17] = ImageIO.read(new File("images/theme_toxic.png"));
 			
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -81,6 +89,13 @@ public class Images {
 			img_bouton[7] = ImageIO.read(new File("images/accueil_bouton_gerer.png"));
 			img_bouton[8] = ImageIO.read(new File("images/bouton_filtre.png"));
 			img_bouton[9] = ImageIO.read(new File("images/delete_icon.png"));
+			// theme use
+			img_bouton[10] = ImageIO.read(new File("images/accueil_bouton_jouer_use.png"));
+			img_bouton[11] = ImageIO.read(new File("images/accueil_bouton_statistiques_use.png"));
+			img_bouton[12] = ImageIO.read(new File("images/accueil_bouton_ credit_use.png"));
+			img_bouton[13] = ImageIO.read(new File("images/accueil_bouton_quitter_use.png"));
+			img_bouton[17] = ImageIO.read(new File("images/accueil_bouton_gerer_use.png"));
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -96,6 +111,13 @@ public class Images {
 			img_bouton_hover[5] = ImageIO.read(new File("images/retour_hover.png"));
 			img_bouton_hover[6] = ImageIO.read(new File("images/bouton_option_hover.png"));
 			img_bouton_hover[7] = ImageIO.read(new File("images/accueil_bouton_gerer_mouseover.png"));
+			//theme use
+			img_bouton_hover[10] = ImageIO.read(new File("images/accueil_bouton_jouer_mouseover_use.png"));
+			img_bouton_hover[11] = ImageIO.read(new File("images/accueil_bouton_statistiques_mouseover_use.png"));
+			img_bouton_hover[12] = ImageIO.read(new File("images/accueil_bouton_credit_mouseover_use.png"));
+			img_bouton_hover[13] = ImageIO.read(new File("images/accueil_bouton_quitter_mouseover_use.png"));
+			img_bouton_hover[17] = ImageIO.read(new File("images/accueil_bouton_gerer_mouseover_use.png"));
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
