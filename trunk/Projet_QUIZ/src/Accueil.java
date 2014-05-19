@@ -66,8 +66,6 @@ public class Accueil extends JPanel implements MouseListener, MouseMotionListene
 	public void mouseClicked(MouseEvent e) {
 		// On recupere X et Y au click
 		if (e.getX() >= 120 && e.getX() <= 490 && e.getY() >= 260 && e.getY() <= 345) { // JOUER
-			System.out.print("JOUER");
-
 			selection = "jouer";
 			if(Connexion.connexion_admin){
 				fenetre.goToGerer(selection); // on appel la fonction qui va changer de panel
@@ -79,14 +77,11 @@ public class Accueil extends JPanel implements MouseListener, MouseMotionListene
 		}
 		
 		if (e.getX() >= 120 && e.getX() <= 490 && e.getY() >= 360 && e.getY() <= 445) { // STATS
-			System.out.print("STATS");
-			
 			selection = "statistiques";
 			if(Connexion.connexion_admin){
 				try {
 					fenetre.goToStatistiquesAdmin(selection);
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				} // on appel la fonction qui va changer de panel
 			}
@@ -94,21 +89,17 @@ public class Accueil extends JPanel implements MouseListener, MouseMotionListene
 				try {
 					fenetre.goToStatistiques(selection);
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				} // on appel la fonction qui va changer de panel
 			}
 		}
 		
 		if (e.getX() >= 120 && e.getX() <= 490 && e.getY() >= 460 && e.getY() <= 545) { // CREDITS
-			System.out.println("CREDITS");
 			selection = "credits";
 			fenetre.goToCredits(selection); // on appel la fonction qui va changer de panel
-			System.out.println(Connexion.login_general);
 		}
 		
 		if (e.getX() >= 120 && e.getX() <= 490 && e.getY() >= 560 && e.getY() <= 645) { // QUITTER
-			System.out.print("QUITTER");
 			selection = "quitter";
 			fenetre.goToQuitter(selection); // on appel la fonction qui va changer de panel
 		}
@@ -320,11 +311,5 @@ public class Accueil extends JPanel implements MouseListener, MouseMotionListene
 			}
 			*/
 		}
-		
-		
-		
-		//g.setColor(new Color(255, 255, 255));
-		//g.setFont(new Font("Courier New", Font.BOLD, 36));
-		//g.drawString("Yoo!", 400, 600);
 	}
 }

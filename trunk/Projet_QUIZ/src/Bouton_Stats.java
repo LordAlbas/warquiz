@@ -56,17 +56,20 @@ public class Bouton_Stats extends JButton implements MouseListener {
 				break;
 			case "Facile":
 				for (int j=0; j<Statistiques_Admin.ListeQuizStats_facile.length; j++) {
-					Statistiques_Admin.list_quiz_stats.add(Statistiques_Admin.ListeQuizStats_facile[j].getNom());
+					if (Statistiques_Admin.ListeQuizStats_facile[j] != null)
+						Statistiques_Admin.list_quiz_stats.add(Statistiques_Admin.ListeQuizStats_facile[j].getNom());
 				}
 				break;
 			case "Moyen":
 				for (int k=0; k<Statistiques_Admin.ListeQuizStats_moyen.length; k++) {
-					Statistiques_Admin.list_quiz_stats.add(Statistiques_Admin.ListeQuizStats_moyen[k].getNom());
+					if (Statistiques_Admin.ListeQuizStats_moyen[k] != null)
+						Statistiques_Admin.list_quiz_stats.add(Statistiques_Admin.ListeQuizStats_moyen[k].getNom());
 				}
 				break;
 			case "Difficile":
 				for (int l=0; l<Statistiques_Admin.ListeQuizStats_difficile.length; l++) {
-					Statistiques_Admin.list_quiz_stats.add(Statistiques_Admin.ListeQuizStats_difficile[l].getNom());
+					if (Statistiques_Admin.ListeQuizStats_difficile[l] != null)
+						Statistiques_Admin.list_quiz_stats.add(Statistiques_Admin.ListeQuizStats_difficile[l].getNom());
 				}
 				break;		
 		}

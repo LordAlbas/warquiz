@@ -31,7 +31,7 @@ public class Statistiques_Admin extends JPanel implements MouseListener, MouseMo
 	public JLabel score,titreA,titreU,score_moyen,score_moyen_total,nb_parties,nb_quiz,quiz_joue,nb_participants_quiz,nb_quiz_dispo; // le score d'un joueur pour un quiz
 	private JLabel lb_titreStatistiques,score_diff,lb_nom_quiz,lb_score_quiz,lb_temps_quiz,lb_nb_quest_quiz,lb_nb_part_quiz,lb_temps_moyen_quiz;
 	private JList table;
-	private Bouton bouton;
+	//private Bouton bouton;
 	private String texte;
 	
 	private Bouton_Stats bt_afficherQuizFacile;

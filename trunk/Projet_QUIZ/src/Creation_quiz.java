@@ -183,6 +183,8 @@ public class Creation_quiz extends JPanel implements MouseListener, MouseMotionL
 			cb_heure.addItem(""+i);
 		}
 		cb_heure.setSelectedItem(monQuiz.getHeureQuiz());
+		if (monQuiz.getHeureQuiz() == null)		// si heure vide, on selectionne le premier choix (h=0 au lieu de h=null, plus de plantage)
+			cb_heure.setSelectedIndex(0);
 		cb_heure.setBackground(new Color(54, 90, 118));
 		cb_heure.setForeground(Color.WHITE);
 		cb_heure.setFont(new Font("Arial", Font.PLAIN, 22));
@@ -205,6 +207,8 @@ public class Creation_quiz extends JPanel implements MouseListener, MouseMotionL
 			cb_minute.addItem(""+i);
 		}
 		cb_minute.setSelectedItem(monQuiz.getMinuteQuiz());
+		if (monQuiz.getMinuteQuiz() == null)
+			cb_minute.setSelectedIndex(0);
 		cb_minute.setBackground(new Color(54, 90, 118));
 		cb_minute.setForeground(Color.WHITE);
 		cb_minute.setFont(new Font("Arial", Font.PLAIN, 22));
@@ -227,6 +231,8 @@ public class Creation_quiz extends JPanel implements MouseListener, MouseMotionL
 			cb_seconde.addItem(""+i);
 		}
 		cb_seconde.setSelectedItem(monQuiz.getSecondeQuiz());
+		if (monQuiz.getSecondeQuiz() == null)
+			cb_seconde.setSelectedIndex(0);
 		cb_seconde.setBackground(new Color(54, 90, 118));
 		cb_seconde.setForeground(Color.WHITE);
 		cb_seconde.setFont(new Font("Arial", Font.PLAIN, 22));
@@ -473,9 +479,11 @@ public class Creation_quiz extends JPanel implements MouseListener, MouseMotionL
 		boolean nbRepNull = false;
 		String msg = "";
 		if (monQuiz.getNb_questions() <= 0)
-			msg = "- Le quiz ne contient aucune question pour le moment !\n";
+			msg = "- Le quiz ne contient aucune question pour le moment !<br/>";
 		if (cb_difficulte.getSelectedItem().toString() == "default")
-			msg += "- La difficult&eacute; du quiz n'a pas &eacute;t&eacute; d&eacute;finie !\n";
+			msg += "- La difficult&eacute; du quiz n'a pas &eacute;t&eacute; d&eacute;finie !<br/>";
+		if (cb_heure.getSelectedIndex() == 0 && cb_minute.getSelectedIndex() == 0 && cb_seconde.getSelectedIndex() == 0)
+			msg += "- Le temps du quiz n'a pas &eacute;t&eacute; d&eacute;fini !<br/>";
 		for (byte i=0; i<monQuiz.getNb_questions(); i++) {
 			if (monQuiz.getQuest(i).getNbr_reponses_juste() <= 0)
 				nbRepJusteNull = true;
@@ -483,9 +491,9 @@ public class Creation_quiz extends JPanel implements MouseListener, MouseMotionL
 				nbRepNull = true;
 		}
 		if (nbRepNull)
-			msg += "- Le quiz contient des questions sans r&eacute;ponses !\n";
+			msg += "- Le quiz contient des questions sans r&eacute;ponses !<br/>";
 		if (nbRepJusteNull)
-			msg += "- Le quiz comporte des questions sans bonnes r&eacute;ponses !\n";
+			msg += "- Le quiz comporte des questions sans bonnes r&eacute;ponses !<br/>";
 		return msg;
 	}
 	
@@ -501,7 +509,7 @@ public class Creation_quiz extends JPanel implements MouseListener, MouseMotionL
 		String error_msg = testValidationQuiz();
 		if (error_msg != "")					// Si la validation renvoi une string non-vide c'est que quelque chose ne va pas.
 			JOptionPane.showMessageDialog(null, 
-					error_msg, 
+					"<html>"+error_msg+"</html>", 
 					"Quiz non valide", 
 					JOptionPane.ERROR_MESSAGE);
 		else {

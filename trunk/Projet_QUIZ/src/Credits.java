@@ -123,7 +123,5 @@ public class Credits extends JPanel implements MouseListener, MouseMotionListene
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-	}
+	public void actionPerformed(ActionEvent e) {}
 }

@@ -106,7 +106,7 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 	          final Toolkit tk = Toolkit.getDefaultToolkit();
 	          final Image img = tk.createImage(new URL(url));
 	          tk.prepareImage(img, -1, -1, null);
-	          System.out.println("PASSAGE IMG GIF");
+	          //System.out.println("PASSAGE IMG GIF");
 	          return img;
 	      }catch (Exception e) {
 	          e.printStackTrace();
