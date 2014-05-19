@@ -48,7 +48,7 @@ public class Inscription extends JPanel implements MouseListener, MouseMotionLis
 		
 		err_inscr = err;
 		repaint();
-		System.out.println(err_inscr);
+		
 		// Création du textBox PEUDO et placement + suppression du style
 		textField_pseudo = new JTextField();
 		textField_pseudo.setBounds(398, 288, 366, 36);
