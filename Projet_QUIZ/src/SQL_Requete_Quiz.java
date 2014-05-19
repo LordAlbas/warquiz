@@ -612,11 +612,14 @@ public class SQL_Requete_Quiz {
 			 * Code pour MODIFIER un quiz
 			 */
 			System.out.println("Quiz deja existant (=modif) --> "+id);
+			// TODO faire le code d'update
+			// Ca va etre mega chaud car il faut savoir si des questions/reponses ont ete ajoute(insert into)
+			// ou supprime(delete), encore ca va pour celle qui ont juste besoin d'un (update)...
 		} else {
 			/*
 			 * Code pour AJOUTER un quiz
 			 */
-			System.out.println("Quiz tout nouveau ! (=creation) --> "+currentQuiz.getId());
+			//System.out.println("Quiz tout nouveau ! (=creation) --> "+currentQuiz.getId());
 			int newIdQuiz = 99;
 			Connection connAdd = null;
 			try {

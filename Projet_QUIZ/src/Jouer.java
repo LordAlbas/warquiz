@@ -98,8 +98,9 @@ public class Jouer extends JPanel implements MouseListener, MouseMotionListener,
 		bt_afficherAllQuiz = new Bouton("Tous");
 		bt_afficherAllQuiz.setSize(122, 36);
 		bt_afficherAllQuiz.setLocation(60, 282);
-		bt_afficherAllQuiz.addActionListener(bt_afficherAllQuiz);
-		bt_afficherAllQuiz.addActionListener(new ActionListener() {
+		bt_afficherAllQuiz.removeMouseListener(bt_afficherAllQuiz);		// REMOVE du mouseListener qui posait probleme !
+		bt_afficherAllQuiz.addActionListener(bt_afficherAllQuiz);		// (le mouseListener s'utilise du cote statistique je crois bien)
+		bt_afficherAllQuiz.addActionListener(new ActionListener() {		// (alors qu'ici on veut juste l'actionListener !)
 			public void actionPerformed(ActionEvent e) {
 				filtre = 0;
 			}
@@ -109,6 +110,7 @@ public class Jouer extends JPanel implements MouseListener, MouseMotionListener,
 		bt_afficherQuizFacile = new Bouton("Facile");
 		bt_afficherQuizFacile.setSize(122, 36);
 		bt_afficherQuizFacile.setLocation(183, 282);
+		bt_afficherQuizFacile.removeMouseListener(bt_afficherQuizFacile);
 		bt_afficherQuizFacile.addActionListener(bt_afficherQuizFacile);
 		bt_afficherQuizFacile.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -120,6 +122,7 @@ public class Jouer extends JPanel implements MouseListener, MouseMotionListener,
 		bt_afficherQuizMoyen = new Bouton("Moyen");
 		bt_afficherQuizMoyen.setSize(122, 36);
 		bt_afficherQuizMoyen.setLocation(306, 282);
+		bt_afficherQuizMoyen.removeMouseListener(bt_afficherQuizMoyen);
 		bt_afficherQuizMoyen.addActionListener(bt_afficherQuizMoyen);
 		bt_afficherQuizMoyen.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -131,6 +134,7 @@ public class Jouer extends JPanel implements MouseListener, MouseMotionListener,
 		bt_afficherQuizDifficile = new Bouton("Difficile");
 		bt_afficherQuizDifficile.setSize(122, 36);
 		bt_afficherQuizDifficile.setLocation(429, 282);
+		bt_afficherQuizDifficile.removeMouseListener(bt_afficherQuizDifficile);
 		bt_afficherQuizDifficile.addActionListener(bt_afficherQuizDifficile);
 		bt_afficherQuizDifficile.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
