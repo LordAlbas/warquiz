@@ -84,7 +84,7 @@ public class Jouer_partie extends JPanel implements MouseListener, MouseMotionLi
 						JOptionPane.INFORMATION_MESSAGE);
 				if (rep == 0) {												// si OK on redirige
 					if (isReponduPartout()) {
-						fenetre.goToCorrection(monQuiz, boutonQuestion, calculScore(), calculTemps());
+						validerPartie();
 					} else {
 						timer.start();
 						chrono.startTimer();
@@ -305,6 +305,14 @@ public class Jouer_partie extends JPanel implements MouseListener, MouseMotionLi
 		return repondu;
 	}
 	
+	public void validerPartie() {
+		int score = calculScore();
+		long temps = calculTemps();
+		SQL_Requete_Quiz srq = new SQL_Requete_Quiz(fenetre);
+		srq.comptabiliserPartie(monQuiz, score, temps);
+		fenetre.goToCorrection(monQuiz, boutonQuestion, score, temps);
+	}
+	
 	public int calculScore() {
 		int score = 0;
 		for (byte z=0; z<boutonQuestion.length; z++) {		// pour chaque Question
@@ -325,32 +333,6 @@ public class Jouer_partie extends JPanel implements MouseListener, MouseMotionLi
 		double resultat = (score/monQuiz.getNb_questions());
 		
 		score = (int)Math.round(resultat);
-		
-		// user => quiz deja joue ? null : quizJoue++
-		//			table JOUER where JOUER.login_user == connexion.login_generel
-		//			AND JOUER.id_quiz == monQuiz.getID;
-		//		Si oui (deja jouee) => nb_partieJouer++
-		//		Si non (pas jouee) => nb_partieJouer++ && nb_quizJouer++
-		//		Dans tout les cas => JOUER.insertInto (login_usr, id_quiz, score, tempsh,min,sec);
-		
-		/*
-		 * TABLE JOUER
-		 * 		login_usr			(varchar)				VS.			login_usr	courant
-		 * 		id_quiz				(int)					VS. 		id_quiz		courant
-		 * 		score_usr_quiz		(int)
-		 * 		heure_usr_quiz		(int)
-		 * 		minute_usr_quiz		(int)
-		 * 		seconde_usr_quiz	(int)
-		 */
-		
-		/*
-		 * TABLE UTILISATEUR
-		 * 		nb_partie_joue	(int)	(+1)
-		 * 		nb_quiz_joue	(int)	(+1 ou pas)
-		 * 		(login_usr)		(varchar)
-		 * 		(mdp_usr)		(varchar)
-		 * 		(adr_mail_usr)	(varchar)
-		 */
 		
 		return score;
 	}
