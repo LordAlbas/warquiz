@@ -24,7 +24,7 @@ public class Bouton_selection_question extends JButton implements MouseListener 
 	 * @param _quiz
 	 * @param _partie
 	 */
-	public Bouton_selection_question(int _num_question, Quiz _quiz, Jouer_partie _partie){	
+	public Bouton_selection_question(int _num_question, Quiz _quiz, Jouer_partie _partie) {
 		quiz = _quiz;
 		num_question = _num_question;
 		ma_partie = _partie;
