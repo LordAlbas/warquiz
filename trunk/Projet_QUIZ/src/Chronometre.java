@@ -82,7 +82,7 @@ public class Chronometre {
 			timer.stop();
 			JOptionPane.showMessageDialog(null, 
 					"<html>Le temps est &eacute;coul&eacute;.<br/> Vous allez &eacute;tre redirig&eacute; vers la correction.</html>", 
-					"Temps Ã©coulÃ© !", 
+					"Temps écoulé !", 
 					JOptionPane.WARNING_MESSAGE);
 			
 				System.out.println("Redirige correction");
