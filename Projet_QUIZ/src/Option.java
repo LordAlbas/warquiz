@@ -50,10 +50,10 @@ public class Option extends JPanel implements MouseListener, MouseMotionListener
 	    
 	    header2.setInOption(true);
 	    
-		lb_titreOption = new JLabel("<html>Selectionnez votre th&egrave;me puis validez.</html>");
+		lb_titreOption = new JLabel("<html>Selectionnez un th&egrave;me puis validez.</html>");
 		lb_titreOption.setForeground(Images.couleurLabel);
 		lb_titreOption.setFont(new Font("Arial", Font.PLAIN, 25));
-		lb_titreOption.setBounds(450, 170, 500, 50);
+		lb_titreOption.setBounds(290, 220, 500, 50);
 		add(lb_titreOption);
 		
 		lb_info = new JLabel("Option");
@@ -95,13 +95,13 @@ public class Option extends JPanel implements MouseListener, MouseMotionListener
 			check3 = true;
 		}
 		
-		t1 = new JRadioButton("<html>Selectionner le th&egrave;me d&eacute;faut</html>", check1);
+		t1 = new JRadioButton("", check1);
 		t1.setOpaque(false);
 		t1.setForeground(Color.WHITE);
 		t1.setBorder(null);
 		t1.setBackground(Color.BLUE);
 		t1.setFont(new Font("Arial", Font.PLAIN, 20));
-		t1.setBounds(300, 240, 300, 23);
+		t1.setBounds(160, 512, 300, 23);
 		add(t1);
 		t1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -135,13 +135,13 @@ public class Option extends JPanel implements MouseListener, MouseMotionListener
 		
 
 		
-		t2 = new JRadioButton("<html>Selectionner le th&egrave;me carr&eacute;</html>", check2);
+		t2 = new JRadioButton("", check2);
 		t2.setOpaque(false);
 		t2.setForeground(Color.WHITE);
 		t2.setBorder(null);
 		t2.setBackground(Color.BLUE);
 		t2.setFont(new Font("Arial", Font.PLAIN, 20));
-		t2.setBounds(300, 443, 300, 23);
+		t2.setBounds(460, 512, 300, 23);
 		add(t2);
 		t2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -169,13 +169,13 @@ public class Option extends JPanel implements MouseListener, MouseMotionListener
 			}
 		});
 		
-		t3 = new JRadioButton("<html>Selectionner le th&egrave;me Toxic</html>", check3);
+		t3 = new JRadioButton("", check3);
 		t3.setOpaque(false);
 		t3.setForeground(Color.WHITE);
 		t3.setBorder(null);
 		t3.setBackground(Color.BLUE);
 		t3.setFont(new Font("Arial", Font.PLAIN, 20));
-		t3.setBounds(300, 646, 300, 23);
+		t3.setBounds(760, 512, 300, 23);
 		add(t3);
 		t3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -213,7 +213,7 @@ public class Option extends JPanel implements MouseListener, MouseMotionListener
 
 
 	public void mouseClicked(MouseEvent arg0) {
-		if (arg0.getX() >= 60 && arg0.getX() <= 260 && arg0.getY() >= 140 && arg0.getY() <= 340) { //Defaut
+		if (arg0.getX() >= 140 && arg0.getX() <= 340 && arg0.getY() >= 350 && arg0.getY() <= 750) { //Defaut
 			t1.setSelected(true);
 			t2.setSelected(false);
 			t3.setSelected(false);
@@ -238,7 +238,7 @@ public class Option extends JPanel implements MouseListener, MouseMotionListener
 			Theme.setOption(4);
 			repaint();
 		}
-		if (arg0.getX() >= 60 && arg0.getX() <= 260 && arg0.getY() >= 343 && arg0.getY() <= 543) { //carr�
+		if (arg0.getX() >= 440 && arg0.getX() <= 640 && arg0.getY() >= 350 && arg0.getY() <= 750) { //carr�
 			t1.setSelected(false);
 			t2.setSelected(true);
 			t3.setSelected(false);
@@ -264,7 +264,7 @@ public class Option extends JPanel implements MouseListener, MouseMotionListener
 			t3.setSelected(false);
 			repaint();
 		}
-		if (arg0.getX() >= 60 && arg0.getX() <= 260 && arg0.getY() >= 546 && arg0.getY() <= 746) { //toxic
+		if (arg0.getX() >= 740 && arg0.getX() <= 940 && arg0.getY() >= 350 && arg0.getY() <= 750) { //toxic
 			t1.setSelected(false);
 			t2.setSelected(false);
 			t3.setSelected(true);
@@ -300,14 +300,14 @@ public class Option extends JPanel implements MouseListener, MouseMotionListener
 	public void mouseReleased(MouseEvent arg0) {}
 	public void mouseDragged(MouseEvent arg0) {}
 	public void mouseMoved(MouseEvent arg0) {
-		if (arg0.getX() >= 60 && arg0.getX() <= 260 && arg0.getY() >= 140 && arg0.getY() <= 340) { //Defaut
+		if (arg0.getX() >= 140 && arg0.getX() <= 340 && arg0.getY() >= 350 && arg0.getY() <= 550) { //Defaut
 			setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		}
-		else if (arg0.getX() >= 60 && arg0.getX() <= 260 && arg0.getY() >= 343 && arg0.getY() <= 543) { //carr�
+		else if (arg0.getX() >= 440 && arg0.getX() <= 640 && arg0.getY() >= 350 && arg0.getY() <= 550) { //carr�
 			setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		}
-		else if(arg0.getX() >= 60 && arg0.getX() <= 260 && arg0.getY() >= 546 && arg0.getY() <= 746){//toxic
-			
+		else if(arg0.getX() >= 740 && arg0.getX() <= 940 && arg0.getY() >= 350 && arg0.getY() <= 550){//toxic
+			setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
 		}else {
 			setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
 		}
@@ -330,9 +330,9 @@ public class Option extends JPanel implements MouseListener, MouseMotionListener
 		g.drawImage(Images.img_fond[Theme.getOption()], 0, 0, this.getWidth(), this.getHeight(), null);	//fond du option
 		
 		
-		g.drawImage(Images.img_element[10], 60, 140, 200, 200, null);
-		g.drawImage(Images.img_element[11], 60, 343, 200, 200, null);
-		g.drawImage(Images.img_element[17], 60, 546, 200, 200, null);
+		g.drawImage(Images.img_element[10], 140, 350, 200, 200, null);
+		g.drawImage(Images.img_element[11], 440, 350, 200, 200, null);
+		g.drawImage(Images.img_element[17], 740, 350, 200, 200, null);
 		
 		
 	}
