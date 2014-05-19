@@ -36,7 +36,7 @@ public class Header extends JPanel implements MouseListener, MouseMotionListener
 		else if(InCreateQuiz){
 			int choix = JOptionPane.showConfirmDialog(
 				    null,
-				    "<html>Si vous revenez &agrave; l'acceuil sans avoir valid&eacute; le quiz,<br/> il sera d&eacute;finitivement perdu !<br/>Continuer ?</html>",
+				    "<html>Si vous revenez &agrave; l'acceuil sans avoir valid&eacute; le quiz,<br/> les modifications seront d&eacute;finitivement perdues !<br/>Continuer ?</html>",
 				    "Attention !",
 				    JOptionPane.YES_NO_OPTION,
 				    JOptionPane.WARNING_MESSAGE);

@@ -149,17 +149,17 @@ public class Admin_ajout_reponses extends JPanel  implements MouseListener, Item
 					// TODO pop-up d'erreur "il y a des reponses en double (txtQuest = txtQuest)".
 					if (existAlready)
 						JOptionPane.showMessageDialog(null,
-							    "<html>Impossible de valider vos réponses !<br/>- Il semble qu'au moins 2 réponses soient identiques !</html>",
+							    "<html>Impossible de valider vos r&eacute;ponses !<br/>- Il semble qu'au moins 2 r&eacute;ponses sont identiques !</html>",
 							    "Erreur",
 							    JOptionPane.WARNING_MESSAGE);
-						System.out.println("Erreur -> Duplicata dans les reponses ! (doublon ou triplon ou quadruplon ou quintuplon ou niktameruplon..)");
+						//System.out.println("Erreur -> Duplicata dans les reponses ! (doublon ou triplon ou quadruplon ou quintuplon ou niktameruplon..)");
 					// TODO pop-up d'erreur "il y a des reponses vide !".
 					if (isEmpty)
 						JOptionPane.showMessageDialog(null,
-							    "<html>Impossible de valider vos réponses !<br/>- Il semble qu'au moins 1 réponse soit vide !</html>",
+							    "<html>Impossible de valider vos r&eacute;ponses !<br/>- Il semble qu'au moins une r&eacute;ponse est vide !</html>",
 							    "Erreur",
 							    JOptionPane.WARNING_MESSAGE);
-						System.out.println("Erreur -> Des reponses sont carement vides !");
+						//System.out.println("Erreur -> Des reponses sont carement vides !");
 				} else {
 					// On sauve l'etat actuel
 					short i=0;

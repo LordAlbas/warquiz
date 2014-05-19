@@ -579,6 +579,10 @@ public class SQL_Requete_Quiz {
 		Connection conn = null;
 		
 		/*
+		 * PREPARED_STATEMENT FOR THE WIN!!
+		 */
+		
+		/*
 		 * BLOC de SELECT ID_QUIZ
 		 * pour voir si c'est une MODIF ou une CREATION de quiz
 		 */
@@ -589,8 +593,8 @@ public class SQL_Requete_Quiz {
 			String query_recupIdQuiz = "SELECT id_quiz FROM QUIZ";
 			stmt_recupIdQuiz.executeQuery(query_recupIdQuiz);
 			ResultSet rs_idQuiz = stmt_recupIdQuiz.getResultSet();
+			exist = false;
 			while (rs_idQuiz.next()) {
-				exist = false;
 				if (rs_idQuiz.getInt("id_quiz") == currentQuiz.getId()) {
 					id = rs_idQuiz.getInt("id_quiz");
 					exist = true;
@@ -611,24 +615,55 @@ public class SQL_Requete_Quiz {
 			/*
 			 * Code pour MODIFIER un quiz
 			 */
-			System.out.println("Quiz deja existant (=modif) --> "+id);
-			// TODO faire le code d'update
-			// Ca va etre mega chaud car il faut savoir si des questions/reponses ont ete ajoute(insert into)
-			// ou supprime(delete), encore ca va pour celle qui ont juste besoin d'un (update)...
+			//System.out.println("Quiz deja existant (=modif) --> "+id);
+			
+			/*
+			 * Voici ma methode pour modifier un quiz existant (un peu bourrine mais tant pis hein..)
+			 * 		UPDATE du QUIZ
+			 * 		DELETE all REPONSES / QUESTIONS liees au quiz
+			 * 		INSERT all REPONSES / QUESTIONS liees au quiz
+			 * C'est pas beau mais ca marche.
+			 */
+			try {
+				Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+				conn = DriverManager.getConnection("jdbc:sqlserver://193.252.48.189\\SQLEXPRESS:1433;" + "database=BDD_B3I_groupe_5;" + "user=b3i_groupe_5;" + "password=123Soleil");
+				
+				// On update le quiz ...
+				String update_Quiz = "UPDATE QUIZ SET DIFFICULTE_QUIZ = ?, NOM_QUIZ = ?, HEURE_QUIZ = ?, "
+						+ "MINUTE_QUIZ = ?, SECONDE_QUIZ = ?, NB_QUESTION = ? WHERE ID_QUIZ = ?";
+				PreparedStatement prep_stmt_updateQuiz = conn.prepareStatement(update_Quiz);
+				prep_stmt_updateQuiz.setInt(1, currentQuiz.getDifficulteQuizInt());
+				prep_stmt_updateQuiz.setString(2, currentQuiz.getNom());
+				prep_stmt_updateQuiz.setInt(3, Integer.parseInt(currentQuiz.getHeureQuiz()));
+				prep_stmt_updateQuiz.setInt(4, Integer.parseInt(currentQuiz.getMinuteQuiz()));
+				prep_stmt_updateQuiz.setInt(5, Integer.parseInt(currentQuiz.getSecondeQuiz()));
+				prep_stmt_updateQuiz.setInt(6, currentQuiz.getNb_questions());
+				prep_stmt_updateQuiz.setInt(7, currentQuiz.getId());
+				prep_stmt_updateQuiz.executeUpdate();
+				
+				// ... et on supprime les questions et reponses liees.
+				Statement stmt_del2 = (Statement) conn.createStatement();
+				Statement stmt_del3 = (Statement) conn.createStatement();
+				query_del2 = "DELETE FROM REPONSE WHERE REPONSE.ID_QUIZ = " + currentQuiz.getId() + ";";
+				query_del3 = "DELETE FROM QUESTION WHERE QUESTION.ID_QUIZ = " + currentQuiz.getId() + ";";
+				stmt_del3.executeUpdate(query_del3);
+				stmt_del2.executeUpdate(query_del2);
+		    } catch (SQLException eeee) {
+		    	eeee.printStackTrace();
+		    } catch (ClassNotFoundException eeee) {
+				eeee.printStackTrace();
+			}
+			
 		} else {
 			/*
 			 * Code pour AJOUTER un quiz
 			 */
 			//System.out.println("Quiz tout nouveau ! (=creation) --> "+currentQuiz.getId());
-			int newIdQuiz = 99;
+			
 			Connection connAdd = null;
 			try {
 				Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
 				connAdd = DriverManager.getConnection("jdbc:sqlserver://193.252.48.189\\SQLEXPRESS:1433;" + "database=BDD_B3I_groupe_5;" + "user=b3i_groupe_5;" + "password=123Soleil");
-				
-				/*
-				 * PREPARED_STATEMENT FOR THE WIN!!
-				 */
 				
 				// Insert QUIZ
 				String query_insertQuiz = "INSERT INTO QUIZ (LOGIN_ADMIN, DIFFICULTE_QUIZ, NOM_QUIZ, MINUTE_QUIZ, SECONDE_QUIZ, HEURE_QUIZ, NB_QUESTION) VALUES(?, ?, ?, ?, ?, ?, ?);";
@@ -649,48 +684,11 @@ public class SQL_Requete_Quiz {
 				prep_stmt_getIdQuiz.executeQuery();
 				ResultSet rs_getIdQuiz = prep_stmt_getIdQuiz.getResultSet();
 				if (rs_getIdQuiz.next()) {
-					newIdQuiz = rs_getIdQuiz.getInt("id_quiz");
+					currentQuiz.setId(rs_getIdQuiz.getInt("id_quiz"));
 				} else {
 					querySuccess = false;
 				}
-				
-				for (byte i=0; i<currentQuiz.getNb_questions(); i++) {
-					int newIdQuest = 999;
-					
-					// Insert QUESTION
-					String query_insertQuest = "INSERT INTO QUESTION (ID_QUIZ, NB_REP_TOTAL, NB_REP_JUSTE, TEXT_QUEST) VALUES(?, ?, ?, ?);";
-					PreparedStatement prep_stmt_addQuest = connAdd.prepareStatement(query_insertQuest);
-					prep_stmt_addQuest.setInt(1, newIdQuiz);
-					prep_stmt_addQuest.setInt(2, currentQuiz.getQuest(i).getNb_reponses());
-					prep_stmt_addQuest.setInt(3, currentQuiz.getQuest(i).getNbr_reponses_juste());
-					prep_stmt_addQuest.setString(4, currentQuiz.getQuest(i).getQuestTxt());
-					prep_stmt_addQuest.executeUpdate();
-					
-					// Recuperation de l'ID_REPONSE qui vient d'etre inserer (id auto incremente dans SQL_Server).
-					String query_getIdQuest = "SELECT ID_QUESTION FROM QUESTION WHERE ID_QUIZ=? AND TEXT_QUEST=?;";
-					PreparedStatement prep_stmt_getIdQuest = connAdd.prepareStatement(query_getIdQuest);
-					prep_stmt_getIdQuest.setInt(1, newIdQuiz);
-					prep_stmt_getIdQuest.setString(2, currentQuiz.getQuest(i).getQuestTxt());
-					prep_stmt_getIdQuest.executeQuery();
-					ResultSet rs_getIdQuest = prep_stmt_getIdQuest.getResultSet();
-					if (rs_getIdQuest.next()) {
-						newIdQuest = rs_getIdQuest.getInt("ID_QUESTION");
-					} else {
-						querySuccess = false;
-					}
-					
-					for (byte j=0; j<currentQuiz.getQuest(i).getNb_reponses(); j++) {
-						// Insert REPONSE
-						String query_insertRep = "INSERT INTO REPONSE (ID_QUESTION, TEXT_REP, STATUT_REP, ID_QUIZ) VALUES(?, ?, ?, ?);";
-						PreparedStatement prep_stmt_addRep = connAdd.prepareStatement(query_insertRep);
-						prep_stmt_addRep.setInt(1, newIdQuest);
-						prep_stmt_addRep.setString(2, currentQuiz.getQuest(i).getReponse(j).getTxtReponse());
-						prep_stmt_addRep.setInt(3, currentQuiz.getQuest(i).getReponse(j).getStatutRepInt());
-						prep_stmt_addRep.setInt(4, newIdQuiz);
-						prep_stmt_addRep.executeUpdate();
-					}
-				}
-		    } catch (SQLException eeee) {
+			} catch (SQLException eeee) {
 		    	eeee.printStackTrace();
 		    	querySuccess = false;
 		    } catch (ClassNotFoundException eeee) {
@@ -698,9 +696,67 @@ public class SQL_Requete_Quiz {
 				querySuccess = false;
 			}
 		}
+		/*
+		 * FIN DU IF..ELSE --> la suite s'applique que ca soit une modif ou une creation.
+		 */
+		
+		Connection connAdd = null;
+		try {
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+			connAdd = DriverManager.getConnection("jdbc:sqlserver://193.252.48.189\\SQLEXPRESS:1433;" + "database=BDD_B3I_groupe_5;" + "user=b3i_groupe_5;" + "password=123Soleil");
+			
+			for (byte i=0; i<currentQuiz.getNb_questions(); i++) {
+				int newIdQuest = 999;
+				
+				// Insert QUESTION
+				String query_insertQuest = "INSERT INTO QUESTION (ID_QUIZ, NB_REP_TOTAL, NB_REP_JUSTE, TEXT_QUEST) VALUES(?, ?, ?, ?);";
+				PreparedStatement prep_stmt_addQuest = connAdd.prepareStatement(query_insertQuest);
+				prep_stmt_addQuest.setInt(1, currentQuiz.getId());
+				prep_stmt_addQuest.setInt(2, currentQuiz.getQuest(i).getNb_reponses());
+				prep_stmt_addQuest.setInt(3, currentQuiz.getQuest(i).getNbr_reponses_juste());
+				prep_stmt_addQuest.setString(4, currentQuiz.getQuest(i).getQuestTxt());
+				prep_stmt_addQuest.executeUpdate();
+				
+				// Recuperation de l'ID_REPONSE qui vient d'etre inserer (id auto incremente dans SQL_Server).
+				String query_getIdQuest = "SELECT ID_QUESTION FROM QUESTION WHERE ID_QUIZ=? AND TEXT_QUEST=?;";
+				PreparedStatement prep_stmt_getIdQuest = connAdd.prepareStatement(query_getIdQuest);
+				prep_stmt_getIdQuest.setInt(1, currentQuiz.getId());
+				prep_stmt_getIdQuest.setString(2, currentQuiz.getQuest(i).getQuestTxt());
+				prep_stmt_getIdQuest.executeQuery();
+				ResultSet rs_getIdQuest = prep_stmt_getIdQuest.getResultSet();
+				if (rs_getIdQuest.next()) {
+					newIdQuest = rs_getIdQuest.getInt("ID_QUESTION");
+				} else {
+					querySuccess = false;
+				}
+				
+				for (byte j=0; j<currentQuiz.getQuest(i).getNb_reponses(); j++) {
+					// Insert REPONSE
+					String query_insertRep = "INSERT INTO REPONSE (ID_QUESTION, TEXT_REP, STATUT_REP, ID_QUIZ) VALUES(?, ?, ?, ?);";
+					PreparedStatement prep_stmt_addRep = connAdd.prepareStatement(query_insertRep);
+					prep_stmt_addRep.setInt(1, newIdQuest);
+					prep_stmt_addRep.setString(2, currentQuiz.getQuest(i).getReponse(j).getTxtReponse());
+					prep_stmt_addRep.setInt(3, currentQuiz.getQuest(i).getReponse(j).getStatutRepInt());
+					prep_stmt_addRep.setInt(4, currentQuiz.getId());
+					prep_stmt_addRep.executeUpdate();
+				}
+			}
+		} catch (SQLException eeee) {
+			eeee.printStackTrace();
+			querySuccess = false;
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
 		return querySuccess;
 	}
 	
+	/**
+	 * Insert le score, le temps, et deux-trois choses dans les tables JOUER et UTILISATEUR.
+	 * S'effectue a la fin d'une partie jouee.
+	 * @param monQuiz
+	 * @param monScore
+	 * @param monTemps
+	 */
 	public void comptabiliserPartie(Quiz monQuiz, int monScore, long monTemps) {
 		int sec = (int)monTemps%60;
     	int min = (int)(monTemps/60)%60;
