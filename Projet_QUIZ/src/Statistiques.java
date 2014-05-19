@@ -1,5 +1,4 @@
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.List;
@@ -15,12 +14,8 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-
 import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JPanel;
-import javax.swing.JTable;
 
 
 public class Statistiques extends JPanel implements MouseListener, MouseMotionListener, ItemListener{
@@ -221,7 +216,6 @@ public class Statistiques extends JPanel implements MouseListener, MouseMotionLi
 			e.printStackTrace();
 		}
 		catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return score_moyen_user;
@@ -255,7 +249,6 @@ public class Statistiques extends JPanel implements MouseListener, MouseMotionLi
 			e.printStackTrace();
 		}
 		catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -277,11 +270,10 @@ public class Statistiques extends JPanel implements MouseListener, MouseMotionLi
 	        if(rs_moyenne.next()){
 	        	score_moyen = rs_moyenne.getInt("score_moyen"); // on récupère la moyenne
 	        }
-		} catch(ClassNotFoundException e){
+		} catch(ClassNotFoundException e) {
 			e.printStackTrace();
 		}
 		catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return score_moyen;
@@ -304,7 +296,6 @@ public class Statistiques extends JPanel implements MouseListener, MouseMotionLi
 			e.printStackTrace();
 		}
 		catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -326,7 +317,6 @@ public class Statistiques extends JPanel implements MouseListener, MouseMotionLi
 			e.printStackTrace();
 		}
 		catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -348,7 +338,6 @@ public class Statistiques extends JPanel implements MouseListener, MouseMotionLi
 			e.printStackTrace();
 		}
 		catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -378,7 +367,6 @@ public class Statistiques extends JPanel implements MouseListener, MouseMotionLi
 			e.printStackTrace();
 		}	
 		catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -407,7 +395,6 @@ public class Statistiques extends JPanel implements MouseListener, MouseMotionLi
 			e.printStackTrace();
 		}
 		catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -448,7 +435,6 @@ public class Statistiques extends JPanel implements MouseListener, MouseMotionLi
 			e.printStackTrace();
 		}	
 		catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -470,11 +456,8 @@ public class Statistiques extends JPanel implements MouseListener, MouseMotionLi
 	        stmt_nb_participants_quiz.executeQuery(query_nb_participants_quiz);	
 	        ResultSet rs_nb_participants_quiz = stmt_nb_participants_quiz.getResultSet();
 	        
-
-	        
 	        while(rs_nb_participants_quiz.next()){
 	        	db_nb_participants_quiz = rs_nb_participants_quiz.getString("nb_participants_quiz"); // on récupère le nombre
-	        	
 	        	
 	        	nb_participants_quiz = new JLabel("Nombre de participant pour le quiz "+num_quiz+" : "+db_nb_participants_quiz);
 	        	nb_participants_quiz.setBounds(48, 100, 600,600);
@@ -486,7 +469,6 @@ public class Statistiques extends JPanel implements MouseListener, MouseMotionLi
 			e.printStackTrace();
 		}
 		catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -517,7 +499,6 @@ public class Statistiques extends JPanel implements MouseListener, MouseMotionLi
 			e.printStackTrace();
 		}	
 		catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}	
@@ -596,7 +577,8 @@ public class Statistiques extends JPanel implements MouseListener, MouseMotionLi
 			lb_score_quiz.setText("Score moyen du quiz : " + item_score);
 			lb_score_user_quiz.setText("Votre score moyen à ce quiz : " + item_score_user);
 			lb_temps_quiz.setText("Temps du quiz : " + item_temps);
-		}else{System.out.println("marche pas");
+		} else {
+			//System.out.println("marche pas");
 		}
 	}
 }

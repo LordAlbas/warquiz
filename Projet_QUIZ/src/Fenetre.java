@@ -24,6 +24,7 @@ public class Fenetre extends JFrame {
 	public Correction correction;
 	public Quiz partie;
 	public JPanel back;
+	
 	/**
 	 * Constructeur
 	 */
@@ -106,7 +107,6 @@ public class Fenetre extends JFrame {
 		this.getContentPane().setVisible(false);
 		this.setContentPane(accueil);
 		this.getContentPane().setVisible(true);
-		System.out.println(Connexion.login_general);
 	}
 
 	
@@ -182,7 +182,6 @@ public class Fenetre extends JFrame {
 		gestion_quiz.addMouseListener(gestion_quiz);
 		this.getContentPane().setVisible(false);
 		gestion_quiz.addMouseListener(gestion_quiz);	// 'statistiques' implemente les methodes relatif a l'ecoute de la souris
-		//creation_quiz.addMouseMotionListener(creation_quiz);
 		this.setContentPane(gestion_quiz);
 		this.getContentPane().setVisible(true);
 	}
@@ -192,7 +191,6 @@ public class Fenetre extends JFrame {
 	 * @param selection
 	 */
 	public void goToJouer(String selection) {
-		// TODO Auto-generated method stub
 		jouer = new Jouer(this);
 		jouer.addMouseListener(jouer);
 		this.getContentPane().setVisible(false);
@@ -218,7 +216,6 @@ public class Fenetre extends JFrame {
 	}
 	
 	public void goToCorrection(Quiz partie, Bouton_selection_question[] tabRep, int score, long temps){
-		// TODO Auto-generated method stub
 		correction = new Correction(partie, tabRep, score, temps, this);
 		correction.addMouseListener(correction);
 		this.getContentPane().setVisible(false);
@@ -228,7 +225,7 @@ public class Fenetre extends JFrame {
 	}
 	
 	/**
-	 * MAIN
+	 * MAIN (le big bang de notre univer !!)
 	 * @param args
 	 */
 	public static void main(String[] args) {

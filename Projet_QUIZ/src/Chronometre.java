@@ -25,7 +25,6 @@ public class Chronometre {
 		chrono = hrs*3600 + min*60 + sec;
 		timer = createTimer();
 		timer.start();
-		System.out.println(timer);
 	}
 	
 	public long getChronoInital(){
@@ -77,12 +76,9 @@ public class Chronometre {
 			timer.stop();
 			JOptionPane.showMessageDialog(null, 
 					"<html>Le temps est &eacute;coul&eacute;.<br/> Vous allez &eacute;tre redirig&eacute; vers la correction.</html>", 
-					"Temps écoulé !", 
+					"Temps ï¿½coulï¿½ !", 
 					JOptionPane.WARNING_MESSAGE);
-			
-				System.out.println("Redirige correction");
-				fenetre.goToCorrection(monQuiz, partie_en_cours.getBoutonQuestion(), partie_en_cours.calculScore(), partie_en_cours.calculTemps());
-			
+			fenetre.goToCorrection(monQuiz, partie_en_cours.getBoutonQuestion(), partie_en_cours.calculScore(), partie_en_cours.calculTemps());
 		}
 	}
 	

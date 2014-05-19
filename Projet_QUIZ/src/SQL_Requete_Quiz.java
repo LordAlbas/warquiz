@@ -752,19 +752,11 @@ public class SQL_Requete_Quiz {
 	    } catch (ClassNotFoundException eeee) {
 			eeee.printStackTrace();
 		}
-		
-		
-		// user => quiz deja joue ? null : quizJoue++
-				//			table JOUER where JOUER.login_user == connexion.login_generel
-				//			AND JOUER.id_quiz == monQuiz.getID;
-				//		Si oui (deja jouee) => nb_partieJouer++
-				//		Si non (pas jouee) => nb_partieJouer++ && nb_quizJouer++
-				//DONE	Dans tout les cas => JOUER.insertInto (login_usr, id_quiz, score, tempsh,min,sec);
 				
 				/*
 				 * TABLE JOUER
-				 * 		login_usr			(varchar)				VS.			login_usr	courant
-				 * 		id_quiz				(int)					VS. 		id_quiz		courant
+				 * 		login_usr			(varchar)
+				 * 		id_quiz				(int)
 				 * 		score_usr_quiz		(int)
 				 * 		heure_usr_quiz		(int)
 				 * 		minute_usr_quiz		(int)
@@ -773,8 +765,8 @@ public class SQL_Requete_Quiz {
 				
 				/*
 				 * TABLE UTILISATEUR
-				 * 		nb_partie_joue	(int)	(+1)
-				 * 		nb_quiz_joue	(int)	(+1 ou pas)
+				 * 		nb_partie_joue	(int)
+				 * 		nb_quiz_joue	(int)
 				 * 		(login_usr)		(varchar)
 				 * 		(mdp_usr)		(varchar)
 				 * 		(adr_mail_usr)	(varchar)
