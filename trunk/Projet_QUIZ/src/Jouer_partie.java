@@ -7,8 +7,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
-import java.text.DecimalFormat;
-
 import javax.swing.*;
 
 public class Jouer_partie extends JPanel implements MouseListener, MouseMotionListener {
@@ -102,12 +100,10 @@ public class Jouer_partie extends JPanel implements MouseListener, MouseMotionLi
 		 */
         JButton bt_leave_game = new JButton("<html>Quitter la partie</html>");
         bt_leave_game.setBounds(840, 570, 170, 40);
-        
         bt_leave_game.setBackground(Color.RED);
         bt_leave_game.setBorder(null);
         bt_leave_game.setForeground(Color.WHITE);
         bt_leave_game.setFont(new Font("Arial", Font.PLAIN, 20));
-        
         bt_leave_game.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				timer.stop();												// PAUSE des chronos
@@ -197,7 +193,6 @@ public class Jouer_partie extends JPanel implements MouseListener, MouseMotionLi
         /*
          * Chronometre local ... (apparement il en faut un pour le temps et un pour les couleurs ..).
          */
-        //System.out.println(chrono.getTpsRestant());
         Chronometre = new JLabel(chrono.getTpsRestant());
         Chronometre.setForeground(Color.BLACK);
         Chronometre.setOpaque(true);
@@ -269,7 +264,6 @@ public class Jouer_partie extends JPanel implements MouseListener, MouseMotionLi
 	}
 	public void setQuestion(String txt) {
 		question.setText("<html>"+txt+"</html>");
-		//repaint();
 	}
 	
 	/**
@@ -401,6 +395,5 @@ public class Jouer_partie extends JPanel implements MouseListener, MouseMotionLi
 		super.paintComponent(g);
 		g.drawImage(Images.img_fond[Theme.getTheme()], 0, 0, this.getWidth(), this.getHeight(), null);
 		g.drawImage(Images.img_bouton[4], 960, 1, 46, 46, null);
-		
 	}
 }

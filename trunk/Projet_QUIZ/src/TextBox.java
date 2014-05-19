@@ -12,10 +12,6 @@ public class TextBox extends JTextField implements MouseListener, MouseMotionLis
 	
 	public TextBox (){
 		super();
-		
-		//test.setText("nijonijoni");
-		//test.setBorder(null);
-		//test.setOpaque(false);
 	}
 
 	@Override

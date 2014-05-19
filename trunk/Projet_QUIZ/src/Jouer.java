@@ -9,21 +9,9 @@ import java.awt.event.ItemListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-
-import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTable;
-import javax.swing.JTextField;
-import javax.swing.border.BevelBorder;
 
 public class Jouer extends JPanel implements MouseListener, MouseMotionListener, ItemListener{
 
@@ -40,12 +28,10 @@ public class Jouer extends JPanel implements MouseListener, MouseMotionListener,
 	private Bouton bt_afficherQuizMoyen;
 	private Bouton bt_afficherQuizDifficile;
 	private Bouton bt_afficherAllQuiz;
-	private Bouton bt_afficherQuizRien;
 	private JButton bt_jouer;
 	private int filtre = 0;
 	private Jouer_partie jouer_Quiz;
 	
-	private Tableau Tableau_quiz;
 	public static List list_quizcree;
 	public static Quiz[] ListeQuiz;
 	public static Quiz[] ListeQuiz_facile;
@@ -160,13 +146,11 @@ public class Jouer extends JPanel implements MouseListener, MouseMotionListener,
 		add(info);
 		
 		bt_jouer = new JButton("Jouer");
-		
 		bt_jouer.setEnabled(false);
 		bt_jouer.setForeground(Color.WHITE);
 		bt_jouer.setFont(new Font("Arial", Font.PLAIN, 20));
 		bt_jouer.setBackground(new Color(7, 92, 120));
 		bt_jouer.setBorder(null);
-
 		bt_jouer.setBounds(850, 500, 122, 36);
 		bt_jouer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -180,10 +164,6 @@ public class Jouer extends JPanel implements MouseListener, MouseMotionListener,
 				}else {
 					jouer_Quiz = new Jouer_partie(fenetre, ListeQuiz[list_quizcree.getSelectedIndex()]);
 				}
-				
-				
-				
-				
 				fenetre.getContentPane().setVisible(false);
 				jouer_Quiz.addMouseListener(jouer_Quiz);
 				fenetre.setContentPane(jouer_Quiz);
@@ -198,18 +178,12 @@ public class Jouer extends JPanel implements MouseListener, MouseMotionListener,
 		list_quizcree.addItemListener(this);
 		list_quizcree.setBackground(new Color(54, 90, 118));
 		list_quizcree.setForeground(Color.WHITE);
-		
 		add(list_quizcree);
 		
 		// remplissage de la liste avec une requete du style "recuperer tout les quiz creer par cet admin"
 		for (short i=0; i<ListeQuiz.length; i++) {
 			list_quizcree.add(ListeQuiz[i].getNom()+" - [ "+ListeQuiz[i].getNb_questions()+" question(s) ] - Temps : " + ListeQuiz[i].getHeureQuiz() + "h "+ ListeQuiz[i].getMinuteQuiz() + "m " + ListeQuiz[i].getSecondeQuiz() +"s ");
 		}
-		
-		// il faut remplir la liste avec une requete du style "recuperer tout les quiz creer par cet admin"
-		//list_quizcree.add("quiz qui rox");
-		//list_quizcree.add("quiz qui rox un peu moins");
-		
 	}
 	
 	/**
@@ -233,7 +207,6 @@ public class Jouer extends JPanel implements MouseListener, MouseMotionListener,
 
 	@Override
 	public void itemStateChanged(ItemEvent arg0) {
-		// TODO Auto-generated method stub
 		if (list_quizcree.getItemCount() > 0 && list_quizcree.getSelectedItem() != null) {
 			bt_jouer.setEnabled(true);
 			bt_jouer.setBackground(new Color(27, 113, 16));

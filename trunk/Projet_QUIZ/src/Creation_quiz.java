@@ -15,7 +15,6 @@ import javax.swing.SwingConstants;
 
 import java.awt.Font;
 import java.awt.Color;
-import java.util.List;
 
 
 public class Creation_quiz extends JPanel implements MouseListener, MouseMotionListener{
@@ -105,7 +104,6 @@ public class Creation_quiz extends JPanel implements MouseListener, MouseMotionL
 		cb_difficulte.setSelectedItem(monQuiz.getDifficulteQuiz());
 		cb_difficulte.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//System.out.println(cb_difficulte.getSelectedItem());
 				monQuiz.setDifficulteQuiz(cb_difficulte.getSelectedItem().toString());
 			}
 		});
@@ -135,7 +133,7 @@ public class Creation_quiz extends JPanel implements MouseListener, MouseMotionL
 					// Ajout d'une question au tableau de boutons (local) (il se charge lui-meme de l'ajouter a l'objet Quiz)
 					addQuestion(nextNull(tabQuest), nomQuest);
 				} else {
-					System.out.println("Aucune string retournee");
+					//System.out.println("Aucune string retournee");
 				}
 			}
 		});
@@ -284,7 +282,6 @@ public class Creation_quiz extends JPanel implements MouseListener, MouseMotionL
 		
 		repaint();
 		
-		
 		//****Inclusion du Header en 2 parties ****
         header1 = new Header(fen);
         header1.setBounds(0, 0, 444, 130);
@@ -292,7 +289,6 @@ public class Creation_quiz extends JPanel implements MouseListener, MouseMotionL
         header1.addMouseMotionListener(header1);
         this.add(header1); 
      
-
         header2 = new Header_menu(fen, this);
         header2.setBounds(444, 0, 580, 58);
         header2.addMouseListener(header2);
@@ -307,7 +303,6 @@ public class Creation_quiz extends JPanel implements MouseListener, MouseMotionL
 		lb_hint.setText("<html>&emsp;Ce quiz ne contient pour le moment aucune question.<br/><br/>&emsp;Aidez-vous du bouton sur votre droite pour commencer &agrave; ajouter des questions.</html>");
 		lb_hint.setForeground(Color.WHITE);
 		lb_hint.setFont(new Font("Arial", Font.PLAIN, 16));
-		//lb_hint.setHorizontalAlignment(SwingConstants.CENTER);
 		lb_hint.setBounds(marginLeft, 250, 300, 100);
 		add(lb_hint);
 	}
@@ -333,10 +328,8 @@ public class Creation_quiz extends JPanel implements MouseListener, MouseMotionL
 	public void addQuestion(int i, String nomQuest) {
 		String err_msg = "";
 		boolean existAlready = false;
-		//System.out.println("Next NULL = tabQuest["+i+"], ecriture dedans ...");
 		if (i < 20) {
 			for (byte j=0; j<i; j++) {
-				//System.out.println("["+j+"] {{ "+nomQuest+" }} VS {{ "+tabQuest[j].getText()+" }}");
 				if (tabQuest[j].getText().equals(nomQuest))
 					existAlready = true;
 			}
@@ -358,11 +351,6 @@ public class Creation_quiz extends JPanel implements MouseListener, MouseMotionL
 			} else {
 				err_msg = "<html>Cette question existe d&eacute;j&agrave; dans ce quiz !</html>";
 			}
-			
-			// print de debug du tabQuest
-			/*for (byte j = 0; j<20; j++) {
-				System.out.println("\t tabQuest["+j+"] = "+tabQuest[j]);
-			}*/
 		} else {
 			err_msg = "Le nombre de question maximum est atteint !";
 		}
@@ -393,7 +381,6 @@ public class Creation_quiz extends JPanel implements MouseListener, MouseMotionL
 		lb_nbRep[i].setForeground(Color.WHITE);
 		lb_nbRep[i].setFont(new Font("Arial", Font.PLAIN, 16)); 
 		lb_nbRep[i].setBounds(marginLeft+320, 220+(i*cellSpace), 50, 20);
-		//lb_nbRep.setHorizontalAlignment(SwingConstants.RIGHT);
 		add(lb_nbRep[i]);
 	}
 	
@@ -473,7 +460,6 @@ public class Creation_quiz extends JPanel implements MouseListener, MouseMotionL
 		add(tabQuest[id_quest]);
 		add(lb_nbRep[id_quest]);
 		
-		//revalidate();
 		fenetre.repaint();
 	}
 	
@@ -558,10 +544,7 @@ public class Creation_quiz extends JPanel implements MouseListener, MouseMotionL
 	
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		g.drawImage(Images.img_fond[Theme.getTheme()], 0, 0, this.getWidth(), this.getHeight(), null);
-		//g.drawImage(Images.img_element[0], 0, 0, this.getWidth(), (int)(this.getHeight() / 6.1230), null);		// dessine le header	
+		g.drawImage(Images.img_fond[Theme.getTheme()], 0, 0, this.getWidth(), this.getHeight(), null);		// dessine le header	
 		g.drawImage(Images.img_bouton[4], 960, 1, 46, 46, null);
-			
-
 	}
 }

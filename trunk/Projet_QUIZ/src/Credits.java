@@ -3,7 +3,6 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.*;
 
-import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
