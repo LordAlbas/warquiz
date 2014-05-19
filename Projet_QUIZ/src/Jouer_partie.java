@@ -253,9 +253,11 @@ public class Jouer_partie extends JPanel implements MouseListener, MouseMotionLi
 		bt_nextQuest.setEnabled(num+1 < boutonQuestion.length);
 		
 		// lieu arbitraire pour checker les reponses au fur et a mesure
-		for (Bouton_selection_question bsq : boutonQuestion) {
-			if (bsq.isRepondu())
-				bsq.setBackground(new Color(27, 113, 16));
+		for (byte i=0; i<boutonQuestion.length; i++) {
+			if (boutonQuestion[i].isRepondu())
+				boutonQuestion[i].setBackground(new Color(27, 113, 16));
+			if (i == id_numQuest)
+				boutonQuestion[i].setBackground(Color.ORANGE);
 		}
 	}
 	public void setQuestion(String txt) {
