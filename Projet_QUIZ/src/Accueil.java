@@ -154,6 +154,7 @@ public class Accueil extends JPanel implements MouseListener, MouseMotionListene
 		else {
 			setCursor(Cursor.getPredefinedCursor(Cursor.DEFAULT_CURSOR));
 			L_info.setText("");
+			image_select="rien";
 			L_info.repaint();
 		}
 		
@@ -175,8 +176,78 @@ public class Accueil extends JPanel implements MouseListener, MouseMotionListene
 		 * Chaque bouton obtient une position X (hauteur) en fonction de son numero (i).
 		 * Les positions en durs (ici 120 et 260) correspondent au coin haut-gauche du bloc de bouton.
 		 */
+		
+		
+
+		
+		switch(image_select){
+		case "rien":
+			if(Connexion.connexion_admin){
+				g.drawImage(Images.img_bouton[Theme.getGerer()], 120, 260+(0*(Images.hauteur_bouton+Images.ecart_bouton)), Images.largeur_bouton, Images.hauteur_bouton, null); // gerer
+			}
+			else {
+				g.drawImage(Images.img_bouton[Theme.getJouer()], 120, 260+(0*(Images.hauteur_bouton+Images.ecart_bouton)), Images.largeur_bouton, Images.hauteur_bouton, null); // jouer
+			}
+			g.drawImage(Images.img_bouton[Theme.getStatistiques()], 120, 260+(1*(Images.hauteur_bouton+Images.ecart_bouton)), Images.largeur_bouton, Images.hauteur_bouton, null); // statistiques
+			g.drawImage(Images.img_bouton[Theme.getCredits()], 120, 260+(2*(Images.hauteur_bouton+Images.ecart_bouton)), Images.largeur_bouton, Images.hauteur_bouton, null); // crédits
+			g.drawImage(Images.img_bouton[Theme.getQuitter()], 120, 260+(3*(Images.hauteur_bouton+Images.ecart_bouton)), Images.largeur_bouton, Images.hauteur_bouton, null); // quitter
+			break;
+		case "JOUER_hover": 
+			if(Connexion.connexion_admin){
+				g.drawImage(Images.img_bouton_hover[Theme.getGerer_hover()], 120, 260+(0*(Images.hauteur_bouton+Images.ecart_bouton)), Images.largeur_bouton, Images.hauteur_bouton, null); // gerer hover
+			}
+			else {
+				g.drawImage(Images.img_bouton_hover[Theme.getJouer_hover()], 120, 260+(0*(Images.hauteur_bouton+Images.ecart_bouton)), Images.largeur_bouton, Images.hauteur_bouton, null); // jouer hover
+			}
+			g.drawImage(Images.img_bouton[Theme.getStatistiques()], 120, 260+(1*(Images.hauteur_bouton+Images.ecart_bouton)), Images.largeur_bouton, Images.hauteur_bouton, null); // statistiques
+			g.drawImage(Images.img_bouton[Theme.getCredits()], 120, 260+(2*(Images.hauteur_bouton+Images.ecart_bouton)), Images.largeur_bouton, Images.hauteur_bouton, null); // crédits
+			g.drawImage(Images.img_bouton[Theme.getQuitter()], 120, 260+(3*(Images.hauteur_bouton+Images.ecart_bouton)), Images.largeur_bouton, Images.hauteur_bouton, null); // quitter
+			break;
+		case "STATS_hover":
+			if(Connexion.connexion_admin){
+				g.drawImage(Images.img_bouton[Theme.getGerer()], 120, 260+(0*(Images.hauteur_bouton+Images.ecart_bouton)), Images.largeur_bouton, Images.hauteur_bouton, null); // gerer
+			}
+			else {
+				g.drawImage(Images.img_bouton[Theme.getJouer()], 120, 260+(0*(Images.hauteur_bouton+Images.ecart_bouton)), Images.largeur_bouton, Images.hauteur_bouton, null); // jouer
+			}
+			g.drawImage(Images.img_bouton_hover[Theme.getStatistiques_hover()], 120, 260+(1*(Images.hauteur_bouton+Images.ecart_bouton)), Images.largeur_bouton, Images.hauteur_bouton, null); // statistiques hover
+			g.drawImage(Images.img_bouton[Theme.getCredits()], 120, 260+(2*(Images.hauteur_bouton+Images.ecart_bouton)), Images.largeur_bouton, Images.hauteur_bouton, null); // crédits
+			g.drawImage(Images.img_bouton[Theme.getQuitter()], 120, 260+(3*(Images.hauteur_bouton+Images.ecart_bouton)), Images.largeur_bouton, Images.hauteur_bouton, null); // quitter
+			break;
+		case "CREDITS_hover":
+			if(Connexion.connexion_admin){
+				g.drawImage(Images.img_bouton[Theme.getGerer()], 120, 260+(0*(Images.hauteur_bouton+Images.ecart_bouton)), Images.largeur_bouton, Images.hauteur_bouton, null); // gerer
+			}
+			else {
+				g.drawImage(Images.img_bouton[Theme.getJouer()], 120, 260+(0*(Images.hauteur_bouton+Images.ecart_bouton)), Images.largeur_bouton, Images.hauteur_bouton, null); // jouer
+			}
+			g.drawImage(Images.img_bouton[Theme.getStatistiques()], 120, 260+(1*(Images.hauteur_bouton+Images.ecart_bouton)), Images.largeur_bouton, Images.hauteur_bouton, null); // statistiques
+			g.drawImage(Images.img_bouton_hover[Theme.getCredits_hover()], 120, 260+(2*(Images.hauteur_bouton+Images.ecart_bouton)), Images.largeur_bouton, Images.hauteur_bouton, null); // crédits hover
+			g.drawImage(Images.img_bouton[Theme.getQuitter()], 120, 260+(3*(Images.hauteur_bouton+Images.ecart_bouton)), Images.largeur_bouton, Images.hauteur_bouton, null); // quitter
+			break;
+		case "QUITTER_hover":
+			if(Connexion.connexion_admin){
+				g.drawImage(Images.img_bouton[Theme.getGerer()], 120, 260+(0*(Images.hauteur_bouton+Images.ecart_bouton)), Images.largeur_bouton, Images.hauteur_bouton, null); // gerer
+			}
+			else {
+				g.drawImage(Images.img_bouton[Theme.getJouer()], 120, 260+(0*(Images.hauteur_bouton+Images.ecart_bouton)), Images.largeur_bouton, Images.hauteur_bouton, null); // jouer
+			}
+			g.drawImage(Images.img_bouton[Theme.getStatistiques()], 120, 260+(1*(Images.hauteur_bouton+Images.ecart_bouton)), Images.largeur_bouton, Images.hauteur_bouton, null); // statistiques
+			g.drawImage(Images.img_bouton[Theme.getCredits()], 120, 260+(2*(Images.hauteur_bouton+Images.ecart_bouton)), Images.largeur_bouton, Images.hauteur_bouton, null); // crédits
+			g.drawImage(Images.img_bouton_hover[Theme.getQuitter_hover()], 120, 260+(3*(Images.hauteur_bouton+Images.ecart_bouton)), Images.largeur_bouton, Images.hauteur_bouton, null); // quitter hover
+			break;
+		}
+		
+		if(Theme.getBarre() == 1){
+			g.drawImage(Images.img_element[1], 140, 113, 8, 655, null); // barre bleu vertical
+		}
+		
+		
+		
 		for (int i=0; i<4; i++) {
 			// On dessine l'image sans ruban si le curseur n'est pas dessus.
+
+			/*
 			switch (image_select){
 			case "rien" :
 				// 7 = gérer
@@ -247,9 +318,10 @@ public class Accueil extends JPanel implements MouseListener, MouseMotionListene
 				}
 				break;
 			}
+			*/
 		}
 		
-		g.drawImage(Images.img_element[1], 140, 113, 8, 655, null);
+		
 		
 		//g.setColor(new Color(255, 255, 255));
 		//g.setFont(new Font("Courier New", Font.BOLD, 36));

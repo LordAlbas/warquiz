@@ -77,7 +77,7 @@ public class Header extends JPanel implements MouseListener, MouseMotionListener
     protected void paintComponent(Graphics g){
         super.paintComponent(g);
         
-        g.drawImage(Images.img_element[9], 0, 0, this.getWidth(), this.getHeight(), this);
+        g.drawImage(Images.img_element[Theme.getHeader1()], 0, 0, this.getWidth(), this.getHeight(), this);
 
     }
 

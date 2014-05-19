@@ -129,7 +129,7 @@ public class Header_menu extends JPanel implements MouseListener, MouseMotionLis
     @Override
     protected void paintComponent(Graphics g){
         super.paintComponent(g);
-        g.drawImage(Images.img_element[7], 0, 0, this.getWidth(), this.getHeight(), this);
+        g.drawImage(Images.img_element[Theme.getHeader2()], 0, 0, this.getWidth(), this.getHeight(), this);
         	
 		switch (bouton_option){
 		case "rien" :
