@@ -16,6 +16,7 @@ public class Bouton_selection_question extends JButton implements MouseListener 
 	private int num_question;
 	private Jouer_partie ma_partie;
 	private JCheckBox[] TabCheck;
+	private int etatBouton;			// 0 = pas vu (bleu)	1 = vu (gris)
 	
 	/**
 	 * Constructeur
@@ -28,6 +29,7 @@ public class Bouton_selection_question extends JButton implements MouseListener 
 		num_question = _num_question;
 		ma_partie = _partie;
 		TabCheck = createTabRep(num_question);
+		etatBouton = 0;
 		
 		setText(""+(num_question+1));
 		setBorder(null);
@@ -71,7 +73,7 @@ public class Bouton_selection_question extends JButton implements MouseListener 
 	public void switchQuest() {
 		ma_partie.sousPanel.removeAll();
 		affCheckrep(TabCheck, num_question);
-		setBackground(Color.GRAY);
+		etatBouton = 1;
 		ma_partie.setQuestion(quiz.getQuest(num_question).getQuestTxt());
 		ma_partie.setNumQuest(num_question);
 		ma_partie.repaint();
@@ -96,6 +98,10 @@ public class Bouton_selection_question extends JButton implements MouseListener 
 	
 	public int getTabCheckLength() {
 		return TabCheck.length;
+	}
+	
+	public int getEtatBouton() {
+		return etatBouton;
 	}
 	
 	public void mouseClicked(MouseEvent arg0) {
