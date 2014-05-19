@@ -124,6 +124,8 @@ public class Option extends JPanel implements MouseListener, MouseMotionListener
 				Theme.setGerer_hover(7);
 				Theme.setBarre(1);
 				
+				Theme.setOption(4);
+				
 				t2.setSelected(false);
 				t3.setSelected(false);
 				repaint();
@@ -160,6 +162,7 @@ public class Option extends JPanel implements MouseListener, MouseMotionListener
 				Theme.setGerer(7);
 				Theme.setGerer_hover(7);
 				Theme.setBarre(1);
+				Theme.setOption(6);
 				t1.setSelected(false);
 				t3.setSelected(false);
 				repaint();
@@ -196,6 +199,7 @@ public class Option extends JPanel implements MouseListener, MouseMotionListener
 				Theme.setGerer_hover(17);
 				
 				Theme.setBarre(2);
+				Theme.setOption(7);
 				
 				t1.setSelected(false);
 				t2.setSelected(false);
@@ -231,6 +235,7 @@ public class Option extends JPanel implements MouseListener, MouseMotionListener
 			Theme.setGerer(7);
 			Theme.setGerer_hover(7);
 			Theme.setBarre(1);
+			Theme.setOption(4);
 			repaint();
 		}
 		if (arg0.getX() >= 60 && arg0.getX() <= 260 && arg0.getY() >= 343 && arg0.getY() <= 543) { //carr�
@@ -254,6 +259,7 @@ public class Option extends JPanel implements MouseListener, MouseMotionListener
 			Theme.setGerer(7);
 			Theme.setGerer_hover(7);
 			Theme.setBarre(1);
+			Theme.setOption(6);
 			t1.setSelected(false);
 			t3.setSelected(false);
 			repaint();
@@ -282,7 +288,7 @@ public class Option extends JPanel implements MouseListener, MouseMotionListener
 			Theme.setGerer_hover(17);
 			
 			Theme.setBarre(2);
-			
+			Theme.setOption(7);
 			
 			
 			repaint();
@@ -315,8 +321,15 @@ public class Option extends JPanel implements MouseListener, MouseMotionListener
 		// le fond et les elements sont en fonction de la taille de la fenetre, donc pas de soucis de redimensionnement de la fenetre
 		
 		g.drawImage(Images.img_fond[Theme.getTheme()], 0, 0, this.getWidth(), this.getHeight(), null);							// dessine le fond d'ecran
-		g.drawImage(Images.img_element[1], 140, 113, 8, 655, null);
-		g.drawImage(Images.img_fond[4], 0, 0, this.getWidth(), this.getHeight(), null);	
+		
+		if(Theme.getBarre()==1){
+			g.drawImage(Images.img_element[1], 140, 113, 8, 655, null);
+		}
+		
+		
+		g.drawImage(Images.img_fond[Theme.getOption()], 0, 0, this.getWidth(), this.getHeight(), null);	//fond du option
+		
+		
 		g.drawImage(Images.img_element[10], 60, 140, 200, 200, null);
 		g.drawImage(Images.img_element[11], 60, 343, 200, 200, null);
 		g.drawImage(Images.img_element[17], 60, 546, 200, 200, null);
