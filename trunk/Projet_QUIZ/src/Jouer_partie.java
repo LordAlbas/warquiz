@@ -254,13 +254,18 @@ public class Jouer_partie extends JPanel implements MouseListener, MouseMotionLi
 		
 		// lieu arbitraire pour checker les reponses au fur et a mesure
 		for (byte i=0; i<boutonQuestion.length; i++) {
-			if (boutonQuestion[i].isRepondu())
-				boutonQuestion[i].setBackground(new Color(27, 113, 16));
 			if (i == id_numQuest) {
 				boutonQuestion[i].setBackground(Color.ORANGE);
 			} else {
-				boutonQuestion[i].setBackground(new Color(23, 78, 116));
+				if (boutonQuestion[i].getEtatBouton() == 1) {
+					boutonQuestion[i].setBackground(Color.GRAY);
+				} else {
+					boutonQuestion[i].setBackground(new Color(23, 78, 116));
+				}
+				
 			}
+			if (boutonQuestion[i].isRepondu())
+				boutonQuestion[i].setBackground(new Color(27, 113, 16));
 		}
 	}
 	public void setQuestion(String txt) {
