@@ -697,6 +697,89 @@ public class SQL_Requete_Quiz {
 		}
 		return querySuccess;
 	}
+	
+	public void comptabiliserPartie(Quiz monQuiz, int monScore, long monTemps) {
+		int sec = (int)monTemps%60;
+    	int min = (int)(monTemps/60)%60;
+    	int hrs = (int)(monTemps/3600)%60;
+    	
+		Connection conn = null;
+		
+		try {
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+			conn = DriverManager.getConnection("jdbc:sqlserver://193.252.48.189\\SQLEXPRESS:1433;" + "database=BDD_B3I_groupe_5;" + "user=b3i_groupe_5;" + "password=123Soleil");
+			
+			String query_jouer = "SELECT * FROM JOUER WHERE LOGIN_USR = ? AND ID_QUIZ = ?;";
+			PreparedStatement prep_stmt_jouer = conn.prepareStatement(query_jouer);
+			prep_stmt_jouer.setString(1, Connexion.login_general);
+			prep_stmt_jouer.setInt(2, monQuiz.getId());
+			prep_stmt_jouer.executeQuery();							// execute la query
+			ResultSet rs_jouer = prep_stmt_jouer.getResultSet();
+			if (!rs_jouer.next()) {
+				String query_insertUser = "UPDATE UTILISATEUR SET NB_QUIZ_JOUE = NB_QUIZ_JOUE+1 WHERE LOGIN_USR = ?";
+				PreparedStatement prep_stmt_insertUser = conn.prepareStatement(query_insertUser);
+				prep_stmt_insertUser.setString(1, Connexion.login_general);
+				prep_stmt_insertUser.executeUpdate();
+			}
+			String query_updateUser = "UPDATE UTILISATEUR SET NB_PARTIE_JOUE = NB_PARTIE_JOUE+1 WHERE LOGIN_USR = ?";
+			PreparedStatement prep_stmt_updateUser = conn.prepareStatement(query_updateUser);
+			prep_stmt_updateUser.setString(1, Connexion.login_general);
+			prep_stmt_updateUser.executeUpdate();
+		} catch (SQLException eeee) {
+	    	eeee.printStackTrace();
+	    } catch (ClassNotFoundException eeee) {
+			eeee.printStackTrace();
+		}
+		
+		try {
+			Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+			conn = DriverManager.getConnection("jdbc:sqlserver://193.252.48.189\\SQLEXPRESS:1433;" + "database=BDD_B3I_groupe_5;" + "user=b3i_groupe_5;" + "password=123Soleil");
+			
+			// INSERT INTO JOUER => nouvelle ligne avec le score et le temps etc de la game
+			String query_insertPartie = "INSERT INTO JOUER "
+					+ "(LOGIN_USR, ID_QUIZ, SCORE_USR_QUIZ, HEURE_USR_QUIZ, MINUTE_USR_QUIZ, SECONDE_USR_QUIZ) "
+					+ "VALUES(?, ?, ?, ?, ?, ?);";
+			PreparedStatement prep_stmt_insertPartie = conn.prepareStatement(query_insertPartie);
+			prep_stmt_insertPartie.setString(1, Connexion.login_general);
+			prep_stmt_insertPartie.setInt(2, monQuiz.getId());
+			prep_stmt_insertPartie.setInt(3, monScore);
+			prep_stmt_insertPartie.setInt(4, hrs);
+			prep_stmt_insertPartie.setInt(5, min);
+			prep_stmt_insertPartie.setInt(6, sec);
+			prep_stmt_insertPartie.executeUpdate();					// execute la commande
+	    } catch (SQLException eeee) {
+	    	eeee.printStackTrace();
+	    } catch (ClassNotFoundException eeee) {
+			eeee.printStackTrace();
+		}
+		
+		
+		// user => quiz deja joue ? null : quizJoue++
+				//			table JOUER where JOUER.login_user == connexion.login_generel
+				//			AND JOUER.id_quiz == monQuiz.getID;
+				//		Si oui (deja jouee) => nb_partieJouer++
+				//		Si non (pas jouee) => nb_partieJouer++ && nb_quizJouer++
+				//DONE	Dans tout les cas => JOUER.insertInto (login_usr, id_quiz, score, tempsh,min,sec);
+				
+				/*
+				 * TABLE JOUER
+				 * 		login_usr			(varchar)				VS.			login_usr	courant
+				 * 		id_quiz				(int)					VS. 		id_quiz		courant
+				 * 		score_usr_quiz		(int)
+				 * 		heure_usr_quiz		(int)
+				 * 		minute_usr_quiz		(int)
+				 * 		seconde_usr_quiz	(int)
+				 */
+				
+				/*
+				 * TABLE UTILISATEUR
+				 * 		nb_partie_joue	(int)	(+1)
+				 * 		nb_quiz_joue	(int)	(+1 ou pas)
+				 * 		(login_usr)		(varchar)
+				 * 		(mdp_usr)		(varchar)
+				 * 		(adr_mail_usr)	(varchar)
+				 */
+	}
 
 }
 
