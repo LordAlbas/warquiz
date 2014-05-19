@@ -10,7 +10,7 @@ import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 
 
-public class Bouton_selection_question extends JButton implements MouseListener{
+public class Bouton_selection_question extends JButton implements MouseListener {
 	
 	private Quiz quiz;
 	private int num_question;
@@ -71,9 +71,9 @@ public class Bouton_selection_question extends JButton implements MouseListener{
 	public void switchQuest() {
 		ma_partie.sousPanel.removeAll();
 		affCheckrep(TabCheck, num_question);
+		setBackground(Color.GRAY);
 		ma_partie.setQuestion(quiz.getQuest(num_question).getQuestTxt());
 		ma_partie.setNumQuest(num_question);
-		setBackground(Color.GRAY);
 		ma_partie.repaint();
 	}
 	
