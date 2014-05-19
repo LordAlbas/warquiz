@@ -446,21 +446,32 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 		super.paintComponent(g);
 		
 		g.drawImage(Images.img_fond[Theme.getTheme()], 0, 0, this.getWidth(), this.getHeight(), null);
-		g.drawImage(Images.img_element[0], 0, 0, this.getWidth(), (int)(this.getHeight() / 6.1230), null);		// dessine le header	
+		//g.drawImage(Images.img_element[0], 0, 0, this.getWidth(), (int)(this.getHeight() / 6.1230), null);		// dessine le header
+		
+		g.drawImage(Images.img_element[Theme.getHeader1()], 0, 0, 444, 130, null); //header1
+		g.drawImage(Images.img_element[Theme.getHeader2()], 444, 0, 580, 58, null); // header2
+		
 		g.drawImage(Images.img_bouton[6], 901, 0, 46, 46, null);
 		g.drawImage(Images.img_bouton[4], 967, 0, 46, 46, null);
+		
+		
+
 		/*
 		 * On boucle sur tous les boutons (de [0] a [3]).
 		 * Chaque bouton obtient une position X (hauteur) en fonction de son numero (i).
 		 * Les positions en durs (ici 120 et 260) correspondent au coin haut-gauche du bloc de bouton.
 		 */
-		for (int i=0; i<4; i++) {
-			g.drawImage(Images.img_bouton[i], 120, 260+(i*(Images.hauteur_bouton+Images.ecart_bouton)), Images.largeur_bouton, Images.hauteur_bouton, null);
-			g.drawImage(Images.img_bouton[i], 120, 260+(i*(Images.hauteur_bouton+Images.ecart_bouton)), Images.largeur_bouton, Images.hauteur_bouton, null);
-			g.drawImage(Images.img_bouton[i], 120, 260+(i*(Images.hauteur_bouton+Images.ecart_bouton)), Images.largeur_bouton, Images.hauteur_bouton, null);
-			g.drawImage(Images.img_bouton[i], 120, 260+(i*(Images.hauteur_bouton+Images.ecart_bouton)), Images.largeur_bouton, Images.hauteur_bouton, null);
+
+		g.drawImage(Images.img_bouton[Theme.getJouer()], 120, 260+(0*(Images.hauteur_bouton+Images.ecart_bouton)), Images.largeur_bouton, Images.hauteur_bouton, null); // jouer
+		g.drawImage(Images.img_bouton[Theme.getStatistiques()], 120, 260+(1*(Images.hauteur_bouton+Images.ecart_bouton)), Images.largeur_bouton, Images.hauteur_bouton, null); // statistiques
+		g.drawImage(Images.img_bouton[Theme.getCredits()], 120, 260+(2*(Images.hauteur_bouton+Images.ecart_bouton)), Images.largeur_bouton, Images.hauteur_bouton, null); // crédits
+		g.drawImage(Images.img_bouton[Theme.getQuitter()], 120, 260+(3*(Images.hauteur_bouton+Images.ecart_bouton)), Images.largeur_bouton, Images.hauteur_bouton, null); // quitter
+		
+		if(Theme.getBarre()==1){
+			g.drawImage(Images.img_element[1], 140, 113, 8, 655, null);
 		}
-		g.drawImage(Images.img_element[1], 140, 113, 8, 655, null);
+		
+		
 		g.drawImage(Images.img_fond[1], 0, 0, this.getWidth(), this.getHeight(), null);	
 		
 		// On affiche ou non la banderole info
