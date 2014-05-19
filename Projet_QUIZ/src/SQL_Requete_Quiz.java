@@ -634,9 +634,9 @@ public class SQL_Requete_Quiz {
 				PreparedStatement prep_stmt_updateQuiz = conn.prepareStatement(update_Quiz);
 				prep_stmt_updateQuiz.setInt(1, currentQuiz.getDifficulteQuizInt());
 				prep_stmt_updateQuiz.setString(2, currentQuiz.getNom());
-				prep_stmt_updateQuiz.setInt(3, Integer.parseInt(currentQuiz.getHeureQuiz()));
-				prep_stmt_updateQuiz.setInt(4, Integer.parseInt(currentQuiz.getMinuteQuiz()));
-				prep_stmt_updateQuiz.setInt(5, Integer.parseInt(currentQuiz.getSecondeQuiz()));
+				prep_stmt_updateQuiz.setString(3, currentQuiz.getHeureQuiz());
+				prep_stmt_updateQuiz.setString(4, currentQuiz.getMinuteQuiz());
+				prep_stmt_updateQuiz.setString(5, currentQuiz.getSecondeQuiz());
 				prep_stmt_updateQuiz.setInt(6, currentQuiz.getNb_questions());
 				prep_stmt_updateQuiz.setInt(7, currentQuiz.getId());
 				prep_stmt_updateQuiz.executeUpdate();
