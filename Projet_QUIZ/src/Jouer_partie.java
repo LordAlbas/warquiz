@@ -324,6 +324,25 @@ public class Jouer_partie extends JPanel implements MouseListener, MouseMotionLi
 		//		Si non (pas jouee) => nb_partieJouer++ && nb_quizJouer++
 		//		Dans tout les cas => JOUER.insertInto (login_usr, id_quiz, score, tempsh,min,sec);
 		
+		/*
+		 * TABLE JOUER
+		 * 		login_usr			(varchar)				VS.			login_usr	courant
+		 * 		id_quiz				(int)					VS. 		id_quiz		courant
+		 * 		score_usr_quiz		(int)
+		 * 		heure_usr_quiz		(int)
+		 * 		minute_usr_quiz		(int)
+		 * 		seconde_usr_quiz	(int)
+		 */
+		
+		/*
+		 * TABLE UTILISATEUR
+		 * 		nb_partie_joue	(int)	(+1)
+		 * 		nb_quiz_joue	(int)	(+1 ou pas)
+		 * 		(login_usr)		(varchar)
+		 * 		(mdp_usr)		(varchar)
+		 * 		(adr_mail_usr)	(varchar)
+		 */
+		
 		return score;
 	}
 	

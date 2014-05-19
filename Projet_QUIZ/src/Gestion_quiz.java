@@ -57,27 +57,37 @@ public class Gestion_quiz extends JPanel implements MouseListener, ItemListener 
 		
 		// Titre et sous-titre en haut a droite
 		lb_titreGestion = new JLabel("Gestion des Quiz");
-		lb_titreGestion.setForeground(Color.WHITE);
+		lb_titreGestion.setForeground(Images.couleurLabel);
 		lb_titreGestion.setFont(new Font("Arial", Font.PLAIN, 42));
 		lb_titreGestion.setBounds(575, 105, 400, 50);
 		add(lb_titreGestion);
 		
+		// desciption dans la barre de droite
 		lb_descrGestion = new JLabel("<html>Cette section vous permet de g&eacute;rer et de cr&eacute;er vos propres quiz.</html>");
 		lb_descrGestion.setForeground(Color.WHITE);
 		lb_descrGestion.setFont(new Font("Arial", Font.PLAIN, 20));
 		lb_descrGestion.setBounds(655, 175, 320, 50);
 		add(lb_descrGestion);
 		
+		// Consigne en haut a gauche
+		JLabel lb_consigne = new JLabel("<html>&nbsp;&nbsp;&nbsp;&nbsp;Ici vous pouvez visualiser l'ensemble des quiz de "
+				+ "l'application. Vous ne pouvez modifier et/ou supprimer uniquement les quiz qui vous appartienent.<br/>"
+				+ "&nbsp;&nbsp;&nbsp;&nbsp;Les quiz affich&eacute;s entre parenth&egrave;ses ne vous appartiennent pas.</html>");
+		lb_consigne.setForeground(Color.WHITE);
+		lb_consigne.setFont(new Font("Arial", Font.PLAIN, 16));
+		lb_consigne.setBounds(70, 165, 440, 100);
+		add(lb_consigne);
+		
 		// Titre de la liste (au centre)
 		lb_titreListe = new JLabel("Liste de vos quiz");
-		lb_titreListe.setForeground(Color.WHITE);
-		lb_titreListe.setFont(new Font("Arial", Font.PLAIN, 18));
-		lb_titreListe.setBounds(85, 276, 300, 20);
+		lb_titreListe.setForeground(Images.couleurLabel);
+		lb_titreListe.setFont(new Font("Arial", Font.PLAIN, 24));
+		lb_titreListe.setBounds(95, 288, 300, 20);
 		add(lb_titreListe);
 		
 		// liste des quiz creer par cet admin
 		list_quizcree = new List();
-		list_quizcree.setBounds(85, 299, 444, 382);
+		list_quizcree.setBounds(85, 321, 444, 360);
 		list_quizcree.addItemListener(this);
 		list_quizcree.setBackground(new Color(54, 90, 118));
 		list_quizcree.setForeground(Color.WHITE);
@@ -85,12 +95,13 @@ public class Gestion_quiz extends JPanel implements MouseListener, ItemListener 
 		
 		// remplissage de la liste avec une requete du style "recuperer tout les quiz creer par cet admin"
 		for (short i=0; i<mesQuiz.length; i++) {
-			list_quizcree.add(mesQuiz[i].getNom());
-			/*
-			 * Ce serait bien de pouvoir afficher en blanc MES QUIZ et en gris LES AUTRES QUIZ
-			 * et que lorsqu'on selectionne un quiz gris, on ne puisse pas modifier/supprimer (bouton disabled).
-			 */
+			if (mesQuiz[i].getLoginAdmin().equals(Connexion.login_general)) {
+				list_quizcree.add(mesQuiz[i].getNom());
+			} else {
+				list_quizcree.add("(_"+mesQuiz[i].getNom()+"_)");
+			}
 		}
+		list_quizcree.setFont(new Font("Arial", Font.PLAIN, 18));
 		
 		JLabel info = new JLabel("Selectionnez un quiz parmis la liste ci-dessus pour le modifier/supprimer");
 		info.setFont(new Font("Arial", Font.PLAIN, 12));
@@ -224,10 +235,16 @@ public class Gestion_quiz extends JPanel implements MouseListener, ItemListener 
 		 * Il faut faire attention a l'id_admin du quiz, ne pas degriser un quiz qui ne nous appartient pas.
 		 */
 		if (list_quizcree.getSelectedItem() != null) {
-			bt_modifQuiz.setEnabled(true);
-			bt_modifQuiz.setBackground(Color.RED);
-			bt_supprQuiz.setEnabled(true);
-			bt_supprQuiz.setBackground(new Color(219,113,0));
+			// si le login du quiz et le meme que le login de la session (alors le quiz nous appartient et on peut le modif/suppr)
+			if (mesQuiz[list_quizcree.getSelectedIndex()].getLoginAdmin().equals(Connexion.login_general)) {
+				bt_modifQuiz.setEnabled(true);
+				bt_modifQuiz.setBackground(Color.RED);
+				bt_supprQuiz.setEnabled(true);
+				bt_supprQuiz.setBackground(new Color(219,113,0));
+			} else {
+				bt_modifQuiz.setEnabled(false);
+				bt_supprQuiz.setEnabled(false);
+			}
 		} else {
 			bt_modifQuiz.setEnabled(false);
 			bt_supprQuiz.setEnabled(false);
