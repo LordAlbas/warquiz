@@ -76,7 +76,7 @@ public class Jouer_partie extends JPanel implements MouseListener, MouseMotionLi
 				int rep = JOptionPane.showConfirmDialog(null, 				// AFFICHE attention quitter
 						"<html><b>Fini ?</b><br/><br/>"
 						+ "Par&eacute;(e) &agrave; obtenir votre r&eacute;sultat ?<br/>"
-						+ "Cliquez OUI et voyez la correction par vous-m&ecirc;me !</html>", 
+						+ "Cliquez OUI et voyez la correction par vous-m&ecirc;me !<br/>Cliquez sur NON et modifiez des r&eacute;ponses...</html>", 
 						"Quitter partie", 
 						JOptionPane.YES_NO_OPTION, 
 						JOptionPane.INFORMATION_MESSAGE);

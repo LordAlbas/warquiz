@@ -34,7 +34,8 @@ public class Bouton_selection_question_correction extends JButton implements Mou
 		TabLabel = new JLabel[monQuiz.getQuest(i).getNb_reponses()];
 		
 		for (int v=0; v<TabLabel.length; v++) {
-			TabLabel[v] = new JLabel(monQuiz.getQuest(i).getReponse(v).getTxtReponse());
+			TabLabel[v] = new JLabel("<html>"+monQuiz.getQuest(i).getReponse(v).getTxtReponse()+"<html>");
+			TabLabel[v].setSize(80, 300);
 		}
 	}
 	
