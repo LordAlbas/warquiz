@@ -113,21 +113,21 @@ public class Bouton extends JButton implements MouseListener,ActionListener {
 			Jouer.list_quizcree.removeAll();
 			for (short i=0; i<Jouer.ListeQuiz_facile.length; i++) {
 				if (Jouer.ListeQuiz_facile[i] != null)
-					Jouer.list_quizcree.add(Jouer.ListeQuiz_facile[i].getNom()+" - [ "+Jouer.ListeQuiz[i].getNb_questions()+" question(s) ] - Temps : " + Jouer.ListeQuiz[i].getHeureQuiz() + "h "+ Jouer.ListeQuiz[i].getMinuteQuiz() + "m " + Jouer.ListeQuiz[i].getSecondeQuiz() +"s ");
+					Jouer.list_quizcree.add(Jouer.ListeQuiz_facile[i].getNom()+" - [ "+Jouer.ListeQuiz_facile[i].getNb_questions()+" question(s) ] - Temps : " + Jouer.ListeQuiz_facile[i].getHeureQuiz() + "h "+ Jouer.ListeQuiz_facile[i].getMinuteQuiz() + "m " + Jouer.ListeQuiz_facile[i].getSecondeQuiz() +"s ");
 			}
 		}
 		if(diff == 2){
 			Jouer.list_quizcree.removeAll();
 			for (short i=0; i<Jouer.ListeQuiz_moyen.length; i++) {
 				if (Jouer.ListeQuiz_moyen[i] != null)
-					Jouer.list_quizcree.add(Jouer.ListeQuiz_moyen[i].getNom()+" - [ "+Jouer.ListeQuiz[i].getNb_questions()+" question(s) ] - Temps : " + Jouer.ListeQuiz[i].getHeureQuiz() + "h "+ Jouer.ListeQuiz[i].getMinuteQuiz() + "m " + Jouer.ListeQuiz[i].getSecondeQuiz() +"s ");
+					Jouer.list_quizcree.add(Jouer.ListeQuiz_moyen[i].getNom()+" - [ "+Jouer.ListeQuiz_moyen[i].getNb_questions()+" question(s) ] - Temps : " + Jouer.ListeQuiz_moyen[i].getHeureQuiz() + "h "+ Jouer.ListeQuiz_moyen[i].getMinuteQuiz() + "m " + Jouer.ListeQuiz_moyen[i].getSecondeQuiz() +"s ");
 			}
 		}
 		if(diff == 3){
 			Jouer.list_quizcree.removeAll();
 			for (short i=0; i<Jouer.ListeQuiz_difficile.length; i++) {
 				if (Jouer.ListeQuiz_difficile[i] != null)
-				Jouer.list_quizcree.add(Jouer.ListeQuiz_difficile[i].getNom()+" - [ "+Jouer.ListeQuiz[i].getNb_questions()+" question(s) ] - Temps : " + Jouer.ListeQuiz[i].getHeureQuiz() + "h "+ Jouer.ListeQuiz[i].getMinuteQuiz() + "m " + Jouer.ListeQuiz[i].getSecondeQuiz() +"s ");
+				Jouer.list_quizcree.add(Jouer.ListeQuiz_difficile[i].getNom()+" - [ "+Jouer.ListeQuiz_difficile[i].getNb_questions()+" question(s) ] - Temps : " + Jouer.ListeQuiz_difficile[i].getHeureQuiz() + "h "+ Jouer.ListeQuiz_difficile[i].getMinuteQuiz() + "m " + Jouer.ListeQuiz_difficile[i].getSecondeQuiz() +"s ");
 			}
 		}
 	}

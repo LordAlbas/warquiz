@@ -127,12 +127,12 @@ public class Correction extends JPanel implements MouseListener{
 		lb_numQuest = new JLabel("Q #10");
         lb_numQuest.setFont(new Font("Arial", Font.ITALIC, 20));
         lb_numQuest.setForeground(Images.couleurLabel);
-        lb_numQuest.setBounds(20, 260, 90, 30);
+        lb_numQuest.setBounds(20, 240, 90, 30);
         lb_numQuest.setHorizontalAlignment(SwingConstants.CENTER);
         lb_numQuest.setVisible(false);
         add(lb_numQuest);
 		question = new JLabel("<html>Selectionnez une question en haut &agrave; gauche pour voir les r&eacute;ponses.</html>");
-		question.setBounds(60, 280, 520, 70);
+		question.setBounds(60, 260, 520, 70);
 		question.setForeground(Color.WHITE);
 		question.setFont(new Font("Arial", Font.PLAIN, 20));
 		add(question);
