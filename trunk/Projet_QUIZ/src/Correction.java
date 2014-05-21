@@ -26,6 +26,7 @@ public class Correction extends JPanel implements MouseListener{
 	private JLabel mauvais;
 	private JLabel lb_numQuest;
 	public JPanel sousPanel;
+	public int id_numQuest;
 	private int monScore;
 	private long monTemps;		// contient le temps de jeu de la partie en milliseconde.
 	private Bouton_selection_question[] chbx_tabRep;	// CONTIENT les reponses jouee par le user (a comparer avec monQuiz).
@@ -186,6 +187,20 @@ public class Correction extends JPanel implements MouseListener{
 	public void setNumQuest(int num) {
 		lb_numQuest.setText("Q #"+(num+1));
 		lb_numQuest.setVisible(true);
+		id_numQuest = num;
+		
+		// lieu arbitraire pour checker les reponses au fur et a mesure
+		for (byte i=0; i<boutonQuestion.length; i++) {
+			if (i == id_numQuest) {
+				boutonQuestion[i].setBackground(Color.ORANGE);
+			} else {
+				if (boutonQuestion[i].getEtatBouton() == 1) {
+					boutonQuestion[i].setBackground(Color.GRAY);
+				} else {
+					boutonQuestion[i].setBackground(new Color(23, 78, 116));
+				}
+			}
+		}
 	}
 	
 	/**

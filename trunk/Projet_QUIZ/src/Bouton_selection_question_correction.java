@@ -11,6 +11,7 @@ public class Bouton_selection_question_correction extends JButton implements Mou
 	private int num_question;
 	private Correction maCorr;
 	private JLabel[] TabLabel;
+	private int etatBouton;			// 0 = pas vu (bleu)	1 = vu (gris)
 	
 	public Bouton_selection_question_correction(int _num_question, Quiz _quiz, Correction _corr){
 		monQuiz = _quiz;
@@ -43,12 +44,16 @@ public class Bouton_selection_question_correction extends JButton implements Mou
 		return TabLabel[id];
 	}
 	
+	public int getEtatBouton() {
+		return etatBouton;
+	}
+	
 	public void mouseClicked(MouseEvent e) {
 		maCorr.sousPanel.removeAll();											// vire tout
 		maCorr.setQuestion(monQuiz.getQuest(num_question).getQuestTxt());		// affiche la question
 		maCorr.setNumQuest(num_question);
 		maCorr.affchckPlayed(num_question);										// affiche les reponses jouees
-		setBackground(Color.GRAY);												// passe le bouton en gris
+		etatBouton = 1;												// passe le bouton en gris
 	}
 	public void mouseEntered(MouseEvent e) {}
 	public void mouseExited(MouseEvent e) {}

@@ -78,7 +78,7 @@ public class Chronometre {
 					"<html>Le temps est &eacute;coul&eacute;.<br/> Vous allez &eacute;tre redirig&eacute; vers la correction.</html>", 
 					"Temps �coul� !", 
 					JOptionPane.WARNING_MESSAGE);
-			fenetre.goToCorrection(monQuiz, partie_en_cours.getBoutonQuestion(), partie_en_cours.calculScore(), partie_en_cours.calculTemps());
+			partie_en_cours.validerPartie();
 		}
 	}
 	
