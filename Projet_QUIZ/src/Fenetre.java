@@ -76,6 +76,13 @@ public class Fenetre extends JFrame {
 		this.getContentPane().setVisible(false);
 		this.setContentPane(connexion);		
 		this.getContentPane().setVisible(true);
+		Connexion.textField_pseudo.setText("");
+		Connexion.textField_mdp.setText("");
+		Connexion.erreur_log = false;
+		Connexion.erreur_bdd = false;
+		Connexion.bad_mdp = 0;
+		Connexion.bad_pseudo = 0;
+		Connexion.tentative = 0;
 	}
 	
 	/**
