@@ -28,9 +28,9 @@ public class Connexion extends JPanel implements MouseListener, MouseMotionListe
 	public static JTextField textField_pseudo;	// création du champ pseudo
 	public static JPasswordField textField_mdp;	// création du cham mdp cypté
 	
-	public int bad_pseudo=0; // le champ n'est pas encore invalide
-	public int bad_mdp=0; // le champ n'est pas encore invalide
-	public int tentative = 0; //le nombre de tentative d'authentification
+	public static int bad_pseudo=0; // le champ n'est pas encore invalide
+	public static int bad_mdp=0; // le champ n'est pas encore invalide
+	public static int tentative = 0; //le nombre de tentative d'authentification
 	
 	static String selection; 	// defini quel bouton est selectionne
 	public static String dbUsername_admin, dbPassword_admin; // Variables permettant de comparer le champ de login/mdp avec les champs de la bdd de la table ADMIN
