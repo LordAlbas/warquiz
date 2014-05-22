@@ -76,7 +76,7 @@ public class Chronometre {
 			timer.stop();
 			JOptionPane.showMessageDialog(null, 
 					"<html>Le temps est &eacute;coul&eacute;.<br/> Vous allez &eacute;tre redirig&eacute; vers la correction.</html>", 
-					"Temps ï¿½coulï¿½ !", 
+					"Temps écoulé !", 
 					JOptionPane.WARNING_MESSAGE);
 			partie_en_cours.validerPartie();
 		}
