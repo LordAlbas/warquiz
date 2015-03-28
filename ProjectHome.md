@@ -1,0 +1,1 @@
+This java application is a small-sized project. It consists in a quiz game made for school purpose. A list of quiz is avalaible and free to play. Each one has ranking and scoring information
